@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UnitType">
+	<select id="getUnitTypeBean" parameterClass="String" resultClass="com.mydomain.bean.UnitTypeBean">
+		SELECT 
+		UNITTYPECODE,
+		UNITTYPENAME,
+		UNITTYPEREMARK
+		FROM UNITTYPE
+		WHERE UNITTYPECODE=#unitTypeCode#
+		and
+		isEnable=1
+	</select>
+	<select id="selectAllUnitTypeBean" resultClass="com.mydomain.bean.UnitTypeBean">
+		SELECT 
+		UNITTYPECODE,
+		UNITTYPENAME,
+		UNITTYPEREMARK
+		FROM UNITTYPE
+		where
+		isEnable=1
+	</select>
+	<insert id="insertUnitTypeBean" parameterClass="com.mydomain.bean.UnitTypeBean">
+		INSERT INTO 
+		 UNITTYPE
+		(UNITTYPECODE,UNITTYPENAME,UNITTYPEREMARK,isEnable) VALUES
+		(#unitTypeCode#,#unitTypeName#,#unitTypeRemark#,1)
+	</insert>
+	<update id="updateUnitTypeBean" parameterClass="com.mydomain.bean.UnitTypeBean">
+		UPDATE UNITTYPE
+		SET
+		UNITTYPENAME=#unitTypeName#,
+		UNITTYPEREMARK=#unitTypeRemark#,
+		isEnable=1
+		WHERE UNITTYPECODE=#unitTypeCode#
+	</update>
+	<delete id="deleteUnitTypeBean" parameterClass="com.mydomain.bean.UnitTypeBean">
+		UPDATE UNITTYPE
+		SET
+		isEnable=0
+		WHERE UNITTYPECODE=#unitTypeCode#
+	</delete> 
+</sqlMap>

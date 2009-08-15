@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Department">
+	<select id="getDepartmentBean" parameterClass="String" resultClass="com.mydomain.bean.DepartmentBean">
+		SELECT
+		departmentCode,
+		departmentName,
+		department.structCode,
+		structName
+		FROM department,struct
+		WHERE 
+		department.structCode=struct.structCode
+		AND
+		department.isEnabled=1
+		and
+		departmentCode = #departmentCode#
+	</select>
+	<select id="selectAllDepartmentBean" resultClass="com.mydomain.bean.DepartmentBean">
+		SELECT
+		departmentCode,
+		departmentName,
+		department.structCode,
+		structName
+		FROM department,struct
+		WHERE 
+		department.isEnabled=1
+		and
+		department.structCode=struct.structCode
+	</select>
+	<insert id="insertDepartmentBean" parameterClass="com.mydomain.bean.DepartmentBean">
+		INSERT INTO
+		department
+		(departmentCode,
+		departmentName,
+		structCode,isEnabled)
+		VALUES (#departmentCode#,#departmentName#,#structCode#,1)
+	</insert>
+	<update id="updateDepartmentBean" parameterClass="com.mydomain.bean.DepartmentBean">
+		UPDATE department
+		SET
+		departmentName=#departmentName#,
+		structCode=#structCode#,
+		isEnabled=1
+		WHERE departmentCode= #departmentCode#
+	</update>
+	<delete id="deleteDepartmentBean" parameterClass="com.mydomain.bean.DepartmentBean">
+		UPDATE department
+		SET
+		isEnabled=1
+		WHERE departmentCode= #departmentCode#
+	</delete>
+</sqlMap>
