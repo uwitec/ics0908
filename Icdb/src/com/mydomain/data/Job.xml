@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Job">
+	<select id="selectAllJobFind" resultClass="com.mydomain.bean.JobBean">
+	select 
+	job.jobCode,
+	job.jobName,
+	sd.departmentName,
+	sd.departmentCode,
+	sd.structCode,
+	sd.structName
+	from job,
+	(select 
+	department.departmentCode,
+	department.departmentName,
+	struct.structCode,
+	struct.structName
+	from department,struct where department.structCode=struct.structCode) as sd
+	where job.departmentCode=sd.departmentCode
+	and job.jobName like #jobName#
+	</select>
+	<select id="getJobBean" parameterClass="String" resultClass="com.mydomain.bean.JobBean">
+		SELECT 
+		jobCode,
+		jobName,
+		job.departmentCode,
+		department.departmentName
+		FROM job,department
+		WHERE 
+		job.departmentCode=department.departmentCode and
+		job.isEnabled=1 and
+		jobCODE=#jobCode#
+	</select>
+	<select id="selectAllJobBean" resultClass="com.mydomain.bean.JobBean">
+		SELECT 
+		jobCode,
+		jobName,
+		job.departmentCode,
+		department.departmentName
+		FROM job,department
+		WHERE 
+		job.isEnabled=1
+		and
+		job.departmentCode=department.departmentCode
+	</select>
+	<insert id="insertJobBean" parameterClass="com.mydomain.bean.JobBean">
+		INSERT INTO 
+		 job
+		(jobCode,jobName,departmentCode,isEnabled) VALUES
+		(#jobCode#,#jobName#,#departmentCode#,1)
+	</insert>
+	<update id="updateJobBean" parameterClass="com.mydomain.bean.JobBean">
+		UPDATE job
+		SET
+		jobName=#jobName#,
+		departmentCode=#departmentCode#,
+		isEnabled=1
+		WHERE jobCode=#jobCode#
+	</update>
+	<delete id="deleteJobBean" parameterClass="com.mydomain.bean.JobBean">
+		UPDATE job
+		SET
+		isEnabled=0
+		WHERE jobCode=#jobCode#
+	</delete> 
+</sqlMap>

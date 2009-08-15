@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Person">
+	<select id="selectAllfind" resultClass="com.mydomain.bean.PersonBean">
+		SELECT
+		personCode,
+		personName,
+		personPhone,
+		personEmail,
+		personSex,
+		personPhoto
+		FROM person
+		WHERE personName like #personName#
+		and isEnabled=1
+	</select>
+	<select id="getPersonBean" parameterClass="String" resultClass="com.mydomain.bean.PersonBean">
+		SELECT
+		personCode,
+		personName,
+		personPhone,
+		personEmail,
+		personSex,
+		personPhoto
+		FROM person
+		WHERE personCode = #personCode#
+		and isEnabled=1
+	</select>
+	<select id="selectAllPersonBean"  resultClass="com.mydomain.bean.PersonBean">
+		SELECT
+		personCode,
+		personName,
+		personPhone,
+		personEmail,
+		personSex,
+		personPhoto
+		FROM person
+		where isEnabled=1
+	</select>
+	<insert id="insertPersonBean" parameterClass="com.mydomain.bean.PersonBean">
+		INSERT INTO
+		person
+		(personCode,personName,personPhone,personEmail,personSex,personPhoto,isEnabled)
+		VALUES (#personCode#,#personName#,#personPhone#,#personEmail#,#personSex#,#personPhoto#,1)
+	</insert>
+	<update id="updatePersonBean" parameterClass="com.mydomain.bean.PersonBean">
+		UPDATE person
+		SET
+		personName=#personName#,
+		personPhone=#personPhone#,
+		personEmail=#personEmail#,
+		personSex=#personSex#,
+		personPhoto=#personPhoto#,
+		isEnabled=1
+		WHERE personCode= #personCode#
+	</update>
+	<delete id="deletePersonBean" parameterClass="com.mydomain.bean.PersonBean">
+		UPDATE person
+		SET
+		isEnabled=0
+		WHERE personCode= #personCode#
+	</delete>
+</sqlMap>

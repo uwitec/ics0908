@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Supplier">
+	<select id="getSupplierBean" parameterClass="String" resultClass="com.mydomain.bean.SupplierBean">
+SELECT
+	SUPPLIERCODE,
+	SUPPLIERNAME,
+	SUPPLIERADDRESS,
+	SUPPLIERPHONE,
+	SUPPLIERFAX,
+	SUPPLIERZIPCODE,
+	SUPPLIERTAXFILENUMBER,
+	SUPPLIERREMARK,
+	PERSON.PERSONCODE,
+	PERSON.PERSONNAME,
+	ACCOUNT.ACCOUNTCODE,
+	ACCOUNT.ACCOUNTNUMBER,
+	BANK.BANKNAME,
+	BANK.BANKCODE
+	FROM SUPPLIER,PERSON,ACCOUNT,BANK
+	WHERE SUPPLIER.PERSONCODE=PERSON.PERSONCODE
+	AND SUPPLIER.ACCOUNTCODE=ACCOUNT.ACCOUNTCODE
+	AND SUPPLIER.BANKCODE=BANK.BANKCODE
+	AND SUPPLIER.ISENABLED=1
+	AND SUPPLIER.SUPPLIERCODE=#supplierCode#
+	</select>
+	<select id="selectAllSupplierBean" resultClass="com.mydomain.bean.SupplierBean">
+	SELECT
+	SUPPLIERCODE,
+	SUPPLIERNAME,
+	SUPPLIERADDRESS,
+	SUPPLIERPHONE,
+	SUPPLIERFAX,
+	SUPPLIERZIPCODE,
+	SUPPLIERTAXFILENUMBER,
+	SUPPLIERREMARK,
+	PERSON.PERSONCODE,
+	PERSON.PERSONNAME,
+	ACCOUNT.ACCOUNTCODE,
+	ACCOUNT.ACCOUNTNUMBER,
+	BANK.BANKNAME,
+	BANK.BANKCODE
+	FROM SUPPLIER,PERSON,ACCOUNT,BANK
+	WHERE SUPPLIER.PERSONCODE=PERSON.PERSONCODE
+	AND SUPPLIER.ACCOUNTCODE=ACCOUNT.ACCOUNTCODE
+	AND SUPPLIER.BANKCODE=BANK.BANKCODE
+	AND SUPPLIER.ISENABLED=1
+	</select>
+	<insert id="insertSupplierBean" parameterClass="com.mydomain.bean.SupplierBean">
+	INSERT INTO SUPPLIER
+	(SUPPLIERCODE,SUPPLIERNAME,SUPPLIERADDRESS,SUPPLIERPHONE,
+	SUPPLIERFAX,SUPPLIERZIPCODE,SUPPLIERTAXFILENUMBER,SUPPLIERREMARK,
+	PERSONCODE,ACCOUNTCODE,BANKCODE,isEnabled)
+	VALUES
+	(#supplierCode#,#supplierName#,#supplierAddress#,#supplierPhone#,
+	#supplierFax#,#supplierZipCode#,#supplierTaxFileNumber#,#supplierRemark#,
+	#personCode#,#accountCode#,#bankCode#,1)
+	</insert>
+	<update id="updateSupplierBean" parameterClass="com.mydomain.bean.SupplierBean">
+	UPDATE SUPPLIER
+	SUPPLIERNAME=#supplierName#,
+	SUPPLIERADDRESS=#supplierAddress#,
+	SUPPLIERPHONE=#supplierPhone#,
+	SUPPLIERFAX=#supplierFax#,
+	SUPPLIERZIPCODE=#supplierZipCode#,
+	SUPPLIERTAXFILENUMBER=#supplierTaxFileNumber#,
+	SUPPLIERREMARK=#supplierRemark#,
+	PERSONCODE=#personCode#,
+	ACCOUNTCODE=#accountCode#,
+	BANKCODE=#bankCode#,
+	ISENABLE=1
+	WHERE SUPPLIERCODE=#supplierCode#
+	</update>
+	<delete id="deleteSupplierBean" parameterClass="com.mydomain.bean.SupplierBean">
+	UPDATE SUPPLIER
+	ISENABLE=0
+	WHERE SUPPLIERCODE=#supplierCode#
+	</delete> 
+</sqlMap>

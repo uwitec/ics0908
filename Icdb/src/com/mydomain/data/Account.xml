@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Account">
+
+	<select id="getAllFind" resultClass="com.mydomain.bean.AccountBean">
+		SELECT
+		ACCOUNTCODE,
+		ACCOUNTNUMBER,
+		ACCOUNTNAME,
+		ACCOUNTTYPE,
+		ACCOUNT.PERSONCODE,
+		PERSON.PERSONNAME,
+		ACCOUNT.BANKCODE,
+		BANK.BANKNAME
+		FROM ACCOUNT,PERSON,BANK
+		WHERE ACCOUNT.ISENABLED=1
+		AND 
+		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		AND
+		ACCOUNT.BANKCODE=BANK.BANKCODE
+		AND
+		ACCOUNT.ACCOUNTNUMBER like #accountNumber#
+	</select>
+	<select id="getAccountBean" parameterClass="String" resultClass="com.mydomain.bean.AccountBean">
+		SELECT
+		ACCOUNTCODE,
+		ACCOUNTNUMBER,
+		ACCOUNTNAME,
+		ACCOUNTTYPE,
+		ACCOUNT.PERSONCODE,
+		PERSON.PERSONNAME,
+		ACCOUNT.BANKCODE,
+		BANK.BANKNAME
+		FROM ACCOUNT,PERSON,BANK
+		WHERE ACCOUNT.ISENABLED=1
+		AND 
+		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		AND
+		ACCOUNT.BANKCODE=BANK.BANKCODE
+		AND
+		ACCOUNT.ACCOUNTCODE=#accountCode#
+	</select>
+	<select id="selectAllAccountBean" resultClass="com.mydomain.bean.AccountBean">
+		SELECT
+		ACCOUNTCODE,
+		ACCOUNTNUMBER,
+		ACCOUNTNAME,
+		ACCOUNTTYPE,
+		ACCOUNT.PERSONCODE,
+		PERSON.PERSONNAME,
+		ACCOUNT.BANKCODE,
+		BANK.BANKNAME
+		FROM ACCOUNT,PERSON,BANK
+		WHERE PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		AND
+		ACCOUNT.BANKCODE=BANK.BANKCODE
+		AND
+		ACCOUNT.ISENABLED=1
+	</select>
+	<insert id="insertAccountBean" parameterClass="com.mydomain.bean.AccountBean">
+		INSERT INTO ACCOUNT
+		(ACCOUNTCODE,ACCOUNTNUMBER,ACCOUNTNAME,ACCOUNTTYPE,PERSONCODE,BANKCODE,ISENABLED) 
+		VALUES
+		(#accountCode#,#accountNumber#,#accountName#,#accountType#,#personCode#,#bankCode#,1)
+	</insert>
+	<update id="updateAccountBean" parameterClass="com.mydomain.bean.AccountBean">
+		UPDATE ACCOUNT
+		SET 
+		ACCOUNTNUMBER=#accountNumber#,
+		ACCOUNTNAME=#accountName#,
+		ACCOUNTTYPE=#accountType#,
+		PERSONCODE=#personCode#,
+		BANKCODE=#bankCode#,
+		ISENABLED=1
+		WHERE ACCOUNTCODE=#accountCode#
+	</update>
+	<delete id="deleteAccountBean" parameterClass="com.mydomain.bean.AccountBean">
+	UPDATE ACCOUNT
+		SET 
+		ISENABLED=0
+		WHERE ACCOUNTCODE=#accountCode#
+	</delete> 
+</sqlMap>

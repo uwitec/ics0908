@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="Icdb" extends="struts-default" namespace="/baseset">
+
+<action name="ShowAccount" class="com.action.baseset.AccountAction" method="showAccount">
+	<result name="success">/baseset/account/AccountShow.jsp</result>
+</action>
+<action name="GoAddAccount" class="com.action.baseset.AccountAction" method="goAddAccount">
+	<result name="success">/baseset/account/AccountAdd.jsp</result>
+</action>
+<action name="AddAccount" class="com.action.baseset.AccountAction" method="addAccount">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneAccount" class="com.action.baseset.AccountAction" method="getOneAccount">
+	<result name="success">/baseset/account/AccountUpdate.jsp</result>
+</action>
+<action name="UpdateAccount" class="com.action.baseset.AccountAction" method="updateAccount">
+	<result name="success" type="redirect">ShowAccount.action</result>
+</action>
+<action name="FindAccount" class="com.action.baseset.AccountAction" method="findAccount">
+	<result name="success">/baseset/FindAccount.jsp</result>
+</action>
+
+<!-- bank -->
+<action name="ShowBank" class="com.action.baseset.BankAction" method="showBank">
+   <result name="success">/baseset/bank/BankShow.jsp</result>
+</action>
+<action name="AddBank" class="com.action.baseset.BankAction" method="addBank">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateBank" class="com.action.baseset.BankAction" method="updateBank">
+	<result name="success" type="redirect">ShowBank.action</result>
+</action>
+<action name="GetOneBank" class="com.action.baseset.BankAction" method="getOneBank">
+	<result name="success">/baseset/bank/BankUpdate.jsp</result>
+</action>
+<action name="DeleteBank" class="com.action.baseset.BankAction" method="deleteBank">
+	<result name="success" type="redirect">ShowBank.action</result>
+</action>
+<action name="FindBank" class="com.action.baseset.BankAction" method="findBank">
+	<result name="success">/baseset/FindBank.jsp</result>
+</action>
+
+<!-- employee -->
+<action name="ShowEmployee" class="com.action.baseset.EmployeeAction" method="showEmployee">
+	<result name="success">/baseset/employee/EmployeeShow.jsp</result>
+</action>
+<action name="GoAddEmployee" class="com.action.baseset.EmployeeAction" method="goAddEmployee">
+	<result name="success">/baseset/employee/EmployeeAdd.jsp</result>
+</action>
+<action name="AddEmployee" class="com.action.baseset.EmployeeAction" method="addEmployee">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateEmployee" class="com.action.baseset.EmployeeAction" method="updateEmployee">
+	<result name="success" type="redirect">ShowEmployee.action</result>
+</action>
+<action name="GetOneEmployee" class="com.action.baseset.EmployeeAction" method="getOneEmployee">
+	<result name="success">/baseset/employee/EmployeeUpdate.jsp</result>
+</action>
+<action name="FindEmployee" class="com.action.baseset.EmployeeAction" method="findEmployee">
+	<result name="success">/baseset/FindEmployee.jsp</result>
+</action>
+
+<!-- struct -->
+<action name="ShowStruct" class="com.action.baseset.StructAction" method="showStruct">
+	<result name="success">/baseset/struct/StructShow.jsp</result>
+</action>
+<action name="GoAddStruct" class="com.action.baseset.StructAction" method="goAddStruct">
+	<result name="success">/baseset/struct/StructAdd.jsp</result>
+</action>
+<action name="AddStruct" class="com.action.baseset.StructAction" method="addStruct">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateStruct" class="com.action.baseset.StructAction" method="updateStruct">
+	<result name="success" type="redirect">ShowStruct.action</result>
+</action>
+<action name="GetOneStruct" class="com.action.baseset.StructAction" method="getOneStruct">
+	<result name="success">/baseset/struct/StructUpdate.jsp</result>
+</action>
+
+
+<!-- department -->
+<action name="ShowDepartment" class="com.action.baseset.DepartmentAction" method="showDepartment">
+	<result name="success">/baseset/department/DepartmentShow.jsp</result>
+</action>
+<action name="GoAddDepartment" class="com.action.baseset.DepartmentAction" method="goAddDepartment">
+	<result name="success">/baseset/department/DepartmentAdd.jsp</result>
+</action>
+<action name="AddDepartment" class="com.action.baseset.DepartmentAction" method="addDepartment">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneDepartment" class="com.action.baseset.DepartmentAction" method="getOneDepartment">
+	<result name="success">/baseset/department/DepartmentUpdate.jsp</result>
+</action>
+<action name="UpdateDepartment" class="com.action.baseset.DepartmentAction" method="updateDepartment">
+	<result name="success" type="redirect">ShowDepartment.action</result>
+</action>
+<action name="DeleteDepartment" class="com.action.baseset.DepartmentAction" method="deleteDepartment">
+	<result name="success" type="redirect">ShowDepartment.action</result>
+</action>
+
+
+<action name="ShowUnitType" class="com.action.baseset.UnitTypeAction" method="showUnitType">
+	<result name="success">/baseset/unittype/UnitTypeShow.jsp</result>
+</action>
+<action name="AddUnitType" class="com.action.baseset.UnitTypeAction" method="addUnitType">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateUnitType" class="com.action.baseset.UnitTypeAction" method="updateUnitType">
+	<result name="success" type="redirect">ShowUnitType.action</result>
+</action>
+<action name="GetOneUnitType" class="com.action.baseset.UnitTypeAction" method="getOneUnitType">
+	<result name="success">/baseset/unittype/UnitTypeUpdate.jsp</result>
+</action>
+<action name="ShowPerson" class="com.action.baseset.PersonAction" method="showPerson">
+	<result name="success">/baseset/person/PersonShow.jsp</result>
+</action>
+<action name="GoAddPerson" class="com.action.baseset.PersonAction" method="goAddPerson">
+	<result name="success">/baseset/person/PersonAdd.jsp</result>
+</action>
+<action name="AddPerson" class="com.action.baseset.PersonAction" method="addPerson">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOnePerson" class="com.action.baseset.PersonAction" method="getOnePerson">
+	<result name="success">/baseset/person/PersonUpdate.jsp</result>
+</action>
+<action name="UpdatePerson" class="com.action.baseset.PersonAction" method="updatePerson">
+	<result name="success" type="redirect">ShowPerson.action</result>
+</action>
+<action name="FindPerson" class="com.action.baseset.PersonAction" method="findPerson">
+	<result name="success">/baseset/FindPerson.jsp</result>
+</action>
+
+
+<action name="ShowUnit" class="com.action.baseset.UnitAction" method="showUnit">
+	<result name="success">/baseset/unit/UnitShow.jsp</result>
+</action>
+<action name="GoAddUnit" class="com.action.baseset.UnitAction" method="goAddUnit">
+	<result name="success">/baseset/unit/UnitAdd.jsp</result>
+</action>
+<action name="GetOneUnit" class="com.action.baseset.UnitAction" method="getOneUnit">
+	<result name="success">/baseset/unit/UnitUpdate.jsp</result>
+</action>
+<action name="AddUnit" class="com.action.baseset.UnitAction" method="addUnit">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateUnit" class="com.action.baseset.UnitAction" method="updateUnit">
+	<result name="success" type="redirect">ShowUnit.action</result>
+</action>
+<action name="ShowJob" class="com.action.baseset.JobAction" method="showJob">
+	<result name="success">/baseset/job/JobShow.jsp</result>
+</action>
+<action name="GoAddJob" class="com.action.baseset.JobAction" method="goAddJob">
+	<result name="success">/baseset/job/JobAdd.jsp</result>
+</action>
+<action name="AddJob" class="com.action.baseset.JobAction" method="addJob">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneJob" class="com.action.baseset.JobAction" method="getOneJob">
+	<result name="success">/baseset/job/JobUpdate.jsp</result>
+</action>
+<action name="UpdateJob" class="com.action.baseset.JobAction" method="updateJob">
+	<result name="success" type="redirect">ShowJob.action</result>
+</action>
+<action name="FindJob" class="com.action.baseset.JobAction" method="findJob">
+	<result name="success">/baseset/FindJob.jsp</result>
+</action>
+
+<!-- supplier -->
+<action name="ShowSupplier" class="com.action.baseset.SupplierAction" method="showSupplier">
+	<result name="success">/baseset/supplier/SupplierShow.jsp</result>
+</action>
+<action name="GoAddSupplier" class="com.action.baseset.SupplierAction" method="goAddSupplier">
+	<result name="success">/baseset/supplier/SupplierAdd.jsp</result>
+</action>
+<action name="AddSupplier" class="com.action.baseset.SupplierAction" method="addSupplier">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneSupplier" class="com.action.baseset.SupplierAction" method="getOneSupplier">
+	<result name="success">/baseset/supplier/SupplierUpdate.jsp</result>
+</action>
+<action name="UpdateSupplier" class="com.action.baseset.SupplierAction" method="updateSupplier">
+	<result name="success" type="redirect">ShowSupplier.action</result>
+</action>
+
+<!-- storehouse -->
+<action name="ShowStorehouse" class="com.action.baseset.StorehouseAction" method="showStorehouse">
+	<result name="success">/baseset/storehouse/StorehouseShow.jsp</result>
+</action>
+<action name="GoAddStorehouse" class="com.action.baseset.StorehouseAction" method="goAddStorehouse">
+	<result name="success">/baseset/storehouse/StorehouseAdd.jsp</result>
+</action>
+<action name="AddStorehouse" class="com.action.baseset.StorehouseAction" method="addStorehouse">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneStorehouse" class="com.action.baseset.StorehouseAction" method="getOneStorehouse">
+	<result name="success">/baseset/storehouse/StorehouseUpdate.jsp</result>
+</action>
+<action name="UpdateStorehouse" class="com.action.baseset.StorehouseAction" method="updateStorehouse">
+	<result name="success" type="redirect">ShowStorehouse.action</result>
+</action>
+</package></struts>

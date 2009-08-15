@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Struct">
+	<select id="getStructBean" parameterClass="String" resultClass="com.mydomain.bean.StructBean">
+		SELECT 
+		STRUCTCODE,
+		STRUCTNAME
+		FROM STRUCT
+		WHERE STRUCTCODE=#structCode#
+		and
+		isEnabled=1
+	</select>
+	<select id="selectAllStructBean" resultClass="com.mydomain.bean.StructBean">
+		SELECT 
+		STRUCTCODE,
+		STRUCTNAME
+		FROM STRUCT
+		where
+		isEnabled=1
+	</select>
+	<insert id="insertStructBean" parameterClass="com.mydomain.bean.StructBean">
+		INSERT INTO 
+		STRUCT
+		(STRUCTCODE,STRUCTNAME,isEnabled) VALUES
+		(#structCode#,#structName#,1)
+	</insert>
+	<update id="updateStructBean" parameterClass="com.mydomain.bean.StructBean">
+		UPDATE STRUCT
+		SET
+		STRUCTNAME=#structName#,
+		isEnabled=1
+		WHERE STRUCTCode=#structCode#
+	</update>
+	<delete id="deleteStructBean" parameterClass="com.mydomain.bean.StructBean">
+		UPDATE STRUCT
+		SET
+		isEnabled=0
+		WHERE STRUCTCode=#structCode#
+	</delete> 
+</sqlMap>
