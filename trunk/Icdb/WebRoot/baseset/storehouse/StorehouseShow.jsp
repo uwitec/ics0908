@@ -27,6 +27,12 @@
 			<s:param name="storehouseCode" value="storehouseCode"></s:param>       
         	</s:url> 
         	<s:a href="%{updateUrl}">修改</s:a>
+        	|
+        	<s:url id="showUrl" action="ShowCargoSpace">
+			<s:param name="storehouseCode" value="storehouseCode"></s:param>
+			<s:param name="storehouseName" value="storehouseName"></s:param>       
+        	</s:url> 
+        	<s:a href="%{showUrl}">详细信息</s:a>
         </td>
         </tr>
        </s:iterator>
