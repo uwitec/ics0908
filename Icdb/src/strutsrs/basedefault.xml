@@ -3,6 +3,5 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="name" extends="struts-default" namespace="sapce">
-</package>
+<package name="names" extends="struts-default" namespace="sapces"></package>
 </struts>
