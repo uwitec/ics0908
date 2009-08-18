@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="account" extends="struts-default" namespace="/baseset">
+<action name="ShowAccount" class="com.action.baseset.AccountAction" method="showAccount">
+	<result name="success">/baseset/account/AccountShow.jsp</result>
+</action>
+<action name="GoAddAccount" class="com.action.baseset.AccountAction" method="goAddAccount">
+	<result name="success">/baseset/account/AccountAdd.jsp</result>
+</action>
+<action name="AddAccount" class="com.action.baseset.AccountAction" method="addAccount">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneAccount" class="com.action.baseset.AccountAction" method="getOneAccount">
+	<result name="success">/baseset/account/AccountUpdate.jsp</result>
+</action>
+<action name="UpdateAccount" class="com.action.baseset.AccountAction" method="updateAccount">
+	<result name="success" type="redirect">ShowAccount.action</result>
+</action>
+<action name="FindAccount" class="com.action.baseset.AccountAction" method="findAccount">
+	<result name="success">/baseset/FindAccount.jsp</result>
+</action>
+</package>
+</struts>

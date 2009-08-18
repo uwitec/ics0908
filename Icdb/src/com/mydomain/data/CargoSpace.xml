@@ -5,6 +5,19 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CargoSpace">
+	<select id="getHouseSpace" resultClass="com.mydomain.bean.CargoSpaceBean">
+	SELECT
+	cargoSpace.cargoSpaceCode,
+	cargoSpace.cargoSpaceName,
+	cargoSpace.cargoSpaceAddress,
+	cargoSpace.storehouseCode,
+	storehouse.storehouseName
+	from storehouse,cargoSpace
+	where storehouse.storehouseCode=cargoSpace.storehouseCode
+	and cargoSpace.isEnabled=1
+	and cargoSpace.storehouseCode=#storehouseCode#
+	
+	</select>
 	<select id="getCargoSpaceBean" parameterClass="String" resultClass="com.mydomain.bean.CargoSpaceBean">
 	SELECT
 	cargoSpace.cargoSpaceCode,
@@ -42,7 +55,6 @@
 	storehouseCode=#storehouseCode#,
 	isEnabled=1
 	where cargoSpaceCode=#cargoSpaceCode#
-	
 	</update>
 	<delete id="deleteCargoSpaceBean" parameterClass="com.mydomain.bean.CargoSpaceBean">
 	update CargoSpace

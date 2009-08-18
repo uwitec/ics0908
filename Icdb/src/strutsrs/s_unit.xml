@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="unit" extends="struts-default" namespace="/baseset">
+<action name="ShowUnit" class="com.action.baseset.UnitAction" method="showUnit">
+	<result name="success">/baseset/unit/UnitShow.jsp</result>
+</action>
+<action name="GoAddUnit" class="com.action.baseset.UnitAction" method="goAddUnit">
+	<result name="success">/baseset/unit/UnitAdd.jsp</result>
+</action>
+<action name="GetOneUnit" class="com.action.baseset.UnitAction" method="getOneUnit">
+	<result name="success">/baseset/unit/UnitUpdate.jsp</result>
+</action>
+<action name="AddUnit" class="com.action.baseset.UnitAction" method="addUnit">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateUnit" class="com.action.baseset.UnitAction" method="updateUnit">
+	<result name="success" type="redirect">ShowUnit.action</result>
+</action>
+</package>
+</struts>

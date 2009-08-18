@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="unittype" extends="struts-default" namespace="/baseset">
+<action name="ShowUnitType" class="com.action.baseset.UnitTypeAction" method="showUnitType">
+	<result name="success">/baseset/unittype/UnitTypeShow.jsp</result>
+</action>
+<action name="AddUnitType" class="com.action.baseset.UnitTypeAction" method="addUnitType">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateUnitType" class="com.action.baseset.UnitTypeAction" method="updateUnitType">
+	<result name="success" type="redirect">ShowUnitType.action</result>
+</action>
+<action name="GetOneUnitType" class="com.action.baseset.UnitTypeAction" method="getOneUnitType">
+	<result name="success">/baseset/unittype/UnitTypeUpdate.jsp</result>
+</action>
+</package>
+</struts>

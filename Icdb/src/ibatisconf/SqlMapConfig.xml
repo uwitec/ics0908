@@ -47,4 +47,5 @@
 	<sqlMap resource="com/mydomain/data/Supplier.xml"/>
 	<sqlMap resource="com/mydomain/data/Employee.xml"/>
 	<sqlMap resource="com/mydomain/data/Storehouse.xml"/>
+	<sqlMap resource="com/mydomain/data/CargoSpace.xml"/>
 </sqlMapConfig>

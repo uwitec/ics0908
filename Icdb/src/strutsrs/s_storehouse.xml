@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="storehouse" extends="struts-default" namespace="/baseset">
+<action name="ShowStorehouse" class="com.action.baseset.StorehouseAction" method="showStorehouse">
+	<result name="success">/baseset/storehouse/StorehouseShow.jsp</result>
+</action>
+<action name="GoAddStorehouse" class="com.action.baseset.StorehouseAction" method="goAddStorehouse">
+	<result name="success">/baseset/storehouse/StorehouseAdd.jsp</result>
+</action>
+<action name="AddStorehouse" class="com.action.baseset.StorehouseAction" method="addStorehouse">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneStorehouse" class="com.action.baseset.StorehouseAction" method="getOneStorehouse">
+	<result name="success">/baseset/storehouse/StorehouseUpdate.jsp</result>
+</action>
+<action name="UpdateStorehouse" class="com.action.baseset.StorehouseAction" method="updateStorehouse">
+	<result name="success" type="redirect">ShowStorehouse.action</result>
+</action>
+</package>
+</struts>

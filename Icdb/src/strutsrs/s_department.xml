@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="department" extends="struts-default" namespace="/baseset">
+<action name="ShowDepartment" class="com.action.baseset.DepartmentAction" method="showDepartment">
+	<result name="success">/baseset/department/DepartmentShow.jsp</result>
+</action>
+<action name="GoAddDepartment" class="com.action.baseset.DepartmentAction" method="goAddDepartment">
+	<result name="success">/baseset/department/DepartmentAdd.jsp</result>
+</action>
+<action name="AddDepartment" class="com.action.baseset.DepartmentAction" method="addDepartment">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneDepartment" class="com.action.baseset.DepartmentAction" method="getOneDepartment">
+	<result name="success">/baseset/department/DepartmentUpdate.jsp</result>
+</action>
+<action name="UpdateDepartment" class="com.action.baseset.DepartmentAction" method="updateDepartment">
+	<result name="success" type="redirect">ShowDepartment.action</result>
+</action>
+<action name="DeleteDepartment" class="com.action.baseset.DepartmentAction" method="deleteDepartment">
+	<result name="success" type="redirect">ShowDepartment.action</result>
+</action>
+</package>
+</struts>
