@@ -13,9 +13,7 @@
      <a href="<s:url action="baseset/ShowDepartment"/>">部门信息</a><br/>
      <a href="<s:url action="baseset/ShowUnit"/>">计量单位信息</a><br/>
      <a href="<s:url action="baseset/ShowJob"/>">岗位信息</a><br/>
-    <a href="<s:url action="baseset/ShowAccount"/>">帐号信息</a>
-    ----------------------------
-    <a href="baseset/FindJob.jsp">测试</a><br/>
+    <a href="<s:url action="baseset/ShowAccount"/>">帐号信息</a><br/>
     <a href="<s:url action="baseset/ShowSupplier"/>">供应商信息</a><br/>
    <a href="<s:url action="baseset/ShowEmployee"/>">员工信息</a><br/>
    <a href="<s:url action="baseset/ShowStorehouse"/>">仓库信息</a>
