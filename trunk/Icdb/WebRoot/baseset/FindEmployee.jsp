@@ -38,7 +38,7 @@ String base=request.getContextPath();
         <td><s:property value="departmentName"></s:property></td>
         </tr>
        </s:iterator>
-       <tr><input type="button" onclick="toSetId(new Array('employeeCode','personName'),'p_radio')" value="确认"/></tr>
+       <tr><td colspan="4"><input type="button" onclick="toSetId(new Array('employeeCode','personName'),'p_radio')" value="确认"/></td></tr>
      </table>
      </s:if>
      <s:elseif test="lhp==null">
