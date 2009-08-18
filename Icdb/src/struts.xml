@@ -3,16 +3,16 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<include file="strutsrs/s_bank.xml"></include>
-<include file="strutsrs/s_account.xml"></include>
-<include file="strutsrs/s_employee.xml"></include>
-<include file="strutsrs/s_struct.xml"></include>
-<include file="strutsrs/s_department.xml"></include>
-<include file="strutsrs/s_unittype.xml"></include>
-<include file="strutsrs/s_person.xml"></include>
-<include file="strutsrs/s_unit.xml"></include>
-<include file="strutsrs/s_job.xml"></include>
-<include file="strutsrs/s_supplier.xml"></include>
-<include file="strutsrs/s_storehouse.xml"></include>
-<include file="strutsrs/s_cargospace.xml"></include>
+<include file="strutsrs/baseset/s_bank.xml"></include>
+<include file="strutsrs/baseset/s_account.xml"></include>
+<include file="strutsrs/baseset/s_employee.xml"></include>
+<include file="strutsrs/baseset/s_struct.xml"></include>
+<include file="strutsrs/baseset/s_department.xml"></include>
+<include file="strutsrs/baseset/s_unittype.xml"></include>
+<include file="strutsrs/baseset/s_person.xml"></include>
+<include file="strutsrs/baseset/s_unit.xml"></include>
+<include file="strutsrs/baseset/s_job.xml"></include>
+<include file="strutsrs/baseset/s_supplier.xml"></include>
+<include file="strutsrs/baseset/s_storehouse.xml"></include>
+<include file="strutsrs/baseset/s_cargospace.xml"></include>
 </struts>
