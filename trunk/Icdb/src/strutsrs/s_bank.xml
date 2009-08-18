@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="bank" extends="struts-default" namespace="/baseset">
+<action name="ShowBank" class="com.action.baseset.BankAction" method="showBank">
+   <result name="success">/baseset/bank/BankShow.jsp</result>
+</action>
+<action name="AddBank" class="com.action.baseset.BankAction" method="addBank">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateBank" class="com.action.baseset.BankAction" method="updateBank">
+	<result name="success" type="redirect">ShowBank.action</result>
+</action>
+<action name="GetOneBank" class="com.action.baseset.BankAction" method="getOneBank">
+	<result name="success">/baseset/bank/BankUpdate.jsp</result>
+</action>
+<action name="DeleteBank" class="com.action.baseset.BankAction" method="deleteBank">
+	<result name="success" type="redirect">ShowBank.action</result>
+</action>
+<action name="FindBank" class="com.action.baseset.BankAction" method="findBank">
+	<result name="success">/baseset/FindBank.jsp</result>
+</action>
+</package>
+</struts>

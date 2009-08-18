@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="cargoSpace" extends="struts-default" namespace="/baseset">
+<action name="ShowCargoSpace" class="com.action.baseset.CargoSpaceAction" method="getHouseSapce">
+	<result name="success">/baseset/cargoSpace/CargoSpaceShow.jsp</result>
+</action>
+<action name="GoAddCargoSpace" class="com.action.baseset.CargoSpaceAction" method="goAddCargoSpace">
+	<result name="success">/baseset/cargoSpace/CargoSpaceAdd.jsp</result>
+</action>
+<action name="AddCargoSpace" class="com.action.baseset.CargoSpaceAction" method="addCargoSpace">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneCargoSpace" class="com.action.baseset.CargoSpaceAction" method="getOneCargoSpace">
+	<result name="success">/baseset/cargospace/CargoSpaceUpdate.jsp</result>
+</action>
+<action name="UpdateCargoSpace" class="com.action.baseset.CargoSpaceAction" method="updateCargoSpace">
+	<result name="success" type="redirect">ShowStorehouse.action</result>
+</action>
+</package>
+</struts>

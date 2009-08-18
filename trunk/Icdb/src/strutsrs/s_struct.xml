@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="struct" extends="struts-default" namespace="/baseset">
+<action name="ShowStruct" class="com.action.baseset.StructAction" method="showStruct">
+	<result name="success">/baseset/struct/StructShow.jsp</result>
+</action>
+<action name="GoAddStruct" class="com.action.baseset.StructAction" method="goAddStruct">
+	<result name="success">/baseset/struct/StructAdd.jsp</result>
+</action>
+<action name="AddStruct" class="com.action.baseset.StructAction" method="addStruct">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="UpdateStruct" class="com.action.baseset.StructAction" method="updateStruct">
+	<result name="success" type="redirect">ShowStruct.action</result>
+</action>
+<action name="GetOneStruct" class="com.action.baseset.StructAction" method="getOneStruct">
+	<result name="success">/baseset/struct/StructUpdate.jsp</result>
+</action>
+</package>
+</struts>

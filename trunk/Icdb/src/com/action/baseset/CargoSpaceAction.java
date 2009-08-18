@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.CargoSapceBean;
+import com.mydomain.bean.CargoSpaceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -18,15 +18,16 @@ public class CargoSpaceAction extends ActionSupport{
 	private String cargoSpaceName; //货位名称
 	private String cargoSpaceAddress; //货位地址
 	private String storehouseCode; //库房编码
+	private String storehouseName;
 	private String nextPath;
 	private String rePath;
 	private String message;
-	private List<CargoSapceBean> lhp;
-	private CargoSapceBean cargoSpace;
+	private List<CargoSpaceBean> lhp;
+	private CargoSpaceBean cargoSpace;
 	/**
 	 * @return the cargoSapce
 	 */
-	public CargoSapceBean getCargoSpace() {
+	public CargoSpaceBean getCargoSpace() {
 		return cargoSpace;
 	}
 	/**
@@ -50,7 +51,7 @@ public class CargoSpaceAction extends ActionSupport{
 	/**
 	 * @return the lhp
 	 */
-	public List<CargoSapceBean> getLhp() {
+	public List<CargoSpaceBean> getLhp() {
 		return lhp;
 	}
 	/**
@@ -80,7 +81,7 @@ public class CargoSpaceAction extends ActionSupport{
 	/**
 	 * @param cargoSapce the cargoSapce to set
 	 */
-	public void setCargoSpace(CargoSapceBean cargoSpace) {
+	public void setCargoSpace(CargoSpaceBean cargoSpace) {
 		this.cargoSpace = cargoSpace;
 	}
 	/**
@@ -104,7 +105,7 @@ public class CargoSpaceAction extends ActionSupport{
 	/**
 	 * @param lhp the lhp to set
 	 */
-	public void setLhp(List<CargoSapceBean> lhp) {
+	public void setLhp(List<CargoSpaceBean> lhp) {
 		this.lhp = lhp;
 	}
 	/**
@@ -133,9 +134,25 @@ public class CargoSpaceAction extends ActionSupport{
 	}
 	
 	@SuppressWarnings("unchecked")
+	public String getHouseSapce(){
+		cargoSpace=new CargoSpaceBean();
+		cargoSpace.setStorehouseCode(storehouseCode);
+		cargoSpace.setStorehouseName(storehouseName);
+		try {
+			lhp=(List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace", cargoSpace, 0, 10);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return SUCCESS;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public String showCargoSpace(){
 		try {
-			lhp=(List<CargoSapceBean>) DBServer.quider.queryForList(CargoSapceBean.class);
+			lhp=(List<CargoSpaceBean>) DBServer.quider.queryForList(CargoSpaceBean.class);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,7 +166,7 @@ public class CargoSpaceAction extends ActionSupport{
 	}
 	
 	public String addCargoSpace(){
-		cargoSpace=new CargoSapceBean();
+		cargoSpace=new CargoSpaceBean();
 		cargoSpace.setCargoSpaceCode(cargoSpaceCode);
 		cargoSpace.setCargoSpaceName(cargoSpaceName);
 		cargoSpace.setCargoSpaceAddress(cargoSpaceAddress);
@@ -165,7 +182,7 @@ public class CargoSpaceAction extends ActionSupport{
 	
 	public String getOneCargoSpace(){
 		try {
-			cargoSpace=(CargoSapceBean) DBServer.quider.queryForObjectById(cargoSpaceCode, CargoSapceBean.class);
+			cargoSpace=(CargoSpaceBean) DBServer.quider.queryForObjectById(cargoSpaceCode, CargoSpaceBean.class);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -174,7 +191,7 @@ public class CargoSpaceAction extends ActionSupport{
 	}
 	
 	public String updateCargoSpace(){
-		cargoSpace=new CargoSapceBean();
+		cargoSpace=new CargoSpaceBean();
 		cargoSpace.setCargoSpaceCode(cargoSpaceCode);
 		cargoSpace.setCargoSpaceName(cargoSpaceName);
 		cargoSpace.setCargoSpaceAddress(cargoSpaceAddress);
@@ -186,5 +203,17 @@ public class CargoSpaceAction extends ActionSupport{
 			e.printStackTrace();
 		}
 		return SUCCESS;
+	}
+	/**
+	 * @return the storehouseName
+	 */
+	public String getStorehouseName() {
+		return storehouseName;
+	}
+	/**
+	 * @param storehouseName the storehouseName to set
+	 */
+	public void setStorehouseName(String storehouseName) {
+		this.storehouseName = storehouseName;
 	}
 }

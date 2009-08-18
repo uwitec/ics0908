@@ -2,7 +2,7 @@ package com.mydomain.bean;
 /*
  * 货位BEAN
  * */
-public class CargoSapceBean {
+public class CargoSpaceBean {
 	private String cargoSpaceCode; //货位编码
 	private String cargoSpaceName; //货位名称
 	private String cargoSpaceAddress; //货位地址
