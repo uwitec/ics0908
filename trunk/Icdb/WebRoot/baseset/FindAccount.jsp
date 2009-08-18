@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
     <head>
-        <title>y银行信息</title>
+        <title>银行信息</title>
     </head>
 <% 
 int idtitle=1;
