@@ -34,8 +34,8 @@ String base=request.getContextPath();
        	<td id="jobCode<%=idtitle%>"><s:property value="jobCode"></s:property></td>
         <td id="jobName<%=idtitle%>"><s:property value="jobName"></s:property></td>
         <td id="departmentName<%=idtitle%>"><s:property value="departmentName"></s:property></td>
-        	<input id="departmentCode<%=idtitle%>" type="hidden" value="<s:property value="departmentCode"/>"/>
-        	<input id="structCode<%=idtitle%>" type="hidden" value="<s:property value="structCode"/>"/>
+        <input id="departmentCode<%=idtitle%>" type="hidden" value="<s:property value="departmentCode"/>"/>
+        <input id="structCode<%=idtitle%>" type="hidden" value="<s:property value="structCode"/>"/>
         <td id="structName<%=idtitle++%>"><s:property value="structName"></s:property></td>
         	
         </tr>
