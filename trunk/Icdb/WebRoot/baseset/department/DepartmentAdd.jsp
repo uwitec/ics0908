@@ -9,10 +9,10 @@
     <body>
 		<s:form action="AddDepartment" namespace="/baseset">
 		<table>
-			<tr><td><s:textfield name="departmentCode" label="部门编号" value="%{departmentCode}"></s:textfield></td></tr>
-			<tr><td><s:textfield name="departmentName" label="部门名称"></s:textfield></td></tr>
+			<tr><td><s:textfield name="department.departmentCode" label="部门编号" value="%{department.departmentCode}"></s:textfield></td></tr>
+			<tr><td><s:textfield name="department.departmentName" label="部门名称"></s:textfield></td></tr>
 			<tr><td>
-			<s:select list="lsb" listKey="structCode" listValue="structName" name="structCode" label="机构名称" headerKey="-1" headerValue="请选择机构名称">		
+			<s:select list="lsb" listKey="structCode" listValue="structName" name="department.structCode" label="机构名称" headerKey="-1" headerValue="请选择机构名称">		
 			</s:select>
 			</td></tr>
 			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>

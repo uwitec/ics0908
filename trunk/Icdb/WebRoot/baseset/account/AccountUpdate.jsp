@@ -19,14 +19,14 @@ function showBank(){
 		<s:form action="UpdateAccount" namespace="/baseset">
 		 <s:push value="account">
 		<table>
-			<s:textfield name="accountCode" label="账户编号" value="%{accountCode}"></s:textfield>
-			<s:textfield name="accountNumber" label="帐号" value="%{accountNumber}"></s:textfield>
-			<s:textfield name="accountName" label="帐户名" value="%{accountName}"></s:textfield>
-			<s:textfield name="accountType" label="帐号类型" value="%{accountType}"></s:textfield>
-			<s:textfield id="personName" name="personName" value="%{personName}" label="户主" onclick="showPerson()"></s:textfield>
-			<s:hidden id="personCode" name="personCode" value="%{personCode}"></s:hidden>
-			<s:textfield id="bankName" name="bankName" value="%{bankName}" label="所属银行" onclick="showBank()"></s:textfield>
-			<s:hidden id="bankCode" name="bankCode" value="%{bankCode}"></s:hidden>
+			<s:textfield name="account.accountCode" label="账户编号" value="%{accountCode}" readonly="true"></s:textfield>
+			<s:textfield name="account.accountNumber" label="帐号" value="%{accountNumber}"></s:textfield>
+			<s:textfield name="account.accountName" label="帐户名" value="%{accountName}"></s:textfield>
+			<s:textfield name="account.accountType" label="帐号类型" value="%{accountType}"></s:textfield>
+			<s:textfield id="personName" name="account.personName" value="%{personName}" label="户主" onclick="showPerson()"></s:textfield>
+			<s:hidden id="personCode" name="account.personCode" value="%{personCode}"></s:hidden>
+			<s:textfield id="bankName" name="account.bankName" value="%{bankName}" label="所属银行" onclick="showBank()"></s:textfield>
+			<s:hidden id="bankCode" name="account.bankCode" value="%{bankCode}"></s:hidden>
 			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
 		</table>
 		</s:push>

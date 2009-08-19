@@ -6,12 +6,12 @@
         <title>货位信息</title>
     </head>
     <body>
-
+	<s:if test="lhp.size>0">
     <table border="1">
     	<tr>
     	<th colspan="4">
-    	<s:property value="storehouseName"></s:property>
-    	<s:if test="storehouseName!=null">
+    	<s:property value="cargoSpace.storehouseName"></s:property>
+    	<s:if test="cargoSpace.storehouseName!=null">
     		的库位信息
     	</s:if>
     	</th>
@@ -28,15 +28,20 @@
         <td><s:property value="cargoSpaceName"></s:property></td>
         <td><s:property value="cargoSpaceAddress"></s:property></td>
         <td><s:url id="updateUrl" action="GetOneCargoSpace">
-			<s:param name="cargoSpaceCode" value="cargoSpaceCode"></s:param>       
+			<s:param name="cargoSpace.cargoSpaceCode" value="cargoSpaceCode"></s:param>       
         	</s:url> 
         	<s:a href="%{updateUrl}">修改</s:a>
         </td>
         </tr>
        </s:iterator>
      </table>
+     </s:if>
+     <s:else>
+      	未有相关信息！<br/>
+     </s:else>
      <s:url id="addUrl" action="GoAddCargoSpace">
-     	<s:param name="storehouseCode" value="storehouseCode"></s:param>
+     	<s:param name="cargoSpace.storehouseCode" value="cargoSpace.storehouseCode"></s:param>
+     	<s:param name="cargoSpace.storehouseName" value="cargoSpace.storehouseName"></s:param>
      </s:url>
      <s:a href="%{addUrl}">添加</s:a>
     </body>

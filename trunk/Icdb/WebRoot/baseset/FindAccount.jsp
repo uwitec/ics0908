@@ -16,7 +16,8 @@ String base=request.getContextPath();
     <table>
     <tr><td>
     <s:form action="FindAccount" namespace="/baseset">
-    <s:textfield name="accountNumber"></s:textfield>
+    <s:textfield name="res.s_value" label="内容"></s:textfield>
+    <s:hidden name="account.accountNumber"></s:hidden>
     <s:submit value="查询"></s:submit>
     </s:form>
     </td></tr>
@@ -24,7 +25,7 @@ String base=request.getContextPath();
     <s:if test="lhp!=null">
     <table border="1">
     	<tr>
-    	
+    	<th>选择</th>
     	<th>帐号</th>
 		<th>帐户名</th>
 		<th>帐号类型</th>
@@ -45,7 +46,7 @@ String base=request.getContextPath();
         </td>
         </tr>
        </s:iterator>
-       <tr><input type="button" onclick="toSetId(new Array('accountCode','accountNumber','personName','personCode','bankCode','bankName'),'p_radio')" value="确认"/></tr>
+       <tr><td colspan="6"><input type="button" onclick="toSetId(new Array('accountCode','accountNumber','personName','personCode','bankCode','bankName'),'p_radio')" value="确认"/></td></tr>
      </table>
      </s:if>
      <s:elseif test="lhp==null">

@@ -10,38 +10,13 @@
     <body>
     <s:push value="person">
       <s:form action="UpdatePerson" namespace="/baseset">
-    <table border="1"> 
-	  <tr>
-	  <td>
-	  <s:textfield name="personCode" value="%{personCode}" label="人员编号"></s:textfield>
-	  </td>
-	  </tr>
-	  <tr>
-	  	<td><s:textfield name="personName" value="%{personName}" label="名字"></s:textfield></td>
-	  </tr>
-	  <tr>
-	  <td>
-	  <s:textfield name="personPhone" value="%{personPhone}" label="电话"></s:textfield>
-	  </td>
-	  </tr>
-	  <tr>
-	  <td>
-	  <s:textfield name="personEmail" value="%{personEmail}" label="电邮"></s:textfield>
-	  </td>
-	  </tr>
-	  <tr>
-	  <td>
-	 	<s:select list="{'男','女'}"  name="personSex" label="性别"></s:select>
-	  </td>
-	  </tr>
-	  <tr>
-	  <td>
-	  <s:textfield name="personPhoto" value="%{personPhoto}" label="照片"></s:textfield>
-	  </tr>
-	  <tr><td colspan="2">
-		<s:submit value="确认修改"></s:submit>
-		</td></tr>
-     </table>
+	  <s:textfield name="person.personCode" value="%{personCode}" label="人员编号" readonly="true"></s:textfield>
+	  <s:textfield name="person.personName" value="%{personName}" label="名字"></s:textfield>
+	  <s:textfield name="person.personPhone" value="%{personPhone}" label="电话"></s:textfield>
+	  <s:textfield name="person.personEmail" value="%{personEmail}" label="电邮"></s:textfield>
+	  <s:radio list="{'男','女'}"  name="person.personSex" label="性别"></s:radio>
+	  <s:textfield name="person.personPhoto" value="%{personPhoto}" label="照片"></s:textfield>
+	 <s:submit value="确认修改"></s:submit>
      </s:form>
      </s:push>
     </body>

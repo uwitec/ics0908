@@ -9,8 +9,8 @@
     <body>
 		<s:form action="AddBank" namespace="/baseset">
 		<table>
-			<tr><td><s:textfield name="bankCode" label="银行编码"></s:textfield></td></tr>
-			<tr><td><s:textfield name="bankName" label="银行名称"></s:textfield></td></tr>
+			<tr><td><s:textfield name="bank.bankCode" label="银行编码"></s:textfield></td></tr>
+			<tr><td><s:textfield name="bank.bankName" label="银行名称"></s:textfield></td></tr>
 			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
 		</table>
 		</s:form>

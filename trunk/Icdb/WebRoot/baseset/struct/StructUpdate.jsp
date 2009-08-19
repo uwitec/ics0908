@@ -4,24 +4,14 @@
 
 <html>
     <head>
-        <title>机构信息维护</title>
+        <title>修改机构信息</title>
     </head>
     <body>
     <s:push value="struct">
       <s:form action="UpdateStruct" namespace="/baseset">
-    <table border="1">
-	  <tr>
-	  <td>
-	  <s:textfield name="structCode" value="%{structCode}" label="机构编码"></s:textfield>
-	 </td>
-	  </tr>
-	  <tr>
-	  <td>
-	  <s:textfield name="structName" value="%{structName}" label="机构名称"></s:textfield>
-	  </td>
-	  </tr>
-	  <tr><td colspan="2"><s:submit></s:submit></td></tr>
-     </table>
+	  <s:textfield name="struct.structCode" value="%{structCode}" label="机构编码" readonly="true"></s:textfield>
+	  <s:textfield name="struct.structName" value="%{structName}" label="机构名称"></s:textfield>
+	  <s:submit value="修改"></s:submit>
      </s:form>
      </s:push>
     </body>

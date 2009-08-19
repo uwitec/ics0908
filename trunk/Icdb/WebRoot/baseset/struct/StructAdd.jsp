@@ -9,8 +9,8 @@
     <body>
 		<s:form action="AddStruct" namespace="/baseset">
 		<table>
-			<tr><td><s:textfield name="structCode" label="机构编码" value="%{structCode}"></s:textfield></td></tr>
-			<tr><td><s:textfield name="structName" label="机构名称"></s:textfield></td></tr>
+			<tr><td><s:textfield name="struct.structCode" label="机构编码" value="%{struct.structCode}" readonly="true"></s:textfield></td></tr>
+			<tr><td><s:textfield name="struct.structName" label="机构名称"></s:textfield></td></tr>
 			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
 		</table>
 		</s:form>

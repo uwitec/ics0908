@@ -8,14 +8,10 @@
     </head>
     <body>
 		<s:form action="AddJob" namespace="/baseset">
-		<table>
-			<tr><td><s:textfield name="jobCode" label="岗位编号" value="%{jobCode}"></s:textfield></td></tr>
-			<tr><td><s:textfield name="jobName" label="岗位名称"></s:textfield></td></tr>
-			<tr><td>
-			<s:select list="ldb" listKey="departmentCode" listValue="departmentName" name="departmentCode" label="部门名称" headerKey="-1" headerValue="请选择部门名称">		
-			</s:select>
-			</td></tr>
-			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
+		<s:textfield name="job.jobCode" label="岗位编号" value="%{job.jobCode}"></s:textfield>
+		<s:textfield name="job.jobName" label="岗位名称"></s:textfield>
+		<s:select list="ldb" listKey="departmentCode" listValue="departmentName" name="job.departmentCode" label="部门名称" headerKey="-1" headerValue="请选择部门名称">	</s:select>
+		<s:submit value="确认"></s:submit>
 		</table>
 		</s:form>
     </body>

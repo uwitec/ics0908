@@ -8,15 +8,10 @@
     </head>
     <body>
 		<s:form action="AddUnit" namespace="/baseset">
-		<table>
-			<tr><td><s:textfield name="UnitCode" label="计量单位编号"></s:textfield></td></tr>
-			<tr><td><s:textfield name="UnitName" label="计量单位名称"></s:textfield></td></tr>
-			<tr><td>
-			<s:select list="utb" listKey="unitTypeCode" listValue="unitTypeName" name="unitTypeCode" label="类型名称" headerKey="-1" headerValue="请选择类型名称">		
-			</s:select>
-			</td></tr>
-			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
-		</table>
+		<s:textfield name="unit.UnitCode" label="计量单位编号"></s:textfield>
+		<s:textfield name="unit.UnitName" label="计量单位名称"></s:textfield>
+		<s:select list="utb" listKey="unitTypeCode" listValue="unitTypeName" name="unit.unitTypeCode" label="类型名称" headerKey="-1" headerValue="请选择类型名称"></s:select>
+		<s:submit value="确认"></s:submit>
 		</s:form>
     </body>
 </html>

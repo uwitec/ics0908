@@ -18,25 +18,25 @@
 		<tr><td>
 		<table>
 		<s:push value="employee">
-			<s:textfield name="employeeCode" label="人员编码" value="%{employeeCode}"></s:textfield>
-			<s:textfield id="jobName" name="jobName" label="岗位" value="%{jobName}" onclick="showJob()"></s:textfield>
-			<s:hidden id="jobCode" name="jobCode" value="%{jobCode}"></s:hidden>
-			<s:textfield id="departmentName" name="departmentName" value="%{departmentName}" label="部门名称"></s:textfield>
-			<s:hidden id="departmentCode" name="departmentCode" value="%{departmentCode}"></s:hidden>
-			<s:textfield id="structName" id="structName" name="structName" label="所属公司"></s:textfield>
-			<s:hidden id="structCode" name="structCode"></s:hidden>
+			<s:textfield name="employee.employeeCode" label="人员编码" value="%{employeeCode}"></s:textfield>
+			<s:textfield id="jobName" name="employee.jobName" label="岗位" value="%{jobName}" onclick="showJob()"></s:textfield>
+			<s:hidden id="jobCode" name="employee.jobCode" value="%{jobCode}"></s:hidden>
+			<s:textfield id="departmentName" name="employee.departmentName" value="%{departmentName}" label="部门名称"></s:textfield>
+			<s:hidden id="departmentCode" name="employee.departmentCode" value="%{departmentCode}"></s:hidden>
+			<s:textfield id="structName" id="structName" name="employee.structName" label="所属公司"></s:textfield>
+			<s:hidden id="structCode" name="employee.structCode"></s:hidden>
 		</s:push>
 		</table>
 		</td>
 		<td>
 		<table>
 		<s:push value="person">
-			<s:textfield name="personCode" label="人员编码" value="%{personCode}"></s:textfield>
-			<s:textfield name="personName" label="姓名" value="%{personName}"></s:textfield>
-			<s:textfield name="personPhone" label="电话" value="%{personPhone}"></s:textfield>
-			<s:textfield name="personEmail" label="电邮" value="%{personEmail}"></s:textfield> 
-			<s:select list="{'男','女'}" name="personSex" label="性别"></s:select>
-			<s:textfield name="personPhoto" label="照片" value="%{personPhoto}"></s:textfield>   
+			<s:textfield name="person.personCode" label="人员编码" value="%{personCode}"></s:textfield>
+			<s:textfield name="person.personName" label="姓名" value="%{personName}"></s:textfield>
+			<s:textfield name="person.personPhone" label="电话" value="%{personPhone}"></s:textfield>
+			<s:textfield name="person.personEmail" label="电邮" value="%{personEmail}"></s:textfield> 
+			<s:radio list="{'男','女'}" name="person.personSex" label="性别" value="%{personSex}"></s:radio>
+			<s:textfield name="person.personPhoto" label="照片" value="%{personPhoto}"></s:textfield>   
 		</s:push>
 		</table>
 		</td>
