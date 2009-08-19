@@ -19,5 +19,8 @@
 <action name="UpdateSupplier" class="com.action.baseset.SupplierAction" method="updateSupplier">
 	<result name="success" type="redirect">ShowSupplier.action</result>
 </action>
+<action name="SelectSupplierDef" class="com.action.baseset.SupplierAction" method="selectSupplierDef">
+	<result name="success">/baseset/supplier/SupplierShow.jsp</result>
+</action>
 </package>
 </struts>

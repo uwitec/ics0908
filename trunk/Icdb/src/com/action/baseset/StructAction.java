@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.mydomain.bean.ReSourceBean;
 import com.mydomain.bean.StructBean;
 import com.opensymphony.xwork2.ActionSupport;
-import com.tools.DBControl;
 import com.tools.ICTools;
 
 public class StructAction extends ActionSupport{
@@ -15,11 +15,7 @@ public class StructAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String structCode;
-	private String structName;
-	private String message;
-	private String nextPath;
-	private String rePath;
+	private ReSourceBean res;
 	private StructBean struct;
 	private List<StructBean> lhp;
 	/**
@@ -29,40 +25,10 @@ public class StructAction extends ActionSupport{
 		return lhp;
 	}
 	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-	/**
-	 * @return the nextPath
-	 */
-	public String getNextPath() {
-		return nextPath;
-	}
-	/**
-	 * @return the rePath
-	 */
-	public String getRePath() {
-		return rePath;
-	}
-	/**
 	 * @return the struct
 	 */
 	public StructBean getStruct() {
 		return struct;
-	}
-	/**
-	 * @return the structCode
-	 */
-	public String getStructCode() {
-		return structCode;
-	}
-	/**
-	 * @return the structName
-	 */
-	public String getStructName() {
-		return structName;
 	}
 	/**
 	 * @param lhp the lhp to set
@@ -71,59 +37,40 @@ public class StructAction extends ActionSupport{
 		this.lhp = lhp;
 	}
 	/**
-	 * @param message the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	/**
-	 * @param nextPath the nextPath to set
-	 */
-	public void setNextPath(String nextPath) {
-		this.nextPath = nextPath;
-	}
-	/**
-	 * @param rePath the rePath to set
-	 */
-	public void setRePath(String rePath) {
-		this.rePath = rePath;
-	}
-	/**
 	 * @param struct the struct to set
 	 */
 	public void setStruct(StructBean struct) {
 		this.struct = struct;
 	}
 	/**
-	 * @param structCode the structCode to set
+	 * @return the res
 	 */
-	public void setStructCode(String structCode) {
-		this.structCode = structCode;
+	public ReSourceBean getRes() {
+		return res;
 	}
 	/**
-	 * @param structName the structName to set
+	 * @param res the res to set
 	 */
-	public void setStructName(String structName) {
-		this.structName = structName;
+	public void setRes(ReSourceBean res) {
+		this.res = res;
 	}
-	
 	public String addStruct(){
-		struct=new StructBean();
-		struct.setStructCode(structCode);
-		struct.setStructName(structName);
-		DBControl db=new DBControl();
-		if(db.insert(struct)){
-			message="";
-		}else{
-			message="有已经存在为"+struct.getStructCode()+"的编号，请重新输入";
+		res=new ReSourceBean();
+		try {
+			DBServer.quider.insertObject(struct);
+			res.setMessage(ICTools.MESSAGE_OK);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		nextPath="/baseset/struct/StructAdd.jsp";
-		rePath="/baseset/ShowStruct.action";
+		res.setNextPath("/baseset/GoAddStruct.action");
+		res.setRePath("/baseset/ShowStruct.action");
 		return SUCCESS;
 	}
 	public String getOneStruct(){
 		try {
-			struct=(StructBean) DBServer.quider.queryForObjectById(structCode, StructBean.class);
+			struct=(StructBean) DBServer.quider.queryForObjectById(struct.getStructCode(), StructBean.class);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -131,6 +78,19 @@ public class StructAction extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public String selectStructDef(){
+		ICTools.setBean(struct, ICTools.likeString(res.getS_value()));
+		try {
+			lhp=(List<StructBean>) DBServer.quider.queryForList("selectStructDef", struct, 0, 10);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public String showStruct(){
 		try {
@@ -142,9 +102,6 @@ public class StructAction extends ActionSupport{
 		return SUCCESS;
 	}
 	public String updateStruct(){
-		struct=new StructBean();
-		struct.setStructCode(structCode);
-		struct.setStructName(structName);
 		try {
 			DBServer.quider.updateObject(struct);
 		} catch (SQLException e) {
@@ -155,7 +112,9 @@ public class StructAction extends ActionSupport{
 	}
 	
 	public String goAddStruct(){
-		structCode=ICTools.randId("S");
+		struct=new StructBean();
+		struct.setStructCode(ICTools.randId("S"));
 		return SUCCESS;
 	}
+
 }

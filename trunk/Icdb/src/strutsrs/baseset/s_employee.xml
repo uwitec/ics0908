@@ -26,5 +26,8 @@ method="getOneEmployee">
 <action name="FindEmployee" class="com.action.baseset.EmployeeAction" method="findEmployee">
 	<result name="success">/baseset/FindEmployee.jsp</result>
 </action>
+<action name="SelectEmployeeDef" class="com.action.baseset.EmployeeAction" method="selectEmployeeDef">
+	<result name="success">/baseset/employee/EmployeeShow.jsp</result>
+</action>
 </package>
 </struts>

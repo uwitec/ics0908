@@ -14,7 +14,7 @@
 	<result name="success">/baseset/AddEnd.jsp</result>
 </action>
 <action name="GetOneCargoSpace" class="com.action.baseset.CargoSpaceAction" method="getOneCargoSpace">
-	<result name="success">/baseset/cargospace/CargoSpaceUpdate.jsp</result>
+	<result name="success">/baseset/cargoSpace/CargoSpaceUpdate.jsp</result>
 </action>
 <action name="UpdateCargoSpace" class="com.action.baseset.CargoSpaceAction" method="updateCargoSpace">
 	<result name="success" type="redirect">ShowStorehouse.action</result>

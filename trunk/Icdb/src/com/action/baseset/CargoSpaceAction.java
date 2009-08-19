@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.CargoSpaceBean;
+import com.mydomain.bean.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -14,14 +15,8 @@ public class CargoSpaceAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String cargoSpaceCode; //货位编码
-	private String cargoSpaceName; //货位名称
-	private String cargoSpaceAddress; //货位地址
-	private String storehouseCode; //库房编码
-	private String storehouseName;
-	private String nextPath;
-	private String rePath;
-	private String message;
+
+	private ReSourceBean res;
 	private List<CargoSpaceBean> lhp;
 	private CargoSpaceBean cargoSpace;
 	/**
@@ -30,77 +25,19 @@ public class CargoSpaceAction extends ActionSupport{
 	public CargoSpaceBean getCargoSpace() {
 		return cargoSpace;
 	}
-	/**
-	 * @return the cargoSpaceAddress
-	 */
-	public String getCargoSpaceAddress() {
-		return cargoSpaceAddress;
-	}
-	/**
-	 * @return the cargoSpaceCode
-	 */
-	public String getCargoSpaceCode() {
-		return cargoSpaceCode;
-	}
-	/**
-	 * @return the cargoSpaceName
-	 */
-	public String getCargoSpaceName() {
-		return cargoSpaceName;
-	}
+	
 	/**
 	 * @return the lhp
 	 */
 	public List<CargoSpaceBean> getLhp() {
 		return lhp;
 	}
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-	/**
-	 * @return the nextPath
-	 */
-	public String getNextPath() {
-		return nextPath;
-	}
-	/**
-	 * @return the rePath
-	 */
-	public String getRePath() {
-		return rePath;
-	}
-	/**
-	 * @return the storehouseCode
-	 */
-	public String getStorehouseCode() {
-		return storehouseCode;
-	}
+	
 	/**
 	 * @param cargoSapce the cargoSapce to set
 	 */
 	public void setCargoSpace(CargoSpaceBean cargoSpace) {
 		this.cargoSpace = cargoSpace;
-	}
-	/**
-	 * @param cargoSpaceAddress the cargoSpaceAddress to set
-	 */
-	public void setCargoSpaceAddress(String cargoSpaceAddress) {
-		this.cargoSpaceAddress = cargoSpaceAddress;
-	}
-	/**
-	 * @param cargoSpaceCode the cargoSpaceCode to set
-	 */
-	public void setCargoSpaceCode(String cargoSpaceCode) {
-		this.cargoSpaceCode = cargoSpaceCode;
-	}
-	/**
-	 * @param cargoSpaceName the cargoSpaceName to set
-	 */
-	public void setCargoSpaceName(String cargoSpaceName) {
-		this.cargoSpaceName = cargoSpaceName;
 	}
 	/**
 	 * @param lhp the lhp to set
@@ -109,35 +46,21 @@ public class CargoSpaceAction extends ActionSupport{
 		this.lhp = lhp;
 	}
 	/**
-	 * @param message the message to set
+	 * @return the res
 	 */
-	public void setMessage(String message) {
-		this.message = message;
+	public ReSourceBean getRes() {
+		return res;
 	}
+
 	/**
-	 * @param nextPath the nextPath to set
+	 * @param res the res to set
 	 */
-	public void setNextPath(String nextPath) {
-		this.nextPath = nextPath;
-	}
-	/**
-	 * @param rePath the rePath to set
-	 */
-	public void setRePath(String rePath) {
-		this.rePath = rePath;
-	}
-	/**
-	 * @param storehouseCode the storehouseCode to set
-	 */
-	public void setStorehouseCode(String storehouseCode) {
-		this.storehouseCode = storehouseCode;
+	public void setRes(ReSourceBean res) {
+		this.res = res;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String getHouseSapce(){
-		cargoSpace=new CargoSpaceBean();
-		cargoSpace.setStorehouseCode(storehouseCode);
-		cargoSpace.setStorehouseName(storehouseName);
 		try {
 			lhp=(List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace", cargoSpace, 0, 10);
 		} catch (SQLException e) {
@@ -161,28 +84,32 @@ public class CargoSpaceAction extends ActionSupport{
 	}
 
 	public String goAddCargoSpace(){
-		cargoSpaceCode=ICTools.randId("C");
+		cargoSpace.setCargoSpaceCode(ICTools.randId("C"));
+		System.out.println(cargoSpace.getStorehouseName());
+		System.out.println(cargoSpace.getStorehouseCode());
 		return SUCCESS;
 	}
 	
 	public String addCargoSpace(){
-		cargoSpace=new CargoSpaceBean();
-		cargoSpace.setCargoSpaceCode(cargoSpaceCode);
-		cargoSpace.setCargoSpaceName(cargoSpaceName);
-		cargoSpace.setCargoSpaceAddress(cargoSpaceAddress);
-		cargoSpace.setStorehouseCode(storehouseCode);
+		res=new ReSourceBean();
 		try {
 			DBServer.quider.insertObject(cargoSpace);
+			res.setMessage(ICTools.MESSAGE_OK);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
+		//res.setNextPath("/baseset/GoAddCargoSpace.action");
+		//res.setRePath("/baseset/ShowCargoSpace.action");
+		res.setNextPath("/baseset/GoAddCargoSpace.action?cargoSpace.storehouseCode="+cargoSpace.getStorehouseCode()+"&cargoSpace.storehouseName="+cargoSpace.getCargoSpaceName());
+		res.setRePath("/baseset/ShowCargoSpace.action?cargoSpace.storehouseCode="+cargoSpace.getStorehouseCode()+"&cargoSpace.storehouseName="+cargoSpace.getCargoSpaceName());
 		return SUCCESS;
 	}
 	
 	public String getOneCargoSpace(){
 		try {
-			cargoSpace=(CargoSpaceBean) DBServer.quider.queryForObjectById(cargoSpaceCode, CargoSpaceBean.class);
+			cargoSpace=(CargoSpaceBean) DBServer.quider.queryForObjectById(cargoSpace.getCargoSpaceCode(), CargoSpaceBean.class);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -191,11 +118,6 @@ public class CargoSpaceAction extends ActionSupport{
 	}
 	
 	public String updateCargoSpace(){
-		cargoSpace=new CargoSpaceBean();
-		cargoSpace.setCargoSpaceCode(cargoSpaceCode);
-		cargoSpace.setCargoSpaceName(cargoSpaceName);
-		cargoSpace.setCargoSpaceAddress(cargoSpaceAddress);
-		cargoSpace.setStorehouseCode(storehouseCode);
 		try {
 			DBServer.quider.updateObject(cargoSpace);
 		} catch (SQLException e) {
@@ -204,16 +126,7 @@ public class CargoSpaceAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	/**
-	 * @return the storehouseName
-	 */
-	public String getStorehouseName() {
-		return storehouseName;
-	}
-	/**
-	 * @param storehouseName the storehouseName to set
-	 */
-	public void setStorehouseName(String storehouseName) {
-		this.storehouseName = storehouseName;
-	}
+
+
+
 }

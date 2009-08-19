@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Storehouse">
-	<select id="selectAllStorehousefind" resultClass="com.mydomain.bean.StorehouseBean">
+	<select id="selectStorehouseDef" resultClass="com.mydomain.bean.StorehouseBean">
 		SELECT 
 		STOREHOUSE.STOREHOUSECODE,
 		STOREHOUSE.STOREHOUSENAME,
@@ -22,7 +22,11 @@
 		WHERE PERSON.PERSONCODE=EMPLOYEE.PERSONCODE) AS PE 
 		WHERE PE.EMPLOYEECODE=STOREHOUSE.EMPLOYEECODE
 		AND STOREHOUSE.ISENABLED=1
-		AND STOREHOUSE.STOREHOUSENAME LIKE #storehouseName#
+		AND (STOREHOUSE.STOREHOUSENAME LIKE #storehouseName#
+		or STOREHOUSE.STOREHOUSECODE like #storehouseCode#
+		or STOREHOUSE.STOREHOUSEADDRESS like #storehouseAddress#
+		or STOREHOUSE.STOREHOUSEDEFAULTCARGO like #storehouseDefaultCargo#
+		or PE.PERSONNAME like #personName#)
 	</select>
 	<select id="getStorehouseBean" parameterClass="String" resultClass="com.mydomain.bean.StorehouseBean">
 		SELECT 

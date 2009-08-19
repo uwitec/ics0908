@@ -19,5 +19,8 @@
 <action name="GetOneStruct" class="com.action.baseset.StructAction" method="getOneStruct">
 	<result name="success">/baseset/struct/StructUpdate.jsp</result>
 </action>
+<action name="SelectStructDef" class="com.action.baseset.StructAction" method="selectStructDef">
+	<result name="success">/baseset/struct/StructShow.jsp</result>
+</action>
 </package>
 </struts>

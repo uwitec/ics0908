@@ -19,5 +19,8 @@
 <action name="UpdateUnit" class="com.action.baseset.UnitAction" method="updateUnit">
 	<result name="success" type="redirect">ShowUnit.action</result>
 </action>
+<action name="SelectUnitDef" class="com.action.baseset.UnitAction" method="selectUnitDef">
+	<result name="success">/baseset/unit/UnitShow.jsp</result>
+</action>
 </package>
 </struts>

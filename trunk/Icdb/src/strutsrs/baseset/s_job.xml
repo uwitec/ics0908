@@ -22,5 +22,8 @@
 <action name="FindJob" class="com.action.baseset.JobAction" method="findJob">
 	<result name="success">/baseset/FindJob.jsp</result>
 </action>
+<action name="SelectJobDef" class="com.action.baseset.JobAction" method="selectJobDef">
+	<result name="success">/baseset/job/JobShow.jsp</result>
+</action>
 </package>
 </struts>

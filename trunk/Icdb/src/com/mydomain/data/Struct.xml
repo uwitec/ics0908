@@ -5,6 +5,17 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Struct">
+	<select id="selectStructDef" resultClass="com.mydomain.bean.StructBean">
+		SELECT 
+		STRUCTCODE,
+		STRUCTNAME
+		FROM STRUCT
+		WHERE 
+		isEnabled=1
+		and
+		(structCode like #structCode#
+		or structName like #structName#)
+	</select>
 	<select id="getStructBean" parameterClass="String" resultClass="com.mydomain.bean.StructBean">
 		SELECT 
 		STRUCTCODE,

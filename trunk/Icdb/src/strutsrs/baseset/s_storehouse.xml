@@ -19,5 +19,8 @@
 <action name="UpdateStorehouse" class="com.action.baseset.StorehouseAction" method="updateStorehouse">
 	<result name="success" type="redirect">ShowStorehouse.action</result>
 </action>
+<action name="SelectStorehouseDef" class="com.action.baseset.StorehouseAction" method="selectStorehouseDef">
+	<result name="success">/baseset/storehouse/StorehouseShow.jsp</result>
+</action>
 </package>
 </struts>

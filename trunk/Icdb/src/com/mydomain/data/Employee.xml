@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Employee">
-	<select id="selectAllEmployeeFind" resultClass="com.mydomain.bean.EmployeeBean">
+	<select id="selectEmployeeDef" resultClass="com.mydomain.bean.EmployeeBean">
 			select
 			employee.employeeCode,
 			employee.personCode,
@@ -33,7 +33,12 @@
 			employee.personCode=person.personCode 
 			and employee.jobCode=jsd.jobCode
 			and employee.isEnabled=1 
-			and person.personName like #personName#
+			and (
+			employee.employeeCode like #employeeCode#
+			or person.personName like #personName#
+			<!-- or jsd.structName like #structName#-->
+			or jsd.jobName like #jobName#
+			or jsd.departmentName like #departmentName#)
 	</select>
 	<select id="getEmployeeBean" parameterClass="String" resultClass="com.mydomain.bean.EmployeeBean">
 			select

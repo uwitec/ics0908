@@ -5,6 +5,24 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Department">
+	<select id="selectDepartmentDef" resultClass="com.mydomain.bean.DepartmentBean">
+		SELECT
+		departmentCode,
+		departmentName,
+		department.structCode,
+		structName
+		FROM department,struct
+		WHERE 
+		department.isEnabled=1
+		and
+		department.structCode=struct.structCode
+		and(
+		departmentCode like #departmentCode#
+		or
+		departmentName like #departmentName#
+		or
+		struct.structName like #structName#)
+	</select>
 	<select id="getDepartmentBean" parameterClass="String" resultClass="com.mydomain.bean.DepartmentBean">
 		SELECT
 		departmentCode,
