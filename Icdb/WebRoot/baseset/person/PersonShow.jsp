@@ -8,13 +8,15 @@
     <body>
     <table>
     <tr><td>
-    <s:form action="" namespace="/baseset">
-    <s:textfield name="personName"></s:textfield>
-    <s:submit value="查询"></s:submit>
+    <s:form action="SelectPersonDef" namespace="/baseset">
+	    <s:textfield name="res.s_value"></s:textfield>
+	    <s:hidden name="person.personCode"></s:hidden>
+	    <s:submit value="查询"></s:submit>
     </s:form>
     </td></tr>
     </table>
     <table border="1">
+    <s:if test="lhp.size>0">
     	<tr>
     	<th>人员编号</th>
     	<th>姓名</th>
@@ -23,6 +25,10 @@
 		<th>性别</th>
 		<th>操作</th>
 		</tr>
+	</s:if>
+	<s:else>
+		未找到相关信息！
+	</s:else>
        <s:iterator value="lhp" status="stat">
        	<tr>
        	<td><s:property value="personCode"></s:property></td>
@@ -31,7 +37,7 @@
         <td><s:property value="personEmail"></s:property></td>
         <td><s:property value="personSex"></s:property></td>
         <td><s:url id="updateUrl" action="GetOnePerson">
-			<s:param name="personCode" value="personCode"></s:param>       
+			<s:param name="person.personCode" value="personCode"></s:param>       
         	</s:url> 
         	<s:a href="%{updateUrl}">修改</s:a>
         </td>

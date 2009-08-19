@@ -14,7 +14,8 @@ String base=request.getContextPath();
     <table>
     <tr><td>
     <s:form action="FindPerson" namespace="/baseset">
-    <s:textfield name="personName"></s:textfield>
+    <s:textfield name="res.s_value" label="内容"></s:textfield>
+    <s:hidden name="person.personCode"></s:hidden>
     <s:submit value="查询"></s:submit>
     </s:form>
     </td></tr>

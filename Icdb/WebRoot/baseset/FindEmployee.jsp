@@ -16,14 +16,16 @@ String base=request.getContextPath();
     <table>
     <tr><td>
     <s:form action="FindEmployee" namespace="/baseset">
-    <s:textfield name="personName"></s:textfield>
+    <s:textfield name="res.s_value" label="内容"></s:textfield>
+    <s:hidden name="employee.employeeCode"></s:hidden>
     <s:submit value="查询"></s:submit>
     </s:form>
     </td></tr>
     </table>
     <s:if test="lhp!=null">
     <table border="1">
-    	<tr>	
+    	<tr>
+    	<td>选择</td>
     	<th>员工编号</th>
 		<th>员工姓名</th>
 		<th>岗位</th>
@@ -38,7 +40,7 @@ String base=request.getContextPath();
         <td><s:property value="departmentName"></s:property></td>
         </tr>
        </s:iterator>
-       <tr><td colspan="4"><input type="button" onclick="toSetId(new Array('employeeCode','personName'),'p_radio')" value="确认"/></td></tr>
+       <tr><td colspan="5"><input type="button" onclick="toSetId(new Array('employeeCode','personName'),'p_radio')" value="确认"/></td></tr>
      </table>
      </s:if>
      <s:elseif test="lhp==null">

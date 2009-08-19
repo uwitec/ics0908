@@ -18,14 +18,14 @@ function showBank(){
     <body>
 		<s:form action="AddAccount" namespace="/baseset">
 		<table>
-			<s:textfield name="accountCode" label="账户编号" value="%{accountCode}"></s:textfield>
-			<s:textfield name="accountNumber" label="帐号"></s:textfield>
-			<s:textfield name="accountName" label="帐户名"></s:textfield>
-			<s:textfield name="accountType" label="帐号类型"></s:textfield>
-			<s:textfield id="personName" name="personName" label="户主" onclick="showPerson()"></s:textfield>
-			<s:hidden id="personCode" name="personCode"></s:hidden>
-			<s:textfield id="bankName" name="bankName" label="所属银行" onclick="showBank()"></s:textfield>
-			<s:hidden id="bankCode" name="bankCode"></s:hidden>
+			<s:textfield name="account.accountCode" label="账户编号" value="%{account.accountCode}"></s:textfield>
+			<s:textfield name="account.accountNumber" label="帐号"></s:textfield>
+			<s:textfield name="account.accountName" label="帐户名"></s:textfield>
+			<s:textfield name="account.accountType" label="帐号类型"></s:textfield>
+			<s:textfield id="personName" name="account.personName" label="户主" onclick="showPerson()"></s:textfield>
+			<s:hidden id="personCode" name="account.personCode"></s:hidden>
+			<s:textfield id="bankName" name="account.bankName" label="所属银行" onclick="showBank()"></s:textfield>
+			<s:hidden id="bankCode" name="account.bankCode"></s:hidden>
 			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
 		</table>
 		</s:form>

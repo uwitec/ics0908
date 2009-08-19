@@ -7,7 +7,13 @@
         <title>供应商信息</title>
     </head>
     <body>
+    <s:form action="SelectSupplierDef">
+    	<s:textfield name="res.s_value" label="内容"></s:textfield>
+    	<s:hidden name="supplier.supplierCode"></s:hidden>
+    	<s:submit value="查询"></s:submit>
+    </s:form>
     <table border="1">
+    <s:if test="lhp.size>0">
     	<tr>
     	<th>供应商编码</th>
     	<th>供应商名称</th>
@@ -21,6 +27,10 @@
     	<th>银行帐号</th>
     	<th>所属银行</th>
     	<th>操作</th></tr>
+    </s:if>
+    <s:else>
+    未找到相关数据！
+    </s:else>
        <s:iterator value="lhp" status="stat">
        	<tr>
        	<td><s:property value="supplierCode"></s:property></td>
@@ -35,7 +45,7 @@
         <td><s:property value="accountNumber"></s:property></td>
         <td><s:property value="bankName"></s:property></td>
         <td><s:url id="updateUrl" action="GetOneSupplier">
-			<s:param name="supplierCode" value="supplierCode"></s:param>     
+			<s:param name="supplier.supplierCode" value="supplierCode"></s:param>     
         	</s:url> 
         	<s:a href="%{updateUrl}">修改</s:a>
         </td>

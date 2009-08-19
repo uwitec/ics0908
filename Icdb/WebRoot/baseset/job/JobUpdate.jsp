@@ -9,21 +9,10 @@
     <body>
     <s:push value="job">
       <s:form action="UpdateJob" namespace="/baseset">
-    <table border="1">
-	  <tr>
-	  <td>
-	  <s:textfield name="jobCode" value="%{jobCode}" label="岗位编号"></s:textfield>
-	  </tr>
-	  <tr>
-	  <td>
-	  <s:textfield name="jobName" value="%{jobName}" label="岗位名称"></s:textfield>
-	  </td>
-	  <td>
-	  <s:select list="ldb" listKey="departmentCode" listValue="departmentName" name="departmentCode" label="所属机构"></s:select>
-	  </td>
-	  </tr>
-	  <tr><td colspan="2"><s:submit></s:submit></td></tr>
-     </table>
+	  <s:textfield name="job.jobCode" value="%{jobCode}" label="岗位编号" readonly="true"></s:textfield>
+	  <s:textfield name="job.jobName" value="%{jobName}" label="岗位名称"></s:textfield>
+	  <s:select list="ldb" listKey="departmentCode" listValue="departmentName" name="job.departmentCode" label="所属机构"></s:select>
+	  <s:submit value="修改"></s:submit>
      </s:form>
      </s:push>
     </body>

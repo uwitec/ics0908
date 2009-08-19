@@ -8,14 +8,12 @@
     </head>
     <body>
 		<s:form action="AddCargoSpace" namespace="/baseset">
-		<table>
-			<s:textfield name="cargoSpaceCode" label="仓库编号" value="%{cargoSpaceCode}"></s:textfield>
-			<s:textfield name="cargoSpaceName" label="仓库名" ></s:textfield>
-			<s:textfield name="cargoSpaceAddress" label="所在地"></s:textfield>
-			<s:textfield name="storehouseName" label="所属仓库" value="%{storehouseName}"></s:textfield>
-			<s:hidden id="storehouseCode" name="storehouseCode"></s:hidden>
-		<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
-		</table>
+			<s:textfield name="cargoSpace.cargoSpaceCode" label="仓库编号" value="%{cargoSpace.cargoSpaceCode}" readonly="true"></s:textfield>
+			<s:textfield name="cargoSpace.cargoSpaceName" label="仓库名" ></s:textfield>
+			<s:textfield name="cargoSpace.cargoSpaceAddress" label="所在地"></s:textfield>
+			<s:textfield name="cargoSpace.storehouseName" label="所属仓库" value="%{cargoSpace.storehouseName}" readonly="true"></s:textfield>
+			<s:hidden id="storehouseCode" name="cargoSpace.storehouseCode" value="%{cargoSpace.storehouseCode}"></s:hidden>
+			<s:submit value="确认"></s:submit>
 		</s:form>
     </body>
 </html>

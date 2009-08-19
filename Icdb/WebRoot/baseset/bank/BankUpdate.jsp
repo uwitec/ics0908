@@ -8,19 +8,12 @@
     </head>
     <body>
     <s:push value="bank">
-      <s:form action="UpdateBank" namespace="/baseset">
-    <table border="1">
-	  <tr>
-	  <td>
-	  <s:textfield name="bankCode" value="%{bankCode}" label="银行编码" readonly="true"></s:textfield>
-	  </tr>
-	  <tr>
-	  <td>
-	  <s:textfield name="bankName" value="%{bankName}" label="银行名称"></s:textfield>
-	  </td>
-	  </tr>
-	  <tr><td colspan="2"><s:submit></s:submit></td></tr>
-     </table>
+      <s:form action="UpdateBank" namespace="/baseset" >
+      <table>
+	  <tr><td><s:textfield name="bank.bankCode" value="%{bankCode}" label="银行编码" readonly="true"></s:textfield></td></tr>
+	  <tr><td><s:textfield name="bank.bankName" value="%{bankName}" label="银行名称"></s:textfield></td></tr>
+	  <tr><td colspan="2"><s:submit value="修改"></s:submit></td></tr>
+	  </table>
      </s:form>
      </s:push>
     </body>

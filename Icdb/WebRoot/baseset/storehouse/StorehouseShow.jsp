@@ -6,8 +6,13 @@
         <title>仓库信息</title>
     </head>
     <body>
-
+	<s:form action="SelectStorehouseDef">
+		<s:textfield name="res.s_value" label="内容"></s:textfield>
+		<s:hidden name="storehouse.storehouseCode"></s:hidden>
+		<s:submit value="查询"></s:submit>
+	</s:form>
     <table border="1">
+    <s:if test="lhp.size>0">
     	<tr>
     	<th>仓库编号</th>
     	<th>仓库名</th>
@@ -16,6 +21,10 @@
 		<th>负责人</th>
 		<th>操作</th>
 		</tr>
+	</s:if>
+	<s:else>
+		未找到合适的信息！
+	</s:else>
        <s:iterator value="lhp" status="stat">
        	<tr>
        	<td><s:property value="storehouseCode"></s:property></td>
@@ -24,13 +33,13 @@
         <td><s:property value="storehouseDefaultCargo"></s:property></td>
         <td><s:property value="personName"></s:property></td>
         <td><s:url id="updateUrl" action="GetOneStorehouse">
-			<s:param name="storehouseCode" value="storehouseCode"></s:param>       
+			<s:param name="storehouse.storehouseCode" value="storehouseCode"></s:param>       
         	</s:url> 
         	<s:a href="%{updateUrl}">修改</s:a>
         	|
         	<s:url id="showUrl" action="ShowCargoSpace">
-			<s:param name="storehouseCode" value="storehouseCode"></s:param>
-			<s:param name="storehouseName" value="storehouseName"></s:param>       
+			<s:param name="cargoSpace.storehouseCode" value="storehouseCode"></s:param>
+			<s:param name="cargoSpace.storehouseName" value="storehouseName"></s:param>       
         	</s:url> 
         	<s:a href="%{showUrl}">详细信息</s:a>
         </td>

@@ -17,23 +17,23 @@
 		<table>
 		<tr><td>
 		<table>
-			<s:textfield name="employeeCode" label="人员编码" value="%{personCode}"></s:textfield>
-			<s:textfield id="jobName" name="jobName" label="岗位" onclick="showJob()"></s:textfield>
-			<s:hidden id="jobCode" name="jobCode"></s:hidden>
-			<s:textfield id="departmentName" name="departmentName" label="部门名称"></s:textfield>
-			<s:hidden id="departmentCode" name="departmentCode"></s:hidden>
-			<s:textfield id="structName" name="structName" label="所属公司"></s:textfield>
-			<s:hidden id="structCode" name="structCode"></s:hidden>
+			<s:textfield name="employee.employeeCode" label="人员编码" value="%{employee.personCode}"></s:textfield>
+			<s:textfield id="jobName" name="employee.jobName" label="岗位" onclick="showJob()"></s:textfield>
+			<s:hidden id="jobCode" name="employee.jobCode"></s:hidden>
+			<s:textfield id="departmentName" name="employee.departmentName" label="部门名称"></s:textfield>
+			<s:hidden id="departmentCode" name="employee.departmentCode"></s:hidden>
+			<s:textfield id="structName" name="employee.structName" label="所属公司"></s:textfield>
+			<s:hidden id="structCode" name="semployee.tructCode"></s:hidden>
 		</table>
 		</td>
 		<td>
 		<table>
-			<s:textfield name="personCode" label="人员编码" value="%{personCode}"></s:textfield>
-			<s:textfield name="personName" label="姓名"></s:textfield>
-			<s:textfield name="personPhone" label="电话"></s:textfield>
-			<s:textfield name="personEmail" label="电邮"></s:textfield> 
-			<s:select list="{'男','女'}" name="personSex" label="性别"></s:select>
-			<s:textfield name="personPhoto" label="照片"></s:textfield>   
+			<s:textfield name="person.personCode" label="人员编码" value="%{employee.personCode}"></s:textfield>
+			<s:textfield name="person.personName" label="姓名"></s:textfield>
+			<s:textfield name="person.personPhone" label="电话"></s:textfield>
+			<s:textfield name="person.personEmail" label="电邮"></s:textfield> 
+			<s:radio list="{'男','女'}" name="person.personSex" label="性别"></s:radio>
+			<s:textfield name="person.personPhoto" label="照片"></s:textfield>   
 		</table>
 		</td>
 		</tr>
