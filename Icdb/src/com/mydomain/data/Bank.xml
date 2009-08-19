@@ -5,6 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Bank">
+
 	<select id="selectAllFind" resultClass="com.mydomain.bean.BankBean">
 	SELECT
 	BANKCODE,

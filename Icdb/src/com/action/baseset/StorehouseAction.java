@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.mydomain.bean.ReSourceBean;
 import com.mydomain.bean.StorehouseBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
@@ -14,45 +15,14 @@ public class StorehouseAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String storehouseCode; //库房编码
-	private String storehouseName; //库房名称
-	private String storehouseAddress; //库房地址
-	private String storehouseDefaultCargo; //默认货位
-	private String employeeCode; //管理员编码
-	private String nextPath;
-	private String rePath;
-	private String message;
+	private ReSourceBean res;
 	private List<StorehouseBean> lhp;
 	private StorehouseBean storehouse;
-	/**
-	 * @return the employeeCode
-	 */
-	public String getEmployeeCode() {
-		return employeeCode;
-	}
 	/**
 	 * @return the lhp
 	 */
 	public List<StorehouseBean> getLhp() {
 		return lhp;
-	}
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-	/**
-	 * @return the nextPath
-	 */
-	public String getNextPath() {
-		return nextPath;
-	}
-	/**
-	 * @return the rePath
-	 */
-	public String getRePath() {
-		return rePath;
 	}
 	/**
 	 * @return the storehouse
@@ -61,58 +31,10 @@ public class StorehouseAction extends ActionSupport{
 		return storehouse;
 	}
 	/**
-	 * @return the storehouseAddress
-	 */
-	public String getStorehouseAddress() {
-		return storehouseAddress;
-	}
-	/**
-	 * @return the storehouseCode
-	 */
-	public String getStorehouseCode() {
-		return storehouseCode;
-	}
-	/**
-	 * @return the storehouseDefaultCargo
-	 */
-	public String getStorehouseDefaultCargo() {
-		return storehouseDefaultCargo;
-	}
-	/**
-	 * @return the storehouseName
-	 */
-	public String getStorehouseName() {
-		return storehouseName;
-	}
-	/**
-	 * @param employeeCode the employeeCode to set
-	 */
-	public void setEmployeeCode(String employeeCode) {
-		this.employeeCode = employeeCode;
-	}
-	/**
 	 * @param lhp the lhp to set
 	 */
 	public void setLhp(List<StorehouseBean> lhp) {
 		this.lhp = lhp;
-	}
-	/**
-	 * @param message the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	/**
-	 * @param nextPath the nextPath to set
-	 */
-	public void setNextPath(String nextPath) {
-		this.nextPath = nextPath;
-	}
-	/**
-	 * @param rePath the rePath to set
-	 */
-	public void setRePath(String rePath) {
-		this.rePath = rePath;
 	}
 	/**
 	 * @param storehouse the storehouse to set
@@ -121,30 +43,30 @@ public class StorehouseAction extends ActionSupport{
 		this.storehouse = storehouse;
 	}
 	/**
-	 * @param storehouseAddress the storehouseAddress to set
+	 * @return the res
 	 */
-	public void setStorehouseAddress(String storehouseAddress) {
-		this.storehouseAddress = storehouseAddress;
+	public ReSourceBean getRes() {
+		return res;
 	}
 	/**
-	 * @param storehouseCode the storehouseCode to set
+	 * @param res the res to set
 	 */
-	public void setStorehouseCode(String storehouseCode) {
-		this.storehouseCode = storehouseCode;
+	public void setRes(ReSourceBean res) {
+		this.res = res;
 	}
-	/**
-	 * @param storehouseDefaultCargo the storehouseDefaultCargo to set
-	 */
-	public void setStorehouseDefaultCargo(String storehouseDefaultCargo) {
-		this.storehouseDefaultCargo = storehouseDefaultCargo;
+	
+	@SuppressWarnings("unchecked")
+	public String selectStorehouseDef(){
+		ICTools.setBean(storehouse, ICTools.likeString(res.getS_value()));
+		try {
+			lhp=(List<StorehouseBean>) DBServer.quider.queryForList("selectStorehouseDef", storehouse, 0, 10);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return SUCCESS;
 	}
-	/**
-	 * @param storehouseName the storehouseName to set
-	 */
-	public void setStorehouseName(String storehouseName) {
-		this.storehouseName = storehouseName;
-	}
-
+	
 	@SuppressWarnings("unchecked")
 	public String showStorehouse(){
 		try {
@@ -157,33 +79,29 @@ public class StorehouseAction extends ActionSupport{
 	}
 	
 	public String goAddStorehouse(){
-		storehouseCode=ICTools.randId("ST");
+		storehouse=new StorehouseBean();
+		storehouse.setStorehouseCode(ICTools.randId("ST"));
 		return SUCCESS;
 	}
 	
 	public String addStorehouse(){
-		storehouse=new StorehouseBean();
-		storehouse.setStorehouseCode(storehouseCode);
-		storehouse.setStorehouseName(storehouseName);
-		storehouse.setStorehouseAddress(storehouseAddress);
-		storehouse.setStorehouseDefaultCargo(storehouseDefaultCargo);
-		storehouse.setEmployeeCode(employeeCode);
+		res=new ReSourceBean();
 		try {
 			DBServer.quider.insertObject(storehouse);
-			message="";
+			res.setMessage(ICTools.MESSAGE_OK);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			message="请检查数据";
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		nextPath="/baseset/GoAddStorehouse.action";
-		rePath="/baseset/ShowStorehouse.action";
+		res.setNextPath("/baseset/GoAddStorehouse.action");
+		res.setRePath("/baseset/ShowStorehouse.action");
 		return SUCCESS;
 	}
 	
 	public String getOneStorehouse(){
 		try {
-			storehouse=(StorehouseBean) DBServer.quider.queryForObjectById(storehouseCode, StorehouseBean.class);
+			storehouse=(StorehouseBean) DBServer.quider.queryForObjectById(storehouse.getStorehouseCode(), StorehouseBean.class);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -191,14 +109,7 @@ public class StorehouseAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	public String updateStorehouse(){
-		storehouse=new StorehouseBean();
-		storehouse.setStorehouseCode(storehouseCode);
-		storehouse.setStorehouseName(storehouseName);
-		storehouse.setStorehouseAddress(storehouseAddress);
-		storehouse.setStorehouseDefaultCargo(storehouseDefaultCargo);
-		storehouse.setEmployeeCode(employeeCode);
-		
+	public String updateStorehouse(){	
 		try {
 			DBServer.quider.updateObject(storehouse);
 		} catch (SQLException e) {
@@ -209,8 +120,6 @@ public class StorehouseAction extends ActionSupport{
 	}
 	
 	public String deleteStorehouse(){
-		storehouse=new StorehouseBean();
-		storehouse.setStorehouseCode(storehouseCode);
 		try {
 			DBServer.quider.deleteObject(storehouse);
 		} catch (SQLException e) {

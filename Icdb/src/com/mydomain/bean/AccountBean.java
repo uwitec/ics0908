@@ -23,17 +23,7 @@ public class AccountBean {
 	 */
 	public String getAccountNumber() {
 		return accountNumber;
-	}
-	/**
-	 * @return the bankCode
-	 */
-	public int getBankCode() {
-		return bankCode;
-	}
-	/**
-	 * @return the peopleCode
-	 */
-	
+	}	
 	/**
 	 * @param accountCode the accountCode to set
 	 */
@@ -46,15 +36,6 @@ public class AccountBean {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	/**
-	 * @param bankCode the bankCode to set
-	 */
-	public void setBankCode(int bankCode) {
-		this.bankCode = bankCode;
-	}
-	/**
-	 * @param peopleCode the peopleCode to set
-	 */
 	/**
 	 * @return the accountName
 	 */
@@ -114,6 +95,18 @@ public class AccountBean {
 	 */
 	public void setPersonName(String personName) {
 		this.personName = personName;
+	}
+	/**
+	 * @return the bankCode
+	 */
+	public int getBankCode() {
+		return bankCode;
+	}
+	/**
+	 * @param bankCode the bankCode to set
+	 */
+	public void setBankCode(int bankCode) {
+		this.bankCode = bankCode;
 	}
 
 

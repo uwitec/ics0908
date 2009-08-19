@@ -22,5 +22,7 @@
 <action name="FindBank" class="com.action.baseset.BankAction" method="findBank">
 	<result name="success">/baseset/FindBank.jsp</result>
 </action>
-</package>
+<action name="SelectBankDef" class="com.action.baseset.BankAction" method="selectBankDef">
+	<result name="success">/baseset/bank/BankShow.jsp</result>
+</action></package>
 </struts>

@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Person">
-	<select id="selectAllfind" resultClass="com.mydomain.bean.PersonBean">
+	<select id="selectPersonDef" resultClass="com.mydomain.bean.PersonBean">
 		SELECT
 		personCode,
 		personName,
@@ -14,8 +14,13 @@
 		personSex,
 		personPhoto
 		FROM person
-		WHERE personName like #personName#
-		and isEnabled=1
+		WHERE 
+		isEnabled=1
+		and (personName like #personName#
+		or personCode like #personCode#
+		or personPhone like #personPhone#
+		or personEmail like #personEmail#
+		or personSex like #personSex#)
 	</select>
 	<select id="getPersonBean" parameterClass="String" resultClass="com.mydomain.bean.PersonBean">
 		SELECT

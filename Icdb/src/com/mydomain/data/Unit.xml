@@ -5,6 +5,19 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Unit">
+	<select id="selectUnitDef" resultClass="com.mydomain.bean.UnitBean">
+		SELECT 
+		unitCode,
+		unitName,
+		unit.unitTypeCode,
+		unittype.unitTypeName
+		FROM unit,UNITTYPE
+		WHERE 
+		unit.unitTypeCode=unitType.unitTypeCode and
+		unit.isEnabled=1 and
+		(unitName like #unitName#
+		or unittype.unitTypeName like #unitTypName#)
+	</select>
 	<select id="getUnitBean" parameterClass="String" resultClass="com.mydomain.bean.UnitBean">
 		SELECT 
 		unitCode,
@@ -21,7 +34,6 @@
 		SELECT 
 		unitCode,
 		unitName,
-		isEnabled,
 		unit.unitTypeCode,
 		unittype.unitTypeName
 		FROM unit,UNITTYPE

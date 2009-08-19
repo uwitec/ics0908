@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Job">
-	<select id="selectAllJobFind" resultClass="com.mydomain.bean.JobBean">
+	<select id="selectJobDef" resultClass="com.mydomain.bean.JobBean">
 	select 
 	job.jobCode,
 	job.jobName,
@@ -21,7 +21,9 @@
 	struct.structName
 	from department,struct where department.structCode=struct.structCode) as sd
 	where job.departmentCode=sd.departmentCode
-	and job.jobName like #jobName#
+	and (job.jobName like #jobName#
+	or job.jobCode like #jobCode#
+	or sd.departmentName like #departmentName#)
 	</select>
 	<select id="getJobBean" parameterClass="String" resultClass="com.mydomain.bean.JobBean">
 		SELECT 
