@@ -12,7 +12,6 @@
 		<s:textfield name="job.jobName" label="岗位名称"></s:textfield>
 		<s:select list="ldb" listKey="departmentCode" listValue="departmentName" name="job.departmentCode" label="部门名称" headerKey="-1" headerValue="请选择部门名称">	</s:select>
 		<s:submit value="确认"></s:submit>
-		</table>
 		</s:form>
     </body>
 </html>

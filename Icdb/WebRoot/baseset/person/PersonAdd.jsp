@@ -7,14 +7,14 @@
         <title>添加人员信息</title>
     </head>
     <body>
-		<s:form action="AddPerson" namespace="/baseset">
+		<s:form action="AddPerson" namespace="/baseset" method="post" enctype ="multipart/form-data">
 		<table>
 			<s:textfield name="person.personCode" label="人员编码" value="%{person.personCode}"></s:textfield>
 			<s:textfield name="person.personName" label="姓名"></s:textfield>
 			<s:textfield name="person.personPhone" label="电话"></s:textfield>
 			<s:textfield name="person.personEmail" label="电邮"></s:textfield> 
 			<s:radio list="{'男','女'}" name="person.personSex" label="性别"></s:radio>
-			<s:textfield name="person.personPhoto" label="照片"></s:textfield>   
+			<s:file  name="photoImg" label="照片" ></s:file>
 			<tr><td align="center"><s:submit value="确认"></s:submit></td></tr>
 		</table>
 		</s:form>
