@@ -1,5 +1,6 @@
 package com.action.baseset;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class EmployeeAction extends ActionSupport{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private String photoImgcontentType;
+    private String photoImgFileName;
+    private File photoImg;
+    
 	private ReSourceBean res;
 	private List<EmployeeBean> lhp;
 	private EmployeeBean employee;
@@ -75,6 +80,44 @@ public class EmployeeAction extends ActionSupport{
 	public void setRes(ReSourceBean res) {
 		this.res = res;
 	}
+	
+	/**
+	 * @return the photoImg
+	 */
+	public File getPhotoImg() {
+		return photoImg;
+	}
+	/**
+	 * @return the photoImgcontentType
+	 */
+	public String getPhotoImgcontentType() {
+		return photoImgcontentType;
+	}
+	/**
+	 * @return the photoImgFileName
+	 */
+	public String getPhotoImgFileName() {
+		return photoImgFileName;
+	}
+	/**
+	 * @param photoImg the photoImg to set
+	 */
+	public void setPhotoImg(File photoImg) {
+		this.photoImg = photoImg;
+	}
+	/**
+	 * @param photoImgcontentType the photoImgcontentType to set
+	 */
+	public void setPhotoImgcontentType(String photoImgcontentType) {
+		this.photoImgcontentType = photoImgcontentType;
+	}
+	/**
+	 * @param photoImgFileName the photoImgFileName to set
+	 */
+	public void setPhotoImgFileName(String photoImgFileName) {
+		this.photoImgFileName = photoImgFileName;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public String showEmployee(){
 		try {
@@ -112,6 +155,9 @@ public class EmployeeAction extends ActionSupport{
 	
 	public String addEmployee(){
 		res=new ReSourceBean();
+		if(photoImg!=null){
+			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
+		}
 		try {
 			employee.setPersonCode(person.getPersonCode());
 			DBServer.quider.insertObject(person);
@@ -139,6 +185,9 @@ public class EmployeeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	public String updateEmployee(){
+		if(photoImg!=null){
+			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
+		}
 		try {
 			employee.setPersonCode(person.getPersonCode());
 			DBServer.quider.updateObject(person);
@@ -149,6 +198,7 @@ public class EmployeeAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+
 	
 	/*
 	public String deleteEmployee(){

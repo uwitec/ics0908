@@ -1,14 +1,24 @@
 package com.tools;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.apache.struts2.ServletActionContext;
 
 public class ICTools {
 	
 	public static String MESSAGE_OK="";
 	public static String MESSAGE_ERROR="数据有错误，请检查";
-	
+	private static final int BUFFER_SIZE = 16 * 1024 ;
+	 
 	public static String randId(String id_char){
 		StringBuffer id_code=new StringBuffer();
 		SimpleDateFormat sdf=new SimpleDateFormat( "yyyyMMddHHmmss");
@@ -45,14 +55,42 @@ public class ICTools {
 		}   
 		
 	}
-	/*
-	public static void main(String[] args) {
-		AccountBean a=new AccountBean();
-		ICTools.setBean(a, "abc");
-		System.out.println(a.getAccountCode());
-		System.out.println(a.getPersonName());
-		System.out.println(a.getBankCode());
+	
+	 
+	 private static void copy(File src, File dst)  {
+	        try {
+	           InputStream in = null ;
+	           OutputStream out = null ;
+	            try {                
+	               in = new BufferedInputStream( new FileInputStream(src), BUFFER_SIZE);
+	               out = new BufferedOutputStream( new FileOutputStream(dst), BUFFER_SIZE);
+	                byte [] buffer = new byte [BUFFER_SIZE];
+	                while (in.read(buffer) > 0 ) {
+	                   out.write(buffer);
+	               }
+	           } finally {
+	                if ( null != in) {
+	                   in.close();
+	               }
+	                if ( null != out) {
+	                   out.close();
+	               }
+	           }
+	       } catch (Exception e) {
+	           e.printStackTrace();
+	       }
+	   } 
+	 
+	 private static String getExtention(String fileName)  {
+	        int pos = fileName.lastIndexOf(".");
+	        return fileName.substring(pos);
+	 } 
+	 
+	 public static String sendImg(String fileName,File upLoadFile){
+		 String imageFileName = new Date().getTime() + getExtention(fileName);
+	     File imageFile = new File(ServletActionContext.getServletContext().getRealPath("/upLoadImg" ) + "/" + imageFileName);
+		 copy(upLoadFile, imageFile);
 
-	}
-	*/
+	     return imageFileName;
+	 }
 }
