@@ -1,5 +1,6 @@
 package com.action.baseset;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,7 +16,12 @@ public class PersonAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+    
+	private String photoImgcontentType;
+    private String photoImgFileName;
+    private File photoImg;
+  
+    
 	private ReSourceBean res;
 	private PersonBean person;
 	private List<PersonBean> lhp;
@@ -60,7 +66,10 @@ public class PersonAction extends ActionSupport{
 	
 	public String addPerson(){
 		res=new ReSourceBean();
-		try {
+		if(photoImg!=null){
+			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
+		}
+			try {
 			DBServer.quider.insertObject(person);
 			res.setMessage(ICTools.MESSAGE_OK);
 		} catch (SQLException e) {
@@ -118,6 +127,9 @@ public class PersonAction extends ActionSupport{
 	}
 
 	public String updatePerson(){
+		if(photoImg!=null){
+			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
+		}	
 		try {
 			DBServer.quider.updateObject(person);
 		} catch (SQLException e) {
@@ -127,5 +139,42 @@ public class PersonAction extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	/**
+	 * @return the photoImgcontentType
+	 */
+	public String getPhotoImgcontentType() {
+		return photoImgcontentType;
+	}
+	/**
+	 * @return the photoImgFileName
+	 */
+	public String getPhotoImgFileName() {
+		return photoImgFileName;
+	}
+	/**
+	 * @param photoImgcontentType the photoImgcontentType to set
+	 */
+	public void setPhotoImgcontentType(String photoImgcontentType) {
+		this.photoImgcontentType = photoImgcontentType;
+	}
+	/**
+	 * @param photoImgFileName the photoImgFileName to set
+	 */
+	public void setPhotoImgFileName(String photoImgFileName) {
+		this.photoImgFileName = photoImgFileName;
+	}
+	/**
+	 * @return the photoImg
+	 */
+	public File getPhotoImg() {
+		return photoImg;
+	}
+	/**
+	 * @param photoImg the photoImg to set
+	 */
+	public void setPhotoImg(File photoImg) {
+		this.photoImg = photoImg;
+	}
 
+	
 }
