@@ -13,7 +13,7 @@
 }
     </SCRIPT>
     <body>
-		<s:form action="UpdateEmployee" namespace="/baseset">
+		<s:form action="UpdateEmployee" namespace="/baseset" method="post" enctype ="multipart/form-data">
 		<table>
 		<tr><td>
 		<table>
@@ -36,7 +36,9 @@
 			<s:textfield name="person.personPhone" label="电话" value="%{personPhone}"></s:textfield>
 			<s:textfield name="person.personEmail" label="电邮" value="%{personEmail}"></s:textfield> 
 			<s:radio list="{'男','女'}" name="person.personSex" label="性别" value="%{personSex}"></s:radio>
-			<s:textfield name="person.personPhoto" label="照片" value="%{personPhoto}"></s:textfield>   
+			<tr><td colspan="2"><img src='<%=base%>/upLoadImg/<s:property value ="personPhoto"/>' alt='<s:property value="personName"/>'></td></tr>
+			<s:file name="photoImg" label="照片"></s:file>
+			<s:hidden name="person.personPhoto" value="%{personPhoto}"></s:hidden>  
 		</s:push>
 		</table>
 		</td>

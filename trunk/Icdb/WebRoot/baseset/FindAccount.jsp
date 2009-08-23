@@ -38,10 +38,10 @@ String base=request.getContextPath();
        	<td id="accountCode<%=idtitle%>"><s:property value="accountCode"></s:property></td>
         <td id="accountNumber<%=idtitle%>"><s:property value="accountNumber"></s:property></td>
         <td><s:property value="accountName"></s:property></td>
-         <input id="personCode<%=idtitle%>" type="hidden" value="<s:property value="personCode"/>"/>     	
+         <input id="personCode<%=idtitle%>" type="hidden" value='<s:property value="personCode"/>'/>     	
          <td id="personName<%=idtitle%>"><s:property value="personName"></s:property>
          </td>
-        <input id="bankCode<%=idtitle%>" type="hidden" value="<s:property value="bankCode"/>"/>	
+        <input id="bankCode<%=idtitle%>" type="hidden" value='<s:property value="bankCode"/>'/>	
         <td id="bankName<%=idtitle++%>"><s:property value="bankName"></s:property>
         </td>
         </tr>

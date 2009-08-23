@@ -13,7 +13,7 @@
 }
     </SCRIPT>
     <body>
-		<s:form action="AddEmployee" namespace="/baseset">
+		<s:form action="AddEmployee" namespace="/baseset" method="post" enctype ="multipart/form-data">
 		<table>
 		<tr><td>
 		<table>
@@ -33,7 +33,7 @@
 			<s:textfield name="person.personPhone" label="电话"></s:textfield>
 			<s:textfield name="person.personEmail" label="电邮"></s:textfield> 
 			<s:radio list="{'男','女'}" name="person.personSex" label="性别"></s:radio>
-			<s:textfield name="person.personPhoto" label="照片"></s:textfield>   
+			<s:file name="photoImg" label="照片"></s:file> 
 		</table>
 		</td>
 		</tr>
