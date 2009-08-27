@@ -77,7 +77,6 @@ public class SimpleExample {
 				}
 			}
 			
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
