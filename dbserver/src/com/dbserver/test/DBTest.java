@@ -47,5 +47,6 @@ public class DBTest {
 		System.out.println(new DBTest().getHYear(2009, false));
 
 		System.out.println("end!");
+		com.dbserver.DBServer.logger.exception(e);
 	}
 }

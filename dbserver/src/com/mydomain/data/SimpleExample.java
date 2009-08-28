@@ -31,6 +31,8 @@ public class SimpleExample {
 
 	public static void main(String[] args) throws Exception {
 		try {
+			// System.out.println("jdk test 1.6..." + System.getenv());
+			// if (true) return;
 			Person p = new Person();
 			p.setFirstName("Zho");
 			p.setLastName("Lizhi");
@@ -46,7 +48,8 @@ public class SimpleExample {
 				Person person = (Person) obj;
 				System.out.println("查找的对象：" + person);
 			}
-			System.out.println(DBServer.quider.queryForList("selectAllPerson", p, 0, 11));
+			System.out.println(DBServer.quider.queryForList("selectAllPerson",
+					p, 0, 11));
 
 			p.setBirthDate(new Date());
 			DBServer.quider.updateObject(p);
@@ -58,7 +61,6 @@ public class SimpleExample {
 
 			List<?> list = DBServer.quider.queryForList(Person.class);
 
-			
 			System.out.println("查找所有对象：");
 			for (Object o : list) {
 				if (o instanceof Person) {
@@ -76,7 +78,6 @@ public class SimpleExample {
 					System.out.println("  对象：" + pp);
 				}
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
