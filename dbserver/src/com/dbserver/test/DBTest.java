@@ -29,9 +29,9 @@ public class DBTest {
 	}
 
 	public String getHYear(int year, boolean isBeforeZero) {
-		int a = 6 - (year & 0x0f) / 2;
-		int b = (year & 0xfff0) / 10 % 6;
-		System.out.println(year & 0x000f);
+		int a = 6 - (year % 10) / 2;
+		int b = (year - a) / 10 % 6;
+		System.out.println(year % (10));
 		System.out.println(Integer.toBinaryString(year));
 		System.out.println(Integer.toBinaryString(0x000f));
 		System.out.println(Integer.toBinaryString(year & 0x000f));
@@ -48,5 +48,4 @@ public class DBTest {
 
 		System.out.println("end!");
 	}
-
 }
