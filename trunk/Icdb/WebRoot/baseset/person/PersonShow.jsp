@@ -15,8 +15,8 @@
     </s:form>
     </td></tr>
     </table>
-    <table border="1">
     <s:if test="lhp.size>0">
+    <table border="1">
     	<tr>
     	<th>人员编号</th>
     	<th>姓名</th>
@@ -25,10 +25,7 @@
 		<th>性别</th>
 		<th>操作</th>
 		</tr>
-	</s:if>
-	<s:else>
-		未找到相关信息！
-	</s:else>
+
        <s:iterator value="lhp" status="stat">
        	<tr>
        	<td><s:property value="personCode"></s:property></td>
@@ -43,7 +40,26 @@
         </td>
         </tr>
        </s:iterator>
+       <tr><td colspan="6">
+      <s:push value="person">
+      <s:form theme="simple">
+      <s:url id="showUrl" action="ShowPerson">
+      	<s:param name="person.startSize" value="person.startSize"></s:param>
+      </s:url>
+       <s:a href="%{showUrl}">首页</s:a>
+       <s:a href="%{showUrl}">上一页</s:a>
+       <s:a href="%{showUrl}">下一页</s:a>
+       <s:a href="%{showUrl}">末页</s:a>
+       <s:textfield size="3" name="person.startSize"></s:textfield>
+       <font>页数:<s:property value="person.startSize"/>/<s:property value="person.countSize"/>页</font>
+      </s:form>
+       </s:push> 
+       </td></tr>
      </table>
+     	</s:if>
+	<s:else>
+		未找到相关信息！
+	</s:else>
      <s:a href="GoAddPerson.action">添加</s:a>
     </body>
 </html>
