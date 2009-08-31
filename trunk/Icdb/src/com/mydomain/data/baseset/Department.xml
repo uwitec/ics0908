@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Department">
-	<select id="selectDepartmentDef" resultClass="com.mydomain.bean.DepartmentBean">
+	<select id="selectDepartmentDef" resultClass="com.mydomain.bean.baseset.DepartmentBean">
 		SELECT
 		departmentCode,
 		departmentName,
@@ -23,7 +23,7 @@
 		or
 		struct.structName like #structName#)
 	</select>
-	<select id="getDepartmentBean" parameterClass="String" resultClass="com.mydomain.bean.DepartmentBean">
+	<select id="getDepartmentBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.DepartmentBean">
 		SELECT
 		departmentCode,
 		departmentName,
@@ -37,7 +37,7 @@
 		and
 		departmentCode = #departmentCode#
 	</select>
-	<select id="selectAllDepartmentBean" resultClass="com.mydomain.bean.DepartmentBean">
+	<select id="selectAllDepartmentBean" resultClass="com.mydomain.bean.baseset.DepartmentBean">
 		SELECT
 		departmentCode,
 		departmentName,
@@ -49,7 +49,7 @@
 		and
 		department.structCode=struct.structCode
 	</select>
-	<insert id="insertDepartmentBean" parameterClass="com.mydomain.bean.DepartmentBean">
+	<insert id="insertDepartmentBean" parameterClass="com.mydomain.bean.baseset.DepartmentBean">
 		INSERT INTO
 		department
 		(departmentCode,
@@ -57,7 +57,7 @@
 		structCode,isEnabled)
 		VALUES (#departmentCode#,#departmentName#,#structCode#,1)
 	</insert>
-	<update id="updateDepartmentBean" parameterClass="com.mydomain.bean.DepartmentBean">
+	<update id="updateDepartmentBean" parameterClass="com.mydomain.bean.baseset.DepartmentBean">
 		UPDATE department
 		SET
 		departmentName=#departmentName#,
@@ -65,7 +65,7 @@
 		isEnabled=1
 		WHERE departmentCode= #departmentCode#
 	</update>
-	<delete id="deleteDepartmentBean" parameterClass="com.mydomain.bean.DepartmentBean">
+	<delete id="deleteDepartmentBean" parameterClass="com.mydomain.bean.baseset.DepartmentBean">
 		UPDATE department
 		SET
 		isEnabled=1

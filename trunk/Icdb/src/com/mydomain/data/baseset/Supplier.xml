@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Supplier">
-	<select id="selectSupplierDef" resultClass="com.mydomain.bean.SupplierBean">
+	<select id="selectSupplierDef" resultClass="com.mydomain.bean.baseset.SupplierBean">
 	SELECT
 	SUPPLIERCODE,
 	SUPPLIERNAME,
@@ -37,7 +37,7 @@
 	OR PERSON.PERSONNAME like #personName#
 	OR ACCOUNT.ACCOUNTNUMBER like #accountNumber#)
 	</select>
-	<select id="getSupplierBean" parameterClass="String" resultClass="com.mydomain.bean.SupplierBean">
+	<select id="getSupplierBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.SupplierBean">
 	SELECT
 	SUPPLIERCODE,
 	SUPPLIERNAME,
@@ -60,7 +60,7 @@
 	AND SUPPLIER.ISENABLED=1
 	AND SUPPLIER.SUPPLIERCODE=#supplierCode#
 	</select>
-	<select id="selectAllSupplierBean" resultClass="com.mydomain.bean.SupplierBean">
+	<select id="selectAllSupplierBean" resultClass="com.mydomain.bean.baseset.SupplierBean">
 	SELECT
 	SUPPLIERCODE,
 	SUPPLIERNAME,
@@ -82,7 +82,7 @@
 	AND SUPPLIER.BANKCODE=BANK.BANKCODE
 	AND SUPPLIER.ISENABLED=1
 	</select>
-	<insert id="insertSupplierBean" parameterClass="com.mydomain.bean.SupplierBean">
+	<insert id="insertSupplierBean" parameterClass="com.mydomain.bean.baseset.SupplierBean">
 	INSERT INTO SUPPLIER
 	(SUPPLIERCODE,SUPPLIERNAME,SUPPLIERADDRESS,SUPPLIERPHONE,
 	SUPPLIERFAX,SUPPLIERZIPCODE,SUPPLIERTAXFILENUMBER,SUPPLIERREMARK,
@@ -92,7 +92,7 @@
 	#supplierFax#,#supplierZipCode#,#supplierTaxFileNumber#,#supplierRemark#,
 	#personCode#,#accountCode#,#bankCode#,1)
 	</insert>
-	<update id="updateSupplierBean" parameterClass="com.mydomain.bean.SupplierBean">
+	<update id="updateSupplierBean" parameterClass="com.mydomain.bean.baseset.SupplierBean">
 	UPDATE SUPPLIER
 	SUPPLIERNAME=#supplierName#,
 	SUPPLIERADDRESS=#supplierAddress#,
@@ -107,7 +107,7 @@
 	ISENABLE=1
 	WHERE SUPPLIERCODE=#supplierCode#
 	</update>
-	<delete id="deleteSupplierBean" parameterClass="com.mydomain.bean.SupplierBean">
+	<delete id="deleteSupplierBean" parameterClass="com.mydomain.bean.baseset.SupplierBean">
 	UPDATE SUPPLIER
 	ISENABLE=0
 	WHERE SUPPLIERCODE=#supplierCode#

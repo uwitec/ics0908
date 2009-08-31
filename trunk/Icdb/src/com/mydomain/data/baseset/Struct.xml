@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Struct">
-	<select id="selectStructDef" resultClass="com.mydomain.bean.StructBean">
+	<select id="selectStructDef" resultClass="com.mydomain.bean.baseset.StructBean">
 		SELECT 
 		STRUCTCODE,
 		STRUCTNAME
@@ -16,7 +16,7 @@
 		(structCode like #structCode#
 		or structName like #structName#)
 	</select>
-	<select id="getStructBean" parameterClass="String" resultClass="com.mydomain.bean.StructBean">
+	<select id="getStructBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.StructBean">
 		SELECT 
 		STRUCTCODE,
 		STRUCTNAME
@@ -25,7 +25,7 @@
 		and
 		isEnabled=1
 	</select>
-	<select id="selectAllStructBean" resultClass="com.mydomain.bean.StructBean">
+	<select id="selectAllStructBean" resultClass="com.mydomain.bean.baseset.StructBean">
 		SELECT 
 		STRUCTCODE,
 		STRUCTNAME
@@ -33,20 +33,20 @@
 		where
 		isEnabled=1
 	</select>
-	<insert id="insertStructBean" parameterClass="com.mydomain.bean.StructBean">
+	<insert id="insertStructBean" parameterClass="com.mydomain.bean.baseset.StructBean">
 		INSERT INTO 
 		STRUCT
 		(STRUCTCODE,STRUCTNAME,isEnabled) VALUES
 		(#structCode#,#structName#,1)
 	</insert>
-	<update id="updateStructBean" parameterClass="com.mydomain.bean.StructBean">
+	<update id="updateStructBean" parameterClass="com.mydomain.bean.baseset.StructBean">
 		UPDATE STRUCT
 		SET
 		STRUCTNAME=#structName#,
 		isEnabled=1
 		WHERE STRUCTCode=#structCode#
 	</update>
-	<delete id="deleteStructBean" parameterClass="com.mydomain.bean.StructBean">
+	<delete id="deleteStructBean" parameterClass="com.mydomain.bean.baseset.StructBean">
 		UPDATE STRUCT
 		SET
 		isEnabled=0

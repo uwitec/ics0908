@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Person">
-	<select id="selectPersonDef" resultClass="com.mydomain.bean.PersonBean">
+	<select id="selectPersonDef" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
 		personCode,
 		personName,
@@ -22,7 +22,7 @@
 		or personEmail like #personEmail#
 		or personSex like #personSex#)
 	</select>
-	<select id="selectPersonDefPag" resultClass="com.mydomain.bean.PersonBean">
+	<select id="selectPersonDefPag" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
 		count(*) as count
 		FROM person
@@ -35,7 +35,7 @@
 		or personSex like #personSex#) 
 		limit #startValue#,#endValue#
 	</select>
-	<select id="getPersonBean" parameterClass="String" resultClass="com.mydomain.bean.PersonBean">
+	<select id="getPersonBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
 		personCode,
 		personName,
@@ -47,13 +47,13 @@
 		WHERE personCode = #personCode#
 		and isEnabled=1
 	</select>
-	<select id="selectAllPersonBeanPag" resultClass="com.mydomain.bean.PersonBean">
+	<select id="selectAllPersonBeanPag" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
 		count(*) as countValue
 		FROM person
 		where isEnabled=1
 	</select>
-	<select id="selectAllPersonBean" resultClass="com.mydomain.bean.PersonBean">
+	<select id="selectAllPersonBean" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
 		personCode,
 		personName,
@@ -64,13 +64,13 @@
 		FROM person
 		where isEnabled=1 limit #startValue#,#endValue#
 	</select>
-	<insert id="insertPersonBean" parameterClass="com.mydomain.bean.PersonBean">
+	<insert id="insertPersonBean" parameterClass="com.mydomain.bean.baseset.PersonBean">
 		INSERT INTO
 		person
 		(personCode,personName,personPhone,personEmail,personSex,personPhoto,isEnabled)
 		VALUES (#personCode#,#personName#,#personPhone#,#personEmail#,#personSex#,#personPhoto#,1)
 	</insert>
-	<update id="updatePersonBean" parameterClass="com.mydomain.bean.PersonBean">
+	<update id="updatePersonBean" parameterClass="com.mydomain.bean.baseset.PersonBean">
 		UPDATE person
 		SET
 		personName=#personName#,
@@ -81,7 +81,7 @@
 		isEnabled=1
 		WHERE personCode= #personCode#
 	</update>
-	<delete id="deletePersonBean" parameterClass="com.mydomain.bean.PersonBean">
+	<delete id="deletePersonBean" parameterClass="com.mydomain.bean.baseset.PersonBean">
 		UPDATE person
 		SET
 		isEnabled=0

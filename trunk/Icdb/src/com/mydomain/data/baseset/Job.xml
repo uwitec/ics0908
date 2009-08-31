@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Job">
-	<select id="selectJobDef" resultClass="com.mydomain.bean.JobBean">
+	<select id="selectJobDef" resultClass="com.mydomain.bean.baseset.JobBean">
 	select 
 	job.jobCode,
 	job.jobName,
@@ -25,7 +25,7 @@
 	or job.jobCode like #jobCode#
 	or sd.departmentName like #departmentName#)
 	</select>
-	<select id="getJobBean" parameterClass="String" resultClass="com.mydomain.bean.JobBean">
+	<select id="getJobBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.JobBean">
 		SELECT 
 		jobCode,
 		jobName,
@@ -37,7 +37,7 @@
 		job.isEnabled=1 and
 		jobCODE=#jobCode#
 	</select>
-	<select id="selectAllJobBean" resultClass="com.mydomain.bean.JobBean">
+	<select id="selectAllJobBean" resultClass="com.mydomain.bean.baseset.JobBean">
 		SELECT 
 		jobCode,
 		jobName,
@@ -49,13 +49,13 @@
 		and
 		job.departmentCode=department.departmentCode
 	</select>
-	<insert id="insertJobBean" parameterClass="com.mydomain.bean.JobBean">
+	<insert id="insertJobBean" parameterClass="com.mydomain.bean.baseset.JobBean">
 		INSERT INTO 
 		 job
 		(jobCode,jobName,departmentCode,isEnabled) VALUES
 		(#jobCode#,#jobName#,#departmentCode#,1)
 	</insert>
-	<update id="updateJobBean" parameterClass="com.mydomain.bean.JobBean">
+	<update id="updateJobBean" parameterClass="com.mydomain.bean.baseset.JobBean">
 		UPDATE job
 		SET
 		jobName=#jobName#,
@@ -63,7 +63,7 @@
 		isEnabled=1
 		WHERE jobCode=#jobCode#
 	</update>
-	<delete id="deleteJobBean" parameterClass="com.mydomain.bean.JobBean">
+	<delete id="deleteJobBean" parameterClass="com.mydomain.bean.baseset.JobBean">
 		UPDATE job
 		SET
 		isEnabled=0
