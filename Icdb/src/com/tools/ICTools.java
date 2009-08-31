@@ -18,6 +18,14 @@ public class ICTools {
 	public static String MESSAGE_OK="";
 	public static String MESSAGE_ERROR="数据有错误，请检查";
 	private static final int BUFFER_SIZE = 16 * 1024 ;
+	
+	public static int mathCeil(double arg0,double arg1){
+		return (int) Math.ceil(arg0/arg1);
+	}
+	
+	public static int mathCeil(int arg0,int arg1){
+		return (int) Math.ceil(arg0*1.0/arg1);
+	}
 	 
 	public static String randId(String id_char){
 		StringBuffer id_code=new StringBuffer();
