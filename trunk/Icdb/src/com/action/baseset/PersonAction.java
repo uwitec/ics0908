@@ -5,8 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.PersonBean;
-import com.mydomain.bean.ReSourceBean;
+import com.mydomain.bean.baseset.BaseBean;
+import com.mydomain.bean.baseset.PersonBean;
+import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -100,7 +101,14 @@ public class PersonAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String showPerson(){
 		try {
-			lhp=(List<PersonBean>) DBServer.quider.queryForList(PersonBean.class);
+			if(person==null){
+				person=new PersonBean();
+			}
+			person=(PersonBean) DBServer.quider.queryForObject("selectAllPersonBeanPag", person);
+			person.setCountSize(ICTools.mathCeil(person.getCountValue(),BaseBean.countNumber));
+			System.out.println(person.getCountSize()+":"+person.getStartValue()+":"+person.getCountValue());
+			lhp=(List<PersonBean>) DBServer.quider.queryForList("selectAllPersonBean", person);
+			//		lhp=(List<PersonBean>) DBServer.quider.queryForList(PersonBean.class);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

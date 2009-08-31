@@ -5,9 +5,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.EmployeeBean;
-import com.mydomain.bean.PersonBean;
-import com.mydomain.bean.ReSourceBean;
+import com.mydomain.bean.baseset.EmployeeBean;
+import com.mydomain.bean.baseset.PersonBean;
+import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
