@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2009/8/27 11:08:50                           */
+/* Created on:     2009/8/31 20:55:02                           */
 /*==============================================================*/
 
 
@@ -16,10 +16,6 @@ drop table if exists icdb.CargoSpace;
 
 drop table if exists icdb.Customer;
 
-drop table if exists icdb.CustomerOrder;
-
-drop table if exists icdb.CustomerOrderHasMateriel;
-
 drop table if exists icdb.Department;
 
 drop table if exists icdb.Employee;
@@ -30,23 +26,11 @@ drop table if exists icdb.Materiel;
 
 drop table if exists icdb.Person;
 
-drop table if exists icdb.PurchaseOrder;
-
-drop table if exists icdb.PurchaseOrderHasMateriel;
-
 drop table if exists icdb.Stock;
 
+drop table if exists StockInCheckMateriel;
+
 drop table if exists icdb.StockInCheckOrder;
-
-drop table if exists icdb.StockInCredence;
-
-drop table if exists icdb.StockInHasMateriel;
-
-drop table if exists icdb.StockInOrder;
-
-drop table if exists icdb.StockOutCheckOrder;
-
-drop table if exists icdb.StockOutCredence;
 
 drop table if exists icdb.StockOutHasMateriel;
 
@@ -58,11 +42,17 @@ drop table if exists icdb.Struct;
 
 drop table if exists icdb.Supplier;
 
-drop table if exists icdb.TryForStockInOrder;
+drop table if exists TransferOrder;
+
+drop table if exists TransferOrderHasMateriel;
 
 drop table if exists icdb.Unit;
 
 drop table if exists icdb.UnitType;
+
+drop table if exists wasMateriel;
+
+drop table if exists wastage;
 
 /*==============================================================*/
 /* User: icdb                                                   */
@@ -76,7 +66,6 @@ create table icdb.Account
 (
    accountCode          VARCHAR(45) not null,
    accountNumber        VARCHAR(45),
-   accountName          VARCHAR(45),
    accountType          VARCHAR(45),
    personCode           VARCHAR(45),
    bankCode             INT,
@@ -92,7 +81,11 @@ create table icdb.Account
 create table icdb.BackOrder
 (
    backOrderCode        VARCHAR(45) not null,
-   stockInCheckOrderCode VARCHAR(45),
+   stockOutOrderCode    VARCHAR(45),
+   stockOutDate         datetime,
+   stockOutOptionor     VARCHAR(45),
+   stockOutState        int,
+   stockPersion         VARCHAR(45),
    primary key (backOrderCode)
 );
 
@@ -101,9 +94,11 @@ create table icdb.BackOrder
 /*==============================================================*/
 create table icdb.BackOrderHasMateriel
 (
-   backOrderCode        VARCHAR(45) not null,
-   materielCode         VARCHAR(45) not null,
-   primary key (backOrderCode, materielCode)
+   退货单号                 VARCHAR(45) not null,
+   物料编码                 VARCHAR(45) not null,
+   materelCount         decimal,
+   materelPirce         decimal,
+   primary key (退货单号, 物料编码)
 );
 
 /*==============================================================*/
@@ -137,34 +132,8 @@ create table icdb.CargoSpace
 /*==============================================================*/
 create table icdb.Customer
 (
-   personCode           VARCHAR(45) not null,
-   Customer             VARCHAR(45) not null,
-   primary key (personCode)
-);
-
-/*==============================================================*/
-/* Table: CustomerOrder                                         */
-/*==============================================================*/
-create table icdb.CustomerOrder
-(
-   customerOrderCode    VARCHAR(45) not null,
-   personCode           VARCHAR(45),
-   customerOrderPayType char(10),
-   customerOrderPayer   char(10),
-   customerOrderPayee   char(10),
-   customerOrderIsPass  char(10),
-   customerOrderState   char(10),
-   primary key (customerOrderCode)
-);
-
-/*==============================================================*/
-/* Table: CustomerOrderHasMateriel                              */
-/*==============================================================*/
-create table icdb.CustomerOrderHasMateriel
-(
-   customerOrderCode    VARCHAR(45) not null,
-   materielCode         VARCHAR(45) not null,
-   primary key (customerOrderCode, materielCode)
+   customerCode         VARCHAR(45) not null,
+   primary key (customerCode)
 );
 
 /*==============================================================*/
@@ -185,12 +154,12 @@ create table icdb.Department
 /*==============================================================*/
 create table icdb.Employee
 (
-   personCode           VARCHAR(45) not null,
    employeeCode         VARCHAR(45) not null,
+   personCode           VARCHAR(45) not null,
    jobCode              VARCHAR(45),
    isEnabled            INT,
    jsonField            VARCHAR(3000),
-   primary key (personCode)
+   primary key (employeeCode)
 );
 
 /*==============================================================*/
@@ -218,11 +187,6 @@ create table icdb.Materiel
    materielMaxStore     VARCHAR(45),
    materielMinStore     VARCHAR(45),
    materielSpell        VARCHAR(45),
-   materielIOType       VARCHAR(45),
-   unitCodeSpecification VARCHAR(45),
-   unitCodeType         VARCHAR(45),
-   unitCodeSort         VARCHAR(45),
-   unitCodeUnit         VARCHAR(45),
    isEnabled            INT,
    jsonField            VARCHAR(3000),
    primary key (materielCode)
@@ -245,39 +209,38 @@ create table icdb.Person
 );
 
 /*==============================================================*/
-/* Table: PurchaseOrder                                         */
-/*==============================================================*/
-create table icdb.PurchaseOrder
-(
-   purchaseOrderCode    VARCHAR(45) not null,
-   personCode           VARCHAR(45),
-   customerOrderCode    VARCHAR(45),
-   primary key (purchaseOrderCode)
-);
-
-/*==============================================================*/
-/* Table: PurchaseOrderHasMateriel                              */
-/*==============================================================*/
-create table icdb.PurchaseOrderHasMateriel
-(
-   purchaseOrderCode    VARCHAR(45) not null,
-   materielCode         VARCHAR(45) not null,
-   supplierCode         VARCHAR(100),
-   primary key (purchaseOrderCode, materielCode)
-);
-
-/*==============================================================*/
 /* Table: Stock                                                 */
 /*==============================================================*/
 create table icdb.Stock
 (
-   stockCode            VARCHAR(50) not null,
    cargoSpaceCode       VARCHAR(45) not null,
    materielCode         VARCHAR(45) not null,
    stockPrice           DECIMAL,
    stockAmount          VARCHAR(45),
    jsonField            VARCHAR(3000),
-   primary key (stockCode, cargoSpaceCode, materielCode)
+   primary key (cargoSpaceCode, materielCode)
+);
+
+/*==============================================================*/
+/* Table: StockInCheckMateriel                                  */
+/*==============================================================*/
+create table StockInCheckMateriel
+(
+   materielCode         VARCHAR(45) not null,
+   supplierCode         VARCHAR(100) not null,
+   cargoSpaceCode       VARCHAR(45) not null,
+   stockInCode          VARCHAR(45) not null,
+   amountPercent        decimal,
+   qualityPercent       decimal,
+   checkTime            bigint,
+   packagePercent       decimal,
+   errorStockPercent    decimal,
+   checkNote            varchar(400),
+   checkAmount          int,
+   checkRemark          varchar(400),
+   lastAmount           int,
+   stockInType          int,
+   primary key (materielCode, supplierCode, cargoSpaceCode, stockInCode)
 );
 
 /*==============================================================*/
@@ -285,57 +248,25 @@ create table icdb.Stock
 /*==============================================================*/
 create table icdb.StockInCheckOrder
 (
-   stockInCheckOrderCode VARCHAR(45) not null,
-   stockInCredenceCode  VARCHAR(45),
-   primary key (stockInCheckOrderCode)
-);
-
-/*==============================================================*/
-/* Table: StockInCredence                                       */
-/*==============================================================*/
-create table icdb.StockInCredence
-(
-   stockInCredenceCode  VARCHAR(45) not null,
-   tryForStockInOrderCode VARCHAR(45),
-   primary key (stockInCredenceCode)
-);
-
-/*==============================================================*/
-/* Table: StockInHasMateriel                                    */
-/*==============================================================*/
-create table icdb.StockInHasMateriel
-(
    stockInCode          VARCHAR(45) not null,
-   materielCode         VARCHAR(45) not null,
-   primary key (stockInCode, materielCode)
-);
-
-/*==============================================================*/
-/* Table: StockInOrder                                          */
-/*==============================================================*/
-create table icdb.StockInOrder
-(
-   stockInCode          VARCHAR(45) not null,
-   stockInCredenceCode  VARCHAR(45),
+   stockInDate          datetime,
+   employeeCode         VARCHAR(45),
+   checkMessage         VARCHAR(450),
+   checkResult          int,
+   orderNumber          VARCHAR(45),
+   checkRemark          VARCHAR(450),
+   sendTime             datetime,
+   arriveTime           datetime,
+   checkTime            datetime,
+   stockInType          VARCHAR(45),
+   stockInState         int,
+   stockInStateType     int,
+   stockInGM            VARCHAR(45),
+   stockInExGM          VARCHAR(45),
+   stockInExDate        datetime,
+   stockInExMessage     VARCHAR(450),
+   stockInWill          VARCHAR(45),
    primary key (stockInCode)
-);
-
-/*==============================================================*/
-/* Table: StockOutCheckOrder                                    */
-/*==============================================================*/
-create table icdb.StockOutCheckOrder
-(
-   stockOutCheckOrderCode VARCHAR(45) not null,
-   primary key (stockOutCheckOrderCode)
-);
-
-/*==============================================================*/
-/* Table: StockOutCredence                                      */
-/*==============================================================*/
-create table icdb.StockOutCredence
-(
-   stockOutCredenceCode VARCHAR(45) not null,
-   primary key (stockOutCredenceCode)
 );
 
 /*==============================================================*/
@@ -343,9 +274,15 @@ create table icdb.StockOutCredence
 /*==============================================================*/
 create table icdb.StockOutHasMateriel
 (
-   stockOutCode         VARCHAR(45) not null,
+   cargoSpaceCode       VARCHAR(45) not null,
    materielCode         VARCHAR(45) not null,
-   primary key (stockOutCode, materielCode)
+   stockOutOrderCode    VARCHAR(45) not null,
+   stockOutAmount       int,
+   stockOutPrice        decimal,
+   typeIsOk             int,
+   amountIsOk           int,
+   specificationIsOk    int,
+   primary key (cargoSpaceCode, materielCode, stockOutOrderCode)
 );
 
 /*==============================================================*/
@@ -353,8 +290,27 @@ create table icdb.StockOutHasMateriel
 /*==============================================================*/
 create table icdb.StockOutOrder
 (
-   stockOutCode         VARCHAR(45) not null,
-   primary key (stockOutCode)
+   stockOutOrderCode    VARCHAR(45) not null,
+   customerCode         VARCHAR(45),
+   stockOutState        int,
+   stockOutDealWith     VARCHAR(45),
+   stockOutDealMessage  VARCHAR(45)>,
+   stockOutDealDate     datetime,
+   stockOutDealState    int,
+   stockOutManager      VARCHAR(45),
+   stockOutDate         datetime,
+   stockOutDestination  VARCHAR(400),
+   stockOutChecker      VARCHAR(45),
+   stockOutCheckState   int,
+   stockOutCheckDate    datetime,
+   stockOutMessage      VARCHAR(45),
+   stockOutStateType    int,
+   stockOrtherMoney     VARCHAR(45),
+   stockOrtherMessage   VARCHAR(400),
+   stockOutWillDate     datetime,
+   stockOutWith         VARCHAR(45),
+   stockOutWithState    int,
+   primary key (stockOutOrderCode)
 );
 
 /*==============================================================*/
@@ -403,13 +359,29 @@ create table icdb.Supplier
 );
 
 /*==============================================================*/
-/* Table: TryForStockInOrder                                    */
+/* Table: TransferOrder                                         */
 /*==============================================================*/
-create table icdb.TryForStockInOrder
+create table TransferOrder
 (
-   tryForStockInOrderCode VARCHAR(45) not null,
-   purchaseOrderCode    VARCHAR(45),
-   primary key (tryForStockInOrderCode)
+   transferOrderCode    varchar(45) not null,
+   transferOrderTime    bigint,
+   transferOrderType    int,
+   transferOrderCredence varchar(45),
+   transferOrderChecker varchar(45),
+   transferOrderPerson  varchar(45),
+   primary key (transferOrderCode)
+);
+
+/*==============================================================*/
+/* Table: TransferOrderHasMateriel                              */
+/*==============================================================*/
+create table TransferOrderHasMateriel
+(
+   transferOrderCode    varchar(45) not null,
+   newcargoSpaceCode    VARCHAR(45) not null,
+   cargoSpaceCode       VARCHAR(45) not null,
+   materielCode         VARCHAR(45) not null,
+   primary key (transferOrderCode, newcargoSpaceCode, cargoSpaceCode, materielCode)
 );
 
 /*==============================================================*/
@@ -438,6 +410,30 @@ create table icdb.UnitType
    primary key (unitTypeCode)
 );
 
+/*==============================================================*/
+/* Table: wasMateriel                                           */
+/*==============================================================*/
+create table wasMateriel
+(
+   materielCode         VARCHAR(45),
+   wasCode              VARCHAR(45),
+   wasNumber            int,
+   wasMoney             decimal,
+   wasCause             VARCHAR(500)
+);
+
+/*==============================================================*/
+/* Table: wastage                                               */
+/*==============================================================*/
+create table wastage
+(
+   wasCode              varchar(45) not null,
+   wasType              int,
+   wasTime              bigint,
+   operator             varchar(45),
+   primary key (wasCode)
+);
+
 alter table icdb.Account add constraint fk_Account_Bank1 foreign key (bankCode)
       references icdb.Bank (bankCode);
 
@@ -447,29 +443,17 @@ alter table icdb.Account add constraint fk_Account_People1 foreign key (personCo
 alter table icdb.Account add constraint fk_Account_Supplier foreign key (supplierCode)
       references icdb.Supplier (supplierCode);
 
-alter table icdb.BackOrder add constraint fk_BackOrder_StockInCheckOrder foreign key (stockInCheckOrderCode)
-      references icdb.StockInCheckOrder (stockInCheckOrderCode);
+alter table icdb.BackOrder add constraint FK_Reference_25 foreign key (stockOutOrderCode)
+      references icdb.StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
 
-alter table icdb.BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_BackOrder foreign key (backOrderCode)
+alter table icdb.BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_BackOrder foreign key (退货单号)
       references icdb.BackOrder (backOrderCode);
 
-alter table icdb.BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_Materiel foreign key (materielCode)
+alter table icdb.BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_Materiel foreign key (物料编码)
       references icdb.Materiel (materielCode);
 
 alter table icdb.CargoSpace add constraint fk_CargoSpace_Storehouse1 foreign key (storehouseCode)
       references icdb.Storehouse (storehouseCode);
-
-alter table icdb.Customer add constraint fk_Customer_Person foreign key (personCode)
-      references icdb.Person (personCode);
-
-alter table icdb.CustomerOrder add constraint fk_CustomerOrder_Customer foreign key (personCode)
-      references icdb.Customer (personCode);
-
-alter table icdb.CustomerOrderHasMateriel add constraint fk_CustomerOrder_has_Materiel_CustomerOrder foreign key (customerOrderCode)
-      references icdb.CustomerOrder (customerOrderCode);
-
-alter table icdb.CustomerOrderHasMateriel add constraint fk_CustomerOrder_has_Materiel_Materiel foreign key (materielCode)
-      references icdb.Materiel (materielCode);
 
 alter table icdb.Department add constraint fk_Department_Struct1 foreign key (structCode)
       references icdb.Struct (structCode);
@@ -483,66 +467,54 @@ alter table icdb.Employee add constraint fk_Employee_Person foreign key (personC
 alter table icdb.Job add constraint fk_Job_Department1 foreign key (departmentCode)
       references icdb.Department (departmentCode);
 
-alter table icdb.Materiel add constraint fk_Materiel_Unit1 foreign key (unitCodeSpecification)
-      references icdb.Unit (unitCode);
-
-alter table icdb.Materiel add constraint fk_Materiel_Unit2 foreign key (unitCodeType)
-      references icdb.Unit (unitCode);
-
-alter table icdb.Materiel add constraint fk_Materiel_Unit3 foreign key (unitCodeSort)
-      references icdb.Unit (unitCode);
-
-alter table icdb.Materiel add constraint fk_Materiel_Unit4 foreign key (unitCodeUnit)
-      references icdb.Unit (unitCode);
-
-alter table icdb.PurchaseOrder add constraint fk_PurchaseOrder_CustomerOrder foreign key (customerOrderCode)
-      references icdb.CustomerOrder (customerOrderCode);
-
-alter table icdb.PurchaseOrder add constraint fk_PurchaseOrder_Employee foreign key (personCode)
-      references icdb.Employee (personCode);
-
-alter table icdb.PurchaseOrderHasMateriel add constraint fk_PurchaseOrderHasMateriel_Supplier foreign key (supplierCode)
-      references icdb.Supplier (supplierCode);
-
-alter table icdb.PurchaseOrderHasMateriel add constraint fk_PurchaseOrder_has_Materiel_Materiel foreign key (materielCode)
-      references icdb.Materiel (materielCode);
-
-alter table icdb.PurchaseOrderHasMateriel add constraint fk_PurchaseOrder_has_Materiel_PurchaseOrder foreign key (purchaseOrderCode)
-      references icdb.PurchaseOrder (purchaseOrderCode);
-
 alter table icdb.Stock add constraint fk_Stock_CargoSpace foreign key (cargoSpaceCode)
       references icdb.CargoSpace (cargoSpaceCode);
 
 alter table icdb.Stock add constraint fk_Stock_Materiel foreign key (materielCode)
       references icdb.Materiel (materielCode);
 
-alter table icdb.StockInCheckOrder add constraint fk_StockInCheckOrder_StockInCredence foreign key (stockInCredenceCode)
-      references icdb.StockInCredence (stockInCredenceCode);
+alter table StockInCheckMateriel add constraint FK_Reference_26 foreign key (materielCode)
+      references icdb.Materiel (materielCode) on delete restrict on update restrict;
 
-alter table icdb.StockInCredence add constraint fk_StockInCredence_TryForStockInOrder foreign key (tryForStockInOrderCode)
-      references icdb.TryForStockInOrder (tryForStockInOrderCode);
+alter table StockInCheckMateriel add constraint FK_Reference_27 foreign key (supplierCode)
+      references icdb.Supplier (supplierCode) on delete restrict on update restrict;
 
-alter table icdb.StockInHasMateriel add constraint fk_StockInHasMateriel_Materiel foreign key (materielCode)
-      references icdb.Materiel (materielCode);
+alter table StockInCheckMateriel add constraint FK_Reference_28 foreign key (cargoSpaceCode)
+      references icdb.CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
-alter table icdb.StockInHasMateriel add constraint fk_StockInHasMateriel_StockIn foreign key (stockInCode)
-      references icdb.StockInOrder (stockInCode);
+alter table StockInCheckMateriel add constraint FK_Reference_29 foreign key (stockInCode)
+      references icdb.StockInCheckOrder (stockInCode) on delete restrict on update restrict;
 
-alter table icdb.StockInOrder add constraint fk_StockInOrder_StockInCredence foreign key (stockInCredenceCode)
-      references icdb.StockInCredence (stockInCredenceCode);
+alter table icdb.StockInCheckOrder add constraint FK_Reference_36 foreign key (employeeCode)
+      references icdb.Employee (employeeCode) on delete restrict on update restrict;
 
-alter table icdb.StockOutHasMateriel add constraint fk_StockOutHasMateriel_Materiel foreign key (materielCode)
-      references icdb.Materiel (materielCode);
+alter table icdb.StockOutHasMateriel add constraint FK_Reference_50 foreign key (cargoSpaceCode, materielCode)
+      references icdb.Stock (cargoSpaceCode, materielCode) on delete restrict on update restrict;
 
-alter table icdb.StockOutHasMateriel add constraint fk_StockOutHasMateriel_StockOut foreign key (stockOutCode)
-      references icdb.StockOutOrder (stockOutCode);
+alter table icdb.StockOutHasMateriel add constraint FK_Reference_54 foreign key (stockOutOrderCode)
+      references icdb.StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
+
+alter table icdb.StockOutOrder add constraint FK_Reference_37 foreign key (customerCode)
+      references icdb.Customer (customerCode) on delete restrict on update restrict;
 
 alter table icdb.Storehouse add constraint fk_Storehouse_Employee1 foreign key (employeeCode)
       references icdb.Employee (employeeCode);
 
-alter table icdb.TryForStockInOrder add constraint fk_TryForStockInOrder_PurchaseOrder foreign key (purchaseOrderCode)
-      references icdb.PurchaseOrder (purchaseOrderCode);
+alter table TransferOrderHasMateriel add constraint FK_Reference_49 foreign key (transferOrderCode)
+      references TransferOrder (transferOrderCode) on delete restrict on update restrict;
+
+alter table TransferOrderHasMateriel add constraint FK_Reference_51 foreign key (cargoSpaceCode, materielCode)
+      references icdb.Stock (cargoSpaceCode, materielCode) on delete restrict on update restrict;
+
+alter table TransferOrderHasMateriel add constraint FK_Reference_52 foreign key (newcargoSpaceCode)
+      references icdb.CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
 alter table icdb.Unit add constraint fk_Unit_UnitType foreign key (unitTypeCode)
       references icdb.UnitType (unitTypeCode);
+
+alter table wasMateriel add constraint FK_Reference_44 foreign key (materielCode)
+      references icdb.Materiel (materielCode) on delete restrict on update restrict;
+
+alter table wasMateriel add constraint FK_Reference_45 foreign key (wasCode)
+      references wastage (wasCode) on delete restrict on update restrict;
 
