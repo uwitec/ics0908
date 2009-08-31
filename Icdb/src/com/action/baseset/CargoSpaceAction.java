@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.CargoSpaceBean;
-import com.mydomain.bean.ReSourceBean;
+import com.mydomain.bean.baseset.CargoSpaceBean;
+import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 

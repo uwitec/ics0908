@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.UnitTypeBean;
+import com.mydomain.bean.baseset.UnitTypeBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.DBControl;
 
