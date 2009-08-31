@@ -15,7 +15,7 @@
 		and
 		isEnable=1
 	</select>
-	<select id="selectAllUnitTypeBean" resultClass="com.mydomain.bean.UnitTypeBean">
+	<select id="selectAllUnitTypeBean" resultClass="com.mydomain.bean.baseset.UnitTypeBean">
 		SELECT 
 		UNITTYPECODE,
 		UNITTYPENAME,
@@ -24,13 +24,13 @@
 		where
 		isEnable=1
 	</select>
-	<insert id="insertUnitTypeBean" parameterClass="com.mydomain.bean.UnitTypeBean">
+	<insert id="insertUnitTypeBean" parameterClass="com.mydomain.bean.baseset.UnitTypeBean">
 		INSERT INTO 
 		 UNITTYPE
 		(UNITTYPECODE,UNITTYPENAME,UNITTYPEREMARK,isEnable) VALUES
 		(#unitTypeCode#,#unitTypeName#,#unitTypeRemark#,1)
 	</insert>
-	<update id="updateUnitTypeBean" parameterClass="com.mydomain.bean.UnitTypeBean">
+	<update id="updateUnitTypeBean" parameterClass="com.mydomain.bean.baseset.UnitTypeBean">
 		UPDATE UNITTYPE
 		SET
 		UNITTYPENAME=#unitTypeName#,
@@ -38,7 +38,7 @@
 		isEnable=1
 		WHERE UNITTYPECODE=#unitTypeCode#
 	</update>
-	<delete id="deleteUnitTypeBean" parameterClass="com.mydomain.bean.UnitTypeBean">
+	<delete id="deleteUnitTypeBean" parameterClass="com.mydomain.bean.baseset.UnitTypeBean">
 		UPDATE UNITTYPE
 		SET
 		isEnable=0

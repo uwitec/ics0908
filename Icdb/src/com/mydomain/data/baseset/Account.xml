@@ -29,7 +29,7 @@
 		OR PERSON.PERSONNAME like #personName#
 		OR BANK.BANKNAME like #bankName#)
 	</select>
-	<select id="getAllFind" resultClass="com.mydomain.bean.basesetAccountBean">
+	<select id="getAllFind" resultClass="com.mydomain.bean.baseset.AccountBean">
 		SELECT
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
@@ -48,7 +48,7 @@
 		AND
 		ACCOUNT.ACCOUNTNUMBER like #accountNumber#
 	</select>
-	<select id="getAccountBean" parameterClass="String" resultClass="com.mydomain.bean.basesetAccountBean">
+	<select id="getAccountBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.AccountBean">
 		SELECT
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
@@ -67,7 +67,7 @@
 		AND
 		ACCOUNT.ACCOUNTCODE=#accountCode#
 	</select>
-	<select id="selectAllAccountBean" resultClass="com.mydomain.bean.basesetAccountBean">
+	<select id="selectAllAccountBean" resultClass="com.mydomain.bean.baseset.AccountBean">
 		SELECT
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
@@ -84,13 +84,13 @@
 		AND
 		ACCOUNT.ISENABLED=1
 	</select>
-	<insert id="insertAccountBean" parameterClass="com.mydomain.bean.basesetAccountBean">
+	<insert id="insertAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		INSERT INTO ACCOUNT
 		(ACCOUNTCODE,ACCOUNTNUMBER,ACCOUNTNAME,ACCOUNTTYPE,PERSONCODE,BANKCODE,ISENABLED) 
 		VALUES
 		(#accountCode#,#accountNumber#,#accountName#,#accountType#,#personCode#,#bankCode#,1)
 	</insert>
-	<update id="updateAccountBean" parameterClass="com.mydomain.bean.basesetAccountBean">
+	<update id="updateAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		UPDATE ACCOUNT
 		SET 
 		ACCOUNTNUMBER=#accountNumber#,
@@ -101,7 +101,7 @@
 		ISENABLED=1
 		WHERE ACCOUNTCODE=#accountCode#
 	</update>
-	<delete id="deleteAccountBean" parameterClass="com.mydomain.bean.basesetAccountBean">
+	<delete id="deleteAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 	UPDATE ACCOUNT
 		SET 
 		ISENABLED=0

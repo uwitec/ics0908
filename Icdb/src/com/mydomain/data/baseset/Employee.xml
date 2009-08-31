@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Employee">
-	<select id="selectEmployeeDef" resultClass="com.mydomain.bean.EmployeeBean">
+	<select id="selectEmployeeDef" resultClass="com.mydomain.bean.baseset.EmployeeBean">
 			select
 			employee.employeeCode,
 			employee.personCode,
@@ -40,7 +40,7 @@
 			or jsd.jobName like #jobName#
 			or jsd.departmentName like #departmentName#)
 	</select>
-	<select id="getEmployeeBean" parameterClass="String" resultClass="com.mydomain.bean.EmployeeBean">
+	<select id="getEmployeeBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.EmployeeBean">
 			select
 			employee.employeeCode,
 			employee.personCode,
@@ -70,7 +70,7 @@
 			and employee.isEnabled=1 
 			and employee.employeeCode=#employeeCode#
 	</select>
-	<select id="selectAllEmployeeBean" resultClass="com.mydomain.bean.EmployeeBean">
+	<select id="selectAllEmployeeBean" resultClass="com.mydomain.bean.baseset.EmployeeBean">
 			select
 			employee.employeeCode,
 			employee.personCode,
@@ -99,14 +99,14 @@
 			and employee.jobCode=jsd.jobCode
 			and employee.isEnabled=1
 	</select>
-	<insert id="insertEmployeeBean" parameterClass="com.mydomain.bean.EmployeeBean">
+	<insert id="insertEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			insert into 
 			employee
 			(employeeCode,personCode,jobCode,departmentCode,structCode,isEnabled)
 			values
 			(#employeeCode#,#personCode#,#jobCode#,#departmentCode#,#structCode#,1)
 	</insert>
-	<update id="updateEmployeeBean" parameterClass="com.mydomain.bean.EmployeeBean">
+	<update id="updateEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			update employee
 			set
 			personCode=#personCode#,
@@ -116,7 +116,7 @@
 			isEnabled=1
 			where employeeCode=#employeeCode#
 	</update>
-	<delete id="deleteEmployeeBean" parameterClass="com.mydomain.bean.EmployeeBean">
+	<delete id="deleteEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			update employee
 			set
 			isEnabled=0

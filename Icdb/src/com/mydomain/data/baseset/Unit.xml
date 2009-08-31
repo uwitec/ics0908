@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Unit">
-	<select id="selectUnitDef" resultClass="com.mydomain.bean.UnitBean">
+	<select id="selectUnitDef" resultClass="com.mydomain.bean.baseset.UnitBean">
 		SELECT 
 		unitCode,
 		unitName,
@@ -18,7 +18,7 @@
 		(unitName like #unitName#
 		or unittype.unitTypeName like #unitTypName#)
 	</select>
-	<select id="getUnitBean" parameterClass="String" resultClass="com.mydomain.bean.UnitBean">
+	<select id="getUnitBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.UnitBean">
 		SELECT 
 		unitCode,
 		unitName,
@@ -30,7 +30,7 @@
 		unit.isEnabled=1 and
 		UNITCODE=#unitCode#
 	</select>
-	<select id="selectAllUnitBean" resultClass="com.mydomain.bean.UnitBean">
+	<select id="selectAllUnitBean" resultClass="com.mydomain.bean.baseset.UnitBean">
 		SELECT 
 		unitCode,
 		unitName,
@@ -41,13 +41,13 @@
 		unit.isEnabled=1 and
 		unit.unitTypeCode=unitType.unitTypeCode
 	</select>
-	<insert id="insertUnitBean" parameterClass="com.mydomain.bean.UnitBean">
+	<insert id="insertUnitBean" parameterClass="com.mydomain.bean.baseset.UnitBean">
 		INSERT INTO 
 		 UNIT
 		(unitCode,unitName,unitTypeCode,isEnable) VALUES
 		(#unitCode#,#unitName#,#unitTypeCode#,1)
 	</insert>
-	<update id="updateUnitBean" parameterClass="com.mydomain.bean.UnitBean">
+	<update id="updateUnitBean" parameterClass="com.mydomain.bean.baseset.UnitBean">
 		UPDATE UNIT
 		SET
 		unitName=#unitName#,
@@ -55,7 +55,7 @@
 		unitTypeCode=#unitTypeCode#
 		WHERE unitCode=#unitCode#
 	</update>
-	<delete id="deleteUnitBean" parameterClass="com.mydomain.bean.UnitBean">
+	<delete id="deleteUnitBean" parameterClass="com.mydomain.bean.baseset.UnitBean">
 		UPDATE UNIT
 		SET
 		isEnabled=1

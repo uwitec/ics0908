@@ -6,40 +6,40 @@
 
 <sqlMap namespace="Bank">
 
-	<select id="selectAllFind" resultClass="com.mydomain.bean.BankBean">
+	<select id="selectAllFind" resultClass="com.mydomain.bean.baseset.BankBean">
 	SELECT
 	BANKCODE,
 	BANKNAME
 	FROM BANK
 	WHERE BANKNAME LIKE #bankName# and isEnabled=1
 	</select>
-	<select id="getBankBean" parameterClass="int" resultClass="com.mydomain.bean.BankBean">
+	<select id="getBankBean" parameterClass="int" resultClass="com.mydomain.bean.baseset.BankBean">
 		SELECT 
 		BANKCODE,
 		BANKNAME
 		FROM BANK
 		WHERE BANKCODE=#bankCode# and isEnabled=1
 	</select>
-	<select id="selectAllBankBean" resultClass="com.mydomain.bean.BankBean">
+	<select id="selectAllBankBean" resultClass="com.mydomain.bean.baseset.BankBean">
 		SELECT 
 		BANKCODE,
 		BANKNAME
 		FROM BANK
 		where isEnabled=1
 	</select>
-	<insert id="insertBankBean" parameterClass="com.mydomain.bean.BankBean">
+	<insert id="insertBankBean" parameterClass="com.mydomain.bean.baseset.BankBean">
 		INSERT INTO 
 		BANK
 		(BANKCODE,BANKNAME,isEnabled) VALUES
 		(#bankCode#,#bankName#,1)
 	</insert>
-	<update id="updateBankBean" parameterClass="com.mydomain.bean.BankBean">
+	<update id="updateBankBean" parameterClass="com.mydomain.bean.baseset.BankBean">
 		UPDATE BANK
 		SET
 		BANKNAME=#bankName#
 		WHERE bankCode=#bankCode#
 	</update>
-	<delete id="deleteBankBean" parameterClass="com.mydomain.bean.BankBean">
+	<delete id="deleteBankBean" parameterClass="com.mydomain.bean.baseset.BankBean">
 		UPDATE BANK
 		SET
 		isEnabled=0

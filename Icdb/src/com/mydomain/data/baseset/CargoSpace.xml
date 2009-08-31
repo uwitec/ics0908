@@ -56,7 +56,7 @@
 	isEnabled=1
 	where cargoSpaceCode=#cargoSpaceCode#
 	</update>
-	<delete id="deleteCargoSpaceBean" parameterClass="com.mydomain.bean.CargoSpaceBean">
+	<delete id="deleteCargoSpaceBean" parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
 	update CargoSpace
 	set 
 	isEnabled=0
