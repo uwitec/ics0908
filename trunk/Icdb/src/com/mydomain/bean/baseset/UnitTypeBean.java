@@ -1,4 +1,4 @@
-package com.mydomain.bean;
+package com.mydomain.bean.baseset;
 /*
  * 单位类型
  * */

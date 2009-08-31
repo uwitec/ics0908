@@ -1,4 +1,4 @@
-package com.mydomain.bean;
+package com.mydomain.bean.baseset;
 /*
  * ¿â·¿BEAN
  * */
