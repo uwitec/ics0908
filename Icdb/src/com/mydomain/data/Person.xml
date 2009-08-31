@@ -22,6 +22,19 @@
 		or personEmail like #personEmail#
 		or personSex like #personSex#)
 	</select>
+	<select id="selectPersonDefPag" resultClass="com.mydomain.bean.PersonBean">
+		SELECT
+		count(*) as count
+		FROM person
+		WHERE 
+		isEnabled=1
+		and (personName like #personName#
+		or personCode like #personCode#
+		or personPhone like #personPhone#
+		or personEmail like #personEmail#
+		or personSex like #personSex#) 
+		limit #startValue#,#endValue#
+	</select>
 	<select id="getPersonBean" parameterClass="String" resultClass="com.mydomain.bean.PersonBean">
 		SELECT
 		personCode,
@@ -34,7 +47,13 @@
 		WHERE personCode = #personCode#
 		and isEnabled=1
 	</select>
-	<select id="selectAllPersonBean"  resultClass="com.mydomain.bean.PersonBean">
+	<select id="selectAllPersonBeanPag" resultClass="com.mydomain.bean.PersonBean">
+		SELECT
+		count(*) as countValue
+		FROM person
+		where isEnabled=1
+	</select>
+	<select id="selectAllPersonBean" resultClass="com.mydomain.bean.PersonBean">
 		SELECT
 		personCode,
 		personName,
@@ -43,7 +62,7 @@
 		personSex,
 		personPhoto
 		FROM person
-		where isEnabled=1
+		where isEnabled=1 limit #startValue#,#endValue#
 	</select>
 	<insert id="insertPersonBean" parameterClass="com.mydomain.bean.PersonBean">
 		INSERT INTO

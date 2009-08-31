@@ -2,7 +2,7 @@ package com.mydomain.bean;
 /*
  * 人员信息BEAN
  * */
-public class PersonBean {
+public class PersonBean extends BaseBean{
 
 	private String personCode; //人员编码
 	private String personName; //姓名
