@@ -48,4 +48,4 @@
 	<sqlMap resource="com/mydomain/data/baseset/Employee.xml"/>
 	<sqlMap resource="com/mydomain/data/baseset/Storehouse.xml"/>
 	<sqlMap resource="com/mydomain/data/baseset/CargoSpace.xml"/>
-</sqlMapConfig>
+	</sqlMapConfig>
