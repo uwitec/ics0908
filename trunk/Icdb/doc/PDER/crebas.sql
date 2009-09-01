@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2009/8/31 20:55:02                           */
+/* Created on:     2009-09-01 13:02:03                          */
 /*==============================================================*/
 
 
@@ -89,11 +89,11 @@ create table BackOrder
 /*==============================================================*/
 create table BackOrderHasMateriel
 (
-   退货单号                 VARCHAR(45) not null,
-   物料编码                 VARCHAR(45) not null,
+   backOrderCode        VARCHAR(45) not null,
+   materielCode         VARCHAR(45) not null,
    materelCount         decimal,
    materelPirce         decimal,
-   primary key (退货单号, 物料编码)
+   primary key (backOrderCode, materielCode)
 );
 
 /*==============================================================*/
@@ -441,11 +441,11 @@ alter table Account add constraint fk_Account_Supplier foreign key (supplierCode
 alter table BackOrder add constraint FK_Reference_25 foreign key (stockOutOrderCode)
       references StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
 
-alter table BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_BackOrder foreign key (退货单号)
-      references BackOrder (backOrderCode);
+alter table BackOrderHasMateriel add constraint FK_Reference_30 foreign key (backOrderCode)
+      references BackOrder (backOrderCode) on delete restrict on update restrict;
 
-alter table BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_Materiel foreign key (物料编码)
-      references Materiel (materielCode);
+alter table BackOrderHasMateriel add constraint FK_Reference_31 foreign key (materielCode)
+      references Materiel (materielCode) on delete restrict on update restrict;
 
 alter table CargoSpace add constraint fk_CargoSpace_Storehouse1 foreign key (storehouseCode)
       references Storehouse (storehouseCode);
