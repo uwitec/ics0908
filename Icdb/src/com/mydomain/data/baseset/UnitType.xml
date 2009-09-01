@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="UnitType">
-	<select id="getUnitTypeBean" parameterClass="String" resultClass="com.mydomain.bean.UnitTypeBean">
+	<select id="getUnitTypeBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.UnitTypeBean">
 		SELECT 
 		UNITTYPECODE,
 		UNITTYPENAME,
