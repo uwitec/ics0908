@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.baseset.BaseBean;
+import com.mydomain.bean.BaseBean;
 import com.mydomain.bean.baseset.PersonBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
