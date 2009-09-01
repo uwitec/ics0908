@@ -98,6 +98,7 @@ public class AccountAction extends ActionSupport{
 		account=new AccountBean();
 		account.setAccountCode(ICTools.randId("A"));
 		return SUCCESS;
+		
 	}
 	
 	public String addAccount(){
