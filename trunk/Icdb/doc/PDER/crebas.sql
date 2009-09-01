@@ -4,65 +4,60 @@
 /*==============================================================*/
 
 
-drop table if exists icdb.Account;
+drop table if exists Account;
 
-drop table if exists icdb.BackOrder;
+drop table if exists BackOrder;
 
-drop table if exists icdb.BackOrderHasMateriel;
+drop table if exists BackOrderHasMateriel;
 
-drop table if exists icdb.Bank;
+drop table if exists Bank;
 
-drop table if exists icdb.CargoSpace;
+drop table if exists CargoSpace;
 
-drop table if exists icdb.Customer;
+drop table if exists Customer;
 
-drop table if exists icdb.Department;
+drop table if exists Department;
 
-drop table if exists icdb.Employee;
+drop table if exists Employee;
 
-drop table if exists icdb.Job;
+drop table if exists Job;
 
-drop table if exists icdb.Materiel;
+drop table if exists Materiel;
 
-drop table if exists icdb.Person;
+drop table if exists Person;
 
-drop table if exists icdb.Stock;
+drop table if exists Stock;
 
 drop table if exists StockInCheckMateriel;
 
-drop table if exists icdb.StockInCheckOrder;
+drop table if exists StockInCheckOrder;
 
-drop table if exists icdb.StockOutHasMateriel;
+drop table if exists StockOutHasMateriel;
 
-drop table if exists icdb.StockOutOrder;
+drop table if exists StockOutOrder;
 
-drop table if exists icdb.Storehouse;
+drop table if exists Storehouse;
 
-drop table if exists icdb.Struct;
+drop table if exists Struct;
 
-drop table if exists icdb.Supplier;
+drop table if exists Supplier;
 
 drop table if exists TransferOrder;
 
 drop table if exists TransferOrderHasMateriel;
 
-drop table if exists icdb.Unit;
+drop table if exists Unit;
 
-drop table if exists icdb.UnitType;
+drop table if exists UnitType;
 
 drop table if exists wasMateriel;
 
 drop table if exists wastage;
 
 /*==============================================================*/
-/* User: icdb                                                   */
-/*==============================================================*/
-create user icdb;
-
-/*==============================================================*/
 /* Table: Account                                               */
 /*==============================================================*/
-create table icdb.Account
+create table Account
 (
    accountCode          VARCHAR(45) not null,
    accountNumber        VARCHAR(45),
@@ -78,7 +73,7 @@ create table icdb.Account
 /*==============================================================*/
 /* Table: BackOrder                                             */
 /*==============================================================*/
-create table icdb.BackOrder
+create table BackOrder
 (
    backOrderCode        VARCHAR(45) not null,
    stockOutOrderCode    VARCHAR(45),
@@ -92,7 +87,7 @@ create table icdb.BackOrder
 /*==============================================================*/
 /* Table: BackOrderHasMateriel                                  */
 /*==============================================================*/
-create table icdb.BackOrderHasMateriel
+create table BackOrderHasMateriel
 (
    退货单号                 VARCHAR(45) not null,
    物料编码                 VARCHAR(45) not null,
@@ -104,7 +99,7 @@ create table icdb.BackOrderHasMateriel
 /*==============================================================*/
 /* Table: Bank                                                  */
 /*==============================================================*/
-create table icdb.Bank
+create table Bank
 (
    bankCode             INT not null,
    bankName             VARCHAR(45),
@@ -116,7 +111,7 @@ create table icdb.Bank
 /*==============================================================*/
 /* Table: CargoSpace                                            */
 /*==============================================================*/
-create table icdb.CargoSpace
+create table CargoSpace
 (
    cargoSpaceCode       VARCHAR(45) not null,
    cargoSpaceName       VARCHAR(45),
@@ -130,7 +125,7 @@ create table icdb.CargoSpace
 /*==============================================================*/
 /* Table: Customer                                              */
 /*==============================================================*/
-create table icdb.Customer
+create table Customer
 (
    customerCode         VARCHAR(45) not null,
    primary key (customerCode)
@@ -139,7 +134,7 @@ create table icdb.Customer
 /*==============================================================*/
 /* Table: Department                                            */
 /*==============================================================*/
-create table icdb.Department
+create table Department
 (
    departmentCode       VARCHAR(45) not null,
    departmentName       VARCHAR(45),
@@ -152,7 +147,7 @@ create table icdb.Department
 /*==============================================================*/
 /* Table: Employee                                              */
 /*==============================================================*/
-create table icdb.Employee
+create table Employee
 (
    employeeCode         VARCHAR(45) not null,
    personCode           VARCHAR(45) not null,
@@ -165,7 +160,7 @@ create table icdb.Employee
 /*==============================================================*/
 /* Table: Job                                                   */
 /*==============================================================*/
-create table icdb.Job
+create table Job
 (
    jobCode              VARCHAR(45) not null,
    jobName              VARCHAR(45),
@@ -178,7 +173,7 @@ create table icdb.Job
 /*==============================================================*/
 /* Table: Materiel                                              */
 /*==============================================================*/
-create table icdb.Materiel
+create table Materiel
 (
    materielCode         VARCHAR(45) not null,
    materielName         VARCHAR(45),
@@ -195,7 +190,7 @@ create table icdb.Materiel
 /*==============================================================*/
 /* Table: Person                                                */
 /*==============================================================*/
-create table icdb.Person
+create table Person
 (
    personCode           VARCHAR(45) not null,
    personName           VARCHAR(45),
@@ -211,7 +206,7 @@ create table icdb.Person
 /*==============================================================*/
 /* Table: Stock                                                 */
 /*==============================================================*/
-create table icdb.Stock
+create table Stock
 (
    cargoSpaceCode       VARCHAR(45) not null,
    materielCode         VARCHAR(45) not null,
@@ -246,7 +241,7 @@ create table StockInCheckMateriel
 /*==============================================================*/
 /* Table: StockInCheckOrder                                     */
 /*==============================================================*/
-create table icdb.StockInCheckOrder
+create table StockInCheckOrder
 (
    stockInCode          VARCHAR(45) not null,
    stockInDate          datetime,
@@ -272,7 +267,7 @@ create table icdb.StockInCheckOrder
 /*==============================================================*/
 /* Table: StockOutHasMateriel                                   */
 /*==============================================================*/
-create table icdb.StockOutHasMateriel
+create table StockOutHasMateriel
 (
    cargoSpaceCode       VARCHAR(45) not null,
    materielCode         VARCHAR(45) not null,
@@ -288,7 +283,7 @@ create table icdb.StockOutHasMateriel
 /*==============================================================*/
 /* Table: StockOutOrder                                         */
 /*==============================================================*/
-create table icdb.StockOutOrder
+create table StockOutOrder
 (
    stockOutOrderCode    VARCHAR(45) not null,
    customerCode         VARCHAR(45),
@@ -316,7 +311,7 @@ create table icdb.StockOutOrder
 /*==============================================================*/
 /* Table: Storehouse                                            */
 /*==============================================================*/
-create table icdb.Storehouse
+create table Storehouse
 (
    storehouseCode       VARCHAR(45) not null,
    storehouseName       VARCHAR(45),
@@ -331,7 +326,7 @@ create table icdb.Storehouse
 /*==============================================================*/
 /* Table: Struct                                                */
 /*==============================================================*/
-create table icdb.Struct
+create table Struct
 (
    structCode           VARCHAR(45) not null,
    structName           VARCHAR(45),
@@ -343,7 +338,7 @@ create table icdb.Struct
 /*==============================================================*/
 /* Table: Supplier                                              */
 /*==============================================================*/
-create table icdb.Supplier
+create table Supplier
 (
    supplierCode         VARCHAR(100) not null,
    supplierName         VARCHAR(45),
@@ -387,7 +382,7 @@ create table TransferOrderHasMateriel
 /*==============================================================*/
 /* Table: Unit                                                  */
 /*==============================================================*/
-create table icdb.Unit
+create table Unit
 (
    unitCode             VARCHAR(45) not null,
    unitName             VARCHAR(45),
@@ -400,7 +395,7 @@ create table icdb.Unit
 /*==============================================================*/
 /* Table: UnitType                                              */
 /*==============================================================*/
-create table icdb.UnitType
+create table UnitType
 (
    unitTypeCode         INT not null,
    unitTypeName         VARCHAR(45),
@@ -434,86 +429,86 @@ create table wastage
    primary key (wasCode)
 );
 
-alter table icdb.Account add constraint fk_Account_Bank1 foreign key (bankCode)
-      references icdb.Bank (bankCode);
+alter table Account add constraint fk_Account_Bank1 foreign key (bankCode)
+      references Bank (bankCode);
 
-alter table icdb.Account add constraint fk_Account_People1 foreign key (personCode)
-      references icdb.Person (personCode);
+alter table Account add constraint fk_Account_People1 foreign key (personCode)
+      references Person (personCode);
 
-alter table icdb.Account add constraint fk_Account_Supplier foreign key (supplierCode)
-      references icdb.Supplier (supplierCode);
+alter table Account add constraint fk_Account_Supplier foreign key (supplierCode)
+      references Supplier (supplierCode);
 
-alter table icdb.BackOrder add constraint FK_Reference_25 foreign key (stockOutOrderCode)
-      references icdb.StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
+alter table BackOrder add constraint FK_Reference_25 foreign key (stockOutOrderCode)
+      references StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
 
-alter table icdb.BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_BackOrder foreign key (退货单号)
-      references icdb.BackOrder (backOrderCode);
+alter table BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_BackOrder foreign key (退货单号)
+      references BackOrder (backOrderCode);
 
-alter table icdb.BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_Materiel foreign key (物料编码)
-      references icdb.Materiel (materielCode);
+alter table BackOrderHasMateriel add constraint fk_BackOrderHasMateriel_Materiel foreign key (物料编码)
+      references Materiel (materielCode);
 
-alter table icdb.CargoSpace add constraint fk_CargoSpace_Storehouse1 foreign key (storehouseCode)
-      references icdb.Storehouse (storehouseCode);
+alter table CargoSpace add constraint fk_CargoSpace_Storehouse1 foreign key (storehouseCode)
+      references Storehouse (storehouseCode);
 
-alter table icdb.Department add constraint fk_Department_Struct1 foreign key (structCode)
-      references icdb.Struct (structCode);
+alter table Department add constraint fk_Department_Struct1 foreign key (structCode)
+      references Struct (structCode);
 
-alter table icdb.Employee add constraint fk_Employee_Job1 foreign key (jobCode)
-      references icdb.Job (jobCode);
+alter table Employee add constraint fk_Employee_Job1 foreign key (jobCode)
+      references Job (jobCode);
 
-alter table icdb.Employee add constraint fk_Employee_Person foreign key (personCode)
-      references icdb.Person (personCode);
+alter table Employee add constraint fk_Employee_Person foreign key (personCode)
+      references Person (personCode);
 
-alter table icdb.Job add constraint fk_Job_Department1 foreign key (departmentCode)
-      references icdb.Department (departmentCode);
+alter table Job add constraint fk_Job_Department1 foreign key (departmentCode)
+      references Department (departmentCode);
 
-alter table icdb.Stock add constraint fk_Stock_CargoSpace foreign key (cargoSpaceCode)
-      references icdb.CargoSpace (cargoSpaceCode);
+alter table Stock add constraint fk_Stock_CargoSpace foreign key (cargoSpaceCode)
+      references CargoSpace (cargoSpaceCode);
 
-alter table icdb.Stock add constraint fk_Stock_Materiel foreign key (materielCode)
-      references icdb.Materiel (materielCode);
+alter table Stock add constraint fk_Stock_Materiel foreign key (materielCode)
+      references Materiel (materielCode);
 
 alter table StockInCheckMateriel add constraint FK_Reference_26 foreign key (materielCode)
-      references icdb.Materiel (materielCode) on delete restrict on update restrict;
+      references Materiel (materielCode) on delete restrict on update restrict;
 
 alter table StockInCheckMateriel add constraint FK_Reference_27 foreign key (supplierCode)
-      references icdb.Supplier (supplierCode) on delete restrict on update restrict;
+      references Supplier (supplierCode) on delete restrict on update restrict;
 
 alter table StockInCheckMateriel add constraint FK_Reference_28 foreign key (cargoSpaceCode)
-      references icdb.CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
+      references CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
 alter table StockInCheckMateriel add constraint FK_Reference_29 foreign key (stockInCode)
-      references icdb.StockInCheckOrder (stockInCode) on delete restrict on update restrict;
+      references StockInCheckOrder (stockInCode) on delete restrict on update restrict;
 
-alter table icdb.StockInCheckOrder add constraint FK_Reference_36 foreign key (employeeCode)
-      references icdb.Employee (employeeCode) on delete restrict on update restrict;
+alter table StockInCheckOrder add constraint FK_Reference_36 foreign key (employeeCode)
+      references Employee (employeeCode) on delete restrict on update restrict;
 
-alter table icdb.StockOutHasMateriel add constraint FK_Reference_50 foreign key (cargoSpaceCode, materielCode)
-      references icdb.Stock (cargoSpaceCode, materielCode) on delete restrict on update restrict;
+alter table StockOutHasMateriel add constraint FK_Reference_50 foreign key (cargoSpaceCode, materielCode)
+      references Stock (cargoSpaceCode, materielCode) on delete restrict on update restrict;
 
-alter table icdb.StockOutHasMateriel add constraint FK_Reference_54 foreign key (stockOutOrderCode)
-      references icdb.StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
+alter table StockOutHasMateriel add constraint FK_Reference_54 foreign key (stockOutOrderCode)
+      references StockOutOrder (stockOutOrderCode) on delete restrict on update restrict;
 
-alter table icdb.StockOutOrder add constraint FK_Reference_37 foreign key (customerCode)
-      references icdb.Customer (customerCode) on delete restrict on update restrict;
+alter table StockOutOrder add constraint FK_Reference_37 foreign key (customerCode)
+      references Customer (customerCode) on delete restrict on update restrict;
 
-alter table icdb.Storehouse add constraint fk_Storehouse_Employee1 foreign key (employeeCode)
-      references icdb.Employee (employeeCode);
+alter table Storehouse add constraint fk_Storehouse_Employee1 foreign key (employeeCode)
+      references Employee (employeeCode);
 
 alter table TransferOrderHasMateriel add constraint FK_Reference_49 foreign key (transferOrderCode)
       references TransferOrder (transferOrderCode) on delete restrict on update restrict;
 
 alter table TransferOrderHasMateriel add constraint FK_Reference_51 foreign key (cargoSpaceCode, materielCode)
-      references icdb.Stock (cargoSpaceCode, materielCode) on delete restrict on update restrict;
+      references Stock (cargoSpaceCode, materielCode) on delete restrict on update restrict;
 
 alter table TransferOrderHasMateriel add constraint FK_Reference_52 foreign key (newcargoSpaceCode)
-      references icdb.CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
+      references CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
-alter table icdb.Unit add constraint fk_Unit_UnitType foreign key (unitTypeCode)
-      references icdb.UnitType (unitTypeCode);
+alter table Unit add constraint fk_Unit_UnitType foreign key (unitTypeCode)
+      references UnitType (unitTypeCode);
 
 alter table wasMateriel add constraint FK_Reference_44 foreign key (materielCode)
-      references icdb.Materiel (materielCode) on delete restrict on update restrict;
+      references Materiel (materielCode) on delete restrict on update restrict;
 
 alter table wasMateriel add constraint FK_Reference_45 foreign key (wasCode)
       references wastage (wasCode) on delete restrict on update restrict;
