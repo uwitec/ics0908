@@ -1,4 +1,7 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 人员信息BEAN
  * */
