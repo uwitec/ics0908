@@ -22,14 +22,7 @@
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-     <filter>
-    <filter-name>charfilter</filter-name>
-    <filter-class>com.tools.CharFilter</filter-class>  	
-  </filter>
-   <filter-mapping>
-    <filter-name>charfilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+
  
   
     <welcome-file-list>
