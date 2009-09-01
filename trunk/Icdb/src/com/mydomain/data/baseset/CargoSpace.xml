@@ -5,7 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CargoSpace">
-	<select id="getHouseSpace" resultClass="com.mydomain.bean.CargoSpaceBean">
+	<select id="getHouseSpace" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
 	SELECT
 	cargoSpace.cargoSpaceCode,
 	cargoSpace.cargoSpaceName,
@@ -18,7 +18,7 @@
 	and cargoSpace.storehouseCode=#storehouseCode#
 	
 	</select>
-	<select id="getCargoSpaceBean" parameterClass="String" resultClass="com.mydomain.bean.CargoSpaceBean">
+	<select id="getCargoSpaceBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
 	SELECT
 	cargoSpace.cargoSpaceCode,
 	cargoSpace.cargoSpaceName,
@@ -30,7 +30,7 @@
 	and cargoSpace.isEnabled=1
 	and cargoSpace.cargoSpaceCode=#cargoSpaceCode#
 	</select>
-	<select id="selectAllCargoSpaceBean" resultClass="com.mydomain.bean.CargoSpaceBean">
+	<select id="selectAllCargoSpaceBean" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
 	SELECT
 	cargoSpace.cargoSpaceCode,
 	cargoSpace.cargoSpaceName,
@@ -41,13 +41,13 @@
 	where storehouse.storehouseCode=cargoSpace.storehouseCode
 	and cargoSpace.isEnabled=1
 	</select>
-	<insert id="insertCargoSpaceBean" parameterClass="com.mydomain.bean.CargoSpaceBean">
+	<insert id="insertCargoSpaceBean" parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
 	insert into CargoSpace
 	(cargoSpaceCode,cargoSpaceName,cargoSpaceAddress,storehouseCode,isEnabled)
 	values
 	(#cargoSpaceCode#,#cargoSpaceName#,#cargoSpaceAddress#,#storehouseCode#,1)
 	</insert>
-	<update id="updateCargoSpaceBean" parameterClass="com.mydomain.bean.CargoSpaceBean">
+	<update id="updateCargoSpaceBean" parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
 	update CargoSpace
 	set 
 	cargoSpaceName=#cargoSpaceName#,
