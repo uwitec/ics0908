@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2009-09-01 13:02:03                          */
+/* Created on:     2009-09-01 15:18:03                          */
 /*==============================================================*/
 
 
@@ -13,6 +13,10 @@ drop table if exists BackOrderHasMateriel;
 drop table if exists Bank;
 
 drop table if exists CargoSpace;
+
+drop table if exists CheckStock;
+
+drop table if exists CheckStockList;
 
 drop table if exists Customer;
 
@@ -53,6 +57,7 @@ drop table if exists UnitType;
 drop table if exists wasMateriel;
 
 drop table if exists wastage;
+
 
 /*==============================================================*/
 /* Table: Account                                               */
@@ -120,6 +125,41 @@ create table CargoSpace
    isEnabled            INT,
    jsonField            VARCHAR(3000),
    primary key (cargoSpaceCode)
+);
+
+/*==============================================================*/
+/* Table: CheckStock                                            */
+/*==============================================================*/
+create table CheckStock
+(
+   csCode               varchar(45) not null,
+   storehouseCode       VARCHAR(45),
+   csDate               datetime,
+   csApprove            varchar(45),
+   csApproveMessage     varchar(450),
+   csApproveState       varchar(45),
+   csCheckPerson        varchar(45),
+   csOptionor           varchar(45),
+   csState              int,
+   csStartStock         int,
+   primary key (csCode)
+);
+
+/*==============================================================*/
+/* Table: CheckStockList                                        */
+/*==============================================================*/
+create table CheckStockList
+(
+   csCode               varchar(45),
+   materielCode         VARCHAR(45),
+   cargoSpaceCode       VARCHAR(45),
+   csStartPrice         decimal,
+   csStartNumber        decimal,
+   csCheckPrice         decimal,
+   csCheckNumber        decimal,
+   csDiffMessage        VARCHAR(450),
+   csRemark             VARCHAR(450),
+   csGM                 VARCHAR(45)
 );
 
 /*==============================================================*/
@@ -449,6 +489,18 @@ alter table BackOrderHasMateriel add constraint FK_Reference_31 foreign key (mat
 
 alter table CargoSpace add constraint fk_CargoSpace_Storehouse1 foreign key (storehouseCode)
       references Storehouse (storehouseCode);
+
+alter table CheckStock add constraint FK_Reference_35 foreign key (storehouseCode)
+      references Storehouse (storehouseCode) on delete restrict on update restrict;
+
+alter table CheckStockList add constraint FK_Reference_32 foreign key (csCode)
+      references CheckStock (csCode) on delete restrict on update restrict;
+
+alter table CheckStockList add constraint FK_Reference_33 foreign key (materielCode)
+      references Materiel (materielCode) on delete restrict on update restrict;
+
+alter table CheckStockList add constraint FK_Reference_34 foreign key (cargoSpaceCode)
+      references CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
 alter table Department add constraint fk_Department_Struct1 foreign key (structCode)
       references Struct (structCode);
