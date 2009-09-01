@@ -294,7 +294,7 @@ create table icdb.StockOutOrder
    customerCode         VARCHAR(45),
    stockOutState        int,
    stockOutDealWith     VARCHAR(45),
-   stockOutDealMessage  VARCHAR(45)>,
+   stockOutDealMessage  VARCHAR(45),
    stockOutDealDate     datetime,
    stockOutDealState    int,
    stockOutManager      VARCHAR(45),
