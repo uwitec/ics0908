@@ -67,6 +67,7 @@ public class IcdbOption {
 		return IcdbOption.getState("stock_in");
 	}
 	
+	//ËðºÄ×´Ì¬ÁÐ±í
 	public static LinkedHashMap<String, StateBean> getLostState(){
 		return IcdbOption.getState("lost_state");
 	}
