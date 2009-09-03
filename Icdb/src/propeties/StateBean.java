@@ -2,15 +2,10 @@ package propeties;
 
 public class StateBean {
 
-	private int key;
+	private String key;
 	private String name;
 	private String value;
-	/**
-	 * @return the key
-	 */
-	public int getKey() {
-		return key;
-	}
+	
 	/**
 	 * @return the name
 	 */
@@ -23,10 +18,17 @@ public class StateBean {
 	public String getValue() {
 		return value;
 	}
+	
+	/**
+	 * @return the key
+	 */
+	public String getKey() {
+		return key;
+	}
 	/**
 	 * @param key the key to set
 	 */
-	public void setKey(int key) {
+	public void setKey(String key) {
 		this.key = key;
 	}
 	/**
