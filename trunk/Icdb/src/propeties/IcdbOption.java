@@ -1,10 +1,9 @@
-package com.tools;
+package propeties;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
-import propeties.StateBean;
 
 import com.dbserver.conf.ALCFFactory;
 import com.dbserver.conf.AutoConfiger;
@@ -25,42 +24,63 @@ public class IcdbOption {
 			System.exit(2);
 			e2.printStackTrace();
 		}
+		
+		
 		return autoConfiger.getValue(key);
 
 	}
 	
-	private static LinkedHashMap<Integer, StateBean> getState(String keyValue){
-		LinkedHashMap<Integer, StateBean>lhp=new LinkedHashMap<Integer, StateBean>();
+	
+	
+	private static LinkedHashMap<String, StateBean> getState(String keyValue){
+		LinkedHashMap<String, StateBean>lhp=new LinkedHashMap<String, StateBean>();
 		StateBean st;
 		String[] tab_str=IcdbOption.getValue(keyValue).split(",");
 		for(int i=0;i<tab_str.length;i++){
 			st=new StateBean();
-			Integer key=Integer.valueOf(tab_str[i].split(":")[2]);
+			String key=tab_str[i].split(":")[0];
 			st.setKey(key);
-			st.setName(tab_str[i].split(":")[0]);
-			st.setValue(tab_str[i].split(":")[1]);
+			st.setName(tab_str[i].split(":")[1]);
+			st.setValue(tab_str[i].split(":")[2]);
 			lhp.put(key, st);
 		}
 		return lhp;
-	}
+	}	
 	
 	//表状态列表
-	public static LinkedHashMap<Integer, StateBean> getTableState(){
+	public static LinkedHashMap<String, StateBean> getTableState(){
 		return IcdbOption.getState("table_state");
 	}
 	
 	//检查状态列表
-	public static LinkedHashMap<Integer, StateBean> getCheckState(){
+	public static LinkedHashMap<String, StateBean> getCheckState(){
 		return IcdbOption.getState("check_state");
 	}
 	
 	//审核状态列表
-	public static LinkedHashMap<Integer, StateBean> getExamineState(){
+	public static LinkedHashMap<String, StateBean> getExamineState(){
 		return IcdbOption.getState("examine_state");
 	}
 	
-	public static LinkedHashMap<Integer, StateBean> getStockInState(){
+	//入库类型状态列表
+	public static LinkedHashMap<String, StateBean> getStockInState(){
 		return IcdbOption.getState("stock_in");
 	}
 	
+	public static LinkedHashMap<String, StateBean> getLostState(){
+		return IcdbOption.getState("lost_state");
+	}
+	
+	public static LinkedHashMap<String, StateBean> getAbcState(){
+		return IcdbOption.getState("Materiel_abc");
+	}
+	
+	public static LinkedHashMap<String, StateBean> getEnough(){
+		return IcdbOption.getState("Materiel_enough");
+	}
+	/*
+	public static void main(String[] args) {
+		System.out.println(IcdbOption.getValue("Data_date"));
+	}
+	*/
 }
