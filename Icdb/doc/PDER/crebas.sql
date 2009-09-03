@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2009-09-01 15:18:03                          */
+/* Created on:     2009-09-03 10:25:25                          */
 /*==============================================================*/
 
 
@@ -57,7 +57,6 @@ drop table if exists UnitType;
 drop table if exists wasMateriel;
 
 drop table if exists wastage;
-
 
 /*==============================================================*/
 /* Table: Account                                               */
@@ -224,6 +223,8 @@ create table Materiel
    materielSpell        VARCHAR(45),
    isEnabled            INT,
    jsonField            VARCHAR(3000),
+   materielSize         VARCHAR(45),
+   materielABC          VARCHAR(45),
    primary key (materielCode)
 );
 
@@ -240,6 +241,8 @@ create table Person
    personPhoto          VARCHAR(45),
    isEnabled            INT,
    jsonField            VARCHAR(3000),
+   personCertificateType int,
+   personCertificateCode VARCHAR(45),
    primary key (personCode)
 );
 
@@ -274,6 +277,8 @@ create table StockInCheckMateriel
    checkAmount          int,
    checkRemark          varchar(400),
    lastAmount           int,
+   stockInAmount        decimal,
+   onePrice             decimal,
    stockInType          int,
    primary key (materielCode, supplierCode, cargoSpaceCode, stockInCode)
 );
@@ -301,6 +306,7 @@ create table StockInCheckOrder
    stockInExDate        datetime,
    stockInExMessage     VARCHAR(450),
    stockInWill          VARCHAR(45),
+   stockiinCheckState   int,
    primary key (stockInCode)
 );
 
@@ -450,11 +456,12 @@ create table UnitType
 /*==============================================================*/
 create table wasMateriel
 (
-   materielCode         VARCHAR(45),
-   wasCode              VARCHAR(45),
+   materielCode         VARCHAR(45) not null,
+   wasCode              VARCHAR(45) not null,
    wasNumber            int,
    wasMoney             decimal,
-   wasCause             VARCHAR(500)
+   wasCause             VARCHAR(500),
+   primary key (materielCode, wasCode)
 );
 
 /*==============================================================*/
