@@ -211,6 +211,20 @@ var u88based = document.getElementById('u88based');
             
 InsertBeforeEnd(u88based, "<div class='anncontent'><span class='annfieldname'>详细说明(specification):</span> 部门及岗位管理菜单项。<BR><BR></div><div class='anncontent'><span class='annfieldname'>设计状态(State):</span> 建议的(Proposed)<BR><BR></div><div class='anncontent'><span class='annfieldname'>重要度(Benefit):</span> 必要的(Critical)<BR><BR></div><div class='anncontent'><span class='annfieldname'>风险(Risk):</span> 低(Low)<BR><BR></div><div class='anncontent'><span class='annfieldname'>稳定性(Stability):</span> 在定稿后一般不会改变。<BR><BR></div><div class='anncontent'><span class='annfieldname'>目标版本(Target Release):</span> 0.1<BR><BR></div><div class='anncontent'><span class='annfieldname'>分配给(Assigned To):</span> Zhong Lizhi<BR><BR></div>");
 
+u88.style.cursor = 'pointer';
+if (bIE) u88.attachEvent("onclick", Clicku88);
+else u88.addEventListener("click", Clicku88, true);
+function Clicku88(e)
+{
+
+if (true) {
+
+	self.location.href="orgstructure.html" + GetQuerystring();
+
+}
+
+}
+
 var u130 = document.getElementById('u130');
 
 var u108 = document.getElementById('u108');
