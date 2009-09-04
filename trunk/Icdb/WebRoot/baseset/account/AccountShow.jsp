@@ -6,7 +6,11 @@
         <title>帐号信息</title>
     </head>
     <body>
-    <s:form action="SelectAccountDef">
+<% 
+	String base=request.getContextPath();
+%>  
+    <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+    <s:form action="ShowAccount">
     <s:textfield label="内容" name="res.s_value"></s:textfield>
     <s:hidden name="account.accountCode"></s:hidden>
     <s:submit value="查询"></s:submit>
@@ -43,6 +47,31 @@
         </td>
         </tr>
        </s:iterator>
+       <tr><td colspan="6">
+     
+       <s:form action="ShowAccount" namespace="/baseset" theme="simple" name="pageform">
+       <s:push value="account">
+       <s:hidden name="res.s_value" value="%{res.s_value}"></s:hidden>
+       <s:hidden id="countsize" name="account.countSize" value="%{account.countSize}"></s:hidden>
+        <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
+       <s:if test="account.startSize-1<1">
+       		<font color="gray">上一页</font>
+       </s:if>
+       <s:else>
+      	   <input size="10" type="button" onclick="pageSet(-1)" value="上一页"/>
+       </s:else>
+       <s:if test="account.startSize+1>account.countSize">
+       		<font color="gray">下一页</font>
+       </s:if>
+       <s:else>
+      	 	<input size="10" type="button" onclick="pageSet(1)" value="下一页"/>
+       </s:else>
+       		<input size="10" type="button" onclick="pageSet(2)" value="末页"/>
+        第<s:textfield id="size" size="2" name="account.startSize"></s:textfield>页
+       <font><s:property value="account.startSize"/>/<s:property value="account.countSize"/>页数</font>
+       </s:push> 
+       </s:form>
+       </td></tr>
      </table>
      <s:a href="GoAddAccount.action">添加</s:a>
     </body>

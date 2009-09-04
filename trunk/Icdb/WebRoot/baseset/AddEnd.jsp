@@ -8,12 +8,13 @@ String base=request.getContextPath();
     <head>
         <title>添加信息</title>
     </head>
+  
     <body>
     <s:if test="res.message!=''">
     	<s:property value="res.message"/><br/>
     </s:if>
 	
      <a href="<%=base%><s:property value="res.nextPath"/>">添加下一个</a>
-     <a href="<%=base%><s:property value="res.rePath"/>">返回列表</a>
+     <a href="#" onclick="window.close();">返回列表</a>
     </body>
 </html>
