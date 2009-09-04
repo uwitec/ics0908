@@ -15,4 +15,5 @@
 <include file="strutsrs/baseset/s_supplier.xml"></include>
 <include file="strutsrs/baseset/s_storehouse.xml"></include>
 <include file="strutsrs/baseset/s_cargospace.xml"></include>
+<include file="strutsrs/baseset/s_materiel.xml"></include>
 </struts>

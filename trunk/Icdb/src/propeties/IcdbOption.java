@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 
 import com.dbserver.conf.ALCFFactory;
 import com.dbserver.conf.AutoConfiger;
+import com.tools.ICTools;
 
 public class IcdbOption {
 	
@@ -32,7 +33,7 @@ public class IcdbOption {
 	
 	
 	
-	private static LinkedHashMap<String, StateBean> getState(String keyValue){
+	private static LinkedHashMap<String, StateBean> getState2(String keyValue){
 		LinkedHashMap<String, StateBean>lhp=new LinkedHashMap<String, StateBean>();
 		StateBean st;
 		String[] tab_str=IcdbOption.getValue(keyValue).split(",");
@@ -47,37 +48,56 @@ public class IcdbOption {
 		return lhp;
 	}	
 	
+	private static LinkedHashMap<?, ?> getState(String keyValue){
+		LinkedHashMap<String, String>lhp=new LinkedHashMap<String, String>();
+		String[] tab_str=IcdbOption.getValue(keyValue).split(",");
+		for(int i=0;i<tab_str.length;i++){
+			String key=tab_str[i].split(":")[2];
+			String value=tab_str[i].split(":")[1];
+		//	value=ICTools.GBK(value);
+		//	st.setKey(key);
+		//	st.setName(tab_str[i].split(":")[1]);
+		//	st.setValue(tab_str[i].split(":")[2]);
+			lhp.put(key, value);
+		}
+		return lhp;
+	}	
+	
 	//表状态列表
-	public static LinkedHashMap<String, StateBean> getTableState(){
+	public static LinkedHashMap<?,?> getTableState(){
 		return IcdbOption.getState("table_state");
 	}
 	
 	//检查状态列表
-	public static LinkedHashMap<String, StateBean> getCheckState(){
+	public static LinkedHashMap<?,?> getCheckState(){
 		return IcdbOption.getState("check_state");
 	}
 	
 	//审核状态列表
-	public static LinkedHashMap<String, StateBean> getExamineState(){
+	public static LinkedHashMap<?,?> getExamineState(){
 		return IcdbOption.getState("examine_state");
 	}
 	
 	//入库类型状态列表
-	public static LinkedHashMap<String, StateBean> getStockInState(){
+	public static LinkedHashMap<?,?> getStockInState(){
 		return IcdbOption.getState("stock_in");
 	}
 	
 	//损耗状态列表
-	public static LinkedHashMap<String, StateBean> getLostState(){
+	public static LinkedHashMap<?,?> getLostState(){
 		return IcdbOption.getState("lost_state");
 	}
 	
-	public static LinkedHashMap<String, StateBean> getAbcState(){
+	public static LinkedHashMap<?,?> getAbcState(){
 		return IcdbOption.getState("Materiel_abc");
 	}
 	
-	public static LinkedHashMap<String, StateBean> getEnough(){
+	public static LinkedHashMap<?,?> getEnough(){
 		return IcdbOption.getState("Materiel_enough");
+	}
+	
+	public static LinkedHashMap<?, ?> getABCType(){
+		return IcdbOption.getState("materiel_type");
 	}
 	/*
 	public static void main(String[] args) {
