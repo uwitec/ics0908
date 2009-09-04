@@ -5,6 +5,23 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Account">
+	<select id="selectAccountCount" resultClass="com.mydomain.bean.baseset.AccountBean">
+		SELECT
+		count(*) as countValue
+		FROM ACCOUNT,PERSON,BANK
+		WHERE ACCOUNT.ISENABLED!=0
+		AND 
+		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		AND
+		ACCOUNT.BANKCODE=BANK.BANKCODE
+		AND
+		( locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER)>0
+		OR locate(#accountCode#,ACCOUNTCODE)>0
+		OR locate(#accountName#,ACCOUNTNAME)>0 
+		OR locate(#accountType#,ACCOUNTTYPE)>0 
+		OR locate(#personName#,PERSON.PERSONNAME)>0 
+		OR locate(#bankName#,BANK.BANKNAME)>0)
+	</select>
 	<select id="selectAccountDef" resultClass="com.mydomain.bean.baseset.AccountBean">
 		SELECT
 		ACCOUNTCODE,
@@ -22,31 +39,13 @@
 		AND
 		ACCOUNT.BANKCODE=BANK.BANKCODE
 		AND
-		(ACCOUNT.ACCOUNTNUMBER like #accountNumber#
-		OR ACCOUNTCODE like #accountCode#
-		OR ACCOUNTNAME like #accountName#
-		OR ACCOUNTTYPE like #accountType#
-		OR PERSON.PERSONNAME like #personName#
-		OR BANK.BANKNAME like #bankName#)
-	</select>
-	<select id="getAllFind" resultClass="com.mydomain.bean.baseset.AccountBean">
-		SELECT
-		ACCOUNTCODE,
-		ACCOUNTNUMBER,
-		ACCOUNTNAME,
-		ACCOUNTTYPE,
-		ACCOUNT.PERSONCODE,
-		PERSON.PERSONNAME,
-		ACCOUNT.BANKCODE,
-		BANK.BANKNAME
-		FROM ACCOUNT,PERSON,BANK
-		WHERE ACCOUNT.ISENABLED=1
-		AND 
-		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
-		AND
-		ACCOUNT.BANKCODE=BANK.BANKCODE
-		AND
-		ACCOUNT.ACCOUNTNUMBER like #accountNumber#
+		( locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER)>0
+		OR locate(#accountCode#,ACCOUNTCODE)>0
+		OR locate(#accountName#,ACCOUNTNAME)>0 
+		OR locate(#accountType#,ACCOUNTTYPE)>0 
+		OR locate(#personName#,PERSON.PERSONNAME)>0 
+		OR locate(#bankName#,BANK.BANKNAME)>0)
+		limit #startValue#,#endValue#
 	</select>
 	<select id="getAccountBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.AccountBean">
 		SELECT
@@ -66,23 +65,6 @@
 		ACCOUNT.BANKCODE=BANK.BANKCODE
 		AND
 		ACCOUNT.ACCOUNTCODE=#accountCode#
-	</select>
-	<select id="selectAllAccountBean" resultClass="com.mydomain.bean.baseset.AccountBean">
-		SELECT
-		ACCOUNTCODE,
-		ACCOUNTNUMBER,
-		ACCOUNTNAME,
-		ACCOUNTTYPE,
-		ACCOUNT.PERSONCODE,
-		PERSON.PERSONNAME,
-		ACCOUNT.BANKCODE,
-		BANK.BANKNAME
-		FROM ACCOUNT,PERSON,BANK
-		WHERE PERSON.PERSONCODE=ACCOUNT.PERSONCODE
-		AND
-		ACCOUNT.BANKCODE=BANK.BANKCODE
-		AND
-		ACCOUNT.ISENABLED!=0
 	</select>
 	<insert id="insertAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		INSERT INTO ACCOUNT

@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 岗位BEAN
  * */
-public class JobBean {
+public class JobBean extends BaseBean{
 
 	private String jobCode; //岗位编码
 	private String jobName; //岗位名称

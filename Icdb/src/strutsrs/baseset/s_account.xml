@@ -22,8 +22,5 @@
 <action name="FindAccount" class="com.action.baseset.AccountAction" method="findAccount">
 	<result name="success">/baseset/FindAccount.jsp</result>
 </action>
-<action name="SelectAccountDef" class="com.action.baseset.AccountAction" method="selectAccountDef">
-	<result name="success">/baseset/account/AccountShow.jsp</result>
-</action>
 </package>
 </struts>

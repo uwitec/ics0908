@@ -13,21 +13,14 @@
 <action name="AddEmployee" class="com.action.baseset.EmployeeAction" method="addEmployee">
 	<result name="success">/baseset/AddEnd.jsp</result>
 </action>
-<action name="UpdateEmployee" class="com.action.baseset.EmployeeAction" 
-
-method="updateEmployee">
+<action name="UpdateEmployee" class="com.action.baseset.EmployeeAction" method="updateEmployee">
 	<result name="success" type="redirect">ShowEmployee.action</result>
 </action>
-<action name="GetOneEmployee" class="com.action.baseset.EmployeeAction" 
-
-method="getOneEmployee">
+<action name="GetOneEmployee" class="com.action.baseset.EmployeeAction" method="getOneEmployee">
 	<result name="success">/baseset/employee/EmployeeUpdate.jsp</result>
 </action>
 <action name="FindEmployee" class="com.action.baseset.EmployeeAction" method="findEmployee">
 	<result name="success">/baseset/FindEmployee.jsp</result>
-</action>
-<action name="SelectEmployeeDef" class="com.action.baseset.EmployeeAction" method="selectEmployeeDef">
-	<result name="success">/baseset/employee/EmployeeShow.jsp</result>
 </action>
 </package>
 </struts>

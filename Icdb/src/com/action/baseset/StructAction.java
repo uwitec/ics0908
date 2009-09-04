@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StructBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -79,6 +80,7 @@ public class StructAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/*
 	@SuppressWarnings("unchecked")
 	public String selectStructDef(){
 		ICTools.setBean(struct, ICTools.likeString(res.getS_value()));
@@ -90,11 +92,23 @@ public class StructAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+	*/
 	@SuppressWarnings("unchecked")
 	public String showStruct(){
 		try {
-			lhp=(List<StructBean>) DBServer.quider.queryForList(StructBean.class);
+			PageManage pm=new PageManage();
+			if(struct==null){
+				struct=new StructBean();
+			}
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(struct, "");
+				res.setS_value("");
+			}else{
+				ICTools.setBean(struct,res.getS_value());
+			}
+			struct=(StructBean) pm.setPage(struct, "selectStructcount");
+			lhp=(List<StructBean>) DBServer.quider.queryForList("selectStructDef",struct);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

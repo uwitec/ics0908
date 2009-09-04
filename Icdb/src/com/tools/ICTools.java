@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +28,17 @@ public class ICTools {
 		return (int) Math.ceil(arg0*1.0/arg1);
 	}
 	 
+	public static String GBK(String arg){
+		byte[] isoBs;
+		try {
+			isoBs = arg.getBytes("ISO-8859-1");
+			return new String(isoBs, "GBK");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return arg;
+		}
+	}
 	public static String randId(String id_char){
 		StringBuffer id_code=new StringBuffer();
 		SimpleDateFormat sdf=new SimpleDateFormat( "yyyyMMddHHmmss");

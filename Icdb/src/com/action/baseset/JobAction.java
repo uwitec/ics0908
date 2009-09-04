@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.DepartmentBean;
 import com.mydomain.bean.baseset.JobBean;
 import com.mydomain.bean.baseset.ReSourceBean;
@@ -111,7 +112,19 @@ public class JobAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String showJob(){
 		try {
-			lhp=(List<JobBean>) DBServer.quider.queryForList(JobBean.class);
+			PageManage pm=new PageManage();
+			if(job==null){
+				job=new JobBean();
+			}
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(job, "");
+				res.setS_value("");
+			}else{
+				ICTools.setBean(job,res.getS_value());
+			}
+			job=(JobBean) pm.setPage(job, "selectJobcount");
+			lhp=(List<JobBean>) DBServer.quider.queryForList("selectJobDef",job);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -127,7 +140,7 @@ public class JobAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	public String selectJobDef(){
 		ICTools.setBean(job, ICTools.likeString(res.getS_value()));
@@ -139,10 +152,10 @@ public class JobAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+	*/
 	
 	public String findJob(){
-		this.selectJobDef();
+		this.showJob();
 		return SUCCESS;
 	}
 }

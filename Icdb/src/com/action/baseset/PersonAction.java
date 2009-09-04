@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
-import com.mydomain.bean.BaseBean;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.PersonBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -88,6 +88,7 @@ public class PersonAction extends ActionSupport{
 		person.setPersonCode(ICTools.randId("P"));
 		return SUCCESS;
 	}
+	
 	public String getOnePerson(){
 		
 		try {
@@ -98,17 +99,26 @@ public class PersonAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+	
 	@SuppressWarnings("unchecked")
 	public String showPerson(){
 		try {
+			PageManage pm=new PageManage();
 			if(person==null){
 				person=new PersonBean();
 			}
-			person=(PersonBean) DBServer.quider.queryForObject("selectAllPersonBeanPag", person);
-			person.setCountSize(ICTools.mathCeil(person.getCountValue(),BaseBean.countNumber));
-			System.out.println(person.getCountSize()+":"+person.getStartValue()+":"+person.getCountValue());
-			lhp=(List<PersonBean>) DBServer.quider.queryForList("selectAllPersonBean", person);
-			//		lhp=(List<PersonBean>) DBServer.quider.queryForList(PersonBean.class);
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(person, "");
+				res.setS_value("");
+			}else{
+				System.out.println(res.getS_value());
+				ICTools.setBean(person,res.getS_value());
+			}
+			person=(PersonBean) pm.setPage(person, "selectPersonDefPag");
+			//System.out.println(person.getPersonCode());
+			//person.print();
+			lhp=(List<PersonBean>) DBServer.quider.queryForList("selectPersonDef", person);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,22 +128,10 @@ public class PersonAction extends ActionSupport{
 	
 	
 	public String findPerson(){
-		this.selectPersonDef();
+		this.showPerson();
 		return SUCCESS;
 	}
 	
-	@SuppressWarnings("unchecked")
-	public String selectPersonDef(){
-		ICTools.setBean(person, ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<PersonBean>) DBServer.quider.queryForList("selectPersonDef",person,0,10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-
 	public String updatePerson(){
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));

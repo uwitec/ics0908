@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 库房BEAN
  * */
-public class StorehouseBean {
+public class StorehouseBean extends BaseBean{
 
 	private String storehouseCode; //库房编码
 	private String storehouseName; //库房名称
