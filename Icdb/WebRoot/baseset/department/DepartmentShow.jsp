@@ -6,8 +6,12 @@
     <head>
         <title>部门信息</title>
     </head>
+<% 
+String base=request.getContextPath();
+%>  
+    <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <body>
-    <s:form action="SelectDepartmentDef">
+    <s:form action="ShowDepartment">
     	<s:textfield name="res.s_value" label="内容"></s:textfield>
     	<s:hidden name="department.departmentCode"></s:hidden>
     	<s:submit value="查询"></s:submit>
@@ -34,6 +38,30 @@
         </td>
         </tr>
        </s:iterator>
+       <tr><td colspan="4">
+       <s:form action="ShowDepartment" namespace="/baseset" theme="simple" name="pageform">
+       <s:push value="department">
+       <s:hidden name="res.s_value" value="%{res.s_value}"></s:hidden>
+       <s:hidden id="countsize" name="department.countSize" value="%{department.countSize}"></s:hidden>
+        <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
+       <s:if test="department.startSize-1<1">
+       		<font color="gray">上一页</font>
+       </s:if>
+       <s:else>
+      	   <input size="10" type="button" onclick="pageSet(-1)" value="上一页"/>
+       </s:else>
+       <s:if test="department.startSize+1>department.countSize">
+       		<font color="gray">下一页</font>
+       </s:if>
+       <s:else>
+      	 	<input size="10" type="button" onclick="pageSet(1)" value="下一页"/>
+       </s:else>
+       		<input size="10" type="button" onclick="pageSet(2)" value="末页"/>
+        第<s:textfield id="size" size="2" name="department.startSize"></s:textfield>页
+       <font><s:property value="department.startSize"/>/<s:property value="department.countSize"/>页数</font>
+       </s:push> 
+       </s:form>
+       </td></tr>
      </table>
   	<s:a href="GoAddDepartment.action">添加</s:a>
     </body>

@@ -6,7 +6,12 @@
         <title>仓库信息</title>
     </head>
     <body>
-	<s:form action="SelectStorehouseDef">
+    <% 
+String base=request.getContextPath();
+%>  
+    <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+    
+	<s:form action="ShowStorehouse">
 		<s:textfield name="res.s_value" label="内容"></s:textfield>
 		<s:hidden name="storehouse.storehouseCode"></s:hidden>
 		<s:submit value="查询"></s:submit>
@@ -45,6 +50,30 @@
         </td>
         </tr>
        </s:iterator>
+       <tr><td colspan="6">
+       <s:form action="ShowStorehouse" namespace="/baseset" theme="simple" name="pageform">
+       <s:push value="storehouse">
+       <s:hidden name="res.s_value" value="%{res.s_value}"></s:hidden>
+       <s:hidden id="countsize" name="storehouse.countSize" value="%{storehouse.countSize}"></s:hidden>
+        <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
+       <s:if test="storehouse.startSize-1<1">
+       		<font color="gray">上一页</font>
+       </s:if>
+       <s:else>
+      	   <input size="10" type="button" onclick="pageSet(-1)" value="上一页"/>
+       </s:else>
+       <s:if test="storehouse.startSize+1>storehouse.countSize">
+       		<font color="gray">下一页</font>
+       </s:if>
+       <s:else>
+      	 	<input size="10" type="button" onclick="pageSet(1)" value="下一页"/>
+       </s:else>
+       		<input size="10" type="button" onclick="pageSet(2)" value="末页"/>
+        第<s:textfield id="size" size="2" name="storehouse.startSize"></s:textfield>页
+       <font><s:property value="storehouse.startSize"/>/<s:property value="storehouse.countSize"/>页数</font>
+       </s:push> 
+       </s:form>
+       </td></tr>
      </table>
      <s:a href="GoAddStorehouse.action">添加</s:a>
     </body>
