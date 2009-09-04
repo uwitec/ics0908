@@ -20,27 +20,26 @@ try{
 }
 catch(e){}
 
-	function toSetIdold(id_code,name_code,radiolist){
-    		var code;
-    		var name;
-    		var idtitle;
-    		
-    		idtitle=document.getElementsByName(radiolist);
-    		for(var i=0; i<idtitle.length;i++){
-		       if(idtitle[i].checked){
-		          code="code"+idtitle[i].value;
-		          name="name"+idtitle[i].value;
-		          code=document.getElementById(code).value;
-		          name=document.getElementById(name).value;
-		        } 
-		   }
-		   if(code!=null && name!=null){
-		    window.opener.document.getElementById(id_code).value=code;
-		    window.opener.document.getElementById(name_code).value=name;
-    		window.close();
-    		}else{
-    			alert("请选择一条有效的信息");
-    		}
+	function pageSet(value_key){
+    		var sizevalue=document.getElementById("size").value;
+    		var countvalue=document.getElementById("countsize").value;
+    		 switch(value_key){
+			  case -1:
+			   document.getElementById("size").value=sizevalue-'0'-1;
+			   break;
+			  case 1:
+			    document.getElementById("size").value=sizevalue-'0'+1;
+			   break;
+			  case 0:
+			    document.getElementById("size").value=1;
+			   break;
+			   case 2:
+			    document.getElementById("size").value=countvalue;
+			   	break;
+			  default:
+			   break;
+			   }
+			  pageform.submit();
     	}
     	
     	function toSetId(value_list,radio_list){
