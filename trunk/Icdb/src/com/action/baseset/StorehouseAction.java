@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -54,7 +55,7 @@ public class StorehouseAction extends ActionSupport{
 	public void setRes(ReSourceBean res) {
 		this.res = res;
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	public String selectStorehouseDef(){
 		ICTools.setBean(storehouse, ICTools.likeString(res.getS_value()));
@@ -66,11 +67,23 @@ public class StorehouseAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+	*/
 	@SuppressWarnings("unchecked")
 	public String showStorehouse(){
 		try {
-			lhp=(List<StorehouseBean>) DBServer.quider.queryForList(0, 10, StorehouseBean.class);
+			PageManage pm=new PageManage();
+			if(storehouse==null){
+				storehouse=new StorehouseBean();
+			}
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(storehouse, "");
+				res.setS_value("");
+			}else{
+				ICTools.setBean(storehouse,res.getS_value());
+			}
+			storehouse=(StorehouseBean) pm.setPage(storehouse, "selectStorehousecount");
+			lhp=(List<StorehouseBean>) DBServer.quider.queryForList("selectStorehouseDef",storehouse);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

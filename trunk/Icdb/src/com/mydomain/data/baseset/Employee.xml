@@ -5,6 +5,33 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Employee">
+	<select id="selectEmployeeCount" resultClass="com.mydomain.bean.baseset.EmployeeBean">
+			select
+			count(*) as countValue
+			 from employee,
+			(select 
+			job.jobCode,
+			job.jobName,
+			sd.*
+			from job,
+			(select 
+			department.departmentCode,
+			department.departmentName,
+			struct.structCode,
+			struct.structName
+			from department,struct where department.structCode=struct.structCode) as sd
+			where job.departmentCode=sd.departmentCode) as jsd,person
+			where 
+			employee.personCode=person.personCode 
+			and employee.jobCode=jsd.jobCode
+			and employee.isEnabled!=0 
+			and (
+			locate(#employeeCode#,employee.employeeCode)>0
+			or locate(#personName#,person.personName)>0
+			<!-- or jsd.structName like #structName#-->
+			or locate(#jobName#,jsd.jobName)>0
+			or locate(#departmentName#,jsd.departmentName)>0)
+	</select>
 	<select id="selectEmployeeDef" resultClass="com.mydomain.bean.baseset.EmployeeBean">
 			select
 			employee.employeeCode,
@@ -32,13 +59,14 @@
 			where 
 			employee.personCode=person.personCode 
 			and employee.jobCode=jsd.jobCode
-			and employee.isEnabled=1 
+			and employee.isEnabled!=0 
 			and (
-			employee.employeeCode like #employeeCode#
-			or person.personName like #personName#
+			locate(#employeeCode#,employee.employeeCode)>0
+			or locate(#personName#,person.personName)>0
 			<!-- or jsd.structName like #structName#-->
-			or jsd.jobName like #jobName#
-			or jsd.departmentName like #departmentName#)
+			or locate(#jobName#,jsd.jobName)>0
+			or locate(#departmentName#,jsd.departmentName)>0)
+			limit #startValue#,#endValue#
 	</select>
 	<select id="getEmployeeBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.EmployeeBean">
 			select
@@ -69,35 +97,6 @@
 			and employee.jobCode=jsd.jobCode
 			and employee.isEnabled=1 
 			and employee.employeeCode=#employeeCode#
-	</select>
-	<select id="selectAllEmployeeBean" resultClass="com.mydomain.bean.baseset.EmployeeBean">
-			select
-			employee.employeeCode,
-			employee.personCode,
-			person.personName,
-			jsd.structCode,
-			jsd.structName,
-			jsd.jobCode,
-			jsd.jobName,
-			jsd.departmentCode,
-			jsd.departmentName
-			 from employee,
-			(select 
-			job.jobCode,
-			job.jobName,
-			sd.*
-			from job,
-			(select 
-			department.departmentCode,
-			department.departmentName,
-			struct.structCode,
-			struct.structName
-			from department,struct where department.structCode=struct.structCode) as sd
-			where job.departmentCode=sd.departmentCode) as jsd,person
-			where 
-			employee.personCode=person.personCode 
-			and employee.jobCode=jsd.jobCode
-			and employee.isEnabled=1
 	</select>
 	<insert id="insertEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			insert into 

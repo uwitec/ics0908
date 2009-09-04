@@ -5,16 +5,27 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Struct">
+	<select id="selectStructcount" resultClass="com.mydomain.bean.baseset.StructBean">
+		SELECT 
+		count(*) as countValue
+		FROM STRUCT
+		WHERE 
+		isEnabled!=0
+		and
+		(locate(#structCode#,structCode)>0
+		or locate(#structName#,structName)>0)
+	</select>
 	<select id="selectStructDef" resultClass="com.mydomain.bean.baseset.StructBean">
 		SELECT 
 		STRUCTCODE,
 		STRUCTNAME
 		FROM STRUCT
 		WHERE 
-		isEnabled=1
+		isEnabled!=0
 		and
-		(structCode like #structCode#
-		or structName like #structName#)
+		(locate(#structCode#,structCode)>0
+		or locate(#structName#,structName)>0)
+		limit #startValue#,#endValue#
 	</select>
 	<select id="getStructBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.StructBean">
 		SELECT 
@@ -23,14 +34,6 @@
 		FROM STRUCT
 		WHERE STRUCTCODE=#structCode#
 		and
-		isEnabled=1
-	</select>
-	<select id="selectAllStructBean" resultClass="com.mydomain.bean.baseset.StructBean">
-		SELECT 
-		STRUCTCODE,
-		STRUCTNAME
-		FROM STRUCT
-		where
 		isEnabled=1
 	</select>
 	<insert id="insertStructBean" parameterClass="com.mydomain.bean.baseset.StructBean">

@@ -22,8 +22,5 @@
 <action name="DeleteDepartment" class="com.action.baseset.DepartmentAction" method="deleteDepartment">
 	<result name="success" type="redirect">ShowDepartment.action</result>
 </action>
-<action name="SelectDepartmentDef" class="com.action.baseset.DepartmentAction" method="selectDepartmentDef">
-	<result name="success">/baseset/department/DepartmentShow.jsp</result>
-</action>
 </package>
 </struts>

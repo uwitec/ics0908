@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 部门BEAN
  * */
-public class DepartmentBean {
+public class DepartmentBean extends BaseBean {
 
 	private String departmentCode; //部门编码
 	private String departmentName; //部门名称

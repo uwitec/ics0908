@@ -15,25 +15,27 @@
 		personPhoto
 		FROM person
 		WHERE 
-		isEnabled=1
-		and (personName like #personName#
-		or personCode like #personCode#
-		or personPhone like #personPhone#
-		or personEmail like #personEmail#
-		or personSex like #personSex#)
+		isEnabled!=0
+		and (
+			locate(#personName#,personName)>0
+		or  locate(#personCode#,personCode)>0
+		or  locate(#personPhone#,personPhone)>0
+		or  locate(#personEmail#,personEmail)>0
+		or  locate(#personSex#,personSex)>0
+		)	limit #startValue#,#endValue#
 	</select>
 	<select id="selectPersonDefPag" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
-		count(*) as count
+		count(*) as countValue
 		FROM person
 		WHERE 
-		isEnabled=1
-		and (personName like #personName#
-		or personCode like #personCode#
-		or personPhone like #personPhone#
-		or personEmail like #personEmail#
-		or personSex like #personSex#) 
-		limit #startValue#,#endValue#
+		isEnabled!=0
+		and (
+			locate(#personName#,personName)>0
+		or  locate(#personCode#,personCode)>0
+		or  locate(#personPhone#,personPhone)>0
+		or  locate(#personEmail#,personEmail)>0
+		or  locate(#personSex#,personSex)>0)
 	</select>
 	<select id="getPersonBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.PersonBean">
 		SELECT
@@ -46,23 +48,6 @@
 		FROM person
 		WHERE personCode = #personCode#
 		and isEnabled=1
-	</select>
-	<select id="selectAllPersonBeanPag" resultClass="com.mydomain.bean.baseset.PersonBean">
-		SELECT
-		count(*) as countValue
-		FROM person
-		where isEnabled=1
-	</select>
-	<select id="selectAllPersonBean" resultClass="com.mydomain.bean.baseset.PersonBean">
-		SELECT
-		personCode,
-		personName,
-		personPhone,
-		personEmail,
-		personSex,
-		personPhoto
-		FROM person
-		where isEnabled=1 limit #startValue#,#endValue#
 	</select>
 	<insert id="insertPersonBean" parameterClass="com.mydomain.bean.baseset.PersonBean">
 		INSERT INTO

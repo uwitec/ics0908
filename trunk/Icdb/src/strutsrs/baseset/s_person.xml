@@ -17,13 +17,10 @@
 	<result name="success">/baseset/person/PersonUpdate.jsp</result>
 </action>
 <action name="UpdatePerson" class="com.action.baseset.PersonAction" method="updatePerson">
-	<result name="success" type="redirect">ShowPerson.action</result>
+	<result name="success">/baseset/End.jsp</result>
 </action>
 <action name="FindPerson" class="com.action.baseset.PersonAction" method="findPerson">
 	<result name="success">/baseset/FindPerson.jsp</result>
-</action>
-<action name="SelectPersonDef" class="com.action.baseset.PersonAction" method="selectPersonDef">
-	<result name="success">/baseset/person/PersonShow.jsp</result>
 </action>
 </package>
 </struts>

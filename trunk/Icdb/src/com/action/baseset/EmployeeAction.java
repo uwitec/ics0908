@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.PersonBean;
 import com.mydomain.bean.baseset.ReSourceBean;
@@ -121,14 +122,27 @@ public class EmployeeAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String showEmployee(){
 		try {
-			lhp=(List<EmployeeBean>) DBServer.quider.queryForList(0, 10, EmployeeBean.class);
+			PageManage pm=new PageManage();
+			if(employee==null){
+				employee=new EmployeeBean();
+			}
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(employee, "");
+				res.setS_value("");
+			}else{
+				ICTools.setBean(employee,res.getS_value());
+			}
+			employee=(EmployeeBean)pm.setPage(employee, "selectEmployeeCount");
+			
+			lhp=(List<EmployeeBean>) DBServer.quider.queryForList("selectEmployeeDef",employee);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
-	
+	/*
 	@SuppressWarnings("unchecked")
 	public String selectEmployeeDef(){
 		ICTools.setBean(employee, ICTools.likeString(res.getS_value()));
@@ -140,9 +154,9 @@ public class EmployeeAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-
+*/
 	public String findEmployee(){
-		this.selectEmployeeDef();
+		this.showEmployee();
 		return SUCCESS;
 	}
 	
@@ -198,17 +212,4 @@ public class EmployeeAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-
-	
-	/*
-	public String deleteEmployee(){
-		try {
-			DBServer.quider.deleteObject(person);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-	*/
 }

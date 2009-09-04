@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 员工表
  * */
-public class EmployeeBean {
+public class EmployeeBean extends BaseBean{
 
 	private String employeeCode; //员工编码
 	private String personCode; //人员编码

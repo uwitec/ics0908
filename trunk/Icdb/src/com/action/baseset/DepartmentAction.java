@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.DepartmentBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StructBean;
@@ -107,6 +108,7 @@ public class DepartmentAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	/*
 	@SuppressWarnings("unchecked")
 	public String selectDepartmentDef(){
 		ICTools.setBean(department, ICTools.likeString(res.getS_value()));
@@ -118,11 +120,23 @@ public class DepartmentAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+	*/
 	@SuppressWarnings("unchecked")
 	public String showDepartment(){
 		try {
-			lhp=(List<DepartmentBean>) DBServer.quider.queryForList(DepartmentBean.class);
+			PageManage pm=new PageManage();
+			if(department==null){
+				department=new DepartmentBean();
+			}
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(department, "");
+				res.setS_value("");
+			}else{
+				ICTools.setBean(department,res.getS_value());
+			}
+			department=(DepartmentBean) pm.setPage(department, "selectDepartmentCount");
+			lhp=(List<DepartmentBean>) DBServer.quider.queryForList("selectDepartmentDef",department);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

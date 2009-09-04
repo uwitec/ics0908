@@ -5,6 +5,21 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Department">
+	<select id="selectDepartmentCount" resultClass="com.mydomain.bean.baseset.DepartmentBean">
+		SELECT
+		count(*) as countValue
+		FROM department,struct
+		WHERE 
+		department.isEnabled=1
+		and
+		department.structCode=struct.structCode
+		and(
+		locate(#departmentCode#,departmentCode)>0 
+		or
+		locate(#departmentName#,departmentName)>0
+		or
+		locate(#structName#,struct.structName)>0)
+	</select>
 	<select id="selectDepartmentDef" resultClass="com.mydomain.bean.baseset.DepartmentBean">
 		SELECT
 		departmentCode,
@@ -17,11 +32,12 @@
 		and
 		department.structCode=struct.structCode
 		and(
-		departmentCode like #departmentCode#
+		locate(#departmentCode#,departmentCode)>0 
 		or
-		departmentName like #departmentName#
+		locate(#departmentName#,departmentName)>0
 		or
-		struct.structName like #structName#)
+		locate(#structName#,struct.structName)>0)
+		limit #startValue#,#endValue#
 	</select>
 	<select id="getDepartmentBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.DepartmentBean">
 		SELECT
@@ -36,18 +52,6 @@
 		department.isEnabled=1
 		and
 		departmentCode = #departmentCode#
-	</select>
-	<select id="selectAllDepartmentBean" resultClass="com.mydomain.bean.baseset.DepartmentBean">
-		SELECT
-		departmentCode,
-		departmentName,
-		department.structCode,
-		structName
-		FROM department,struct
-		WHERE 
-		department.isEnabled=1
-		and
-		department.structCode=struct.structCode
 	</select>
 	<insert id="insertDepartmentBean" parameterClass="com.mydomain.bean.baseset.DepartmentBean">
 		INSERT INTO

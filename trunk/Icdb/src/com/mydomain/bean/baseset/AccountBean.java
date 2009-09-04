@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  *  ÕÊºÅBEAN
  * */
-public class AccountBean {
+public class AccountBean extends BaseBean{
 	
 	private String accountCode; //ÕÊºÅ±àÂë
 	private String accountNumber;//ÕË»§ºÅ

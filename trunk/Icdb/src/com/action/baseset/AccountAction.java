@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.manage.baseset.PageManage;
 import com.mydomain.bean.baseset.AccountBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -62,7 +63,7 @@ public class AccountAction extends ActionSupport{
 	public void setLhp(List<AccountBean> lhp) {
 		this.lhp = lhp;
 	}
-
+/*
 	@SuppressWarnings("unchecked")
 	public String selectAccountDef(){
 		String v_str=ICTools.likeString(res.getS_value());
@@ -76,10 +77,24 @@ public class AccountAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+*/
+	
 	@SuppressWarnings("unchecked")
 	public String showAccount(){
 		try {
-			lhp=(List<AccountBean>) DBServer.quider.queryForList(AccountBean.class);
+			PageManage pm=new PageManage();
+			if(account==null){
+				account=new AccountBean();
+			}
+			if(res==null){
+				res=new ReSourceBean();
+				ICTools.setBean(account, "");
+				res.setS_value("");
+			}else{
+				ICTools.setBean(account,res.getS_value());
+			}
+			account=(AccountBean) pm.setPage(account, "selectAccountCount");
+			lhp=(List<AccountBean>) DBServer.quider.queryForList("selectAccountDef", account);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,7 +104,7 @@ public class AccountAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String findAccount(){
-		this.selectAccountDef();
+		this.showAccount();
 		return SUCCESS;
 	}
 	
