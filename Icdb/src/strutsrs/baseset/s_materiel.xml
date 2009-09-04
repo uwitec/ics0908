@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="materiel" extends="struts-default" namespace="/baseset">
+<action name="ShowMateriel" class="com.action.baseset.MaterielAction" method="showMateriel">
+	<result name="success">/baseset/materiel/MaterielShow.jsp</result>
+</action>
+<action name="GoAddMateriel" class="com.action.baseset.MaterielAction" method="goAddMateriel">
+	<result name="success">/baseset/materiel/MaterielAdd.jsp</result>
+</action>
+<action name="AddMateriel" class="com.action.baseset.MaterielAction" method="addMateriel">
+	<result name="success">/baseset/AddEnd.jsp</result>
+</action>
+<action name="GetOneMateriel" class="com.action.baseset.MaterielAction" method="getOneMateriel">
+	<result name="success">/baseset/materiel/MaterielUpdate.jsp</result>
+</action>
+<action name="UpdateMateriel" class="com.action.baseset.MaterielAction" method="updateMateriel">
+	<result name="success" type="redirect">ShowMateriel.action</result>
+</action>
+</package>
+</struts>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Materiel">
+	<select id="selectMaterielCount" resultClass="com.mydomain.bean.baseset.MaterielBean">
+		SELECT				
+		count(*) as countValue
+		from materiel
+		where 
+		isEnabled!=0 and 
+		(locate(#materielCode#,materielCode)>0
+		or locate(#materielName#,materielName)>0
+		or locate(#materielMadeIn#,materielMadeIn)>0
+		or locate(#materielPrice#,materielPrice)>0
+		or locate(#materielMaxStore#,materielMaxStore)>0
+		or locate(#materielMinStore#,materielMinStore)>0
+		or locate(#materielSpell#,materielSpell)>0
+		or locate(#materielSize#,materielSize)>0
+		or locate(#materielABC#,materielABC)>0)
+
+	</select>
+	<select id="selectMaterielDef" resultClass="com.mydomain.bean.baseset.MaterielBean">
+		SELECT				
+		materielCode,
+		materielName,
+		materielMadeIn,
+		materielPrice,
+		materielMaxStore,
+		materielMinStore,
+		materielSpell,
+		jsonField,
+		materielSize,
+		materielABC 
+		from materiel
+		where 
+		isEnabled!=0 and 
+		(locate(#materielCode#,materielCode)>0
+		or locate(#materielName#,materielName)>0
+		or locate(#materielMadeIn#,materielMadeIn)>0
+		or locate(#materielPrice#,materielPrice)>0
+		or locate(#materielMaxStore#,materielMaxStore)>0
+		or locate(#materielMinStore#,materielMinStore)>0
+		or locate(#materielSpell#,materielSpell)>0
+		or locate(#materielSize#,materielSize)>0
+		or locate(#materielABC#,materielABC)>0)
+		limit #startValue#,#endValue#
+</select>
+<select id="getMaterielBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.MaterielBean">
+	SELECT				
+		materielCode,
+		materielName,
+		materielMadeIn,
+		materielPrice,
+		materielMaxStore,
+		materielMinStore,
+		materielSpell,
+		jsonField,
+		materielSize,
+		materielABC 
+		from materiel
+		where 
+		isEnabled!=0 and materielCode=#materielCode#
+</select>
+<insert id="insertMaterielBean" parameterClass="com.mydomain.bean.baseset.MaterielBean">
+	insert into materiel
+	(materielCode,materielName,materielMadeIn,materielPrice,materielMaxStore,
+	materielMinStore,materielSpell,isEnabled,jsonField,materielSize,materielABC)
+	values
+	(#materielCode#,#materielName#,#materielMadeIn#,#materielPrice#,#materielMaxStore#,
+	#materielMinStore#,#materielSpell#,1,#jsonField#,#materielSize#,#materielABC#)
+</insert>
+<update id="updateMaterielBean" parameterClass="com.mydomain.bean.baseset.MaterielBean">
+	update materiel
+	set
+	materielName=#materielName#,
+	materielMadeIn=#materielMadeIn#,
+	materielPrice=#materielPrice#,
+	materielMaxStore=#materielMaxStore#,
+	materielMinStore=#materielMinStore#,
+	materielSpell=#materielSpell#,
+	jsonField=#jsonField#,
+	materielSize=#materielSize#,
+	materielABC=#materielABC#
+	where materielCode=#materielCode#
+</update>
+<delete id="deleteMaterielBean" parameterClass="com.mydomain.bean.baseset.MaterielBean">
+	update materiel
+	set
+	isEnabled=0
+	where materielCode=#materielCode#
+</delete> 
+</sqlMap>
