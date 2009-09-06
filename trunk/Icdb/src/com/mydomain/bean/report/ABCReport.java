@@ -1,4 +1,4 @@
-package com.icdb.report;
+package com.mydomain.bean.report;
 
 import java.util.Date;
 import java.util.List;
