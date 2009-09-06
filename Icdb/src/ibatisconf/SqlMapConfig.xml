@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!DOCTYPE sqlMapConfig      
-    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+<!DOCTYPE sqlMapConfig
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
     "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 	<!-- Always ensure to use the correct XML header as above! -->
 <sqlMapConfig>
@@ -48,6 +48,8 @@
 	<sqlMap resource="com/mydomain/data/baseset/Employee.xml"/>
 	<sqlMap resource="com/mydomain/data/baseset/Storehouse.xml"/>
 	<sqlMap resource="com/mydomain/data/baseset/CargoSpace.xml"/>
-	<sqlMap resource="com/mydomain/data/baseset/Materiel.xml"/>
-	<sqlMap resource="com/mydomain/data/storage/StockStart.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/Common.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/StockInCheckOrder.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/StockInCheckMateriel.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/Materiel.xml"/>
 	</sqlMapConfig>
