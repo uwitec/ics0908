@@ -142,53 +142,56 @@
 		]]>
 	</insert>
 	<update id="UPDATE_STOCK_IN_CHECK_MATERIEL">
-		update stockInCheckMateriel set
+		update stockInCheckMateriel
 
-		<isNotEmpty prepend="and" property="supplierCode">
-			s.supplierCode = #supplierCode#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="cargoSpaceCode">
-			s.cargoSpaceCode = #cargoSpaceCode#
-		</isNotEmpty>
+		<dynamic prepend="set">
 
-		<isNotEmpty prepend="and" property="amountPercent">
-			s.amountPercent = #amountPercent#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="qualityPercent">
-			s.qualityPercent = #qualityPercent#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="checkTime">
-			s.checkTime = #checkTime#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="packagePercent">
-			s.packagePercent = #packagePercent#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="errorStockPercent">
-			s.errorStockPercent = #errorStockPercent#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="checkNote">
-			s.checkNote = #checkNote#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="checkAmount">
-			s.checkAmount = #checkAmount#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="checkRemark">
-			s.checkRemark = #checkRemark#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="lastAmount">
-			s.lastAmount = #lastAmount#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="stockInAmount">
-			s.stockInAmount = #stockInAmount#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="onePrice">
-			s.onePrice = #onePrice#
-		</isNotEmpty>
-		<isNotEmpty prepend="and" property="stockInType">
-			s.stockInType = #stockInType#
-		</isNotEmpty>
 
-		where materiel = #materiel# and stockInCode = #stockInCode#
+			<isNotEmpty prepend="and" property="amountPercent">
+				amountPercent = #amountPercent#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="qualityPercent">
+				qualityPercent = #qualityPercent#
+			</isNotEmpty>
+
+			<isNotEmpty prepend="and" property="packagePercent">
+				packagePercent = #packagePercent#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="errorStockPercent">
+				errorStockPercent = #errorStockPercent#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkTime">
+				checkTime = #checkTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkNote">
+				checkNote = #checkNote#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkAmount">
+				checkAmount = #checkAmount#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="checkRemark">
+				checkRemark = #checkRemark#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="lastAmount">
+				lastAmount = #lastAmount#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockInAmount">
+				stockInAmount = #stockInAmount#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="onePrice">
+				onePrice = #onePrice#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockInType">
+				stockInType = #stockInType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="supplierCode">
+				supplierCode = #supplierCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="cargoSpaceCode">
+				cargoSpaceCode = #cargoSpaceCode#
+			</isNotEmpty>
+		</dynamic>
+		where materielCode = #materielCode# and stockInCode = #stockInCode#
 
 	</update>
 	<delete id="DELETE_STOCK_IN_CHECK_MATERIEL">

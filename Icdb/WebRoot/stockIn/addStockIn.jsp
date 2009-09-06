@@ -148,7 +148,7 @@
 		var stockInCode = trim(document.getElementById('stockInCode').value);
 
 		var checkRemark = document.getElementById('checkRemark').value;
-	  	var stockIn = new StockIn(stockInCode,'','','',checkRemark,stockInType,'','','','','','','');
+	  	var stockIn = new StockIn(stockInCode,'""','""','""',checkRemark,stockInType,'""','""','""','""','""','""','""');
 	  	var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
@@ -166,9 +166,9 @@
 				return;
 			}
 	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,cargoSpaceCode,
-	  									stockInCode,'','','','',
-	  									'','','',
-	  									'',stockInAmount,onePrice,stockInType);
+	  									stockInCode,'""','""','""','""',
+	  									'""','""','""',
+	  									'""',stockInAmount,onePrice,stockInType);
 	  		array.push(JSON.stringify(stockInCheckMaterielBean));
 	  	}
 
@@ -385,13 +385,7 @@
 											<s:textfield name="stockInAmount" onchange="getPrice(this);" />
 										</td>
 										<td bgcolor="white">
-											<s:textfield name="onPrice" onchange="getPrice(this);"/>
-										</td>
-										<td bgcolor="white">
-											<s:select name='cargoSpaceCode'
-												list='#request.cargoSpaceList' listKey='cargoSpaceCode'
-												listValue='cargoSpaceName' value="cargoSpaceCode" theme='simple' headerKey=''
-												headerValue='请选择' />
+											<s:textfield name="onePrice" onchange="getPrice(this);"/>
 										</td>
 										<td bgcolor="white">
 											<s:select
@@ -400,7 +394,13 @@
 												theme='simple' value="supplierCode" headerKey='' headerValue='请选择' />
 										</td>
 										<td bgcolor="white">
-											<s:property value="(stockInAmount*onPrice)" />
+											<s:select name='cargoSpaceCode'
+												list='#request.cargoSpaceList' listKey='cargoSpaceCode'
+												listValue='cargoSpaceName' value="cargoSpaceCode" theme='simple' headerKey=''
+												headerValue='请选择' />
+										</td>
+										<td bgcolor="white">
+											<s:property value="(stockInAmount*onePrice)" />
 										</td>
 										<td bgcolor="white">
 											<input type="button" value="删除" onclick="deleteMateriel(this);">

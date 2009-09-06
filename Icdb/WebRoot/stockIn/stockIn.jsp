@@ -25,6 +25,7 @@
 			src='<%=request.getContextPath()%>/script/json.js'></script>
 
 		<script type="text/javascript">
+
 			function trim(s){
 			  	var str = s||"";
 			   	str = str.replace(/(^\s*)|(\s*$)/g,'');
@@ -110,7 +111,9 @@
             		alert("起始日期不应大于结束日期");
             		return false;
             	}
-            	document.getElementById("currentPage").value=1;
+            	if(document.getElementById("currentPage").value!=null && document.getElementById("currentPage")!=''){
+            		document.getElementById("currentPage").value=1;
+            	}
             	document.getElementById("searchForm").submit();
 			 }
 		</script>
@@ -123,19 +126,19 @@
 	<body>
 		<s:form id="searchForm" theme="simple" action="searchStockIn.action"
 			namespace="/stockIn">
-			<table>
+			<table width="90%" align="center">
 				<tr>
 					<td>
 						<s:textfield name="stock.stockInCode">入库单编号</s:textfield>
 					</td>
 
 					<td>
-						<s:textfield id="stock.stockInStartDate"
+						<s:textfield id="stock.stockInStartDate" size="10"
 							name="stock.stockInStartDate">开始时间</s:textfield>
 					</td>
 
 					<td>
-						<s:textfield id="stock.stockInEndDate" name="stock.stockInEndDate">结束时间</s:textfield>
+						<s:textfield id="stock.stockInEndDate" name="stock.stockInEndDate"  size="10">结束时间</s:textfield>
 					</td>
 
 					<script type="text/javascript">
@@ -164,8 +167,9 @@
 					<td>
 						<input type="button" value="查询" onclick="javascript:check();" />
 					</td>
-
-					<td>
+			</tr>
+			<tr>
+					<td align="left" colspan="6">
 						<input type="button" value="新建入库申请单"
 							onclick="window.location.href='goAddStockIn.action'" />
 					</td>
@@ -176,7 +180,7 @@
 			<p />
 				<s:if test="stockInList.items.size()>0">
 					<table id="stockInTable" bgcolor="black" cellpadding="0"
-						cellspacing="1" width="90%">
+						cellspacing="1" width="90%" align="center">
 						<tr>
 							<th bgcolor="white">
 								选择

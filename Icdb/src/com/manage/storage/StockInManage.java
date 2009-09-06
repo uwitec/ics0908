@@ -70,11 +70,15 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			if (this.getStockInInfo(stockInBean.getStockInCode()) != null) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN",
 						stockInBean);
+			} else {
+				DBServer.quider
+						.insertObject("ADD_SELECT_STOCK_IN", stockInBean);
 			}
-			DBServer.quider.insertObject("ADD_SELECT_STOCK_IN", stockInBean);
 			for (StockInCheckMaterielBean stockInCheckMaterielBean : stockInCheckMaterielList) {
 				if (this.getStockInCheckMaterielCount(stockInCheckMaterielBean) > 0) {
-					DBServer.quider.updateObject("UPDATE_STOCK_IN_CHECK_MATERIEL", stockInCheckMaterielBean);
+					DBServer.quider.updateObject(
+							"UPDATE_STOCK_IN_CHECK_MATERIEL",
+							stockInCheckMaterielBean);
 				} else {
 					DBServer.quider.insertObject("ADD_STOCK_IN_CHECK_MATERIEL",
 							stockInCheckMaterielBean);
@@ -108,7 +112,9 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.insertObject("ADD_SELECT_STOCK_IN", stockInBean);
 			for (StockInCheckMaterielBean stockInCheckMaterielBean : stockInCheckMaterielList) {
 				if (this.getStockInCheckMaterielCount(stockInCheckMaterielBean) > 0) {
-					DBServer.quider.updateObject("UPDATE_STOCK_IN_CHECK_MATERIEL", stockInCheckMaterielBean);
+					DBServer.quider.updateObject(
+							"UPDATE_STOCK_IN_CHECK_MATERIEL",
+							stockInCheckMaterielBean);
 				} else {
 					DBServer.quider.insertObject("ADD_STOCK_IN_CHECK_MATERIEL",
 							stockInCheckMaterielBean);
@@ -136,12 +142,14 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 		parameterMap.put("stockInCode", stockInCheckMaterielBean
 				.getStockInCode());
 
-		List<StockInCheckMaterielBean> list = (List<StockInCheckMaterielBean>) DBServer.quider.queryForList("STOCK_IN_CHECK_MATERIEL_AND_MATERIEL_SELECT",parameterMap);
+		List<StockInCheckMaterielBean> list = (List<StockInCheckMaterielBean>) DBServer.quider
+				.queryForList("STOCK_IN_CHECK_MATERIEL_AND_MATERIEL_SELECT",
+						parameterMap);
 		return list.size();
-//		int count = (Integer) DBServer.quider.queryForObject(
-//				"STOCK_IN_CHECK_MATEREIL_COUNT", parameterMap);
+		// int count = (Integer) DBServer.quider.queryForObject(
+		// "STOCK_IN_CHECK_MATEREIL_COUNT", parameterMap);
 
-//		return count;
+		// return count;
 	}
 
 	public boolean deleteStockInCheckMateriel(String marterielCode,
@@ -156,7 +164,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("",e);
+			log.error("", e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -164,21 +172,22 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 		return true;
 	}
 
-	public boolean deleteStockIn(String stockInCode) throws SQLException{
+	public boolean deleteStockIn(String stockInCode) throws SQLException {
 
 		Map<String, String> paraeterMap = new HashMap<String, String>();
 		paraeterMap.put("stockInCode", stockInCode);
 
 		try {
 			DBServer.quider.startTransaction();
-			DBServer.quider.deleteObject("DELETE_STOCK_IN_CHECK_MATERIEL", paraeterMap);
+			DBServer.quider.deleteObject("DELETE_STOCK_IN_CHECK_MATERIEL",
+					paraeterMap);
 			DBServer.quider.deleteObject("DEKETE_STOCK_IN", paraeterMap);
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			log.error("", e);
 			return false;
-		}finally{
+		} finally {
 			DBServer.quider.endTransaction();
 		}
 

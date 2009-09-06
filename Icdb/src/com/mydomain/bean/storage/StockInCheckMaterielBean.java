@@ -7,17 +7,17 @@ public class StockInCheckMaterielBean {
 	private String supplierCode;
 	private String cargoSpaceCode;
 	private String stockInCode;
-	private Double amountPercent;
-	private Double qualityPercent;
+	private Float amountPercent;
+	private Float qualityPercent;
 	private Date checkTime;
-	private Double packagePercent;
-	private Double errorStockPercent;
+	private Float packagePercent;
+	private Float errorStockPercent;
 	private String checkNote;
 	private Integer checkAmount;
 	private String checkRemark;
 	private Integer lastAmount;
-	private Double stockInAmount;
-	private Double onePrice;
+	private Float stockInAmount;
+	private Float onePrice;
 	private Integer stockInType;
 
 
@@ -50,36 +50,14 @@ public class StockInCheckMaterielBean {
 	public void setStockInCode(String stockInCode) {
 		this.stockInCode = stockInCode;
 	}
-	public Double getAmountPercent() {
-		return amountPercent;
-	}
-	public void setAmountPercent(Double amountPercent) {
-		this.amountPercent = amountPercent;
-	}
-	public Double getQualityPercent() {
-		return qualityPercent;
-	}
-	public void setQualityPercent(Double qualityPercent) {
-		this.qualityPercent = qualityPercent;
-	}
+
 	public Date getCheckTime() {
 		return checkTime;
 	}
 	public void setCheckTime(Date checkTime) {
 		this.checkTime = checkTime;
 	}
-	public Double getPackagePercent() {
-		return packagePercent;
-	}
-	public void setPackagePercent(Double packagePercent) {
-		this.packagePercent = packagePercent;
-	}
-	public Double getErrorStockPercent() {
-		return errorStockPercent;
-	}
-	public void setErrorStockPercent(Double errorStockPercent) {
-		this.errorStockPercent = errorStockPercent;
-	}
+
 	public String getCheckNote() {
 		return checkNote;
 	}
@@ -104,18 +82,7 @@ public class StockInCheckMaterielBean {
 	public void setLastAmount(Integer lastAmount) {
 		this.lastAmount = lastAmount;
 	}
-	public Double getStockInAmount() {
-		return stockInAmount;
-	}
-	public void setStockInAmount(Double stockInAmount) {
-		this.stockInAmount = stockInAmount;
-	}
-	public Double getOnePrice() {
-		return onePrice;
-	}
-	public void setOnePrice(Double onePrice) {
-		this.onePrice = onePrice;
-	}
+
 	public Integer getStockInType() {
 		return stockInType;
 	}
@@ -139,6 +106,42 @@ public class StockInCheckMaterielBean {
 	}
 	public void setMaterielABC(String materielABC) {
 		this.materielABC = materielABC;
+	}
+	public Float getAmountPercent() {
+		return amountPercent;
+	}
+	public void setAmountPercent(Float amountPercent) {
+		this.amountPercent = amountPercent;
+	}
+	public Float getQualityPercent() {
+		return qualityPercent;
+	}
+	public void setQualityPercent(Float qualityPercent) {
+		this.qualityPercent = qualityPercent;
+	}
+	public Float getPackagePercent() {
+		return packagePercent;
+	}
+	public void setPackagePercent(Float packagePercent) {
+		this.packagePercent = packagePercent;
+	}
+	public Float getErrorStockPercent() {
+		return errorStockPercent;
+	}
+	public void setErrorStockPercent(Float errorStockPercent) {
+		this.errorStockPercent = errorStockPercent;
+	}
+	public Float getStockInAmount() {
+		return stockInAmount;
+	}
+	public void setStockInAmount(Float stockInAmount) {
+		this.stockInAmount = stockInAmount;
+	}
+	public Float getOnePrice() {
+		return onePrice;
+	}
+	public void setOnePrice(Float onePrice) {
+		this.onePrice = onePrice;
 	}
 
 }
