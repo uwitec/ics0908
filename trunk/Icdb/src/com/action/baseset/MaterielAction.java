@@ -141,5 +141,8 @@ public class MaterielAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	public String findMateriel(){
+		return this.showMateriel();
+	}
 	
 }

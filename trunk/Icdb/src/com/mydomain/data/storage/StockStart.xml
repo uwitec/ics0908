@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Stock">
+	<select id="selectStockOfStoreHouse" resultClass="com.mydomain.bean.storage.StockBean">
+	Select 
+	s.cargoSpaceCode
+	c.cargoSpaceName
+	s.materielCode
+	m.materielName
+	s.stockPrice
+	s.stockAmount
+	s.jsonField
+	from stock as s,CargoSpace as c,Materiel as m
+	where 
+	s.cargoSpaceCode=c.cargoSpaceCode and 
+	s.materielCode=m.materielCode and
+	s.cargoSpaceCode=#cargoSpaceCode#
+	limit #startValue#,#endValue#
+	</select>
+	<select id="selectStockDef" resultClass="com.mydomain.bean.storage.StockBean">
+	Select 
+	count(*) as countValue
+	from stock as s,CargoSpace as c,Materiel as m
+	where 
+	s.cargoSpaceCode=c.cargoSpaceCode and 
+	s.materielCode=m.materielCode and
+	s.cargoSpaceCode=#cargoSpaceCode#
+	</select>
+	<select id="getStockBean" parameterClass="String" resultClass="com.mydomain.bean.storage.StockBean">
+	
+	</select>
+	<insert id="insertStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
+			</insert>
+	<update id="updateStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
+		</update>
+	<delete id="deleteStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
+	</delete> 
+</sqlMap>
