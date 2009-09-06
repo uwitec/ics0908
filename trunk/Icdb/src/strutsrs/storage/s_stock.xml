@@ -4,13 +4,13 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 <package name="stock" extends="struts-default" namespace="/storage">
-<action name="ShowStockList" class="com.action.storage.StockStartAction" method="getStoreHouseList">
+<action name="ShowStockList" class="com.action.storage.StockAction" method="getStoreHouseList">
 	<result name="success">/storage/stock/StockList.jsp</result>
 </action>
-<action name="GetStockMaerielList" class="com.action.storage.StockStartAction"  method="getStockMaerielList">
-	<result name="success">/storage/stock/StockMaerielList.jsp</result>
+<action name="GetStockMaterielList" class="com.action.storage.StockAction"  method="getStockMaterielList">
+	<result name="success">/storage/stock/StockMaterielList.jsp</result>
 </action>
-<action name="AddStock" class="com.action.storage.StockStartAction" method="addStock">
+<action name="AddStock" class="com.action.storage.StockAction" method="addStock">
 	<result name="success" type="redirect">GetStockMaerielList.action</result>
 </action>
 </package>
