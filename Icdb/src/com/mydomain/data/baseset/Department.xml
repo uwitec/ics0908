@@ -39,6 +39,7 @@
 		locate(#structName#,struct.structName)>0)
 		limit #startValue#,#endValue#
 	</select>
+
 	<select id="getDepartmentBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.DepartmentBean">
 		SELECT
 		departmentCode,
@@ -52,6 +53,16 @@
 		department.isEnabled=1
 		and
 		departmentCode = #departmentCode#
+	</select>
+	<select id="selectAllDepartmentBean" resultClass="com.mydomain.bean.baseset.DepartmentBean">
+		SELECT
+		departmentCode,
+		departmentName,
+		department.structCode,
+		structName
+		FROM department,struct
+		WHERE 
+		department.isEnabled!=0
 	</select>
 	<insert id="insertDepartmentBean" parameterClass="com.mydomain.bean.baseset.DepartmentBean">
 		INSERT INTO

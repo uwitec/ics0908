@@ -27,6 +27,14 @@
 		or locate(#structName#,structName)>0)
 		limit #startValue#,#endValue#
 	</select>
+	<select id="selectAllStructBean" resultClass="com.mydomain.bean.baseset.StructBean">
+		SELECT 
+		STRUCTCODE,
+		STRUCTNAME
+		FROM STRUCT
+		WHERE 
+		isEnabled!=0
+	</select>
 	<select id="getStructBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.StructBean">
 		SELECT 
 		STRUCTCODE,

@@ -101,17 +101,15 @@
 	<insert id="insertEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			insert into 
 			employee
-			(employeeCode,personCode,jobCode,departmentCode,structCode,isEnabled)
+			(employeeCode,personCode,jobCode,isEnabled)
 			values
-			(#employeeCode#,#personCode#,#jobCode#,#departmentCode#,#structCode#,1)
+			(#employeeCode#,#personCode#,#jobCode#,1)
 	</insert>
 	<update id="updateEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			update employee
 			set
 			personCode=#personCode#,
 			jobCode=#jobCode#,
-			departmentCode=#departmentCode#,
-			structCode=#structCode#,
 			isEnabled=1
 			where employeeCode=#employeeCode#
 	</update>

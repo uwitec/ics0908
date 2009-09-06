@@ -118,6 +118,14 @@ public class StockStartAction extends ActionSupport{
 		return SUCCESS;
 	}
 
-	
+	public String addStock(){
+		try {
+			DBServer.quider.insertObject(storehouse);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
 
 }
