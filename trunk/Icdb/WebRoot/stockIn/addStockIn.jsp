@@ -103,8 +103,15 @@
 		var rownum = tab.parentNode.parentNode.rowIndex;
 
  		var onPrice = a.rows.item(rownum).cells.item(6).firstChild.value;
+ 		if(isNaN(onPrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
  		var stockInAmount = a.rows.item(rownum).cells.item(5).firstChild.value;
-
+		if(isNaN(stockInAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
  		if(onPrice!='' && stockInAmount != ''){
  			a.rows.item(rownum).cells.item(9).innerHTML=onPrice*stockInAmount;
  			getSumPrice();
@@ -154,7 +161,15 @@
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
 	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		if(isNaN(stockInAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
 	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		if(isNaN(onePrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
 	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
@@ -267,7 +282,15 @@
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
 	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		if(isNaN(stockInAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
 	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		if(isNaN(onePrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
 	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
@@ -290,16 +313,6 @@
 		var arrayJson = JSON.stringify(array);
 		StockInAction.submitStockIn(stockInJson,array,callBack);
 	  }
-
-	  function isNumber( s ){
-			   var regu = "^[0-9]+$";
-			   var re = new RegExp(regu);
-			   if (s.search(re) != -1) {
-			   return true;
-			   } else {
-				  return false;
-				 }
-			 }
 	</script>
 
 
@@ -462,4 +475,7 @@
 			<input type="button" value="提交" onclick="submitStockIn();" />
 		</s:form>
 	</body>
+	<SCRIPT type="text/javascript">
+		getSumPrice();
+	</SCRIPT>
 </html>
