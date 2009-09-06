@@ -23,8 +23,8 @@ public class StockInBean {
 	private String stockInWill;
 	private Integer stockInCheckState;
 
-	private Date stockInStartDate;
-	private Date stockInEndDate;
+	private String stockInStartDate;
+	private String stockInEndDate;
 	public String getStockInCode() {
 		return stockInCode;
 	}
@@ -139,18 +139,19 @@ public class StockInBean {
 	public void setStockInCheckState(Integer stockInCheckState) {
 		this.stockInCheckState = stockInCheckState;
 	}
-	public Date getStockInStartDate() {
+	public String getStockInStartDate() {
 		return stockInStartDate;
 	}
-	public void setStockInStartDate(Date stockInStartDate) {
+	public void setStockInStartDate(String stockInStartDate) {
 		this.stockInStartDate = stockInStartDate;
 	}
-	public Date getStockInEndDate() {
+	public String getStockInEndDate() {
 		return stockInEndDate;
 	}
-	public void setStockInEndDate(Date stockInEndDate) {
+	public void setStockInEndDate(String stockInEndDate) {
 		this.stockInEndDate = stockInEndDate;
 	}
+
 
 
 
