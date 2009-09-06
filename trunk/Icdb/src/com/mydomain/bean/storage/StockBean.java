@@ -11,6 +11,20 @@ public class StockBean extends BaseBean{
 	private double	stockPrice;
 	private String	stockAmount;
 	private String	jsonField;
+	private String  storehouseCode;
+	private String  storehouseName;
+	/**
+	 * @return the storehouseCode
+	 */
+	public String getStorehouseCode() {
+		return storehouseCode;
+	}
+	/**
+	 * @param storehouseCode the storehouseCode to set
+	 */
+	public void setStorehouseCode(String storehouseCode) {
+		this.storehouseCode = storehouseCode;
+	}
 	/**
 	 * @return the cargoSpaceCode
 	 */
@@ -94,6 +108,18 @@ public class StockBean extends BaseBean{
 	 */
 	public void setStockPrice(double stockPrice) {
 		this.stockPrice = stockPrice;
+	}
+	/**
+	 * @return the storehouseName
+	 */
+	public String getStorehouseName() {
+		return storehouseName;
+	}
+	/**
+	 * @param storehouseName the storehouseName to set
+	 */
+	public void setStorehouseName(String storehouseName) {
+		this.storehouseName = storehouseName;
 	}
 
 }
