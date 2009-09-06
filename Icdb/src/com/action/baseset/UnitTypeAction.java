@@ -10,12 +10,12 @@ import com.tools.DBControl;
 
 public class UnitTypeAction extends ActionSupport{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private int unitTypeCode; //µ¥Î»ÀàÐÍ±àÂë
-	private String unitTypeName; //µ¥Î»ÀàÐÍÃû³Æ
-	private String unitTypeRemark; //µ¥Î»ÀàÐÍËµÃ÷
+	private int unitTypeCode; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½
+	private String unitTypeName; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String unitTypeRemark; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
 	private String nextPath;
 	private String rePath;
 	private String message;
@@ -126,7 +126,7 @@ public class UnitTypeAction extends ActionSupport{
 		if(db.insert(utb)){
 			message="";
 		}else{
-			message="ÓÐÒÑ¾­´æÔÚÎª"+utb.getUnitTypeCode()+"µÄ±àºÅ£¬ÇëÖØÐÂÊäÈë";
+			message="ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½ï¿½Îª"+utb.getUnitTypeCode()+"ï¿½Ä±ï¿½Å£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
 		}
 		nextPath="/baseset/unittype/UnitTypeAdd.jsp";
 		rePath="/baseset/ShowUnitType.action";

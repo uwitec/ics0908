@@ -1,13 +1,13 @@
 package com.mydomain.bean.baseset;
 /*
- * µ¥Î»ÀàĞÍ
+ * ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½
  * */
 public class UnitTypeBean {
 
-	
-	private int unitTypeCode; //µ¥Î»ÀàĞÍ±àÂë
-	private String unitTypeName; //µ¥Î»ÀàĞÍÃû³Æ
-	private String unitTypeRemark; //µ¥Î»ÀàĞÍËµÃ÷
+
+	private int unitTypeCode; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½
+	private String unitTypeName; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private String unitTypeRemark; //ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½
 	/**
 	 * @return the unitTypeCode
 	 */
