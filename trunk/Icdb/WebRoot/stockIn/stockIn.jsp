@@ -222,7 +222,7 @@
 									<s:if test="stockInStateType == 2 ">未完成</s:if>
 								</td>
 								<td bgcolor="white">
-									<s:if test="stockInStateType=2">
+									<s:if test="stockInStateType==2 || stockInCheckState == -1">
 										<input type='button'
 											onclick='window.location.href="goEditStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'
 											value="编辑" />

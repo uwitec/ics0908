@@ -147,47 +147,47 @@
 		<dynamic prepend="set">
 
 
-			<isNotEmpty prepend="and" property="amountPercent">
+			<isNotEmpty prepend="," property="amountPercent">
 				amountPercent = #amountPercent#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="qualityPercent">
+			<isNotEmpty prepend="," property="qualityPercent">
 				qualityPercent = #qualityPercent#
 			</isNotEmpty>
 
-			<isNotEmpty prepend="and" property="packagePercent">
+			<isNotEmpty prepend="," property="packagePercent">
 				packagePercent = #packagePercent#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="errorStockPercent">
+			<isNotEmpty prepend="," property="errorStockPercent">
 				errorStockPercent = #errorStockPercent#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="checkTime">
+			<isNotEmpty prepend="," property="checkTime">
 				checkTime = #checkTime#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="checkNote">
+			<isNotEmpty prepend="," property="checkNote">
 				checkNote = #checkNote#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="checkAmount">
+			<isNotEmpty prepend="," property="checkAmount">
 				checkAmount = #checkAmount#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="checkRemark">
+			<isNotEmpty prepend="," property="checkRemark">
 				checkRemark = #checkRemark#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="lastAmount">
+			<isNotEmpty prepend="," property="lastAmount">
 				lastAmount = #lastAmount#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="stockInAmount">
+			<isNotEmpty prepend="," property="stockInAmount">
 				stockInAmount = #stockInAmount#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="onePrice">
+			<isNotEmpty prepend="," property="onePrice">
 				onePrice = #onePrice#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="stockInType">
+			<isNotEmpty prepend="," property="stockInType">
 				stockInType = #stockInType#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="supplierCode">
+			<isNotEmpty prepend="," property="supplierCode">
 				supplierCode = #supplierCode#
 			</isNotEmpty>
-			<isNotEmpty prepend="and" property="cargoSpaceCode">
+			<isNotEmpty prepend="," property="cargoSpaceCode">
 				cargoSpaceCode = #cargoSpaceCode#
 			</isNotEmpty>
 		</dynamic>
