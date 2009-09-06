@@ -1,4 +1,4 @@
-package com.icdb.report;
+package com.mydomain.bean.report;
 
 public class ABCReportBean {
 
