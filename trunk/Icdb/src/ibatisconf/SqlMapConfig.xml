@@ -52,4 +52,5 @@
 	<sqlMap resource="com/mydomain/data/storage/StockInCheckOrder.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/StockInCheckMateriel.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/Materiel.xml"/>
+	<sqlMap resource="com/mydomain/data/report/CheckStock.xml"/>
 	</sqlMapConfig>
