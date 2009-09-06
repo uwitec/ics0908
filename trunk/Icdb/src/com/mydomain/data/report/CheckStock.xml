@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CheckStock">
+
+	<select id="queryCheckStock" resultClass="com.mydomain.bean.report.CheckStock">
+		SELECT
+		CSCODE as csCode,
+		STOREHOUSECODE as storehouseCode,
+		CSDATE as csDate,
+		CSAPPROVE as csApprove,
+		CSAPPROVEMESSAGE as csApproveMessage,
+		CSAPPROVESTATE as csApproveState,
+		CSCHECKPERSON as csCheckPerson,
+		CSOPTIONOR as csOptionor,
+		CSSTATE as csState,
+		CSSTARTSTOCK as
+		csStartStock
+		FROM CHECKSTOCK
+	</select>
+</sqlMap>
