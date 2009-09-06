@@ -52,9 +52,9 @@
 			<isNotEmpty property="stockInStateType" prepend="and">
 				stockInStateType = #stockInStateType#
 			</isNotEmpty>
-			<isNotNull property="stockInGM" prepend="and">
+			<isNotEmpty property="stockInGM" prepend="and">
 				stockInGM = #stockInGM#
-			</isNotNull>
+			</isNotEmpty>
 			<isNotEmpty property="stockInExGM" prepend="and">
 				stockInExGM = #stockInExGM#
 			</isNotEmpty>
@@ -138,8 +138,8 @@
 		]]>
 	</insert>
 	<update id="UPDATE_SELECT_STOCK_IN">
-		update StockInCheckOrder set
-		<dynamic>
+		update StockInCheckOrder
+		<dynamic prepend="set">
 			<isNotEmpty property="employeeCode" prepend="and">
 				employeeCode = #employeeCode#
 			</isNotEmpty>
@@ -173,9 +173,9 @@
 			<isNotEmpty property="stockInStateType" prepend="and">
 				stockInStateType = #stockInStateType#
 			</isNotEmpty>
-			<isNotNull property="stockInGM" prepend="and">
+			<isNotEmpty property="stockInGM" prepend="and">
 				stockInGM = #stockInGM#
-			</isNotNull>
+			</isNotEmpty>
 			<isNotEmpty property="stockInExGM" prepend="and">
 				stockInExGM = #stockInExGM#
 			</isNotEmpty>
