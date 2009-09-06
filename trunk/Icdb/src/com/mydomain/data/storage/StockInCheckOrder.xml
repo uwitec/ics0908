@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StockInCheckOrder">
+	<typeAlias alias="stockIn"
+		type="com.mydomain.bean.storage.StockInBean" />
+
+	<sql id="STOCK_IN_COMMON_CONDITION">
+		<dynamic prepend="where">
+			<isNotEmpty property="stockInCode" prepend="and">
+				instr(stockInCode, #stockInCode#)>0
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockInStartDate">
+				<![CDATA[			stockInDate >= CAST(#stockInStartDate# as date) ]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockInEndDate">
+				<![CDATA[			stockInDate < CAST(#stockInEndDate# as date)+1 ]]>
+			</isNotEmpty>
+			<isNotEmpty property="employeeCode" prepend="and">
+				employeeCode = #employeeCode#
+			</isNotEmpty>
+			<isNotEmpty property="checkMessage" prepend="and">
+				checkMessage = #checkMessage#
+			</isNotEmpty>
+			<isNotEmpty property="checkResult" prepend="and">
+				checkResult = #checkResult#
+			</isNotEmpty>
+			<isNotEmpty property="orderNumber" prepend="and">
+				orderNumber = #orderNumber#
+			</isNotEmpty>
+			<isNotEmpty property="checkRemark" prepend="and">
+				checkRemark = #checkRemark#
+			</isNotEmpty>
+			<isNotEmpty property="sendTime" prepend="and">
+				sendTime = #sendTime#
+			</isNotEmpty>
+			<isNotEmpty property="arriveTime" prepend="and">
+				arriveTime = #arriveTime#
+			</isNotEmpty>
+			<isNotEmpty property="checkTime" prepend="and">
+				checkTime = #checkTime#
+			</isNotEmpty>
+			<isNotEmpty property="stockInType" prepend="and">
+				stockInType = #stockInType#
+			</isNotEmpty>
+			<isNotEmpty property="stockInState" prepend="and">
+				stockInState = #stockInState#
+			</isNotEmpty>
+			<isNotEmpty property="stockInStateType" prepend="and">
+				stockInStateType = #stockInStateType#
+			</isNotEmpty>
+			<isNotNull property="stockInGM" prepend="and">
+				stockInGM = #stockInGM#
+			</isNotNull>
+			<isNotEmpty property="stockInExGM" prepend="and">
+				stockInExGM = #stockInExGM#
+			</isNotEmpty>
+			<isNotEmpty property="stockInExDate" prepend="and">
+				stockInExDate = #stockInExDate#
+			</isNotEmpty>
+			<isNotEmpty property="stockInExMessage" prepend="and">
+				stockInExMessage = #stockInExMessage#
+			</isNotEmpty>
+			<isNotEmpty property="stockInWill" prepend="and">
+				stockInWill = #stockInWill#
+			</isNotEmpty>
+			<isNotEmpty property="stockInCheckState" prepend="and">
+				<isEqual compareValue="-2"
+					property="stockInCheckState">
+					stockInCheckState in (0,-1)
+				</isEqual>
+				<isNotEqual compareValue="-2"
+					property="stockInCheckState">
+					stockInCheckState = #stockInCheckState#
+				</isNotEqual>
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<sql id="COMMON_STOCK_IN_SELECT">
+		select stockInCode as stockInCode, stockInDate as stockInDate,
+		employeeCode as employeeCode, checkMessage as checkMessage,
+		checkResult as checkResult, orderNumber as orderNumber,
+		checkRemark as checkRemark, sendTime as sendTime, arriveTime as
+		arriveTime, checkTime as checkTime, stockInType as stockInType,
+		stockInState as stockInState, stockInStateType as
+		stockInStateType, stockInGM as stockInGM, stockInExGM as
+		stockInExGM, stockInExDate as stockInExDate, stockInExMessage as
+		stockInExMessage, stockInWill as stockInWill,stockInCheckState
+		as stockInCheckState from StockInCheckOrder
+	</sql>
+
+	<sql id="COMMON_STOCK_IN_COUNT">
+		select count(stockInCode) from StockInCheckOrder
+	</sql>
+	<select id="STOCK_IN_SELECT" resultClass="stockIn">
+		<include refid="COMMON_STOCK_IN_SELECT" />
+		<include refid="STOCK_IN_COMMON_CONDITION" />
+	</select>
+	<select id="STOCK_IN_SELECT_BY_KEY" resultClass="stockIn">
+		<include refid="COMMON_STOCK_IN_SELECT" />
+		<dynamic prepend="where">
+			<isNotEmpty property="stockInCode" prepend="and">
+				stockInCode = #stockInCode#
+			</isNotEmpty>
+		</dynamic>
+
+	</select>
+	<select id="STOCK_IN_SELECT_PAGE" resultClass="stockIn">
+		<include refid="COMMON_STOCK_IN_SELECT" />
+		<include refid="STOCK_IN_COMMON_CONDITION" />
+		<include refid="COMMON_PAGE" />
+	</select>
+	<select id="SELECT_STOCK_IN_COUNT" resultClass="Integer">
+		<include refid="COMMON_STOCK_IN_COUNT" />
+		<include refid="STOCK_IN_COMMON_CONDITION" />
+	</select>
+
+	<insert id="ADD_SELECT_STOCK_IN">
+		<![CDATA[
+			insert into StockInCheckOrder(  stockInCode , stockInDate ,
+		employeeCode , checkMessage ,
+		checkResult , orderNumber ,
+		checkRemark , sendTime ,
+		arriveTime, checkTime , stockInType ,
+		stockInState , stockInStateType , stockInGM , stockInExGM, stockInExDate , stockInExMessage , stockInWill,stockInCheckState
+			 )values(
+			    #stockInCode#, #stockInDate#,
+		#employeeCode#, #checkMessage#,
+		#checkResult#, #orderNumber#,
+		#checkRemark#, #sendTime#, #arriveTime#, #checkTime#, #stockInType#,
+		#stockInState#, #stockInStateType#, #stockInGM#, #stockInExGM#,
+		#stockInExDate#, #stockInExMessage#, #stockInWill#,
+		#stockInCheckState#
+			)
+		]]>
+	</insert>
+	<update id="UPDATE_SELECT_STOCK_IN">
+		update StockInCheckOrder set
+		<dynamic>
+			<isNotEmpty property="employeeCode" prepend="and">
+				employeeCode = #employeeCode#
+			</isNotEmpty>
+			<isNotEmpty property="checkMessage" prepend="and">
+				checkMessage = #checkMessage#
+			</isNotEmpty>
+			<isNotEmpty property="checkResult" prepend="and">
+				checkResult = #checkResult#
+			</isNotEmpty>
+			<isNotEmpty property="orderNumber" prepend="and">
+				orderNumber = #orderNumber#
+			</isNotEmpty>
+			<isNotEmpty property="checkRemark" prepend="and">
+				checkRemark = #checkRemark#
+			</isNotEmpty>
+			<isNotEmpty property="sendTime" prepend="and">
+				sendTime = #sendTime#
+			</isNotEmpty>
+			<isNotEmpty property="arriveTime" prepend="and">
+				arriveTime = #arriveTime#
+			</isNotEmpty>
+			<isNotEmpty property="checkTime" prepend="and">
+				checkTime = #checkTime#
+			</isNotEmpty>
+			<isNotEmpty property="stockInType" prepend="and">
+				stockInType = #stockInType#
+			</isNotEmpty>
+			<isNotEmpty property="stockInState" prepend="and">
+				stockInState = #stockInState#
+			</isNotEmpty>
+			<isNotEmpty property="stockInStateType" prepend="and">
+				stockInStateType = #stockInStateType#
+			</isNotEmpty>
+			<isNotNull property="stockInGM" prepend="and">
+				stockInGM = #stockInGM#
+			</isNotNull>
+			<isNotEmpty property="stockInExGM" prepend="and">
+				stockInExGM = #stockInExGM#
+			</isNotEmpty>
+			<isNotEmpty property="stockInExDate" prepend="and">
+				stockInExDate = #stockInExDate#
+			</isNotEmpty>
+			<isNotEmpty property="stockInExMessage" prepend="and">
+				stockInExMessage = #stockInExMessage#
+			</isNotEmpty>
+			<isNotEmpty property="stockInWill" prepend="and">
+				stockInWill = #stockInWill#
+			</isNotEmpty>
+			<isNotEmpty property="stockInCheckState" prepend="and">
+				stockInCheckState = #stockInCheckState#
+			</isNotEmpty>
+		</dynamic>
+		where stockInCode = #stockInCode#
+	</update>
+
+	<delete id="DEKETE_STOCK_IN">
+		delete from StockInCheckOrder
+		<dynamic prepend="where">
+			<isNotEmpty property="stockInCode" prepend="and">
+				stockInCode = #stockInCode#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

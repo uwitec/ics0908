@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="s_stockIn" extends="struts-default"
+		namespace="/stockIn">
+		<action name="searchStockIn"
+			class="com.action.storage.stockIn.StockInAction"
+			method="searchStockIn">
+			<result name="success">/stockIn/stockIn.jsp</result>
+		</action>
+		<action name="goAddStockIn"
+			class="com.action.storage.stockIn.StockInAction"
+			method="goAddStockIn">
+			<result name="success">/stockIn/addStockIn.jsp</result>
+		</action>
+		<action name="goEditStockIn"
+			class="com.action.storage.stockIn.StockInAction"
+			method="goEditStockIn">
+			<result name="success">/stockIn/addStockIn.jsp</result>
+		</action>
+		<action name="saveStockIn"
+			class="com.action.storage.stockIn.StockInAction"
+			method="saveStockIn">
+			<result name="success" type="redirect-action">
+				searchStockIn
+			</result>
+		</action>
+		<action name="showMateriel"
+			class="com.action.storage.stockIn.StockInAction"
+			method="addMaterielList">
+			<result name="success">
+				/stockIn/showMateriel.jsp
+			</result>
+		</action>
+	</package>
+</struts>

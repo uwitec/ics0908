@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- START SNIPPET: dwr -->
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN"
+    "http://www.getahead.ltd.uk/dwr/dwr10.dtd">
+<dwr>
+	<allow>
+		<create creator="new" javascript="StockInAction">
+			<param name="class"
+				value="com.action.storage.stockIn.StockInAction" />
+			<include method="getMaterielCode" />
+			<include method="saveStockIn" />
+			<include method="deleteStockInMateriel"/>
+			<include method="deleteStockIn"/>
+		</create>
+		<convert converter="bean"
+			match="com.mydomain.bean.storage.StockInCheckMaterielBean">
+			<param name="include"
+				value="materielCode,supplierCode,cargoSpaceCode,
+	  									stockInCode,amountPercent,qualityPercent,
+	  									packagePercent,errorStockPercent,
+	  									checkNote,checkAmount,checkRemark,
+	  									lastAmount,stockInAmount,onePrice,stockInType" />
+
+
+		</convert>
+		<convert converter="bean"
+			match="com.mydomain.bean.storage.StockInBean">
+			<param name="include"
+				value="stockInCode,employeeCode,
+				 checkResult, orderNumber,checkRemark,stockInType, stockInState,
+				 stockInStateType,stockInGM,stockInExGM,stockInExMessage, stockInWill" />
+		</convert>
+
+	</allow>
+	<signatures>
+
+		<![CDATA[ import java.util.List;
+
+				import com.action.storage.stockIn.StockInAction;
+
+				import com.mydomain.bean.storage.StockInBean;
+
+				import com.mydomain.bean.storage.StockInCheckMaterielBean;
+
+				StockInAction.saveStockIn(StockInBean,List<StockInCheckMaterielBean>);
+
+			]]>
+
+	</signatures>
+</dwr>

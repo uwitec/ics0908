@@ -4,15 +4,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.mydomain.bean.baseset.UnitTypeBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.UnitBean;
-import com.mydomain.bean.baseset.UnitTypeBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
 public class UnitAction extends ActionSupport{
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +51,7 @@ public class UnitAction extends ActionSupport{
 	public void setLutb(List<UnitTypeBean> lutb) {
 		this.lutb = lutb;
 	}
-	
+
 	/**
 	 * @param unit the unit to set
 	 */
@@ -82,7 +82,7 @@ public class UnitAction extends ActionSupport{
 		}
 		res.setNextPath("/baseset/GoAddUnit.action");
 		res.setRePath("/baseset/ShowUnit.action");
-		
+
 		return SUCCESS;
 	}
 	@SuppressWarnings("unchecked")
@@ -104,10 +104,10 @@ public class UnitAction extends ActionSupport{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public String selectUnitDef(){
 		ICTools.setBean(unit, ICTools.likeString(res.getS_value()));
@@ -119,10 +119,10 @@ public class UnitAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public String showUnit(){
-		
+
 		try {
 			lhp=(List<UnitBean>) DBServer.quider.queryForList(UnitBean.class);
 		} catch (SQLException e) {

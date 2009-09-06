@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StockInCheckMateriel">
+	<typeAlias alias="stockInCheckMateriel"
+		type="com.mydomain.bean.storage.StockInCheckMaterielBean" />
+
+	<sql id="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION">
+
+		<isNotEmpty prepend="and" property="materielCode">
+			s.materielCode = #materielCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="supplierCode">
+			s.supplierCode = #supplierCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="cargoSpaceCode">
+			s.cargoSpaceCode = #cargoSpaceCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockInCode">
+			s.stockInCode = #stockInCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="amountPercent">
+			s.amountPercent = #amountPercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qualityPercent">
+			s.qualityPercent = #qualityPercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkTime">
+			s.checkTime = #checkTime#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="packagePercent">
+			s.packagePercent = #packagePercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="errorStockPercent">
+			s.errorStockPercent = #errorStockPercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkNote">
+			s.checkNote = #checkNote#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkAmount">
+			s.checkAmount = #checkAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkRemark">
+			s.checkRemark = #checkRemark#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="lastAmount">
+			s.lastAmount = #lastAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockInAmount">
+			s.stockInAmount = #stockInAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="onePrice">
+			s.onePrice = #onePrice#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockInType">
+			s.stockInType = #stockInType#
+		</isNotEmpty>
+
+	</sql>
+	<sql id="STOCK_IN_CHECK_MATERIEL_COMMON_SELECT">
+		select materielCode, supplierCode, cargoSpaceCode, stockInCode ,
+		amountPercent, qualityPercent, checkTime , packagePercent,
+		errorStockPercent , checkNote , checkAmount , checkRemark,
+		lastAmount, stockInAmount, onePrice, stockInType from
+		stockInCheckMateriel s
+	</sql>
+	<sql id="STOCK_IN_CHECK_MATERIEL_COMMON_COUNT">
+		select count(*) from stockInCheckMateriel s
+	</sql>
+
+	<select id="STOCK_IN_CHECK_MATEREIL_COUNT"
+		resultClass="java.lang.Integer">
+		<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_COUNT" />
+		<dynamic prepend="where">
+			<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
+		</dynamic>
+	</select>
+	<select id="STOCK_IN_CHECK_MATERIEL_SELECT"
+		resultClass="stockInCheckMateriel">
+		<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_SELECT" />
+		<dynamic prepend="where">
+			<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
+		</dynamic>
+	</select>
+
+	<sql id="STOCK_IN_CHECK_MATERIEL_AND_MATERIEL">
+		select s.materielCode, s.supplierCode, s.cargoSpaceCode,
+		s.stockInCode , s.amountPercent, s.qualityPercent, s.checkTime ,
+		s.packagePercent, s.errorStockPercent , s.checkNote ,
+		s.checkAmount , s.checkRemark, s.lastAmount, s.stockInAmount,
+		s.onePrice, s.stockInType,m.materielName from
+		stockInCheckMateriel s, materiel m where s.materielCode =
+		m.materielCode
+	</sql>
+
+	<select id="STOCK_IN_CHECK_MATERIEL_AND_MATERIEL_SELECT"
+		resultClass="stockInCheckMateriel">
+		<include refid="STOCK_IN_CHECK_MATERIEL_AND_MATERIEL" />
+		<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
+
+	</select>
+
+	<insert id="ADD_STOCK_IN_CHECK_MATERIEL">
+		<![CDATA[
+			insert into stockInCheckMateriel( materielCode,
+			   supplierCode,
+			   cargoSpaceCode,
+			   stockInCode ,
+			   amountPercent,
+			   qualityPercent,
+			   checkTime ,
+			   packagePercent,
+			   errorStockPercent ,
+			   checkNote ,
+			   checkAmount ,
+			   checkRemark,
+			   lastAmount,
+			   stockInAmount,
+			   onePrice,
+			   stockInType
+			 )values(
+			   #materielCode#,
+			   #supplierCode#,
+			   #cargoSpaceCode#,
+			   #stockInCode# ,
+			   #amountPercent#,
+			   #qualityPercent#,
+			   #checkTime# ,
+			   #packagePercent#,
+			   #errorStockPercent# ,
+			   #checkNote# ,
+			   #checkAmount# ,
+			   #checkRemark#,
+			   #lastAmount#,
+			   #stockInAmount#,
+			   #onePrice#,
+			   #stockInType#
+			)
+		]]>
+	</insert>
+	<update id="UPDATE_STOCK_IN_CHECK_MATERIEL">
+		update stockInCheckMateriel set
+
+		<isNotEmpty prepend="and" property="supplierCode">
+			s.supplierCode = #supplierCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="cargoSpaceCode">
+			s.cargoSpaceCode = #cargoSpaceCode#
+		</isNotEmpty>
+
+		<isNotEmpty prepend="and" property="amountPercent">
+			s.amountPercent = #amountPercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="qualityPercent">
+			s.qualityPercent = #qualityPercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkTime">
+			s.checkTime = #checkTime#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="packagePercent">
+			s.packagePercent = #packagePercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="errorStockPercent">
+			s.errorStockPercent = #errorStockPercent#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkNote">
+			s.checkNote = #checkNote#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkAmount">
+			s.checkAmount = #checkAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="checkRemark">
+			s.checkRemark = #checkRemark#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="lastAmount">
+			s.lastAmount = #lastAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockInAmount">
+			s.stockInAmount = #stockInAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="onePrice">
+			s.onePrice = #onePrice#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockInType">
+			s.stockInType = #stockInType#
+		</isNotEmpty>
+
+		where materiel = #materiel# and stockInCode = #stockInCode#
+
+	</update>
+	<delete id="DELETE_STOCK_IN_CHECK_MATERIEL">
+		delete from stockInCheckMateriel
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="stockInCode">
+				stockInCode=#stockInCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="materielCode">
+				materielCode = #materielCode#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+
+</sqlMap>
