@@ -290,6 +290,16 @@
 		var arrayJson = JSON.stringify(array);
 		StockInAction.submitStockIn(stockInJson,array,callBack);
 	  }
+
+	  function isNumber( s ){
+			   var regu = "^[0-9]+$";
+			   var re = new RegExp(regu);
+			   if (s.search(re) != -1) {
+			   return true;
+			   } else {
+				  return false;
+				 }
+			 }
 	</script>
 
 

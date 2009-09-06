@@ -67,7 +67,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			stockInBean.setStockInCheckState(0);
 			stockInBean.setCheckResult(-1);
 			stockInBean.setStockInDate(new Date());
-			if (this.getStockInInfo(stockInBean.getStockInCode()) != null) {
+			if (this.getStockInCount(stockInBean)>0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN",
 						stockInBean);
 			} else {
@@ -105,7 +105,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			stockInBean.setStockInCheckState(0);
 			stockInBean.setCheckResult(-1);
 			stockInBean.setStockInDate(new Date());
-			if (this.getStockInInfo(stockInBean.getStockInCode()) != null) {
+			if (this.getStockInCount(stockInBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN",
 						stockInBean);
 			}
@@ -133,7 +133,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public int getStockInCheckMaterielCount(
+	private int getStockInCheckMaterielCount(
 			StockInCheckMaterielBean stockInCheckMaterielBean)
 			throws SQLException {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
@@ -150,6 +150,17 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 		// "STOCK_IN_CHECK_MATEREIL_COUNT", parameterMap);
 
 		// return count;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	private int getStockInCount(StockInBean stockInBean) throws SQLException {
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("stockInCode", stockInBean.getStockInCode());
+
+		List<StockInBean> list = (List<StockInBean>) DBServer.quider
+				.queryForList("STOCK_IN_SELECT", parameterMap);
+		return list.size();
 	}
 
 	public boolean deleteStockInCheckMateriel(String marterielCode,

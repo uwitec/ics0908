@@ -140,55 +140,55 @@
 	<update id="UPDATE_SELECT_STOCK_IN">
 		update StockInCheckOrder
 		<dynamic prepend="set">
-			<isNotEmpty property="employeeCode" prepend="and">
+			<isNotEmpty property="employeeCode" prepend=",">
 				employeeCode = #employeeCode#
 			</isNotEmpty>
-			<isNotEmpty property="checkMessage" prepend="and">
+			<isNotEmpty property="checkMessage" prepend=",">
 				checkMessage = #checkMessage#
 			</isNotEmpty>
-			<isNotEmpty property="checkResult" prepend="and">
+			<isNotEmpty property="checkResult" prepend=",">
 				checkResult = #checkResult#
 			</isNotEmpty>
-			<isNotEmpty property="orderNumber" prepend="and">
+			<isNotEmpty property="orderNumber" prepend=",">
 				orderNumber = #orderNumber#
 			</isNotEmpty>
-			<isNotEmpty property="checkRemark" prepend="and">
+			<isNotEmpty property="checkRemark" prepend=",">
 				checkRemark = #checkRemark#
 			</isNotEmpty>
-			<isNotEmpty property="sendTime" prepend="and">
+			<isNotEmpty property="sendTime" prepend=",">
 				sendTime = #sendTime#
 			</isNotEmpty>
-			<isNotEmpty property="arriveTime" prepend="and">
+			<isNotEmpty property="arriveTime" prepend=",">
 				arriveTime = #arriveTime#
 			</isNotEmpty>
-			<isNotEmpty property="checkTime" prepend="and">
+			<isNotEmpty property="checkTime" prepend=",">
 				checkTime = #checkTime#
 			</isNotEmpty>
-			<isNotEmpty property="stockInType" prepend="and">
+			<isNotEmpty property="stockInType" prepend=",">
 				stockInType = #stockInType#
 			</isNotEmpty>
-			<isNotEmpty property="stockInState" prepend="and">
+			<isNotEmpty property="stockInState" prepend=",">
 				stockInState = #stockInState#
 			</isNotEmpty>
-			<isNotEmpty property="stockInStateType" prepend="and">
+			<isNotEmpty property="stockInStateType" prepend=",">
 				stockInStateType = #stockInStateType#
 			</isNotEmpty>
-			<isNotEmpty property="stockInGM" prepend="and">
+			<isNotEmpty property="stockInGM" prepend=",">
 				stockInGM = #stockInGM#
 			</isNotEmpty>
-			<isNotEmpty property="stockInExGM" prepend="and">
+			<isNotEmpty property="stockInExGM" prepend=",">
 				stockInExGM = #stockInExGM#
 			</isNotEmpty>
-			<isNotEmpty property="stockInExDate" prepend="and">
+			<isNotEmpty property="stockInExDate" prepend=",">
 				stockInExDate = #stockInExDate#
 			</isNotEmpty>
-			<isNotEmpty property="stockInExMessage" prepend="and">
+			<isNotEmpty property="stockInExMessage" prepend=",">
 				stockInExMessage = #stockInExMessage#
 			</isNotEmpty>
-			<isNotEmpty property="stockInWill" prepend="and">
+			<isNotEmpty property="stockInWill" prepend=",">
 				stockInWill = #stockInWill#
 			</isNotEmpty>
-			<isNotEmpty property="stockInCheckState" prepend="and">
+			<isNotEmpty property="stockInCheckState" prepend=",">
 				stockInCheckState = #stockInCheckState#
 			</isNotEmpty>
 		</dynamic>
