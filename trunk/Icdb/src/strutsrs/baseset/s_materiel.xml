@@ -19,5 +19,8 @@
 <action name="UpdateMateriel" class="com.action.baseset.MaterielAction" method="updateMateriel">
 	<result name="success" type="redirect">ShowMateriel.action</result>
 </action>
+<action name="FindMateriel" class="com.action.baseset.MaterielAction" method="findMateriel">
+	<result name="success">/baseset/FindMateriel.jsp</result>
+</action>
 </package>
 </struts>
