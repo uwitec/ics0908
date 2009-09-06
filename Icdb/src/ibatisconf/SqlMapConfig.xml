@@ -49,4 +49,5 @@
 	<sqlMap resource="com/mydomain/data/baseset/Storehouse.xml"/>
 	<sqlMap resource="com/mydomain/data/baseset/CargoSpace.xml"/>
 	<sqlMap resource="com/mydomain/data/baseset/Materiel.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/StockStart.xml"/>
 	</sqlMapConfig>
