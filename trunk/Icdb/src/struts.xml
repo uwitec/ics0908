@@ -18,4 +18,5 @@
 	<include file="strutsrs/storage/s_stockIn.xml"></include>
 <include file="strutsrs/baseset/s_materiel.xml"></include>
 <include file="strutsrs/storage/s_stock.xml"></include>
+<include file="strutsrs/report/s_report.xml"></include>
 </struts>
