@@ -46,6 +46,13 @@
 			}
 
 			function pageSizeChange(){
+				var pageSizeTab = document.getElementById("pageSize");
+				var pageSize = pageSizeTab.value;
+				if(!isNumber(pageSize)){
+					alert("请输入数字！");
+					pageSizeTab.focus();
+					return;
+				}
 				var tag = document.getElementById("currentPage");
 				tag.value=1;
 				document.getElementById("searchForm").submit();
@@ -83,6 +90,29 @@
 
 		  		a.deleteRow(rowIndex);
 	  		}
+
+	  		function isNumber( s ){
+			   var regu = "^[0-9]+$";
+			   var re = new RegExp(regu);
+			   if (s.search(re) != -1) {
+			   return true;
+			   } else {
+				  return false;
+				 }
+			 }
+
+			 function check(){
+			 	var start = document.getElementById('stock.stockInStartDate').value;
+            	var end = document.getElementById('stock.stockInEndDate').value;
+            	start = Date.parse(new  Date(start.replace(/-/g,"/")));
+            	end =  Date.parse(new  Date(end.replace(/-/g,"/")));
+            	if(start > end){
+            		alert("起始日期不应大于结束日期");
+            		return false;
+            	}
+            	document.getElementById("currentPage").value=1;
+            	document.getElementById("searchForm").submit();
+			 }
 		</script>
 	</head>
 	<%
@@ -93,14 +123,22 @@
 	<body>
 		<s:form id="searchForm" theme="simple" action="searchStockIn.action"
 			namespace="/stockIn">
+			<table>
+				<tr>
+					<td>
+						<s:textfield name="stock.stockInCode">入库单编号</s:textfield>
+					</td>
 
-			<s:textfield name="stock.stockInCode">入库单编号</s:textfield>
+					<td>
+						<s:textfield id="stock.stockInStartDate"
+							name="stock.stockInStartDate">开始时间</s:textfield>
+					</td>
 
-			<s:textfield name="stock.stockInStartDate">开始时间</s:textfield>
+					<td>
+						<s:textfield id="stock.stockInEndDate" name="stock.stockInEndDate">结束时间</s:textfield>
+					</td>
 
-			<s:textfield name="stock.stockInEndDate">结束时间</s:textfield>
-
-			<script type="text/javascript">
+					<script type="text/javascript">
                             Calendar.setup({
                                 inputField : "stock.stockInStartDate",
                                 ifFormat   : "%Y-%m-%d",
@@ -112,20 +150,30 @@
                                 align      : "Tl"
                             });
                         </script>
-			<s:select name="stock.stockInStateType" list="#{'1':'完成','2':'未完成'}"
-				value="2" value="stock.stockInStateType" headerKey=""
-				headerValue="全部">单据状态</s:select>
-			<s:select name="stock.stockInCheckState"
-				list="#{'0':'未审核','-1':'审核未通过'}" value="stock.stockInCheckState"
-				label="审核状态" headerKey="-2" headerValue="全部">审核状态</s:select>
-			<s:submit value="查询"></s:submit>
+					<td>
+						<s:select name="stock.stockInStateType"
+							list="#{'1':'完成','2':'未完成'}" value="2"
+							value="stock.stockInStateType" headerKey="" headerValue="全部">单据状态</s:select>
+					</td>
 
-			<input type="button" value="新建入库申请单"
-				onclick="window.location.href='goAddStockIn.action'" />
+					<td>
+						<s:select name="stock.stockInCheckState"
+							list="#{'0':'未审核','-1':'审核未通过'}" value="stock.stockInCheckState"
+							label="审核状态" headerKey="-2" headerValue="全部">审核状态</s:select>
+					</td>
+					<td>
+						<input type="button" value="查询" onclick="javascript:check();" />
+					</td>
 
+					<td>
+						<input type="button" value="新建入库申请单"
+							onclick="window.location.href='goAddStockIn.action'" />
+					</td>
+
+				</tr>
+			</table>
 
 			<p />
-
 				<s:if test="stockInList.items.size()>0">
 					<table id="stockInTable" bgcolor="black" cellpadding="0"
 						cellspacing="1" width="90%">
@@ -161,10 +209,13 @@
 									<s:property value="stockInDate"></s:property>
 								</td>
 								<td bgcolor="white">
-									<s:property value="stockInCheckState"></s:property>
+									<s:if test="stockInCheckState == 0 ">未审核</s:if>
+									<s:if test="stockInCheckState == 1 ">审核通过</s:if>
+									<s:if test="stockInCheckState == -1 ">未通过</s:if>
 								</td>
 								<td bgcolor="white">
-									<s:property value="stockInStateType"></s:property>
+									<s:if test="stockInStateType == 1 ">完成</s:if>
+									<s:if test="stockInStateType == 2 ">未完成</s:if>
 								</td>
 								<td bgcolor="white">
 									<s:if test="stockInStateType=2">
@@ -172,7 +223,8 @@
 											onclick='window.location.href="goEditStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'
 											value="编辑" />
 									</s:if>
-									<input type="button" onclick="javasctipt:deleteStockIn(this);" value="删除" />
+									<input type="button" onclick="javasctipt:deleteStockIn(this);"
+										value="删除" />
 								</td>
 							</tr>
 						</s:iterator>
@@ -184,14 +236,13 @@
 								<s:property value="page.currentPage" />
 								/
 								<s:property value="page.totalPage" />
-								<input type="hidden" id="currentPage" name="page.currentPage"
-									value="<%=((Page) request.getAttribute("page"))
-									.getCurrentPage()%>" />
+
+
 								<s:if test="page.hasNext">
 									<input type="button" onclick="nextPage();" value="下一页" />
 								</s:if>
 								&nbsp; 每页
-								<input type="text" size="4" name="page.pageSize"
+								<input type="text" size="4" id="pageSize" name="page.pageSize"
 									value="<%=((Page) request.getAttribute("page"))
 									.getPageSize()%>"
 									onchange="pageSizeChange();" />
@@ -205,6 +256,8 @@
 				<s:elseif test="lhp==null">
      	未找到你需要的数据！
      </s:elseif>
+     		<input type="hidden" id="currentPage" name="page.currentPage"
+									value="<%=((Page) request.getAttribute("page")).getCurrentPage()%>" />
 		</s:form>
 	</body>
 </html>
