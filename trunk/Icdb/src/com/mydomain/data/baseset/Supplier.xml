@@ -5,8 +5,25 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Supplier">
-	<select id="selectSupplierDef"
-		resultClass="com.mydomain.bean.baseset.SupplierBean">
+	<select id="selectSupplierCount" resultClass="com.mydomain.bean.baseset.SupplierBean">
+	SELECT SUPPLIERCODE, SUPPLIERNAME, SUPPLIERADDRESS,
+		count(*) as countValue
+		WHERE SUPPLIER.PERSONCODE=PERSON.PERSONCODE AND
+		SUPPLIER.ACCOUNTCODE=ACCOUNT.ACCOUNTCODE AND
+		SUPPLIER.BANKCODE=BANK.BANKCODE AND SUPPLIER.ISENABLED=1 AND
+		(locate(#supplierCode#,SUPPLIER.SUPPLIERCODE )>1 OR 
+		locate(#supplierName# ,SUPPLIERNAME )>1 OR
+		locate(#supplierAddress# ,SUPPLIERADDRESS )>1 OR
+		locate(#supplierPhone# ,SUPPLIERPHONE )>1 OR
+		locate(#supplierFax# ,SUPPLIERFAX )>1 OR
+		locate(#supplierZipCode#,SUPPLIERZIPCODE )>1 OR 
+		locate(#supplierTaxFileNumber# ,SUPPLIERTAXFILENUMBER )>1 OR
+		locate(#supplierRemark#,SUPPLIERREMARK )>1 OR 
+		locate(#personName# ,PERSON.PERSONNAME )>1 OR
+		locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER )>1)
+
+	</select>
+	<select id="selectSupplierDef"	resultClass="com.mydomain.bean.baseset.SupplierBean">
 		SELECT SUPPLIERCODE, SUPPLIERNAME, SUPPLIERADDRESS,
 		SUPPLIERPHONE, SUPPLIERFAX, SUPPLIERZIPCODE,
 		SUPPLIERTAXFILENUMBER, SUPPLIERREMARK, PERSON.PERSONCODE,
@@ -15,13 +32,17 @@
 		WHERE SUPPLIER.PERSONCODE=PERSON.PERSONCODE AND
 		SUPPLIER.ACCOUNTCODE=ACCOUNT.ACCOUNTCODE AND
 		SUPPLIER.BANKCODE=BANK.BANKCODE AND SUPPLIER.ISENABLED=1 AND
-		(SUPPLIER.SUPPLIERCODE LIKE #supplierCode# OR SUPPLIERNAME LIKE
-		#supplierName# OR SUPPLIERADDRESS like #supplierAddress# OR
-		SUPPLIERPHONE like #supplierPhone# OR SUPPLIERFAX like
-		#supplierFax# OR SUPPLIERZIPCODE like #supplierZipCode# OR
-		SUPPLIERTAXFILENUMBER like #supplierTaxFileNumber# OR
-		SUPPLIERREMARK like #supplierRemark# OR PERSON.PERSONNAME like
-		#personName# OR ACCOUNT.ACCOUNTNUMBER like #accountNumber#)
+		(locate(#supplierCode#,SUPPLIER.SUPPLIERCODE )>1 OR 
+		locate(#supplierName# ,SUPPLIERNAME )>1 OR
+		locate(#supplierAddress# ,SUPPLIERADDRESS )>1 OR
+		locate(#supplierPhone# ,SUPPLIERPHONE )>1 OR
+		locate(#supplierFax# ,SUPPLIERFAX )>1 OR
+		locate(#supplierZipCode#,SUPPLIERZIPCODE )>1 OR 
+		locate(#supplierTaxFileNumber# ,SUPPLIERTAXFILENUMBER )>1 OR
+		locate(#supplierRemark#,SUPPLIERREMARK )>1 OR 
+		locate(#personName# ,PERSON.PERSONNAME )>1 OR
+		locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER )>1)
+		limit #startValue#,#endValue#
 	</select>
 	<select id="getSupplierBean" parameterClass="String"
 		resultClass="com.mydomain.bean.baseset.SupplierBean">

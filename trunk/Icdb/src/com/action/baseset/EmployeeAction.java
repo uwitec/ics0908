@@ -1,11 +1,10 @@
 package com.action.baseset;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.EmployeeManage;
+import com.manage.baseset.PersonManage;
 import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.PersonBean;
 import com.mydomain.bean.baseset.ReSourceBean;
@@ -27,6 +26,8 @@ public class EmployeeAction extends ActionSupport{
 	private List<EmployeeBean> lhp;
 	private EmployeeBean employee;
 	private PersonBean person;
+	private EmployeeManage em=new EmployeeManage();
+	private PersonManage pm=new PersonManage();
 
 	/**
 	 * @return the employee
@@ -121,40 +122,22 @@ public class EmployeeAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showEmployee(){
-		try {
-			PageManage pm=new PageManage();
-			if(employee==null){
-				employee=new EmployeeBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(employee, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(employee,res.getS_value());
-			}
-			employee=(EmployeeBean)pm.setPage(employee, "selectEmployeeCount");
-			
-			lhp=(List<EmployeeBean>) DBServer.quider.queryForList("selectEmployeeDef",employee);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(employee==null){
+			employee=new EmployeeBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(employee, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(employee,res.getS_value());
+		}
+		employee=em.getPageEmployee(employee);
+		lhp=em.getEmployeeList(employee);
+	
 		return SUCCESS;
 	}
-	/*
-	@SuppressWarnings("unchecked")
-	public String selectEmployeeDef(){
-		ICTools.setBean(employee, ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<EmployeeBean>) DBServer.quider.queryForList("selectEmployeeDef",employee,0,10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-*/
+
 	public String findEmployee(){
 		this.showEmployee();
 		return SUCCESS;
@@ -172,43 +155,37 @@ public class EmployeeAction extends ActionSupport{
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
-		try {
-			employee.setPersonCode(person.getPersonCode());
-			DBServer.quider.insertObject(person);
-			DBServer.quider.insertObject(employee);
-			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(pm.addPerson(person)){
+			if(em.addEmployee(employee)){
+				res.setMessage(ICTools.MESSAGE_OK);
+			}else{
+				res.setMessage(ICTools.MESSAGE_ERROR);	
+			}
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);	
 		}
-		res.setNextPath("/baseset/GoAddEmployee.action");
-		res.setRePath("/baseset/ShowEmployee.action");
 		return SUCCESS;
 	}
 
 	public String getOneEmployee(){
 	
-		try {
-			employee=(EmployeeBean) DBServer.quider.queryForObjectById(employee.getEmployeeCode(), EmployeeBean.class);
-			person=(PersonBean) DBServer.quider.queryForObjectById(employee.getPersonCode(),PersonBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		employee=em.getEmployeeOne(employee.getEmployeeCode());
+		person=pm.getPersonOne(employee.getPersonCode());
 		return SUCCESS;
 	}
 	public String updateEmployee(){
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
-		try {
-			employee.setPersonCode(person.getPersonCode());
-			DBServer.quider.updateObject(person);
-			DBServer.quider.updateObject(employee);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(pm.updatePerson(person)){
+			if(em.updateEmployee(employee)){
+				res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			}else{
+				res.setMessage(ICTools.MESSAGE_ERROR);	
+			}
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);	
 		}
 		return SUCCESS;
 	}

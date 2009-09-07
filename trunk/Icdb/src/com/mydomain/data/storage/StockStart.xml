@@ -5,21 +5,22 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Stock">
-	<select id="selectStockOfStoreHouse" resultClass="com.mydomain.bean.storage.StockBean">
+	<select id="selectStockOfStoreHouse"  resultClass="com.mydomain.bean.storage.StockBean">
 	Select 
-	s.cargoSpaceCode
-	c.cargoSpaceName
-	s.materielCode
-	m.materielName
-	s.stockPrice
-	s.stockAmount
+	s.cargoSpaceCode,
+	c.cargoSpaceName,
+	s.materielCode,
+	m.materielName,
+	s.stockPrice,
+	s.stockAmount,
 	s.jsonField
 	from stock as s,CargoSpace as c,Materiel as m
 	where 
 	s.cargoSpaceCode=c.cargoSpaceCode and 
 	s.materielCode=m.materielCode and
-	s.cargoSpaceCode=#cargoSpaceCode#
-	limit #startValue#,#endValue#
+	s.cargoSpaceCode in
+	(select cargoSpaceCode from cargoSpace where storehouseCode=#storehouseCode#)
+	
 	</select>
 	<select id="selectStockDef" resultClass="com.mydomain.bean.storage.StockBean">
 	Select 
@@ -28,13 +29,17 @@
 	where 
 	s.cargoSpaceCode=c.cargoSpaceCode and 
 	s.materielCode=m.materielCode and
-	s.cargoSpaceCode=#cargoSpaceCode#
+	s.cargoSpaceCode in
+	(select cargoSpaceCode from cargoSpace where storehouseCode=#storehouseCode#)
 	</select>
 	<select id="getStockBean" parameterClass="String" resultClass="com.mydomain.bean.storage.StockBean">
 	
 	</select>
 	<insert id="insertStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
-			</insert>
+	insert into stock
+	(cargoSpaceCode,materielCode,stockPrice,stockAmount,jsonField)
+	values(#cargoSpaceCode#,#materielCode#,#stockPrice#,#stockAmount#,#jsonField#)
+	</insert>
 	<update id="updateStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
 		</update>
 	<delete id="deleteStockBean" parameterClass="com.mydomain.bean.storage.StockBean">

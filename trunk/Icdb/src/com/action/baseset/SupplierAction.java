@@ -1,9 +1,8 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
+import com.manage.baseset.SupplierManage;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.SupplierBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,6 +18,7 @@ public class SupplierAction extends ActionSupport{
 	private ReSourceBean res;
 	private List<SupplierBean> lhp;
 	private SupplierBean supplier;
+	private SupplierManage sm=new SupplierManage();
 	
 	/**
 	 * @return the lhp
@@ -65,29 +65,20 @@ public class SupplierAction extends ActionSupport{
 	
 	public String addSupplier(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(supplier);
+		if(sm.addSupplier(supplier)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddSupplier.action");
-		res.setRePath("/baseset/ShowSupplier.action");
 		return SUCCESS;
 	}
 	
 	public String getOneSupplier(){
-		try {
-			supplier=(SupplierBean) DBServer.quider.queryForObjectById(supplier.getSupplierCode(), SupplierBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		supplier=sm.getSupplierOne(supplier.getSupplierCode());
 		return SUCCESS;
 	}
 	
+	/*
 	@SuppressWarnings("unchecked")
 	public String selectSupplierDef(){
 		ICTools.setBean(supplier, ICTools.likeString(res.getS_value()));
@@ -99,35 +90,40 @@ public class SupplierAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+	*/
 	
 	@SuppressWarnings("unchecked")
 	public String showSupplier(){
-		try {
-			lhp=(List<SupplierBean>) DBServer.quider.queryForList(0, 10, SupplierBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(supplier==null){
+			supplier=new SupplierBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(supplier, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(supplier,res.getS_value());
+		}
+		supplier=sm.getPageSupplier(supplier);
+		lhp=sm.getSupplierList(supplier);
 		return SUCCESS;
 	}
 	
 	public String updateSupplier(){
-		try {
-			DBServer.quider.updateObject(supplier);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(sm.updateSupplier(supplier)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
-	public String deleteSuString(){
+	public String deleteSupplierString(){
 		supplier=new SupplierBean();
-		try {
-			DBServer.quider.deleteObject(supplier);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(sm.deleteSupplier(supplier)){
+			res.setMessage(ICTools.MESSAGE_DELETEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

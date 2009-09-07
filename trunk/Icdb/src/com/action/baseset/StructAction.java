@@ -1,10 +1,8 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.StructManage;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StructBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,6 +17,7 @@ public class StructAction extends ActionSupport{
 	private ReSourceBean res;
 	private StructBean struct;
 	private List<StructBean> lhp;
+	private StructManage sm=new StructManage();
 	/**
 	 * @return the lhp
 	 */
@@ -57,70 +56,40 @@ public class StructAction extends ActionSupport{
 	}
 	public String addStruct(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(struct);
+		if(sm.addStruct(struct)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddStruct.action");
-		res.setRePath("/baseset/ShowStruct.action");
 		return SUCCESS;
 	}
 	public String getOneStruct(){
-		try {
-			struct=(StructBean) DBServer.quider.queryForObjectById(struct.getStructCode(), StructBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		struct=sm.getStructOne(struct.getStructCode());
 		return SUCCESS;
 	}
 	
-	/*
-	@SuppressWarnings("unchecked")
-	public String selectStructDef(){
-		ICTools.setBean(struct, ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<StructBean>) DBServer.quider.queryForList("selectStructDef", struct, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-	*/
 	@SuppressWarnings("unchecked")
 	public String showStruct(){
-		try {
-			PageManage pm=new PageManage();
-			if(struct==null){
-				struct=new StructBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(struct, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(struct,res.getS_value());
-			}
-			struct=(StructBean) pm.setPage(struct, "selectStructcount");
-			lhp=(List<StructBean>) DBServer.quider.queryForList("selectStructDef",struct);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(struct==null){
+			struct=new StructBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(struct, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(struct,res.getS_value());
+		}
+		struct=sm.getPageStruct(struct);
+		lhp=sm.getStructList(struct);
 		return SUCCESS;
 	}
+	
 	public String updateStruct(){
-		try {
-			DBServer.quider.updateObject(struct);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(sm.updateStruct(struct)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

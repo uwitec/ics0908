@@ -1,10 +1,10 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
+
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+
+import com.manage.baseset.StorehouseManage;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,6 +19,7 @@ public class StorehouseAction extends ActionSupport{
 	private ReSourceBean res;
 	private List<StorehouseBean> lhp;
 	private StorehouseBean storehouse;
+	private StorehouseManage sm=new StorehouseManage();
 	/**
 	 * @return the lhp
 	 */
@@ -55,39 +56,22 @@ public class StorehouseAction extends ActionSupport{
 	public void setRes(ReSourceBean res) {
 		this.res = res;
 	}
-	/*
-	@SuppressWarnings("unchecked")
-	public String selectStorehouseDef(){
-		ICTools.setBean(storehouse, ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<StorehouseBean>) DBServer.quider.queryForList("selectStorehouseDef", storehouse, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-	*/
+	
+	
 	@SuppressWarnings("unchecked")
 	public String showStorehouse(){
-		try {
-			PageManage pm=new PageManage();
-			if(storehouse==null){
-				storehouse=new StorehouseBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(storehouse, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(storehouse,res.getS_value());
-			}
-			storehouse=(StorehouseBean) pm.setPage(storehouse, "selectStorehousecount");
-			lhp=(List<StorehouseBean>) DBServer.quider.queryForList("selectStorehouseDef",storehouse);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(storehouse==null){
+			storehouse=new StorehouseBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(storehouse, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(storehouse,res.getS_value());
+		}
+		storehouse=sm.getPageStorehouse(storehouse);
+		lhp=sm.getStorhouesList(storehouse);
 		return SUCCESS;
 	}
 	
@@ -99,45 +83,33 @@ public class StorehouseAction extends ActionSupport{
 	
 	public String addStorehouse(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(storehouse);
+		if(sm.addStorehouse(storehouse)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddStorehouse.action");
-		res.setRePath("/baseset/ShowStorehouse.action");
 		return SUCCESS;
 	}
 	
 	public String getOneStorehouse(){
-		try {
-			storehouse=(StorehouseBean) DBServer.quider.queryForObjectById(storehouse.getStorehouseCode(), StorehouseBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		storehouse=sm.getStorehouseOne(storehouse.getStorehouseCode());
 		return SUCCESS;
 	}
 	
 	public String updateStorehouse(){	
-		try {
-			DBServer.quider.updateObject(storehouse);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(sm.updateStorehouse(storehouse)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteStorehouse(){
-		try {
-			DBServer.quider.deleteObject(storehouse);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(sm.deleteStorehouse(storehouse)){
+			res.setMessage(ICTools.MESSAGE_DELETEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

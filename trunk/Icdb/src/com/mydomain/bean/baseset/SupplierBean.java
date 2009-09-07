@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 供应商BEAN
  * */
-public class SupplierBean {
+public class SupplierBean extends BaseBean{
 
 	private String supplierCode; //供应商编码
 	private String supplierName; //供应商名称

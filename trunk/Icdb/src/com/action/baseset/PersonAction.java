@@ -1,11 +1,9 @@
 package com.action.baseset;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.PersonManage;
 import com.mydomain.bean.baseset.PersonBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -26,6 +24,7 @@ public class PersonAction extends ActionSupport{
 	private ReSourceBean res;
 	private PersonBean person;
 	private List<PersonBean> lhp;
+	private PersonManage pm=new PersonManage();
 
 	/**
 	 * @return the lhp
@@ -70,16 +69,11 @@ public class PersonAction extends ActionSupport{
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
-			try {
-			DBServer.quider.insertObject(person);
+		if(pm.addPerson(person)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddPerson.action");
-		res.setRePath("/baseset/ShowPerson.action");
 		return SUCCESS;
 	}
 	
@@ -90,39 +84,24 @@ public class PersonAction extends ActionSupport{
 	}
 	
 	public String getOnePerson(){
-		
-		try {
-			person=(PersonBean) DBServer.quider.queryForObjectById(person.getPersonCode(), PersonBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		person=pm.getPersonOne(person.getPersonCode());
 		return SUCCESS;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String showPerson(){
-		try {
-			PageManage pm=new PageManage();
-			if(person==null){
-				person=new PersonBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(person, "");
-				res.setS_value("");
-			}else{
-				System.out.println(res.getS_value());
-				ICTools.setBean(person,res.getS_value());
-			}
-			person=(PersonBean) pm.setPage(person, "selectPersonDefPag");
-			//System.out.println(person.getPersonCode());
-			//person.print();
-			lhp=(List<PersonBean>) DBServer.quider.queryForList("selectPersonDef", person);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(person==null){
+			person=new PersonBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(person, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(person,res.getS_value());
+		}
+		person=pm.getPagePerson(person);
+		lhp=pm.getPersonList(person);
 		return SUCCESS;
 	}
 	
@@ -136,13 +115,11 @@ public class PersonAction extends ActionSupport{
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}	
-		try {
-			DBServer.quider.updateObject(person);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(pm.updatePerson(person)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		
 		return SUCCESS;
 	}
 	/**

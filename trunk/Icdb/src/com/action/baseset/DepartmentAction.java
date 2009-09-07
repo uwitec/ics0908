@@ -1,10 +1,9 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.DepartmentManage;
+import com.manage.baseset.StructManage;
 import com.mydomain.bean.baseset.DepartmentBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StructBean;
@@ -19,7 +18,9 @@ public class DepartmentAction extends ActionSupport{
 	private ReSourceBean res;
 	private List<StructBean> lsb;
 	private DepartmentBean department;
-	public List<DepartmentBean> lhp;
+	private List<DepartmentBean> lhp;
+	private DepartmentManage dm=new DepartmentManage();
+	private StructManage sm=new StructManage();
 	/**
 	 * @return the department
 	 */
@@ -70,61 +71,29 @@ public class DepartmentAction extends ActionSupport{
 	}
 	public String addDepartment(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(department);
+		if(dm.addDepartment(department)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddDepartment.action");
-		res.setRePath("/baseset/ShowDepartment.action");
 		return SUCCESS;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public String getOneDepartment(){
-		try {
-			department=(DepartmentBean) DBServer.quider.queryForObjectById(department.getDepartmentCode(), DepartmentBean.class);
-			lsb=(List<StructBean>) DBServer.quider.queryForList(StructBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		department=dm.getDepartmentOne(department.getDepartmentCode());
+		lsb=sm.getStructAllList();
 		return SUCCESS;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public String goAddDepartment(){
 		department=new DepartmentBean();
-		try {
-			lsb=(List<StructBean>) DBServer.quider.queryForList(StructBean.class);
-			department.setDepartmentCode(ICTools.randId("D"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		department.setDepartmentCode(ICTools.randId("D"));
+		lsb=sm.getStructAllList();
 		return SUCCESS;
 	}
 	
-	/*
-	@SuppressWarnings("unchecked")
-	public String selectDepartmentDef(){
-		ICTools.setBean(department, ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<DepartmentBean>) DBServer.quider.queryForList("selectDepartmentDef", department, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-	*/
 	@SuppressWarnings("unchecked")
 	public String showDepartment(){
-		try {
-			PageManage pm=new PageManage();
 			if(department==null){
 				department=new DepartmentBean();
 			}
@@ -135,31 +104,25 @@ public class DepartmentAction extends ActionSupport{
 			}else{
 				ICTools.setBean(department,res.getS_value());
 			}
-			department=(DepartmentBean) pm.setPage(department, "selectDepartmentCount");
-			lhp=(List<DepartmentBean>) DBServer.quider.queryForList("selectDepartmentDef",department);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			department=dm.getPageDepartment(department);
+			lhp=dm.getDepartmentList(department);
 		return SUCCESS;
 	}
 	
 	public String updateDepartment(){
-		try {
-			DBServer.quider.updateObject(department);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(dm.updateDepartment(department)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteDepartment(){
-		try {
-			DBServer.quider.deleteObject(department);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(dm.deleteDepartment(department)){
+			res.setMessage(ICTools.MESSAGE_DELETEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

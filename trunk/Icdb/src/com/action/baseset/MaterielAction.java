@@ -1,13 +1,11 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import propeties.IcdbOption;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.MaterielManage;
 import com.mydomain.bean.baseset.MaterielBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -23,6 +21,7 @@ public class MaterielAction extends ActionSupport{
 	private MaterielBean materiel;
 	private List<MaterielBean> lhp;
 	private LinkedHashMap<?,?> lsb;
+	private MaterielManage mm=new MaterielManage();
 	/**
 	 * @return the lsb
 	 */
@@ -74,61 +73,44 @@ public class MaterielAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showMateriel(){
-		try {
-			PageManage pm=new PageManage();
-			if(materiel==null){
-				materiel=new MaterielBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(materiel, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(materiel,res.getS_value());
-			}
-			lsb=IcdbOption.getABCType();
-			materiel=(MaterielBean) pm.setPage(materiel, "selectMaterielCount");
-			lhp=(List<MaterielBean>) DBServer.quider.queryForList("selectMaterielDef",materiel);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(materiel==null){
+			materiel=new MaterielBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(materiel, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(materiel,res.getS_value());
+		}
+		lsb=IcdbOption.getABCType();
+		materiel=mm.getPageMateriel(materiel);
+		lhp=mm.getMaterielList(materiel);
 		return SUCCESS;
 	}
 	
 	public String addMateriel(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(materiel);
+		if(mm.addMateriel(materiel)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddMateriel.action");
-		res.setRePath("/baseset/ShowMateriel.action");
-		
 		return SUCCESS;
 	}
 
 	public String getOneMateriel(){
-		try {
-			lsb=IcdbOption.getABCType();
-			materiel=(MaterielBean) DBServer.quider.queryForObjectById(materiel.getMaterielCode(), MaterielBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		lsb=IcdbOption.getABCType();
+		materiel=mm.getMaterielOne(materiel.getMaterielCode());
 		return SUCCESS;
 	}
+	
+	
 	public String updateMateriel(){
-		try {
-			DBServer.quider.updateObject(materiel);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(mm.updateMateriel(materiel)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

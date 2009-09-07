@@ -106,11 +106,15 @@ public class StockAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String getStockMaterielList(){
 		try {
-		
+			if(stock==null){
+				stock=new StockBean();
+			}
 			storehouse=(StorehouseBean) DBServer.quider.queryForObjectById(storehouse.getStorehouseCode(), StorehouseBean.class);
-			System.out.println(storehouse.getStorehouseCode());
+			stock.setStorehouseCode(storehouse.getStorehouseCode());
+		//	System.out.println(storehouse.getStorehouseCode());
 			lcsb=(List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace",storehouse);
 			lhp=(List<StockBean>) DBServer.quider.queryForList("selectStockOfStoreHouse", stock);
+			System.out.println(stock.getStorehouseCode());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,7 +124,7 @@ public class StockAction extends ActionSupport{
 
 	public String addStock(){
 		try {
-			DBServer.quider.insertObject(storehouse);
+			DBServer.quider.insertObject(stock);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
