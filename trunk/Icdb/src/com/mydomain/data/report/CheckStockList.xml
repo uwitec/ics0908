@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CheckStockList">
+
+	<select id="queryABCReportList" parameterClass="com.mydomain.bean.report.ABCReportBean"
+		resultClass="com.mydomain.bean.report.ABCReportBean">
+		SELECT
+		CSCODE as csCode,
+		MATERIELCODE as materielCode,
+		CARGOSPACECODE as cargoSpaceCode,
+		CSSTARTPRICE as csStartPrice,
+		CSSTARTNUMBER as csStartNumber,
+		CSCHECKPRICE as csCheckPrice,
+		CSCHECKNUMBER as csCheckNumber,
+		CSDIFFMESSAGE as csDiffMessage,
+		CSREMARK as csRemark,
+		CSGM as
+		csGM
+		FROM CHECKSTOCKLIST where CSCODE=#csCode#
+	</select>
+</sqlMap>
