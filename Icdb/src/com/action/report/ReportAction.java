@@ -42,6 +42,10 @@ public class ReportAction extends ActionSupport {
 		}
 		return "SUCCESS";
 	}
+	
+	public String showReportList(){
+		return "SUCCESS";
+	}
 
 	public List<CheckStock> getCsList() {
 		return csList;
