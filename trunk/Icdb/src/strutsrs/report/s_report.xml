@@ -4,9 +4,12 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 <package name="report" extends="struts-default" namespace="/report">
-<action name="ShowReportList" class="com.action.report.ReportAction" method="selectCheckStock">
+<action name="CheckStockList" class="com.action.report.ReportAction" method="selectCheckStock">
    <result name="SUCCESS">/report/list.jsp</result>
    <result name="NULLRESULT">/index.jsp</result>
+</action>
+<action name="ShowReportList" class="com.action.report.ReportAction" method="showReportList">
+   <result name="SUCCESS">/report/report.jsp</result>
 </action>
 </package>
 </struts>
