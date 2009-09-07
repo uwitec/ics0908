@@ -1,9 +1,8 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
+import com.manage.baseset.BankManage;
 import com.mydomain.bean.baseset.BankBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -18,7 +17,7 @@ public class BankAction extends ActionSupport{
 	private BankBean bank;
 	private List<BankBean> lhp;
 	private ReSourceBean res;
-	
+	private BankManage bm=new BankManage();
 
 	/**
 	 * @return the res
@@ -63,69 +62,56 @@ public class BankAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String selectBankDef(){
-		try {
-			bank.setBankName(ICTools.likeString(res.getS_value()));
-			lhp=(List<BankBean>) DBServer.quider.queryForList("selectAllFind", bank, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.showBank();
 		return SUCCESS;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String showBank(){
-		
-		try {
-			lhp=(List<BankBean>) DBServer.quider.queryForList(BankBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(bank==null){
+			bank=new BankBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(bank, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(bank,res.getS_value());
+		}
+		lhp=bm.getBankList(bank);
 		return SUCCESS;
 	}
 	
 	public String addBank(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(bank);
+		if(bm.addBank(bank)){
 			res.setMessage(ICTools.MESSAGE_OK);	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/bank/BankAdd.jsp");
-		res.setRePath("/baseset/ShowBank.action");
 		return SUCCESS;
 	}
 	
 	public String getOneBank(){
-		try {
-			bank=(BankBean) DBServer.quider.queryForObjectById(bank.getBankCode(), BankBean.class);		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();		
-		}
+		bank=bm.getBankOne(bank.getBankCode());
 		return SUCCESS;
 	}
 	
 	public String updateBank(){
-		try {
-			DBServer.quider.updateObject(bank);		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(bm.updateBank(bank)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);	
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteBank(){
-		try {
-			DBServer.quider.deleteObject(bank);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(bm.deleteBank(bank)){
+			res.setMessage(ICTools.MESSAGE_DELETEOK);	
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -133,13 +119,7 @@ public class BankAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	
 	public String findBank(){
-		bank.setBankName(ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<BankBean>) DBServer.quider.queryForList("selectAllFind", bank, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.showBank();
 		return SUCCESS;
 	}
 }

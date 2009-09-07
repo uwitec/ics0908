@@ -1,9 +1,8 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
+import com.manage.baseset.CargoSpaceManage;
 import com.mydomain.bean.baseset.CargoSpaceBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -19,6 +18,7 @@ public class CargoSpaceAction extends ActionSupport{
 	private ReSourceBean res;
 	private List<CargoSpaceBean> lhp;
 	private CargoSpaceBean cargoSpace;
+	private CargoSpaceManage csm;
 	/**
 	 * @return the cargoSapce
 	 */
@@ -61,17 +61,11 @@ public class CargoSpaceAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String getHouseSapce(){
-		try {
-			lhp=(List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace", cargoSpace, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		lhp=csm.getCargoSpaceList(cargoSpace);
 		return SUCCESS;
 	}
 	
-	
+	/*
 	@SuppressWarnings("unchecked")
 	public String showCargoSpace(){
 		try {
@@ -82,47 +76,35 @@ public class CargoSpaceAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-
+	*/
+	
 	public String goAddCargoSpace(){
 		cargoSpace.setCargoSpaceCode(ICTools.randId("C"));
-		System.out.println(cargoSpace.getStorehouseName());
-		System.out.println(cargoSpace.getStorehouseCode());
 		return SUCCESS;
 	}
 	
 	public String addCargoSpace(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(cargoSpace);
+		if(csm.addCargoSpace(cargoSpace)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		//res.setNextPath("/baseset/GoAddCargoSpace.action");
-		//res.setRePath("/baseset/ShowCargoSpace.action");
-		res.setNextPath("/baseset/GoAddCargoSpace.action?cargoSpace.storehouseCode="+cargoSpace.getStorehouseCode()+"&cargoSpace.storehouseName="+cargoSpace.getCargoSpaceName());
-		res.setRePath("/baseset/ShowCargoSpace.action?cargoSpace.storehouseCode="+cargoSpace.getStorehouseCode()+"&cargoSpace.storehouseName="+cargoSpace.getCargoSpaceName());
 		return SUCCESS;
 	}
 	
 	public String getOneCargoSpace(){
-		try {
-			cargoSpace=(CargoSpaceBean) DBServer.quider.queryForObjectById(cargoSpace.getCargoSpaceCode(), CargoSpaceBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		cargoSpace=csm.getCargoSpaceOne(cargoSpace.getCargoSpaceCode());
 		return SUCCESS;
 	}
 	
 	public String updateCargoSpace(){
-		try {
-			DBServer.quider.updateObject(cargoSpace);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(csm.updateCargoSpace(cargoSpace)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 
 import com.dbserver.conf.ALCFFactory;
 import com.dbserver.conf.AutoConfiger;
-import com.tools.ICTools;
 
 public class IcdbOption {
 	
@@ -32,7 +31,7 @@ public class IcdbOption {
 	}
 	
 	
-	
+	/*
 	private static LinkedHashMap<String, StateBean> getState2(String keyValue){
 		LinkedHashMap<String, StateBean>lhp=new LinkedHashMap<String, StateBean>();
 		StateBean st;
@@ -47,7 +46,7 @@ public class IcdbOption {
 		}
 		return lhp;
 	}	
-	
+	*/
 	private static LinkedHashMap<?, ?> getState(String keyValue){
 		LinkedHashMap<String, String>lhp=new LinkedHashMap<String, String>();
 		String[] tab_str=IcdbOption.getValue(keyValue).split(",");

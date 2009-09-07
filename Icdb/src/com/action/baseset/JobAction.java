@@ -1,10 +1,9 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.DepartmentManage;
+import com.manage.baseset.JobManage;
 import com.mydomain.bean.baseset.DepartmentBean;
 import com.mydomain.bean.baseset.JobBean;
 import com.mydomain.bean.baseset.ReSourceBean;
@@ -22,6 +21,8 @@ public class JobAction extends ActionSupport{
 	private JobBean job;
 	private List<JobBean> lhp;
 
+	private JobManage jm=new JobManage();
+	private DepartmentManage dm=new DepartmentManage();
 	/**
 	 * @return the job
 	 */
@@ -70,89 +71,63 @@ public class JobAction extends ActionSupport{
 	public void setRes(ReSourceBean res) {
 		this.res = res;
 	}
+	
 	@SuppressWarnings("unchecked")
 	public String getOneJob(){
-		try {
-			job=(JobBean) DBServer.quider.queryForObjectById(job.getJobCode(), JobBean.class);
-			ldb=(List<DepartmentBean>) DBServer.quider.queryForList(DepartmentBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		job=jm.getJobOne(job.getJobCode());
+		ldb=dm.getDepartmentAllList();
 		return SUCCESS;
 	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public String goAddJob(){
 		job=new JobBean();
-		try {
-			ldb=(List<DepartmentBean>) DBServer.quider.queryForList(DepartmentBean.class);
-			job.setJobCode(ICTools.randId("J"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ldb=dm.getDepartmentAllList();
+		job.setJobCode(ICTools.randId("J"));
 		return SUCCESS;
 	}
+	
+	
 	public String addJob(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(job);
+		if(jm.addJob(job)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddJob.action");
-		res.setRePath("/baseset/ShowJob.action");
-		
 		return SUCCESS;
 	}
+	
+	
 	@SuppressWarnings("unchecked")
 	public String showJob(){
-		try {
-			PageManage pm=new PageManage();
-			if(job==null){
-				job=new JobBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(job, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(job,res.getS_value());
-			}
-			job=(JobBean) pm.setPage(job, "selectJobcount");
-			lhp=(List<JobBean>) DBServer.quider.queryForList("selectJobDef",job);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(job==null){
+			job=new JobBean();
 		}
+		if(res==null){
+			res=new ReSourceBean();
+			ICTools.setBean(job, "");
+			res.setS_value("");
+		}else{
+			ICTools.setBean(job,res.getS_value());
+		}
+		job=jm.getPageJob(job);
+		lhp=jm.getJobList(job);
 		return SUCCESS;
 	}
+	
+	
 	public String updateJob(){
-		try {
-			DBServer.quider.updateObject(job);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(jm.updateJob(job)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
-	/*
-	@SuppressWarnings("unchecked")
-	public String selectJobDef(){
-		ICTools.setBean(job, ICTools.likeString(res.getS_value()));
-		try {
-			lhp=(List<JobBean>) DBServer.quider.queryForList("selectJobDef", job, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-	*/
+
 	
 	public String findJob(){
 		this.showJob();

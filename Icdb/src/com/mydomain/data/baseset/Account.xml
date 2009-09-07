@@ -17,7 +17,6 @@
 		AND
 		( locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER)>0
 		OR locate(#accountCode#,ACCOUNTCODE)>0
-		OR locate(#accountName#,ACCOUNTNAME)>0 
 		OR locate(#accountType#,ACCOUNTTYPE)>0 
 		OR locate(#personName#,PERSON.PERSONNAME)>0 
 		OR locate(#bankName#,BANK.BANKNAME)>0)
@@ -26,7 +25,6 @@
 		SELECT
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
-		ACCOUNTNAME,
 		ACCOUNTTYPE,
 		ACCOUNT.PERSONCODE,
 		PERSON.PERSONNAME,
@@ -41,7 +39,6 @@
 		AND
 		( locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER)>0
 		OR locate(#accountCode#,ACCOUNTCODE)>0
-		OR locate(#accountName#,ACCOUNTNAME)>0 
 		OR locate(#accountType#,ACCOUNTTYPE)>0 
 		OR locate(#personName#,PERSON.PERSONNAME)>0 
 		OR locate(#bankName#,BANK.BANKNAME)>0)
@@ -51,7 +48,6 @@
 		SELECT
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
-		ACCOUNTNAME,
 		ACCOUNTTYPE,
 		ACCOUNT.PERSONCODE,
 		PERSON.PERSONNAME,
@@ -68,15 +64,14 @@
 	</select>
 	<insert id="insertAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		INSERT INTO ACCOUNT
-		(ACCOUNTCODE,ACCOUNTNUMBER,ACCOUNTNAME,ACCOUNTTYPE,PERSONCODE,BANKCODE,ISENABLED) 
+		(ACCOUNTCODE,ACCOUNTNUMBER,ACCOUNTTYPE,PERSONCODE,BANKCODE,ISENABLED) 
 		VALUES
-		(#accountCode#,#accountNumber#,#accountName#,#accountType#,#personCode#,#bankCode#,1)
+		(#accountCode#,#accountNumber#,#accountType#,#personCode#,#bankCode#,1)
 	</insert>
 	<update id="updateAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		UPDATE ACCOUNT
 		SET 
 		ACCOUNTNUMBER=#accountNumber#,
-		ACCOUNTNAME=#accountName#,
 		ACCOUNTTYPE=#accountType#,
 		PERSONCODE=#personCode#,
 		BANKCODE=#bankCode#,

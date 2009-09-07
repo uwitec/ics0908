@@ -16,7 +16,9 @@ import org.apache.struts2.ServletActionContext;
 
 public class ICTools {
 	
-	public static String MESSAGE_OK="";
+	public static String MESSAGE_OK="添加成功";
+	public static String MESSAGE_UPDATEOK="修改成功";
+	public static String MESSAGE_DELETEOK="删除成功";
 	public static String MESSAGE_ERROR="数据有错误，请检查";
 	private static final int BUFFER_SIZE = 16 * 1024 ;
 	

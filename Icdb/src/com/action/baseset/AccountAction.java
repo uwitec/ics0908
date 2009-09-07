@@ -1,10 +1,8 @@
 package com.action.baseset;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
-import com.manage.baseset.PageManage;
+import com.manage.baseset.AccountManage;
 import com.mydomain.bean.baseset.AccountBean;
 import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,6 +19,7 @@ public class AccountAction extends ActionSupport{
 	private List<AccountBean> lhp;
 	private AccountBean account;
 	private ReSourceBean res;
+	private AccountManage am=new AccountManage();
 
 
 	/**
@@ -63,26 +62,9 @@ public class AccountAction extends ActionSupport{
 	public void setLhp(List<AccountBean> lhp) {
 		this.lhp = lhp;
 	}
-/*
-	@SuppressWarnings("unchecked")
-	public String selectAccountDef(){
-		String v_str=ICTools.likeString(res.getS_value());
-		
-		ICTools.setBean(account, v_str);
-		try {
-			lhp=(List<AccountBean>) DBServer.quider.queryForList("selectAccountDef", account, 0, 10);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return SUCCESS;
-	}
-*/
 	
 	@SuppressWarnings("unchecked")
 	public String showAccount(){
-		try {
-			PageManage pm=new PageManage();
 			if(account==null){
 				account=new AccountBean();
 			}
@@ -93,12 +75,8 @@ public class AccountAction extends ActionSupport{
 			}else{
 				ICTools.setBean(account,res.getS_value());
 			}
-			account=(AccountBean) pm.setPage(account, "selectAccountCount");
-			lhp=(List<AccountBean>) DBServer.quider.queryForList("selectAccountDef", account);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			account=am.getPageAccount(account);
+			lhp=am.getAccountList(account);
 		return SUCCESS;
 	}
 	
@@ -118,47 +96,35 @@ public class AccountAction extends ActionSupport{
 	
 	public String addAccount(){
 		res=new ReSourceBean();
-		try {
-			DBServer.quider.insertObject(account);
+		if(am.addAccount(account)){
 			res.setMessage(ICTools.MESSAGE_OK);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}else{
 			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		res.setNextPath("/baseset/GoAddAccount.action");
-		res.setRePath("/baseset/ShowAccount.action");
 		return SUCCESS;
 	}
 
 	public String getOneAccount(){
-		try {
-			account=(AccountBean) DBServer.quider.queryForObjectById(account.getAccountCode(), AccountBean.class);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(account.getBankName());
+		account=am.getAccountOne(account.getAccountCode());
 		return SUCCESS;
 	}
+	
 	public String updateAccount(){
-		
-		try {
-			DBServer.quider.updateObject(account);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		res=new ReSourceBean();
+		if(am.updateAccount(account)){
+			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteAccount(){
 
-		try {
-			DBServer.quider.deleteObject(account);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(am.deleteAccount(account)){
+			res.setMessage(ICTools.MESSAGE_DELETEOK);
+		}else{
+			res.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
