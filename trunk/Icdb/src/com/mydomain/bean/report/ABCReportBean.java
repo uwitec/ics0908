@@ -2,28 +2,74 @@ package com.mydomain.bean.report;
 
 public class ABCReportBean {
 
+	private String beginDate;
+	private String endDate;
+	private String searchTeyp;
+	private String csCode;
+	private String lastCsCode;
+
 	private String name;
 	private String materielType;
 	private String specification;
 	private String util;
 
-	private int lastAmount;
-	private double lastPrice;
-	private double lastTotalPrice;
+	private Integer lastAmount;
+	private Double lastPrice;
+	private Double lastTotalPrice;
 
-	private int amount;
-	private double price;
-	private double totalPrice;
+	private Integer amount;
+	private Double price;
+	private Double totalPrice;
 
-	private int inAmount;
-	private double inPrice;
-	private double inTotalPrice;
+	private Integer inAmount;
+	private Double inPrice;
+	private Double inTotalPrice;
 
-	private int outAmount;
-	private double outPrice;
-	private double outTotalPrice;
+	private Integer outAmount;
+	private Double outPrice;
+	private Double outTotalPrice;
 
 	private String remark;
+
+	public String getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(String beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getSearchTeyp() {
+		return searchTeyp;
+	}
+
+	public void setSearchTeyp(String searchTeyp) {
+		this.searchTeyp = searchTeyp;
+	}
+
+	public String getCsCode() {
+		return csCode;
+	}
+
+	public void setCsCode(String csCode) {
+		this.csCode = csCode;
+	}
+
+	public String getLastCsCode() {
+		return lastCsCode;
+	}
+
+	public void setLastCsCode(String lastCsCode) {
+		this.lastCsCode = lastCsCode;
+	}
 
 	public String getName() {
 		return name;
@@ -57,99 +103,99 @@ public class ABCReportBean {
 		this.util = util;
 	}
 
-	public int getLastAmount() {
+	public Integer getLastAmount() {
 		return lastAmount;
 	}
 
-	public void setLastAmount(int lastAmount) {
+	public void setLastAmount(Integer lastAmount) {
 		this.lastAmount = lastAmount;
 	}
 
-	public double getLastPrice() {
+	public Double getLastPrice() {
 		return lastPrice;
 	}
 
-	public void setLastPrice(double lastPrice) {
+	public void setLastPrice(Double lastPrice) {
 		this.lastPrice = lastPrice;
 	}
 
-	public double getLastTotalPrice() {
+	public Double getLastTotalPrice() {
 		return lastTotalPrice;
 	}
 
-	public void setLastTotalPrice(double lastTotalPrice) {
+	public void setLastTotalPrice(Double lastTotalPrice) {
 		this.lastTotalPrice = lastTotalPrice;
 	}
 
-	public int getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public double getTotalPrice() {
+	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(double totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	public int getInAmount() {
+	public Integer getInAmount() {
 		return inAmount;
 	}
 
-	public void setInAmount(int inAmount) {
+	public void setInAmount(Integer inAmount) {
 		this.inAmount = inAmount;
 	}
 
-	public double getInPrice() {
+	public Double getInPrice() {
 		return inPrice;
 	}
 
-	public void setInPrice(double inPrice) {
+	public void setInPrice(Double inPrice) {
 		this.inPrice = inPrice;
 	}
 
-	public double getInTotalPrice() {
+	public Double getInTotalPrice() {
 		return inTotalPrice;
 	}
 
-	public void setInTotalPrice(double inTotalPrice) {
+	public void setInTotalPrice(Double inTotalPrice) {
 		this.inTotalPrice = inTotalPrice;
 	}
 
-	public int getOutAmount() {
+	public Integer getOutAmount() {
 		return outAmount;
 	}
 
-	public void setOutAmount(int outAmount) {
+	public void setOutAmount(Integer outAmount) {
 		this.outAmount = outAmount;
 	}
 
-	public double getOutPrice() {
+	public Double getOutPrice() {
 		return outPrice;
 	}
 
-	public void setOutPrice(double outPrice) {
+	public void setOutPrice(Double outPrice) {
 		this.outPrice = outPrice;
 	}
 
-	public double getOutTotalPrice() {
+	public Double getOutTotalPrice() {
 		return outTotalPrice;
 	}
 
-	public void setOutTotalPrice(double outTotalPrice) {
+	public void setOutTotalPrice(Double outTotalPrice) {
 		this.outTotalPrice = outTotalPrice;
 	}
 
@@ -160,6 +206,5 @@ public class ABCReportBean {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	
+
 }
