@@ -30,8 +30,11 @@
 		</tr>
 		<s:iterator value="csList" status="stat">
 			<tr>
-				<td><s:url id="showReportList"  action="ShowReportList">
-					<s:param name="csBean.csCode" value="csCode"></s:param>
+				<td><s:url id="showReportList" action="ShowReportList">
+					<s:param name="oldCsCode" value="oldCsCode"></s:param>
+					<s:param name="csCode" value="csCode"></s:param>
+					<s:param name="beginDate" value="beginDate"></s:param>
+					<s:param name="endDate" value="csDate"></s:param>
 				</s:url> <s:a href="%{showReportList}">
 					<s:property value="csCode"></s:property>
 				</s:a></td>
@@ -45,8 +48,12 @@
 				<td><s:property value="csState"></s:property></td>
 				<td><s:property value="csStartStock"></s:property></td>
 			</tr>
+			<s:set name="oldCsCode" value="csCode"></s:set>
+			<s:set name="beginDate" value="csDate"></s:set>
 		</s:iterator>
 	</table>
 </s:if></div>
+
+<s:debug></s:debug>
 </body>
 </html>
