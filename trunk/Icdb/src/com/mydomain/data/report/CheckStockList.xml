@@ -6,20 +6,20 @@
 
 <sqlMap namespace="CheckStockList">
 
-	<select id="queryABCReportList" parameterClass="com.mydomain.bean.report.ABCReportBean"
-		resultClass="com.mydomain.bean.report.ABCReportBean">
+	<select id="queryCheckStock" parameterClass="com.mydomain.bean.report.CheckStock"
+		resultClass="com.mydomain.bean.report.CheckStock">
 		SELECT
 		CSCODE as csCode,
-		MATERIELCODE as materielCode,
-		CARGOSPACECODE as cargoSpaceCode,
-		CSSTARTPRICE as csStartPrice,
-		CSSTARTNUMBER as csStartNumber,
-		CSCHECKPRICE as csCheckPrice,
-		CSCHECKNUMBER as csCheckNumber,
-		CSDIFFMESSAGE as csDiffMessage,
-		CSREMARK as csRemark,
-		CSGM as
-		csGM
-		FROM CHECKSTOCKLIST where CSCODE=#csCode#
+		STOREHOUSECODE as storehouseCode,
+		csDate as csDate,
+		csApprove as csApprove,
+		csApproveMessage as csApproveMessage,
+		csApproveState as csApproveState,
+		csCheckPerson as csCheckPerson,
+		csOptionor as csOptionor,
+		CSSTATE as csState,
+		CSSTARTSTOCK as
+		csStartStock
+		FROM CHECKSTOCK
 	</select>
 </sqlMap>

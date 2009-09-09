@@ -1,12 +1,14 @@
 package com.mydomain.bean.report;
 
+import java.util.Date;
+
 public class ABCReportBean {
 
-	private String beginDate;
-	private String endDate;
+	private Date beginDate;
+	private Date endDate;
 	private String searchTeyp;
 	private String csCode;
-	private String lastCsCode;
+	private String oldCsCode;
 
 	private String name;
 	private String materielType;
@@ -31,19 +33,19 @@ public class ABCReportBean {
 
 	private String remark;
 
-	public String getBeginDate() {
+	public Date getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(String beginDate) {
+	public void setBeginDate(Date beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -63,12 +65,12 @@ public class ABCReportBean {
 		this.csCode = csCode;
 	}
 
-	public String getLastCsCode() {
-		return lastCsCode;
+	public String getOldCsCode() {
+		return oldCsCode;
 	}
 
-	public void setLastCsCode(String lastCsCode) {
-		this.lastCsCode = lastCsCode;
+	public void setOldCsCode(String oldCsCode) {
+		this.oldCsCode = oldCsCode;
 	}
 
 	public String getName() {
@@ -108,6 +110,9 @@ public class ABCReportBean {
 	}
 
 	public void setLastAmount(Integer lastAmount) {
+		if (null == lastAmount) {
+			lastAmount = 0;
+		}
 		this.lastAmount = lastAmount;
 	}
 
@@ -116,15 +121,19 @@ public class ABCReportBean {
 	}
 
 	public void setLastPrice(Double lastPrice) {
+		if (null == lastPrice) {
+			lastPrice = 0.0;
+		}
 		this.lastPrice = lastPrice;
 	}
 
 	public Double getLastTotalPrice() {
+		setLastTotalPrice(0d);
 		return lastTotalPrice;
 	}
 
 	public void setLastTotalPrice(Double lastTotalPrice) {
-		this.lastTotalPrice = lastTotalPrice;
+		this.lastTotalPrice = getLastPrice() * getLastAmount();
 	}
 
 	public Integer getAmount() {
@@ -132,6 +141,9 @@ public class ABCReportBean {
 	}
 
 	public void setAmount(Integer amount) {
+		if (null == amount) {
+			amount = 0;
+		}
 		this.amount = amount;
 	}
 
@@ -140,15 +152,19 @@ public class ABCReportBean {
 	}
 
 	public void setPrice(Double price) {
+		if (null == price) {
+			price = 0.0;
+		}
 		this.price = price;
 	}
 
 	public Double getTotalPrice() {
+		setTotalPrice(0d);
 		return totalPrice;
 	}
 
 	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
+		this.totalPrice = getPrice() * getAmount();
 	}
 
 	public Integer getInAmount() {
@@ -156,6 +172,9 @@ public class ABCReportBean {
 	}
 
 	public void setInAmount(Integer inAmount) {
+		if (null == inAmount) {
+			inAmount = 0;
+		}
 		this.inAmount = inAmount;
 	}
 
@@ -164,15 +183,19 @@ public class ABCReportBean {
 	}
 
 	public void setInPrice(Double inPrice) {
+		if (null == inPrice) {
+			inPrice = 0.0;
+		}
 		this.inPrice = inPrice;
 	}
 
 	public Double getInTotalPrice() {
+		setInTotalPrice(0d);
 		return inTotalPrice;
 	}
 
 	public void setInTotalPrice(Double inTotalPrice) {
-		this.inTotalPrice = inTotalPrice;
+		this.inTotalPrice = getInPrice() * getInAmount();
 	}
 
 	public Integer getOutAmount() {
@@ -180,6 +203,9 @@ public class ABCReportBean {
 	}
 
 	public void setOutAmount(Integer outAmount) {
+		if (null == outAmount) {
+			outAmount = 0;
+		}
 		this.outAmount = outAmount;
 	}
 
@@ -188,15 +214,19 @@ public class ABCReportBean {
 	}
 
 	public void setOutPrice(Double outPrice) {
+		if (null == outPrice) {
+			outPrice = 0.0;
+		}
 		this.outPrice = outPrice;
 	}
 
 	public Double getOutTotalPrice() {
+		setOutTotalPrice(0d);
 		return outTotalPrice;
 	}
 
 	public void setOutTotalPrice(Double outTotalPrice) {
-		this.outTotalPrice = outTotalPrice;
+		this.outTotalPrice = getOutPrice() * getOutAmount();
 	}
 
 	public String getRemark() {
