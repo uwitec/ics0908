@@ -14,10 +14,13 @@
 <table border="1" cellpadding="2" cellspacing="2">
 	<tr>
 		<th><s:url id="ABCReport" action="ABCReportAction">
-			<s:param name="abcReportBean.csCode" value="#parameters.csCode"></s:param>
-			<s:param name="abcReportBean.oldCsCode" value="#parameters.oldCsCode"></s:param>
-			<s:param name="abcReportBean.beginDate" value="#parameters.beginDate"></s:param>
-			<s:param name="abcReportBean.endDate" value="#parameters.endDate"></s:param>
+			<s:param name="abcReportBean.csCode" value="%{abcReportBean.csCode}"></s:param>
+			<s:param name="abcReportBean.oldCsCode"
+				value="%{abcReportBean.oldCsCode}"></s:param>
+			<s:param name="abcReportBean.beginDate"
+				value="%{abcReportBean.beginDate}"></s:param>
+			<s:param name="abcReportBean.endDate"
+				value="%{abcReportBean.endDate}"></s:param>
 		</s:url> <s:a href="%{ABCReport}">ABC报表</s:a></th>
 		<th>超储报表</th>
 		<th>周转率报表</th>
@@ -25,10 +28,38 @@
 		<th>损耗物料资产表</th>
 	</tr>
 </table>
-<div style="border: 1px solid gray;">条件区</div>
+<div style="border: 1px solid gray;">
+<table border="0" width="800px">
+	<tr>
+		<td><s:form name="abcFrom" action="ABCReportAction" method="post">
+			<s:hidden name="abcReportBean.csCode" value="%{abcReportBean.csCode}"></s:hidden>
+			<s:hidden name="abcReportBean.oldCsCode"
+				value="%{abcReportBean.oldCsCode}"></s:hidden>
+			<s:hidden name="abcReportBean.beginDate"
+				value="%{abcReportBean.beginDate}"></s:hidden>
+			<s:hidden name="abcReportBean.endDate"
+				value="%{abcReportBean.endDate}"></s:hidden>
+
+			<s:select name="abcReportBean.materielType" label="物品类型"
+				list="#{'-1':'全部','0':'A类','1':'B类','2':'C类'}" listKey="key"
+				listValue="value" onchange="javascript:abcFrom.submit()"></s:select>
+		</s:form></td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>单位名称:XXXXXX</td>
+		<td>统计时间:2009年9月8日</td>
+		<td>单位:元</td>
+	</tr>
+</table>
+
+
+
+</div>
 <div style="border: 1px solid gray;"><s:if
 	test="abcReportList!=null">
-	<table border="1" cellpadding="0" cellspacing="0">
+	<table border="1" cellpadding="0" cellspacing="0" width="800px">
 		<tr>
 			<th colspan="2" rowspan="2">项目</th>
 			<th colspan="2">&nbsp;</th>

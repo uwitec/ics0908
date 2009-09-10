@@ -31,10 +31,10 @@
 		<s:iterator value="csList" status="stat">
 			<tr>
 				<td><s:url id="showReportList" action="ShowReportList">
-					<s:param name="oldCsCode" value="oldCsCode"></s:param>
-					<s:param name="csCode" value="csCode"></s:param>
-					<s:param name="beginDate" value="beginDate"></s:param>
-					<s:param name="endDate" value="csDate"></s:param>
+					<s:param name="abcReportBean.oldCsCode" value="oldCsCode"></s:param>
+					<s:param name="abcReportBean.csCode" value="csCode"></s:param>
+					<s:param name="abcReportBean.beginDate" value="beginDate"></s:param>
+					<s:param name="abcReportBean.endDate" value="csDate"></s:param>
 				</s:url> <s:a href="%{showReportList}">
 					<s:property value="csCode"></s:property>
 				</s:a></td>
