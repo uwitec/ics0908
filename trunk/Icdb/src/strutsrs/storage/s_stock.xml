@@ -13,5 +13,8 @@
 <action name="AddStock" class="com.action.storage.StockAction" method="addStock">
 	<result name="success" type="redirect">ShowStockList.action</result>
 </action>
+<action name="ShowMaterStore" class="com.action.storage.StockAction" method="showMaterStore">
+	<result name="success">/storage/AddTOMateriel.jsp</result>
+</action>
 </package>
 </struts>
