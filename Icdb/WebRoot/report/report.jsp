@@ -40,9 +40,9 @@
 			<s:hidden name="abcReportBean.endDate"
 				value="%{abcReportBean.endDate}"></s:hidden>
 
-			<s:select name="abcReportBean.materielType" label="物品类型"
-				list="#{'-1':'全部','0':'A类','1':'B类','2':'C类'}" listKey="key"
-				listValue="value" onchange="javascript:abcFrom.submit()"></s:select>
+			<s:select name="abcReportBean.materielType" label="物品类型" 
+				list="abcTypeList" listKey="value"
+				listValue="name" onchange="javascript:abcFrom.submit()"></s:select>
 		</s:form></td>
 		<td>&nbsp;</td>
 		<td>&nbsp;</td>
