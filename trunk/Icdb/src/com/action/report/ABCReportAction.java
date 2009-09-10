@@ -19,18 +19,41 @@ public class ABCReportAction extends ActionSupport {
 
 	private ABCReportBean abcReportBean;
 
+	private boolean isQueryAllType(String mtype) {
+		// 如果类型为空，返回真，查询所有数据。
+		if (null == mtype) {
+			return true;
+		}
+
+		try {
+			Integer i = Integer.parseInt(mtype);
+			if (0 > i) { // 如果类型值小于0，则返回真。
+				return true;
+			} else { // 如果类型值大于等于0，则返回假，即按给定的类型查询。
+				return false;
+			}
+		} catch (NumberFormatException e) {
+			// 入参不是一个数字，返回真，查询所有数据。
+			return true;
+		}
+
+	}
+
 	public String showReportList() {
 		try {
 			abcReportList = new ArrayList<ABCReportBean>();
 			if (null == abcReportBean) {
 				abcReportBean = new ABCReportBean();
 			}
-			//abcReportBean.setBeginDate("2009-09-01 00:00:00");
-			//abcReportBean.setEndDate("2009-09-08 23:59:59");
-			// System.out.println("abcbean: " + abcReportBean.getBeginDate());
-			// System.out.println("abcbean: " + abcReportBean.getEndDate());
-			List<?> list = DBServer.quider.queryForList(
-					"selectAllABCReportBean", abcReportBean);
+			List<?> list = null;
+			if (isQueryAllType(abcReportBean.getMaterielType())) {
+
+				list = DBServer.quider.queryForList("selectAllABCReportBean",
+						abcReportBean);
+			} else {
+				list = DBServer.quider.queryForList("queryABCReportBean",
+						abcReportBean);
+			}
 			if (null != list) {
 				for (int i = 0; i < list.size(); i++) {
 					Object o = list.get(i);
