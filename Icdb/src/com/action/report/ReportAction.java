@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.mydomain.bean.report.ABCReportBean;
 import com.mydomain.bean.report.CheckStock;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -17,6 +18,7 @@ public class ReportAction extends ActionSupport {
 
 	private List<CheckStock> csList;
 	private CheckStock csBean;
+	private ABCReportBean abcReportBean;
 
 	public String selectCheckStock() {
 		try {
@@ -37,7 +39,6 @@ public class ReportAction extends ActionSupport {
 				return "NULLRESULT";
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			DBServer.logger.exception(e);
 		}
 		return "SUCCESS";
@@ -62,5 +63,15 @@ public class ReportAction extends ActionSupport {
 	public void setCsBean(CheckStock csBean) {
 		this.csBean = csBean;
 	}
+
+	public ABCReportBean getAbcReportBean() {
+		return abcReportBean;
+	}
+
+	public void setAbcReportBean(ABCReportBean abcReportBean) {
+		this.abcReportBean = abcReportBean;
+	}
+	
+	
 
 }
