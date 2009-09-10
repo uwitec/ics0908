@@ -14,7 +14,8 @@ public class IcdbOption {
 		AutoConfiger autoConfiger = null;
 		try {
 			autoConfiger = ALCFFactory
-					.createAutoConfiger("propeties/icdb_option.properties");
+					.createAutoConfiger("propeties/icdb_option.cfg");
+					//.createAutoConfiger("propeties/abc.cfg");
 		} catch (FileNotFoundException e2) {
 			//没找到文件
 			e2.printStackTrace();
@@ -98,9 +99,9 @@ public class IcdbOption {
 	public static LinkedHashMap<?, ?> getABCType(){
 		return IcdbOption.getState("materiel_type");
 	}
-	/*
+	
 	public static void main(String[] args) {
-		System.out.println(IcdbOption.getValue("Data_date"));
+		System.out.println(IcdbOption.getABCType());
 	}
-	*/
+	
 }
