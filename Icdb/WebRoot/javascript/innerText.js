@@ -19,7 +19,13 @@ try{
     ); 
 }
 catch(e){}
-
+  
+  	function trim(s){
+	  	var str = s||"";
+	   	str = str.replace(/(^\s*)|(\s*$)/g,'');
+	   	return str;
+	}
+	
 	function pageSet(value_key){
     		var sizevalue=document.getElementById("size").value;
     		var countvalue=document.getElementById("countsize").value;
