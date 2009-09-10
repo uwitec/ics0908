@@ -6,6 +6,7 @@
         <title>欢迎</title>
     </head>
     <body>
+  --------------------基本信息-------------------------------<br/>
      <a href="<s:url action="baseset/ShowBank"/>">银行</a><br/>
      <a href="<s:url action="baseset/ShowStruct"/>">机构</a><br/>
      <a href="<s:url action="baseset/ShowUnitType"/>">类型信息</a><br/>
@@ -16,6 +17,12 @@
     <a href="<s:url action="baseset/ShowAccount"/>">帐号信息</a><br/>
     <a href="<s:url action="baseset/ShowSupplier"/>">供应商信息</a><br/>
    <a href="<s:url action="baseset/ShowEmployee"/>">员工信息</a><br/>
-   <a href="<s:url action="baseset/ShowStorehouse"/>">仓库信息</a>
+   <a href="<s:url action="baseset/ShowStorehouse"/>">仓库信息</a><br/>
+   <a href="<s:url action="baseset/ShowMateriel"/>">物料信息</a><br/>
+   -------------------库存业务---------------------------------<br/>
+   <a href="<s:url action="storage/ShowStockList"/>">初期库存</a><br/>
+   <a href="<s:url action="storage/ShowWas"/>">物料报损</a>
+   -------------------系统信息---------------------------------<br/>
+   
     </body>
 </html>
