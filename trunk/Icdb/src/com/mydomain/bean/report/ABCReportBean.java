@@ -1,11 +1,14 @@
 package com.mydomain.bean.report;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class ABCReportBean {
 
-	private Date beginDate;
-	private Date endDate;
+	private String beginDate;
+	private String endDate;
 	private String searchTeyp;
 	private String csCode;
 	private String oldCsCode;
@@ -33,20 +36,36 @@ public class ABCReportBean {
 
 	private String remark;
 
-	public Date getBeginDate() {
+	public String getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(Date beginDate) {
+	public void setBeginDate(String beginDate) {
+		beginDate = convertDate(beginDate);
+		System.out.println("beginDate: " + beginDate);
 		this.beginDate = beginDate;
 	}
 
-	public Date getEndDate() {
+	private String convertDate(String dateString) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat(
+					"EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+			Date date = sdf.parse(dateString);
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			dateString = sdf.format(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dateString;
+	}
+
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEndDate(String endDate) {
+		this.endDate = convertDate(endDate);
 	}
 
 	public String getSearchTeyp() {
