@@ -8,7 +8,7 @@
     </head>
     <body>
     <s:form action="SelectSupplierDef">
-    	<s:textfield name="res.s_value" label="内容"></s:textfield>
+    	<s:textfield name="supplier.s_value" label="内容"></s:textfield>
     	<s:hidden name="supplier.supplierCode"></s:hidden>
     	<s:submit value="查询"></s:submit>
     </s:form>

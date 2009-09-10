@@ -8,7 +8,7 @@
     </head>
     <body>
     <s:form action="SelectBankDef" namespace="/baseset">
-    <s:textfield label="内容" name="res.s_value" size="20"></s:textfield>
+    <s:textfield label="内容" name="bank.s_value" size="20"></s:textfield>
     <s:hidden name="bank.bankName"></s:hidden>
     <s:submit value="查询"></s:submit>
     </s:form>

@@ -11,7 +11,7 @@
 %>  
     <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <s:form action="ShowAccount">
-    <s:textfield label="内容" name="res.s_value"></s:textfield>
+    <s:textfield label="内容" name="account.s_value"></s:textfield>
     <s:hidden name="account.accountCode"></s:hidden>
     <s:submit value="查询"></s:submit>
     </s:form>

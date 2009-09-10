@@ -12,7 +12,7 @@ String base=request.getContextPath();
 %>  
     <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <s:form action="ShowMateriel">
-    	<s:textfield name="res.s_value" label="内容"></s:textfield>
+    	<s:textfield name="materiel.s_value" label="内容"></s:textfield>
     	<s:hidden name="materiel.jobCode"></s:hidden>
     	<s:submit value="查询"></s:submit>
     </s:form>
