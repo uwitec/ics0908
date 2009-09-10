@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.AccountBean;
+import com.tools.ICTools;
 
 public class AccountManage {
 
@@ -66,6 +67,13 @@ public class AccountManage {
 	
 	public AccountBean getPageAccount(AccountBean account){
 		PageManage pm=new PageManage();
+		if(account==null){
+			account=new AccountBean();
+			ICTools.setBean(account, "");
+			account.setS_value("");
+		}else{
+			ICTools.setBean(account,account.getS_value());
+		}
 		return  (AccountBean) pm.setPage(account,"selectAccountCount");
 	}
 }

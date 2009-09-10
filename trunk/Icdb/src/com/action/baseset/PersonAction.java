@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.manage.baseset.PersonManage;
 import com.mydomain.bean.baseset.PersonBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -20,8 +19,6 @@ public class PersonAction extends ActionSupport{
     private String photoImgFileName;
     private File photoImg;
   
-    
-	private ReSourceBean res;
 	private PersonBean person;
 	private List<PersonBean> lhp;
 	private PersonManage pm=new PersonManage();
@@ -50,29 +47,17 @@ public class PersonAction extends ActionSupport{
 	public void setPerson(PersonBean person) {
 		this.person = person;
 	}
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 
 	
 	public String addPerson(){
-		res=new ReSourceBean();
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
 		if(pm.addPerson(person)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			person.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			person.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -90,16 +75,6 @@ public class PersonAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showPerson(){
-		if(person==null){
-			person=new PersonBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(person, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(person,res.getS_value());
-		}
 		person=pm.getPagePerson(person);
 		lhp=pm.getPersonList(person);
 		return SUCCESS;
@@ -116,9 +91,9 @@ public class PersonAction extends ActionSupport{
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}	
 		if(pm.updatePerson(person)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			person.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			person.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

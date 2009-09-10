@@ -5,7 +5,6 @@ import java.util.List;
 import com.manage.baseset.DepartmentManage;
 import com.manage.baseset.StructManage;
 import com.mydomain.bean.baseset.DepartmentBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StructBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
@@ -15,7 +14,6 @@ public class DepartmentAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ReSourceBean res;
 	private List<StructBean> lsb;
 	private DepartmentBean department;
 	private List<DepartmentBean> lhp;
@@ -40,18 +38,6 @@ public class DepartmentAction extends ActionSupport{
 		this.department = department;
 	}
 	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
-	/**
 	 * @param lsb the lsb to set
 	 */
 	public void setLsb(List<StructBean> lsb) {
@@ -70,11 +56,10 @@ public class DepartmentAction extends ActionSupport{
 		this.lhp = lhp;
 	}
 	public String addDepartment(){
-		res=new ReSourceBean();
 		if(dm.addDepartment(department)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			department.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			department.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -94,35 +79,25 @@ public class DepartmentAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showDepartment(){
-			if(department==null){
-				department=new DepartmentBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(department, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(department,res.getS_value());
-			}
-			department=dm.getPageDepartment(department);
-			lhp=dm.getDepartmentList(department);
+		department=dm.getPageDepartment(department);
+		lhp=dm.getDepartmentList(department);
 		return SUCCESS;
 	}
 	
 	public String updateDepartment(){
 		if(dm.updateDepartment(department)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			department.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			department.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteDepartment(){
 		if(dm.deleteDepartment(department)){
-			res.setMessage(ICTools.MESSAGE_DELETEOK);
+			department.setMessage(ICTools.MESSAGE_DELETEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			department.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

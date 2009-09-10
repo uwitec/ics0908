@@ -7,7 +7,6 @@ import com.manage.baseset.EmployeeManage;
 import com.manage.baseset.PersonManage;
 import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.PersonBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -22,7 +21,6 @@ public class EmployeeAction extends ActionSupport{
     private String photoImgFileName;
     private File photoImg;
     
-	private ReSourceBean res;
 	private List<EmployeeBean> lhp;
 	private EmployeeBean employee;
 	private PersonBean person;
@@ -71,19 +69,6 @@ public class EmployeeAction extends ActionSupport{
 	}
 	
 	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
-	
-	/**
 	 * @return the photoImg
 	 */
 	public File getPhotoImg() {
@@ -122,19 +107,8 @@ public class EmployeeAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showEmployee(){
-		if(employee==null){
-			employee=new EmployeeBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(employee, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(employee,res.getS_value());
-		}
 		employee=em.getPageEmployee(employee);
 		lhp=em.getEmployeeList(employee);
-	
 		return SUCCESS;
 	}
 
@@ -151,18 +125,17 @@ public class EmployeeAction extends ActionSupport{
 	}
 	
 	public String addEmployee(){
-		res=new ReSourceBean();
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
 		if(pm.addPerson(person)){
 			if(em.addEmployee(employee)){
-				res.setMessage(ICTools.MESSAGE_OK);
+				person.setMessage(ICTools.MESSAGE_OK);
 			}else{
-				res.setMessage(ICTools.MESSAGE_ERROR);	
+				person.setMessage(ICTools.MESSAGE_ERROR);	
 			}
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);	
+			person.setMessage(ICTools.MESSAGE_ERROR);	
 		}
 		return SUCCESS;
 	}
@@ -173,19 +146,19 @@ public class EmployeeAction extends ActionSupport{
 		person=pm.getPersonOne(employee.getPersonCode());
 		return SUCCESS;
 	}
+	
 	public String updateEmployee(){
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
-		
 		if(pm.updatePerson(person)){
 			if(em.updateEmployee(employee)){
-				res.setMessage(ICTools.MESSAGE_UPDATEOK);
+				person.setMessage(ICTools.MESSAGE_UPDATEOK);
 			}else{
-				res.setMessage(ICTools.MESSAGE_ERROR);	
+				person.setMessage(ICTools.MESSAGE_ERROR);	
 			}
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);	
+			person.setMessage(ICTools.MESSAGE_ERROR);	
 		}
 		return SUCCESS;
 	}

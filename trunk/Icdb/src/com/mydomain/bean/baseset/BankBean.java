@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 银行BEAN
  * */
-public class BankBean {
+public class BankBean extends BaseBean{
 
 	private int  bankCode; //银行编码
 	private String bankName; //银行名称

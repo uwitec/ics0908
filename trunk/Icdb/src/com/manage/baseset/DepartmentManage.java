@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.DepartmentBean;
+import com.tools.ICTools;
 
 public class DepartmentManage {
 
@@ -77,6 +78,13 @@ public class DepartmentManage {
 	
 	public DepartmentBean getPageDepartment(DepartmentBean department){
 		PageManage pm=new PageManage();
+		if(department==null){
+			department=new DepartmentBean();
+			ICTools.setBean(department, "");
+			department.setS_value("");
+		}else{
+			ICTools.setBean(department,department.getS_value());
+		}
 		return  (DepartmentBean) pm.setPage(department,"selectDepartmentCount");
 	}
 }

@@ -7,7 +7,6 @@ import propeties.IcdbOption;
 
 import com.manage.baseset.MaterielManage;
 import com.mydomain.bean.baseset.MaterielBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -17,7 +16,6 @@ public class MaterielAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ReSourceBean res;
 	private MaterielBean materiel;
 	private List<MaterielBean> lhp;
 	private LinkedHashMap<?,?> lsb;
@@ -47,12 +45,6 @@ public class MaterielAction extends ActionSupport{
 		return materiel;
 	}
 	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
 	 * @param lhp the lhp to set
 	 */
 	public void setLhp(List<MaterielBean> lhp) {
@@ -64,25 +56,10 @@ public class MaterielAction extends ActionSupport{
 	public void setMateriel(MaterielBean materiel) {
 		this.materiel = materiel;
 	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 	
 	@SuppressWarnings("unchecked")
 	public String showMateriel(){
-		if(materiel==null){
-			materiel=new MaterielBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(materiel, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(materiel,res.getS_value());
-		}
 		lsb=IcdbOption.getABCType();
 		materiel=mm.getPageMateriel(materiel);
 		lhp=mm.getMaterielList(materiel);
@@ -90,11 +67,10 @@ public class MaterielAction extends ActionSupport{
 	}
 	
 	public String addMateriel(){
-		res=new ReSourceBean();
 		if(mm.addMateriel(materiel)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			materiel.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			materiel.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -108,9 +84,9 @@ public class MaterielAction extends ActionSupport{
 	
 	public String updateMateriel(){
 		if(mm.updateMateriel(materiel)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			materiel.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			materiel.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

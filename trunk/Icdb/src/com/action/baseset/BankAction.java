@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.manage.baseset.BankManage;
 import com.mydomain.bean.baseset.BankBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -16,21 +15,9 @@ public class BankAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private BankBean bank;
 	private List<BankBean> lhp;
-	private ReSourceBean res;
 	private BankManage bm=new BankManage();
 
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 	/**
 	 * @return the bank
 	 */
@@ -70,24 +57,20 @@ public class BankAction extends ActionSupport{
 	public String showBank(){
 		if(bank==null){
 			bank=new BankBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
 			ICTools.setBean(bank, "");
-			res.setS_value("");
+			bank.setS_value("");
 		}else{
-			ICTools.setBean(bank,res.getS_value());
+			ICTools.setBean(bank,bank.getS_value());
 		}
 		lhp=bm.getBankList(bank);
 		return SUCCESS;
 	}
 	
 	public String addBank(){
-		res=new ReSourceBean();
 		if(bm.addBank(bank)){
-			res.setMessage(ICTools.MESSAGE_OK);	
+			bank.setMessage(ICTools.MESSAGE_OK);	
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			bank.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -99,19 +82,18 @@ public class BankAction extends ActionSupport{
 	
 	public String updateBank(){
 		if(bm.updateBank(bank)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);	
+			bank.setMessage(ICTools.MESSAGE_UPDATEOK);	
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			bank.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteBank(){
-		
 		if(bm.deleteBank(bank)){
-			res.setMessage(ICTools.MESSAGE_DELETEOK);	
+			bank.setMessage(ICTools.MESSAGE_DELETEOK);	
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			bank.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

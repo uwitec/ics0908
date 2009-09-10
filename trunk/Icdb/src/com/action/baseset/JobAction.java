@@ -6,7 +6,6 @@ import com.manage.baseset.DepartmentManage;
 import com.manage.baseset.JobManage;
 import com.mydomain.bean.baseset.DepartmentBean;
 import com.mydomain.bean.baseset.JobBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -16,7 +15,6 @@ public class JobAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ReSourceBean res;
 	private List<DepartmentBean> ldb;
 	private JobBean job;
 	private List<JobBean> lhp;
@@ -59,18 +57,7 @@ public class JobAction extends ActionSupport{
 	public void setLhp(List<JobBean> lhp) {
 		this.lhp = lhp;
 	}
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 	
 	@SuppressWarnings("unchecked")
 	public String getOneJob(){
@@ -90,11 +77,10 @@ public class JobAction extends ActionSupport{
 	
 	
 	public String addJob(){
-		res=new ReSourceBean();
 		if(jm.addJob(job)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			job.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			job.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -102,16 +88,6 @@ public class JobAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showJob(){
-		if(job==null){
-			job=new JobBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(job, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(job,res.getS_value());
-		}
 		job=jm.getPageJob(job);
 		lhp=jm.getJobList(job);
 		return SUCCESS;
@@ -119,11 +95,10 @@ public class JobAction extends ActionSupport{
 	
 	
 	public String updateJob(){
-		
 		if(jm.updateJob(job)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			job.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			job.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

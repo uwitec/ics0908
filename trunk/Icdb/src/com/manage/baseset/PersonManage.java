@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.PersonBean;
+import com.tools.ICTools;
 
 public class PersonManage {
 
@@ -54,6 +55,13 @@ public class PersonManage {
 	
 	public PersonBean getPagePerson(PersonBean person){
 		PageManage pm=new PageManage();
+		if(person==null){
+			person=new PersonBean();
+			ICTools.setBean(person, "");
+			person.setS_value("");
+		}else{
+			ICTools.setBean(person,person.getS_value());
+		}
 		return (PersonBean) pm.setPage(person, "selectPersonDefPag");
 	}
 }

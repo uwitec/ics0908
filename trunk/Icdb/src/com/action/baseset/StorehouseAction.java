@@ -5,7 +5,6 @@ import java.util.List;
 
 
 import com.manage.baseset.StorehouseManage;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
@@ -16,7 +15,6 @@ public class StorehouseAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ReSourceBean res;
 	private List<StorehouseBean> lhp;
 	private StorehouseBean storehouse;
 	private StorehouseManage sm=new StorehouseManage();
@@ -44,32 +42,11 @@ public class StorehouseAction extends ActionSupport{
 	public void setStorehouse(StorehouseBean storehouse) {
 		this.storehouse = storehouse;
 	}
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 	
 	
 	@SuppressWarnings("unchecked")
 	public String showStorehouse(){
-		if(storehouse==null){
-			storehouse=new StorehouseBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(storehouse, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(storehouse,res.getS_value());
-		}
 		storehouse=sm.getPageStorehouse(storehouse);
 		lhp=sm.getStorhouesList(storehouse);
 		return SUCCESS;
@@ -82,11 +59,10 @@ public class StorehouseAction extends ActionSupport{
 	}
 	
 	public String addStorehouse(){
-		res=new ReSourceBean();
 		if(sm.addStorehouse(storehouse)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			storehouse.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			storehouse.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -98,18 +74,18 @@ public class StorehouseAction extends ActionSupport{
 	
 	public String updateStorehouse(){	
 		if(sm.updateStorehouse(storehouse)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			storehouse.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			storehouse.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
 	
 	public String deleteStorehouse(){
 		if(sm.deleteStorehouse(storehouse)){
-			res.setMessage(ICTools.MESSAGE_DELETEOK);
+			storehouse.setMessage(ICTools.MESSAGE_DELETEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			storehouse.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

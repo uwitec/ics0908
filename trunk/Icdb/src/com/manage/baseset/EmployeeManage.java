@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.EmployeeBean;
+import com.tools.ICTools;
 
 public class EmployeeManage {
 
@@ -57,6 +58,13 @@ public class EmployeeManage {
 	
 	public EmployeeBean getPageEmployee(EmployeeBean employee){
 		PageManage pm=new PageManage();
+		if(employee==null){
+			employee=new EmployeeBean();
+			ICTools.setBean(employee, "");
+			employee.setS_value("");
+		}else{
+			ICTools.setBean(employee,employee.getS_value());
+		}
 		return (EmployeeBean)pm.setPage(employee, "selectEmployeeCount");
 	}
 }

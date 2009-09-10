@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 货位BEAN
  * */
-public class CargoSpaceBean {
+public class CargoSpaceBean extends BaseBean{
 	private String cargoSpaceCode; //货位编码
 	private String cargoSpaceName; //货位名称
 	private String cargoSpaceAddress; //货位地址

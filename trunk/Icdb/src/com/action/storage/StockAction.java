@@ -1,13 +1,15 @@
 package com.action.storage;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import com.dbserver.DBServer;
+import com.manage.baseset.CargoSpaceManage;
+import com.manage.baseset.StorehouseManage;
+import com.manage.storage.StockManage;
 import com.mydomain.bean.baseset.CargoSpaceBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.storage.StockBean;
 import com.opensymphony.xwork2.ActionSupport;
+import com.tools.ICTools;
 
 public class StockAction extends ActionSupport{
 
@@ -20,7 +22,10 @@ public class StockAction extends ActionSupport{
 	private StockBean stock;
 	private StorehouseBean storehouse;
 	private List<CargoSpaceBean> lcsb;
+
+
 	
+
 	/**
 	 * @return the lcsb
 	 */
@@ -93,43 +98,42 @@ public class StockAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String getStoreHouseList(){
-		StorehouseBean shb=new StorehouseBean();
-		try {
-			lsb=(List<StorehouseBean>) DBServer.quider.queryForList("seletStorehouseALL", shb);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		StorehouseManage sm=new StorehouseManage();
+		lsb=sm.getStorhouseAllList();
 		return SUCCESS;
 	}
 
 	@SuppressWarnings("unchecked")
 	public String getStockMaterielList(){
-		try {
+		StorehouseManage sm=new StorehouseManage();
+		StockManage stockM=new StockManage();
+		CargoSpaceManage csm=new CargoSpaceManage();
 			if(stock==null){
 				stock=new StockBean();
 			}
-			storehouse=(StorehouseBean) DBServer.quider.queryForObjectById(storehouse.getStorehouseCode(), StorehouseBean.class);
+			storehouse=sm.getStorehouseOne(storehouse.getStorehouseCode());
 			stock.setStorehouseCode(storehouse.getStorehouseCode());
 		//	System.out.println(storehouse.getStorehouseCode());
-			lcsb=(List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace",storehouse);
-			lhp=(List<StockBean>) DBServer.quider.queryForList("selectStockOfStoreHouse", stock);
-			System.out.println(stock.getStorehouseCode());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			lcsb=csm.getCargoSapceOfStoreHouse(storehouse);
+			lhp=stockM.getStockListOfStoreHouse(stock);
 		return SUCCESS;
 	}
 
 	public String addStock(){
-		try {
-			DBServer.quider.insertObject(stock);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		StockManage stockM=new StockManage();
+		stockM.addStock(stock);
 		return SUCCESS;
 	}
 
+	public String showMaterStore(){
+		if(stock==null){
+			stock=new StockBean();
+			ICTools.setBean(stock, "");
+		}
+		StorehouseManage sm=new StorehouseManage();
+		StockManage stockM=new StockManage();
+		lsb=sm.getStorhouseAllList();
+		lhp=stockM.getStockListOfStoreHouse(stock);
+		return SUCCESS;
+	}
 }

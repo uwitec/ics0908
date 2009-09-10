@@ -11,14 +11,14 @@
 	BANKCODE,
 	BANKNAME
 	FROM BANK
-	WHERE BANKNAME LIKE #bankName# and isEnabled=1
+	WHERE locate(#bankName#,BANKNAME)>0 and isEnabled!=0
 	</select>
 	<select id="getBankBean" parameterClass="int" resultClass="com.mydomain.bean.baseset.BankBean">
 		SELECT 
 		BANKCODE,
 		BANKNAME
 		FROM BANK
-		WHERE BANKCODE=#bankCode# and isEnabled=1
+		WHERE BANKCODE=#bankCode# and isEnabled!=0
 	</select>
 	<select id="selectAllBankBean" resultClass="com.mydomain.bean.baseset.BankBean">
 		SELECT 

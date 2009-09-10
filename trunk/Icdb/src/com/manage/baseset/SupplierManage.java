@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.SupplierBean;
+import com.tools.ICTools;
 
 public class SupplierManage {
 
@@ -22,6 +23,13 @@ public class SupplierManage {
 	
 	public SupplierBean getPageSupplier(SupplierBean supplier){
 		PageManage pm=new PageManage();
+		if(supplier==null){
+			supplier=new SupplierBean();
+			ICTools.setBean(supplier, "");
+			supplier.setS_value("");
+		}else{
+			ICTools.setBean(supplier,supplier.getS_value());
+		}
 		return (SupplierBean) pm.setPage(supplier, "selectSupplierCount");
 	}
 	

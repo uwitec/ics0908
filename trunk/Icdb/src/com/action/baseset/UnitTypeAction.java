@@ -7,6 +7,7 @@ import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.UnitTypeBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.DBControl;
+import com.tools.ICTools;
 
 public class UnitTypeAction extends ActionSupport{
 	/**
@@ -15,10 +16,7 @@ public class UnitTypeAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private int unitTypeCode; //��λ���ͱ���
 	private String unitTypeName; //��λ�������
-	private String unitTypeRemark; //��λ����˵��
-	private String nextPath;
-	private String rePath;
-	private String message;
+	private String unitTypeRemark; //��λ
 	private UnitTypeBean utb;
 	public List<UnitTypeBean> lhp;
 	/**
@@ -27,24 +25,7 @@ public class UnitTypeAction extends ActionSupport{
 	public List<UnitTypeBean> getLhp() {
 		return lhp;
 	}
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-	/**
-	 * @return the nextPath
-	 */
-	public String getNextPath() {
-		return nextPath;
-	}
-	/**
-	 * @return the rePath
-	 */
-	public String getRePath() {
-		return rePath;
-	}
+	
 	/**
 	 * @return the unitTypeCode
 	 */
@@ -75,24 +56,7 @@ public class UnitTypeAction extends ActionSupport{
 	public void setLhp(List<UnitTypeBean> lhp) {
 		this.lhp = lhp;
 	}
-	/**
-	 * @param message the message to set
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	/**
-	 * @param nextPath the nextPath to set
-	 */
-	public void setNextPath(String nextPath) {
-		this.nextPath = nextPath;
-	}
-	/**
-	 * @param rePath the rePath to set
-	 */
-	public void setRePath(String rePath) {
-		this.rePath = rePath;
-	}
+
 	/**
 	 * @param unitTypeCode the unitTypeCode to set
 	 */
@@ -124,12 +88,10 @@ public class UnitTypeAction extends ActionSupport{
 		utb.setUnitTypeRemark(unitTypeRemark);
 		DBControl db=new DBControl();
 		if(db.insert(utb)){
-			message="";
+			utb.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			message="���Ѿ�����Ϊ"+utb.getUnitTypeCode()+"�ı�ţ�����������";
+			utb.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		nextPath="/baseset/unittype/UnitTypeAdd.jsp";
-		rePath="/baseset/ShowUnitType.action";
 		return SUCCESS;
 	}
 	public String getOneUnitType(){
