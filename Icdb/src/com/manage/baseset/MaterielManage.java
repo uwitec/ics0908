@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.MaterielBean;
+import com.tools.ICTools;
 
 public class MaterielManage {
 
@@ -32,6 +33,13 @@ public class MaterielManage {
 	
 	public MaterielBean getPageMateriel(MaterielBean materiel){
 		PageManage pm=new PageManage();
+		if(materiel==null){
+			materiel=new MaterielBean();
+			ICTools.setBean(materiel, "");
+			materiel.setS_value("");
+		}else{
+			ICTools.setBean(materiel,materiel.getS_value());
+		}
 		return (MaterielBean) pm.setPage(materiel, "selectMaterielCount");
 	}
 	

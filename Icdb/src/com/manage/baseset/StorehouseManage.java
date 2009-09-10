@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.StorehouseBean;
+import com.tools.ICTools;
 
 public class StorehouseManage {
 
@@ -16,6 +17,17 @@ public class StorehouseManage {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
+			return new ArrayList<StorehouseBean>();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<StorehouseBean> getStorhouseAllList(){
+		try {
+			return (List<StorehouseBean>) DBServer.quider.queryForList("seletStorehouseALL");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return new ArrayList<StorehouseBean>();
 		}
 	}
@@ -63,8 +75,17 @@ public class StorehouseManage {
 		}
 	}
 	
+	
+	
 	public StorehouseBean getPageStorehouse(StorehouseBean storehouse){
 		PageManage pm=new PageManage();
+		if(storehouse==null){
+			storehouse=new StorehouseBean();
+			ICTools.setBean(storehouse, "");
+			storehouse.setS_value("");
+		}else{
+			ICTools.setBean(storehouse,storehouse.getS_value());
+		}
 		return (StorehouseBean) pm.setPage(storehouse, "selectStorehousecount");
 	}
 }

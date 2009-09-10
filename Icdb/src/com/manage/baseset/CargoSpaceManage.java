@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.CargoSpaceBean;
+import com.mydomain.bean.baseset.StorehouseBean;
 
 public class CargoSpaceManage {
 
@@ -14,6 +15,17 @@ public class CargoSpaceManage {
 	public List<CargoSpaceBean> getCargoSpaceList(CargoSpaceBean cargoSpace){
 		try {
 			return (List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace", cargoSpace);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return new ArrayList<CargoSpaceBean>();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<CargoSpaceBean> getCargoSapceOfStoreHouse(StorehouseBean storehouse){
+		try {
+			return (List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace",storehouse);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);

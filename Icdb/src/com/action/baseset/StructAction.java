@@ -3,7 +3,6 @@ package com.action.baseset;
 import java.util.List;
 
 import com.manage.baseset.StructManage;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.StructBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
@@ -14,7 +13,6 @@ public class StructAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ReSourceBean res;
 	private StructBean struct;
 	private List<StructBean> lhp;
 	private StructManage sm=new StructManage();
@@ -42,24 +40,12 @@ public class StructAction extends ActionSupport{
 	public void setStruct(StructBean struct) {
 		this.struct = struct;
 	}
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 	public String addStruct(){
-		res=new ReSourceBean();
 		if(sm.addStruct(struct)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			struct.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			struct.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -70,16 +56,6 @@ public class StructAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showStruct(){
-		if(struct==null){
-			struct=new StructBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(struct, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(struct,res.getS_value());
-		}
 		struct=sm.getPageStruct(struct);
 		lhp=sm.getStructList(struct);
 		return SUCCESS;
@@ -87,9 +63,9 @@ public class StructAction extends ActionSupport{
 	
 	public String updateStruct(){
 		if(sm.updateStruct(struct)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			struct.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			struct.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

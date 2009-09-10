@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="WasTage">
+	<select id="selectWasPersonCount" resultClass="com.mydomain.bean.storage.WasTageBean">
+		select 
+		count(*) as countValue
+		from wastage as w,person as p
+		where p.personCode=w.operator and w.wasState!=0
+		and (
+		locate(#wasCode#,w.wasCode)>1  or
+		locate(#personName#,p.personName)>1 or
+		locate(#wasTime#,w.wasTime)>1 or
+		locate(#wasDoc#,w.wasDoc)>1)
+		and w.operator=#operator#
+	</select>
+	<select id="selectWasPerson" resultClass="com.mydomain.bean.storage.WasTageBean">
+		select 
+		w.wasCode,w.wasTime,w.wasType,w.operator,p.personName,w.wasState,
+		w.wasDoc
+		from wastage as w,person as p
+		where p.personCode=w.operator
+		and w.wasState!=0
+		and (
+		locate(#wasCode#,w.wasCode)>1  or
+		locate(#personName#,p.personName)>1 or
+		locate(#wasTime#,w.wasTime)>1 or
+		locate(#wasDoc#,w.wasDoc)>1) 
+		and w.operator=#operator#
+		limit #startValue#,#endValue# 
+	</select>
+	<select id="selectWasCount" resultClass="com.mydomain.bean.storage.WasTageBean">
+		select 
+		count(*) as countValue
+		from wastage as w,person as p
+		where p.personCode=w.operator and w.wasState!=0
+		and (
+		locate(#wasCode#,w.wasCode)>1  or
+		locate(#personName#,p/personName)>1 or
+		locate(#wasTime#,w.wasTime)>1 or
+		locate(#wasDoc#,w.wasDoc)>1)
+	</select>
+	<select id="selectWasTageDef" resultClass="com.mydomain.bean.storage.WasTageBean">
+		select 
+		w.wasCode,
+		w.wasTime,
+		w.wasType,
+		w.operator,
+		p.personName,
+		w.wasState,
+		w.wasDoc
+		from wastage as w,person as p
+		where p.personCode=w.operator
+		and w.wasState!=0
+		and (
+		locate(#wasCode#,w.wasCode)>1  or
+		locate(#personName#,p.personName)>1 or
+		locate(#wasTime#,w.wasTime)>1 or
+		locate(#wasDoc#,w.wasDoc)>1)
+		limit #startValue#,#endValue# 
+	</select>
+	<select id="getWasTageBean" parameterClass="String" resultClass="com.mydomain.bean.storage.WasTageBean">
+		select 
+		w.wasCode,
+		w.wasTime,
+		w.wasType,
+		w.operator,
+		p.personName
+		w.wasDoc,
+		w.wasState
+		from wastage as w,person as p
+		where p.personCode=w.operator and w.wasState!=0
+		w.wasCode=#wasCode#
+	</select>
+	<insert id="insertWasTageBean" parameterClass="com.mydomain.bean.storage.WasTageBean">
+		insert into wastage
+		(wasCode,wasTime,wasType,operator,wasState,wasDoc) values
+		(#wasCode#,#wasTime#,#wasType#,#operator#,#wasState#,#wasDoc#)	
+	</insert>
+	<update id="updateWasTageBean" parameterClass="com.mydomain.bean.storage.WasTageBean">
+		update wastage
+		set 
+		wasTime=#wasTime#,
+		wasType=#wasType#,
+		operator=#operator#,
+		wasDoc=#wasDoc#,
+		wasState=#wasState#
+		where wasCode=#wasCode#
+	</update>
+	<delete id="deleteWasTageBean" parameterClass="com.mydomain.bean.storage.WasTageBean">
+		update wastage
+		set wasState=0
+		where wasCode=#wasCode#
+	</delete>
+</sqlMap>

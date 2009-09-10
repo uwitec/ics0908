@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.StructBean;
+import com.tools.ICTools;
 
 public class StructManage {
 
@@ -65,6 +66,13 @@ public class StructManage {
 	
 	public StructBean getPageStruct(StructBean struct){
 		PageManage pm=new PageManage();
+		if(struct==null){
+			struct=new StructBean();
+			ICTools.setBean(struct, "");
+			struct.setS_value("");
+		}else{
+			ICTools.setBean(struct,struct.getS_value());
+		}
 		return (StructBean) pm.setPage(struct, "selectStructcount");
 	}
 }

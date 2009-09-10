@@ -1,4 +1,4 @@
-package com.mydomain.bean.baseset;
+package com.mydomain.bean;
 
 public class ReSourceBean {
 	private String message;

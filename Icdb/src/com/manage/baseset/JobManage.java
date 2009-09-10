@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.JobBean;
+import com.tools.ICTools;
 
 public class JobManage {
 
@@ -54,6 +55,13 @@ public class JobManage {
 	
 	public JobBean getPageJob(JobBean job){
 		PageManage pm=new PageManage();
+		if(job==null){
+			job=new JobBean();
+			ICTools.setBean(job, "");
+			job.setS_value("");
+		}else{
+			ICTools.setBean(job,job.getS_value());
+		}
 		return (JobBean) pm.setPage(job, "selectJobcount");
 	}
 }

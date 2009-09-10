@@ -1,12 +1,15 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * ��λ����
  * */
-public class UnitTypeBean {
+public class UnitTypeBean extends BaseBean{
 
 
 	private int unitTypeCode; //��λ���ͱ���
-	private String unitTypeName; //��λ�������
+	private String unitTypeName; //��λ������ￄ1�7
 	private String unitTypeRemark; //��λ����˵��
 	/**
 	 * @return the unitTypeCode

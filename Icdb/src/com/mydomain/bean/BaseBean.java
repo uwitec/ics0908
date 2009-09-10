@@ -2,7 +2,7 @@ package com.mydomain.bean;
 
 import propeties.IcdbOption;
 
-public class BaseBean {
+public class BaseBean extends ReSourceBean{
 
 	private int countValue;
 	private int countSize;

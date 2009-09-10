@@ -3,7 +3,6 @@ package com.action.baseset;
 import java.util.List;
 
 import com.manage.baseset.SupplierManage;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.mydomain.bean.baseset.SupplierBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
@@ -15,7 +14,6 @@ public class SupplierAction extends ActionSupport{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ReSourceBean res;
 	private List<SupplierBean> lhp;
 	private SupplierBean supplier;
 	private SupplierManage sm=new SupplierManage();
@@ -44,18 +42,7 @@ public class SupplierAction extends ActionSupport{
 	public void setSupplier(SupplierBean supplier) {
 		this.supplier = supplier;
 	}
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
+
 	
 	public String goAddSupplier(){
 		supplier=new SupplierBean();
@@ -64,11 +51,10 @@ public class SupplierAction extends ActionSupport{
 	}
 	
 	public String addSupplier(){
-		res=new ReSourceBean();
 		if(sm.addSupplier(supplier)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			supplier.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			supplier.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -94,16 +80,6 @@ public class SupplierAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showSupplier(){
-		if(supplier==null){
-			supplier=new SupplierBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(supplier, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(supplier,res.getS_value());
-		}
 		supplier=sm.getPageSupplier(supplier);
 		lhp=sm.getSupplierList(supplier);
 		return SUCCESS;
@@ -111,9 +87,9 @@ public class SupplierAction extends ActionSupport{
 	
 	public String updateSupplier(){
 		if(sm.updateSupplier(supplier)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			supplier.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			supplier.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -121,9 +97,9 @@ public class SupplierAction extends ActionSupport{
 	public String deleteSupplierString(){
 		supplier=new SupplierBean();
 		if(sm.deleteSupplier(supplier)){
-			res.setMessage(ICTools.MESSAGE_DELETEOK);
+			supplier.setMessage(ICTools.MESSAGE_DELETEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			supplier.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

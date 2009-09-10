@@ -16,10 +16,10 @@ import org.apache.struts2.ServletActionContext;
 
 public class ICTools {
 	
-	public static String MESSAGE_OK="添加成功";
-	public static String MESSAGE_UPDATEOK="修改成功";
-	public static String MESSAGE_DELETEOK="删除成功";
-	public static String MESSAGE_ERROR="数据有错误，请检查";
+	public static String MESSAGE_OK="<font color='green'>添加成功</font>";
+	public static String MESSAGE_UPDATEOK="<font color='green'>修改成功</font>";
+	public static String MESSAGE_DELETEOK="<font color='green'>删除成功</font>";
+	public static String MESSAGE_ERROR="<font color='red'>数据有错误，请检查</font>";
 	private static final int BUFFER_SIZE = 16 * 1024 ;
 	
 	public static int mathCeil(double arg0,double arg1){

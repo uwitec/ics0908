@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.manage.baseset.AccountManage;
 import com.mydomain.bean.baseset.AccountBean;
-import com.mydomain.bean.baseset.ReSourceBean;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -18,23 +17,7 @@ public class AccountAction extends ActionSupport{
 
 	private List<AccountBean> lhp;
 	private AccountBean account;
-	private ReSourceBean res;
 	private AccountManage am=new AccountManage();
-
-
-	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
-	}
 
 	/**
 	 * @return the account
@@ -65,18 +48,8 @@ public class AccountAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showAccount(){
-			if(account==null){
-				account=new AccountBean();
-			}
-			if(res==null){
-				res=new ReSourceBean();
-				ICTools.setBean(account, "");
-				res.setS_value("");
-			}else{
-				ICTools.setBean(account,res.getS_value());
-			}
-			account=am.getPageAccount(account);
-			lhp=am.getAccountList(account);
+		account=am.getPageAccount(account);
+		lhp=am.getAccountList(account);
 		return SUCCESS;
 	}
 	
@@ -95,11 +68,10 @@ public class AccountAction extends ActionSupport{
 	}
 	
 	public String addAccount(){
-		res=new ReSourceBean();
 		if(am.addAccount(account)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			account.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			account.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -110,11 +82,10 @@ public class AccountAction extends ActionSupport{
 	}
 	
 	public String updateAccount(){
-		res=new ReSourceBean();
 		if(am.updateAccount(account)){
-			res.setMessage(ICTools.MESSAGE_UPDATEOK);
+			account.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			account.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}
@@ -122,9 +93,9 @@ public class AccountAction extends ActionSupport{
 	public String deleteAccount(){
 
 		if(am.deleteAccount(account)){
-			res.setMessage(ICTools.MESSAGE_DELETEOK);
+			account.setMessage(ICTools.MESSAGE_DELETEOK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			account.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

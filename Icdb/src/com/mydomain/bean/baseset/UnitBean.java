@@ -1,8 +1,11 @@
 package com.mydomain.bean.baseset;
+
+import com.mydomain.bean.BaseBean;
+
 /*
  * 单位BEAN
  * */
-public class UnitBean {
+public class UnitBean extends BaseBean{
 
 	private String unitCode; //单位编码
 	private String unitName; //单位名称
