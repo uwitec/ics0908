@@ -1,5 +1,7 @@
 package com.mydomain.bean.report;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,34 +9,42 @@ import java.util.Locale;
 
 public class ABCReportBean {
 
-	private String beginDate;
-	private String endDate;
-	private String searchTeyp;
-	private String csCode;
-	private String oldCsCode;
+	private String beginDate; // 开始时间
+	private String endDate; // 结束时间
+	private String searchType; // 查询类型
+	private String csCode; // 盘点编码
+	private String oldCsCode; // 上次盘点单编码
 
-	private String name;
-	private String materielType;
-	private String specification;
-	private String util;
+	private String name; // 物品名
+	private String materielType; // 物品类型
+	private String specification; // 规格
+	private String unit; // 单位
 
-	private Integer lastAmount;
-	private Double lastPrice;
-	private Double lastTotalPrice;
+	private Integer lastAmount; // 上次盘点数量
+	private Double lastPrice; // 上次盘点单价
+	private Double lastTotalPrice; // 上次总金额
 
-	private Integer amount;
-	private Double price;
-	private Double totalPrice;
+	private Integer amount; // 本次盘点数量
+	private Double price; // 本次单价
+	private Double totalPrice; // 本次总金额
 
-	private Integer inAmount;
-	private Double inPrice;
-	private Double inTotalPrice;
+	private Integer inAmount; // 入库数量
+	private Double inPrice; // 入库单价
+	private Double inTotalPrice; // 入库金额
 
-	private Integer outAmount;
-	private Double outPrice;
-	private Double outTotalPrice;
+	private Integer outAmount; // 出库数量
+	private Double outPrice; // 出库单价
+	private Double outTotalPrice; // 出库金额
 
-	private String remark;
+	private Integer maxStore; // 最大库存
+	private Integer minStore; // 最小库存
+
+	private Integer storeState; // 实际状态
+	private Double storePercent; // 实际状态百分比,超存百分比或短缺百分比
+
+	private Double turnoverRate; // 周转率
+
+	private String remark; // 备注
 
 	public String getBeginDate() {
 		return beginDate;
@@ -68,12 +78,12 @@ public class ABCReportBean {
 		this.endDate = convertDate(endDate);
 	}
 
-	public String getSearchTeyp() {
-		return searchTeyp;
+	public String getSearchType() {
+		return searchType;
 	}
 
-	public void setSearchTeyp(String searchTeyp) {
-		this.searchTeyp = searchTeyp;
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 
 	public String getCsCode() {
@@ -116,12 +126,12 @@ public class ABCReportBean {
 		this.specification = specification;
 	}
 
-	public String getUtil() {
-		return util;
+	public String getUnit() {
+		return unit;
 	}
 
-	public void setUtil(String util) {
-		this.util = util;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
 	public Integer getLastAmount() {
@@ -254,6 +264,71 @@ public class ABCReportBean {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Integer getMinStore() {
+		return minStore;
+	}
+
+	public void setMinStore(Integer minStore) {
+		this.minStore = minStore;
+	}
+
+	public Integer getMaxStore() {
+		return maxStore;
+	}
+
+	public void setMaxStore(Integer maxStore) {
+		this.maxStore = maxStore;
+	}
+
+	public Integer getStoreState() {
+		Integer amt = getAmount();
+		if (amt < this.minStore) {
+			storeState = -1;
+			storePercent = divide(minStore - amt, minStore);
+		} else if (amt > this.maxStore) {
+			storeState = 1;
+			storePercent = divide(amt - maxStore, maxStore);
+		} else {
+			storeState = 0;
+			storePercent = 0d;
+		}
+		return storeState;
+	}
+
+	private double divide(Integer na, Integer nb) {
+		BigDecimal a = new BigDecimal(na.toString());
+		BigDecimal b = new BigDecimal(nb.toString());
+		return b.divide(a, 2, RoundingMode.HALF_UP).doubleValue();
+	}
+
+	public void setStoreState(Integer storeState) {
+		this.storeState = storeState;
+	}
+
+	public Double getStorePercent() {
+		getStoreState();
+		return storePercent;
+	}
+
+	public void setStorePercent(Double storePercent) {
+		this.storePercent = storePercent;
+	}
+
+	public Double getTurnoverRate() {
+		Integer amt = getAmount();
+		if (0 == amt) {
+			return 0d;
+		}
+		BigDecimal a = new BigDecimal(amt.toString());
+		BigDecimal b = new BigDecimal(getOutAmount().toString());
+		this.turnoverRate = b.divide(a, 2, RoundingMode.HALF_UP).doubleValue();
+		return this.turnoverRate;
+	}
+
+	public void setTurnoverRate(Double turnoverRate) {
+		this.turnoverRate = turnoverRate;
 	}
 
 }
