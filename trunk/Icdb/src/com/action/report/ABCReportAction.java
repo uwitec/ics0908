@@ -4,16 +4,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-
-import propeties.IcdbOption;
 
 import com.dbserver.DBServer;
 import com.dbserver.conf.ALCFFactory;
 import com.dbserver.conf.AutoConfiger;
 import com.mydomain.bean.report.ABCReportBean;
 import com.mydomain.bean.report.ABCType;
+import com.mydomain.bean.report.Type;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ABCReportAction extends ActionSupport {
@@ -27,38 +25,49 @@ public class ABCReportAction extends ActionSupport {
 
 	private ABCReportBean abcReportBean;
 
-	private List<ABCType> abcTypeList;
+	private List<Type> abcTypeList;
+
+	private List<Type> reportTypeList;
+
+	private String reportType;
+
+	private Integer stateType;
 
 	private void initABCType() {
 		if (null != abcTypeList) {
 			return;
 		}
-		abcTypeList = new ArrayList<ABCType>();
 		AutoConfiger acf;
 		try {
 			acf = ALCFFactory.createAutoConfiger("propeties/icdb_option.cfg");
-			String value = acf.getValue("materiel_type");
-			if (null != value) {
-				String[] vArr = value.split(",");
-				if (0 < vArr.length) {
-					for (int i = 0; i < vArr.length; i++) {
-						ABCType t = new ABCType();
-						String[] vs = vArr[i].split(":");
-						if (3 == vs.length) {
-							t.setKey(vs[0]);
-							t.setName(vs[1]);
-							t.setValue(vs[2]);
-							abcTypeList.add(t);
-						}
-					}
-				}
-			}
+			abcTypeList = getType(acf.getValue("materiel_type"));
+			reportTypeList = getType(acf.getValue("report_type"));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	private List<Type> getType(String value) {
+		List<Type> typeList = new ArrayList<Type>();
+		if (null != value) {
+			String[] vArr = value.split(",");
+			if (0 < vArr.length) {
+				for (int i = 0; i < vArr.length; i++) {
+					ABCType t = new ABCType();
+					String[] vs = vArr[i].split(":");
+					if (3 == vs.length) {
+						t.setKey(vs[0]);
+						t.setName(vs[1]);
+						t.setValue(vs[2]);
+						typeList.add(t);
+					}
+				}
+			}
+		}
+		return typeList;
 	}
 
 	private boolean isQueryAllType(String mtype) {
@@ -128,12 +137,36 @@ public class ABCReportAction extends ActionSupport {
 		this.abcReportBean = abcReportBean;
 	}
 
-	public List<ABCType> getAbcTypeList() {
+	public List<Type> getAbcTypeList() {
 		return abcTypeList;
 	}
 
-	public void setAbcTypeList(List<ABCType> abcTypeList) {
+	public void setAbcTypeList(List<Type> abcTypeList) {
 		this.abcTypeList = abcTypeList;
+	}
+
+	public String getReportType() {
+		return reportType;
+	}
+
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
+	}
+
+	public List<Type> getReportTypeList() {
+		return reportTypeList;
+	}
+
+	public void setReportTypeList(List<Type> reportTypeList) {
+		this.reportTypeList = reportTypeList;
+	}
+
+	public Integer getStateType() {
+		return stateType;
+	}
+
+	public void setStateType(Integer stateType) {
+		this.stateType = stateType;
 	}
 
 }
