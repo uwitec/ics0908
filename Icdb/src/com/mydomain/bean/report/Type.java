@@ -1,9 +1,9 @@
 package com.mydomain.bean.report;
 
-public class ABCType extends Type{
+public class Type {
 	private String key;
-	private String value;
 	private String name;
+	private String value;
 
 	public String getKey() {
 		return key;
@@ -13,20 +13,20 @@ public class ABCType extends Type{
 		this.key = key;
 	}
 
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 }
