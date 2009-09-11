@@ -1,12 +1,18 @@
 package com.action.report;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.dbserver.DBServer;
+import com.dbserver.conf.ALCFFactory;
+import com.dbserver.conf.AutoConfiger;
 import com.mydomain.bean.report.ABCReportBean;
+import com.mydomain.bean.report.ABCType;
 import com.mydomain.bean.report.CheckStock;
+import com.mydomain.bean.report.Type;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ReportAction extends ActionSupport {
@@ -19,6 +25,47 @@ public class ReportAction extends ActionSupport {
 	private List<CheckStock> csList;
 	private CheckStock csBean;
 	private ABCReportBean abcReportBean;
+
+	private List<Type> abcTypeList;
+
+	private List<Type> reportTypeList;
+
+	private void initABCType() {
+		if (null != abcTypeList) {
+			return;
+		}
+		AutoConfiger acf;
+		try {
+			acf = ALCFFactory.createAutoConfiger("propeties/icdb_option.cfg");
+			abcTypeList = getType(acf.getValue("materiel_type"));
+			reportTypeList = getType(acf.getValue("report_type"));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private List<Type> getType(String value) {
+		List<Type> typeList = new ArrayList<Type>();
+		if (null != value) {
+			String[] vArr = value.split(",");
+			if (0 < vArr.length) {
+				for (int i = 0; i < vArr.length; i++) {
+					ABCType t = new ABCType();
+					String[] vs = vArr[i].split(":");
+					if (3 == vs.length) {
+						t.setKey(vs[0]);
+						t.setName(vs[1]);
+						t.setValue(vs[2]);
+						typeList.add(t);
+					}
+				}
+			}
+		}
+		return typeList;
+	}
 
 	public String selectCheckStock() {
 		try {
@@ -43,8 +90,9 @@ public class ReportAction extends ActionSupport {
 		}
 		return "SUCCESS";
 	}
-	
-	public String showReportList(){
+
+	public String showReportList() {
+		initABCType();
 		return "SUCCESS";
 	}
 
@@ -71,7 +119,21 @@ public class ReportAction extends ActionSupport {
 	public void setAbcReportBean(ABCReportBean abcReportBean) {
 		this.abcReportBean = abcReportBean;
 	}
-	
-	
+
+	public List<Type> getAbcTypeList() {
+		return abcTypeList;
+	}
+
+	public void setAbcTypeList(List<Type> abcTypeList) {
+		this.abcTypeList = abcTypeList;
+	}
+
+	public List<Type> getReportTypeList() {
+		return reportTypeList;
+	}
+
+	public void setReportTypeList(List<Type> reportTypeList) {
+		this.reportTypeList = reportTypeList;
+	}
 
 }
