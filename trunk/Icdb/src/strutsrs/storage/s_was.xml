@@ -10,5 +10,11 @@
 <action name="AddWasTage" class="com.action.storage.WasAction" method="addWasTage">
 	<result name="success" type="redirect">ShowWas.action</result>
 </action>
+<action name="ShowWasHistroy" class="com.action.storage.WasAction" method="showWasHistroy">
+	<result name="success">/storage/was/WasHistroy.jsp</result>
+</action>
+<action name="GetOneWas" class="com.action.storage.WasAction" method="getOneWas">
+	<result name="success">/storage/was/WasOne.jsp</result>
+</action>
 </package>
 </struts>
