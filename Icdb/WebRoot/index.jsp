@@ -21,7 +21,9 @@
    <a href="<s:url action="baseset/ShowMateriel"/>">物料信息</a><br/>
    -------------------库存业务---------------------------------<br/>
    <a href="<s:url action="storage/ShowStockList"/>">初期库存</a><br/>
-   <a href="<s:url action="storage/ShowWas"/>">物料报损</a>
+   <a href="<s:url action="storage/ShowCheck"/>">盘点</a><br/>
+   <a href="<s:url action="storage/ShowWas"/>">物料报损</a><br/>
+   <a href="<s:url action="storage/ShowWasHistroy"/>">物料历史清单</a><br/>
    -------------------系统信息---------------------------------<br/>
    
     </body>
