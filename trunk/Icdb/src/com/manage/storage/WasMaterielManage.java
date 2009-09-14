@@ -36,13 +36,10 @@ public class WasMaterielManage {
 	public boolean addWasMaterielList(List<WasMaterielBean> w_List,WasTageBean wasTage){
 		if(w_List!=null){
 			try {
-				//DBServer.quider.startTransaction();
+				DBServer.quider.startTransaction();
 				DBServer.quider.insertObject(wasTage);
 				for(int i=0;i<w_List.size();i++){
 					DBServer.quider.insertObject((WasMaterielBean)w_List.get(i));
-					WasMaterielBean a=(WasMaterielBean)w_List.get(i);
-					System.out.println(i+":"+a.getWasCode()+":"+a.getMaterielCode());
-				//	System.out.println(((WasMaterielBean)w_List.get(i)).getWasMoney());
 				}
 				DBServer.quider.commitTransaction();
 				return true;

@@ -13,6 +13,19 @@ public class StorehouseBean extends BaseBean{
 	private String storehouseDefaultCargo; //默认货位
 	private String employeeCode; //管理员编码
 	private String personName;
+	private int isEnabled;
+	/**
+	 * @return the isEnabled
+	 */
+	public int getIsEnabled() {
+		return isEnabled;
+	}
+	/**
+	 * @param isEnabled the isEnabled to set
+	 */
+	public void setIsEnabled(int isEnabled) {
+		this.isEnabled = isEnabled;
+	}
 	/**
 	 * @return the personName
 	 */
