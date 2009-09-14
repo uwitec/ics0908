@@ -108,8 +108,8 @@ String base=request.getContextPath();
 	  }	
     </SCRIPT>
     <body>
-    <s:form theme="simple" action="AddWasTage">
-    <table id="addWas" style="display:none" border="0">
+    <s:form theme="simple" action="AddWasTage" >
+    <table id="addWas"  border="0">
     	<tr><td>报损单号<s:textfield name="wasTage.wasCode" readonly="true"></s:textfield></td></tr>
     	<tr><td>
     	报损单类型<s:select id="wasTypeM" list="wasTypeList" value="value" name="wasTage.wasType" key="key" >
@@ -126,22 +126,31 @@ String base=request.getContextPath();
     	</td></tr>
     </table>
     </s:form>
+    <s:if test="lhp.size()!=0">
 		 <table border="1">
 	    	<tr>
-	    	<th>物料名称</th>
-	    	<th>库位名称</th>
-	    	<th>单价</th>
-	    	<th>数量</th>
+	    	<th>报损单编号</th>
+	    	<th>报损时间</th>
+	    	<th>报损类型</th>
+	    	<th>操作员</th>
 	    	</tr>
 	       <s:iterator value="lhp" status="stat">
 	       	<tr>
 	       	<td><s:property value="wasCode"></s:property></td>
 	       	<td><s:property value="wasTime"></s:property></td>
-	       	<td><s:property value="wasType"></s:property></td>
+	       	<td><s:iterator value="wasTypeList" status="inner">
+	       			<s:if test="inner.wasType==stat.wasType">
+	       				<s:property value="name"/>
+	       			</s:if>
+	       		</s:iterator>
+	       	</td>
 	       	<td><s:property value="personName"></s:property></td>
 	        </tr>
 	       </s:iterator>
-	       <tr><td colspan="4"><input type="button" onclick="document.getElementById('addWas').style.display='block'" value="新增"/></td></tr>
 	     </table>
+	 </s:if>
+	 <s:else>
+	 	没有未完成的工作。
+	 </s:else>
     </body>
 </html>
