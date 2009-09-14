@@ -57,7 +57,7 @@ String base=request.getContextPath();
      
        <s:form action="ShowPerson" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="person">
-       <s:hidden name="res.s_value" value="%{res.s_value}"></s:hidden>
+       <s:hidden name="person.s_value" value="%{person.s_value}"></s:hidden>
        <s:hidden id="countsize" name="person.countSize" value="%{person.countSize}"></s:hidden>
         <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
        <s:if test="person.startSize-1<1">

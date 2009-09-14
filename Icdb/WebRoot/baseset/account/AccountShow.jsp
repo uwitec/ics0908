@@ -51,7 +51,7 @@
      
        <s:form action="ShowAccount" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="account">
-       <s:hidden name="res.s_value" value="%{res.s_value}"></s:hidden>
+       <s:hidden name="account.s_value" value="%{account.s_value}"></s:hidden>
        <s:hidden id="countsize" name="account.countSize" value="%{account.countSize}"></s:hidden>
         <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
        <s:if test="account.startSize-1<1">

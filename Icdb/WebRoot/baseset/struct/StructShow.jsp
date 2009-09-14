@@ -37,7 +37,7 @@ String base=request.getContextPath();
        <tr><td colspan="5">
        <s:form action="ShowStruct" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="struct">
-       <s:hidden name="res.s_value" value="%{res.s_value}"></s:hidden>
+       <s:hidden name="struct.s_value" value="%{struct.s_value}"></s:hidden>
        <s:hidden id="countsize" name="struct.countSize" value="%{struct.countSize}"></s:hidden>
         <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
        <s:if test="struct.startSize-1<1">
