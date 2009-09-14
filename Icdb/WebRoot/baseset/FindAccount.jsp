@@ -16,7 +16,7 @@ String base=request.getContextPath();
     <table>
     <tr><td>
     <s:form action="FindAccount" namespace="/baseset">
-    <s:textfield name="res.s_value" label="内容"></s:textfield>
+    <s:textfield name="account.s_value" label="内容"></s:textfield>
     <s:hidden name="account.accountNumber"></s:hidden>
     <s:submit value="查询"></s:submit>
     </s:form>

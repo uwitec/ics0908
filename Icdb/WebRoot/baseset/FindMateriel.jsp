@@ -14,7 +14,7 @@ String base=request.getContextPath();
     <table>
     <tr><td>
     <s:form action="FindMateriel">
-    	<s:textfield name="res.s_value" label="内容"></s:textfield>
+    	<s:textfield name="materiel.s_value" label="内容"></s:textfield>
     	<s:hidden name="materiel.jobCode"></s:hidden>
     	<s:submit value="查询"></s:submit>
     </s:form>
