@@ -8,7 +8,6 @@ import propeties.IcdbOption;
 
 import com.manage.storage.WasMaterielManage;
 import com.manage.storage.WasTageManage;
-import com.mydomain.bean.ReSourceBean;
 import com.mydomain.bean.baseset.MaterielBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.storage.WasMaterielBean;
@@ -24,7 +23,6 @@ public class WasAction extends ActionSupport{
 	private static final long serialVersionUID = 1L;
 	private List<WasTageBean> lhp;
 	private WasTageBean wasTage;
-	private ReSourceBean res;
 	private List<WasMaterielBean> lwb;
 	private LinkedHashMap<String, String> wasTypeList;
 	private List<StorehouseBean> lshb;
@@ -72,13 +70,6 @@ public class WasAction extends ActionSupport{
 		return lwb;
 	}
 	/**
-	 * @return the res
-	 */
-	public ReSourceBean getRes() {
-		return res;
-	}
-
-	/**
 	 * @return the wasTage
 	 */
 	public WasTageBean getWasTage() {
@@ -95,12 +86,6 @@ public class WasAction extends ActionSupport{
 	 */
 	public void setLwb(List<WasMaterielBean> lwb) {
 		this.lwb = lwb;
-	}
-	/**
-	 * @param res the res to set
-	 */
-	public void setRes(ReSourceBean res) {
-		this.res = res;
 	}
 	
 	/**
@@ -175,21 +160,34 @@ public class WasAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String showWasTage(){
 		 WasTageManage wtm=new WasTageManage();
-		if(wasTage==null){
-			wasTage=new WasTageBean();
-		}
-		if(res==null){
-			res=new ReSourceBean();
-			ICTools.setBean(wasTage, "");
-			res.setS_value("");
-		}else{
-			ICTools.setBean(wasTage,res.getS_value());
-		}
 		wasTage=wtm.getPageWasTagePerson(wasTage);
 		wasTage.setWasCode(ICTools.randId("W"));
 		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
 		lhp=wtm.getWasPersonList(wasTage);
 		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String showWasHistroy(){
+		WasTageManage wtm=new WasTageManage();
+		wasTage=wtm.getPageWasTage(wasTage);
+		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
+		lhp=wtm.getWasTageList(wasTage);
+		return SUCCESS;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String getOneWas(){
+		WasTageManage wtm=new WasTageManage();
+		WasMaterielManage wmm=new WasMaterielManage();
+		WasMaterielBean wasMateriel=new WasMaterielBean();
+		
+		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
+		wasTage=wtm.getWasTageOne(wasTage.getWasCode());
+		wasMateriel.setWasCode(wasTage.getWasCode());
+		lwb=wmm.getWasMaterileList(wasMateriel);
+		return SUCCESS;
+		
 	}
 	/*
 	public String addWasTage1(){
@@ -228,10 +226,12 @@ public class WasAction extends ActionSupport{
 				}
 			}
 		}
+		wasTage.setWasTime(ICTools.getTime());
+		wasTage.setWasState(1);
 		if(wmm.addWasMaterielList(lwmb,wasTage)){
-			res.setMessage(ICTools.MESSAGE_OK);
+			wasTage.setMessage(ICTools.MESSAGE_OK);
 		}else{
-			res.setMessage(ICTools.MESSAGE_ERROR);
+			wasTage.setMessage(ICTools.MESSAGE_ERROR);
 		}
 		return SUCCESS;
 	}

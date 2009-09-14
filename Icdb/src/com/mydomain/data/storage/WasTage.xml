@@ -11,10 +11,10 @@
 		from wastage as w,person as p
 		where p.personCode=w.operator and w.wasState!=0
 		and (
-		locate(#wasCode#,w.wasCode)>1  or
-		locate(#personName#,p.personName)>1 or
-		locate(#wasTime#,w.wasTime)>1 or
-		locate(#wasDoc#,w.wasDoc)>1)
+		locate(#wasCode#,w.wasCode)>0  or
+		locate(#personName#,p.personName)>0 or
+		locate(#wasTime#,w.wasTime)>0 or
+		locate(#wasDoc#,w.wasDoc)>0)
 		and w.operator=#operator#
 	</select>
 	<select id="selectWasPerson" resultClass="com.mydomain.bean.storage.WasTageBean">
@@ -25,10 +25,10 @@
 		where p.personCode=w.operator
 		and w.wasState!=0
 		and (
-		locate(#wasCode#,w.wasCode)>1  or
-		locate(#personName#,p.personName)>1 or
-		locate(#wasTime#,w.wasTime)>1 or
-		locate(#wasDoc#,w.wasDoc)>1) 
+		locate(#wasCode#,w.wasCode)>0  or
+		locate(#personName#,p.personName)>0 or
+		locate(#wasTime#,w.wasTime)>0 or
+		locate(#wasDoc#,w.wasDoc)>0) 
 		and w.operator=#operator#
 		limit #startValue#,#endValue# 
 	</select>
@@ -38,10 +38,10 @@
 		from wastage as w,person as p
 		where p.personCode=w.operator and w.wasState!=0
 		and (
-		locate(#wasCode#,w.wasCode)>1  or
-		locate(#personName#,p/personName)>1 or
-		locate(#wasTime#,w.wasTime)>1 or
-		locate(#wasDoc#,w.wasDoc)>1)
+		locate(#wasCode#,w.wasCode)>0  or
+		locate(#personName#,p.personName)>0 or
+		locate(#wasTime#,w.wasTime)>0 or
+		locate(#wasDoc#,w.wasDoc)>0)
 	</select>
 	<select id="selectWasTageDef" resultClass="com.mydomain.bean.storage.WasTageBean">
 		select 
@@ -56,10 +56,10 @@
 		where p.personCode=w.operator
 		and w.wasState!=0
 		and (
-		locate(#wasCode#,w.wasCode)>1  or
-		locate(#personName#,p.personName)>1 or
-		locate(#wasTime#,w.wasTime)>1 or
-		locate(#wasDoc#,w.wasDoc)>1)
+		locate(#wasCode#,w.wasCode)>0  or
+		locate(#personName#,p.personName)>0 or
+		locate(#wasTime#,w.wasTime)>0 or
+		locate(#wasDoc#,w.wasDoc)>0)
 		limit #startValue#,#endValue# 
 	</select>
 	<select id="getWasTageBean" parameterClass="String" resultClass="com.mydomain.bean.storage.WasTageBean">
@@ -68,11 +68,11 @@
 		w.wasTime,
 		w.wasType,
 		w.operator,
-		p.personName
+		p.personName,
 		w.wasDoc,
 		w.wasState
 		from wastage as w,person as p
-		where p.personCode=w.operator and w.wasState!=0
+		where p.personCode=w.operator and w.wasState!=0 and
 		w.wasCode=#wasCode#
 	</select>
 	<insert id="insertWasTageBean" parameterClass="com.mydomain.bean.storage.WasTageBean">

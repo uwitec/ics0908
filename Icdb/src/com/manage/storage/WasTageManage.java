@@ -7,6 +7,7 @@ import java.util.List;
 import com.dbserver.DBServer;
 import com.manage.baseset.PageManage;
 import com.mydomain.bean.storage.WasTageBean;
+import com.tools.ICTools;
 
 
 public class WasTageManage {
@@ -24,6 +25,13 @@ public class WasTageManage {
 	
 	public WasTageBean getPageWasTagePerson(WasTageBean wasTage){
 		PageManage pm=new PageManage();
+		if(wasTage==null){
+			wasTage=new WasTageBean();
+			ICTools.setBean(wasTage, "");
+			wasTage.setS_value("");
+		}else{
+			ICTools.setBean(wasTage,wasTage.getS_value());
+		}
 		return (WasTageBean) pm.setPage(wasTage, "selectWasPersonCount");
 	}
 	
@@ -40,6 +48,13 @@ public class WasTageManage {
 	
 	public WasTageBean getPageWasTage(WasTageBean wasTage){
 		PageManage pm=new PageManage();
+		if(wasTage==null){
+			wasTage=new WasTageBean();
+			ICTools.setBean(wasTage, "");
+			wasTage.setS_value("");
+		}else{
+			ICTools.setBean(wasTage,wasTage.getS_value());
+		}
 		return (WasTageBean) pm.setPage(wasTage, "selectWasCount");
 	}
 	

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CheckStock">
+	<select id="selectCheckStockCount" resultClass="com.mydomain.bean.storage.CheckStockBean">
+		select 
+		count(*) as countValue
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		cs.csState!=0 and
+		(locate(#csCode#,cs.csCode)>0 or
+		locate(#storehouseName#,s.storehouseName)>0 or
+		locate(#csDate#,cs.csDate)>0 or
+		locate(#csApprove#,cs.csApprove)>0 or
+		locate(#csApproveMessage#,cs.csApproveMessage)>0 or
+		locate(#csCheckPerson#,cs.csCheckPerson)>0 or
+		locate(#personName#,p.personName)>0)
+	</select>
+	<select id="selectCheckStockDef" resultClass="com.mydomain.bean.storage.CheckStockBean">
+		select 
+		cs.csCode,
+		cs.storehouseCode,
+		s.storehouseName,
+		cs.csDate,
+		cs.csApprove,
+		cs.csApproveMessage,
+		cs.csApproveState,
+		cs.csCheckPerson,
+		cs.csOptionor,
+		p.personName,
+		cs.csState,
+		cs.csStartStock
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		cs.csState!=0 and
+		(locate(#csCode#,cs.csCode)>0 or
+		locate(#storehouseName#,s.storehouseName)>0 or
+		locate(#csDate#,cs.csDate)>0 or
+		locate(#csApprove#,cs.csApprove)>0 or
+		locate(#csApproveMessage#,cs.csApproveMessage)>0 or
+		locate(#csCheckPerson#,cs.csCheckPerson)>0 or
+		locate(#personName#,p.personName)>0)
+		limit #startValue#,#endValue# 
+	</select>
+	<select id="getCheckStockBean" parameterClass="String" resultClass="com.mydomain.bean.storage.CheckStockBean">
+				select 
+		cs.csCode,
+		cs.storehouseCode,
+		s.storehouseName,
+		cs.csDate,
+		cs.csApprove,
+		cs.csApproveMessage,
+		cs.csApproveState,
+		cs.csCheckPerson,
+		cs.csOptionor,
+		p.personName,
+		cs.csState,
+		cs.csStartStock
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		cs.csState!=0 and cs.csCode=#csCode#
+	</select>
+	<insert id="insertCheckStockBean" parameterClass="com.mydomain.bean.storage.CheckStockBean">
+	insert into CheckStock 
+	(csCode,storehouseCode,csDate,csApprove,csApproveMessage,csApproveState,csCheckPerson,
+	csOptionor,csState,csStartStock) 
+	values(#csCode#,#storehouseCode#,#csDate#,#csApprove#,#csApproveMessage#,#csApproveState#,#csCheckPerson#,
+	#csOptionor#,#csState#,#csStartStock#)
+	</insert>
+	<update id="updateCheckStockBean" parameterClass="com.mydomain.bean.storage.CheckStockBean">
+	update CheckStock
+	set
+	storehouseName=#storehouseName#,
+	csDate=#csDate#,
+	csApprove=#csApprove#,
+	csApproveMessage=#csApproveMessage#,
+	csApproveState=#csApproveState#,
+	csCheckPerson=#csCheckPerson#,
+	csOptionor=#csOptionor#,
+	csState=#csState#,
+	csStartStock=#csStartStock#
+	where csCode=#csCode#
+	</update>
+	<delete id="deleteCheckStockBean" parameterClass="com.mydomain.bean.storage.CheckStockBean">
+	update CheckStock
+	set
+	csState=0
+	where csCode=#csCode#
+	</delete>
+</sqlMap>

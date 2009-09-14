@@ -83,7 +83,7 @@
 		FROM PERSON,EMPLOYEE
 		WHERE PERSON.PERSONCODE=EMPLOYEE.PERSONCODE) AS PE 
 		WHERE PE.EMPLOYEECODE=STOREHOUSE.EMPLOYEECODE
-		AND STOREHOUSE.ISENABLED=1
+		AND STOREHOUSE.ISENABLED!=0
 		AND STOREHOUSE.STOREHOUSECODE=#storehouseCode#
 	</select>
 	<insert id="insertStorehouseBean" parameterClass="com.mydomain.bean.baseset.StorehouseBean">
@@ -99,7 +99,7 @@
 		STOREHOUSEADDRESS=#storehouseAddress#,
 		STOREHOUSEDEFAULTCARGO=#storehouseDefaultCargo#,
 		EMPLOYEECODE=#employeeCode#,
-		ISENABLED=1
+		ISENABLED=#isEnabled#
 		WHERE STOREHOUSECODE=#storehouseCode#
 	</update>
 	<delete id="deleteStorehouseBean" parameterClass="com.mydomain.bean.baseset.StorehouseBean">

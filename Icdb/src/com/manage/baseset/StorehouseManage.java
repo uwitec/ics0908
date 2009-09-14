@@ -35,10 +35,13 @@ public class StorehouseManage {
 	public StorehouseBean getStorehouseOne(String Id){
 		try {
 			return (StorehouseBean) DBServer.quider.queryForObjectById(Id, StorehouseBean.class);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
+			System.out.println("2");
 			return new StorehouseBean();
+		
 		}
 	}
 	
