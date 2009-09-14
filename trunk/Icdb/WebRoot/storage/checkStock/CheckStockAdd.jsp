@@ -126,7 +126,7 @@ String base=request.getContextPath();
 	    				<td>单价</td>
 	    				<td>金额</td>
 	    			</tr>
-	    			<s:iterator value="list_stock">
+	    			<s:iterator value="list_csb">
 	    				<tr align="right">
 	    					<td>
 	    					<s:property value="%{materielName}"/>
@@ -136,16 +136,16 @@ String base=request.getContextPath();
 	    					<s:hidden name="checkStockList.cargoSpaceCode" value="%{cargoSpaceCode}"></s:hidden>
 	    					</td>
 	    					<td>
-	    					<s:property value="%{stockAmount}"/>
-	    					<s:hidden name="checkStockList.t_StartNumber" value="%{stockAmount}"/>
+	    					<s:property value="%{csCheckNumber}"/>
+	    					<s:hidden name="checkStockList.t_StartNumber" value="%{csCheckNumber}"/>
 	    					</td>
 	    					<td>
-	    					<s:property value="%{stockPrice}"/>
-	    					<s:hidden name="checkStockList.t_StartPrice" value="%{stockPrice}"/>
+	    					<s:property value="%{csStartPrice}"/>
+	    					<s:hidden name="checkStockList.t_StartPrice" value="%{csStartPrice}"/>
 	    					</td>
-	    					<td><s:property value="%{stockAmount*stockPrice}"/></td>
-	    					<td><s:textfield size="5" name="checkStockList.t_CheckNumber" value="%{stockAmount}" onchange="getPrice(this)"/></td>
-	    					<td><s:textfield size="5" name="checkStockList.t_CheckPrice" value="%{stockPrice}" onchange="getPrice(this)"/></td>
+	    					<td><s:property value="%{csCheckNumber*csStartPrice}"/></td>
+	    					<td><s:textfield size="5" name="checkStockList.t_CheckNumber" value="%{csCheckNumber}" onchange="getPrice(this)"/></td>
+	    					<td><s:textfield size="5" name="checkStockList.t_CheckPrice" value="%{csCheckPrice}" onchange="getPrice(this)"/></td>
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>

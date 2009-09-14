@@ -25,6 +25,7 @@ String base=request.getContextPath();
     		<input type="submit" value="进行盘点"  <s:property value="checkTime"/>"/>
     		</td>
     	</tr>
+    	<tr><td><s:a href="ShowHistroy.action">查看历史</s:a></td></tr>
     </table>
     </s:form>
     </body>
