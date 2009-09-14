@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2009-09-03 10:25:25                          */
+/* Created on:     2009-09-14 17:15:45                          */
 /*==============================================================*/
 
 
@@ -27,6 +27,8 @@ drop table if exists Employee;
 drop table if exists Job;
 
 drop table if exists Materiel;
+
+drop table if exists Permission;
 
 drop table if exists Person;
 
@@ -193,6 +195,10 @@ create table Employee
    jobCode              VARCHAR(45),
    isEnabled            INT,
    jsonField            VARCHAR(3000),
+   userName             VARCHAR(255),
+   password             VARCHAR(45),
+   permissionCode       VARCHAR(255),
+   isAlowLogin          INT,
    primary key (employeeCode)
 );
 
@@ -206,6 +212,7 @@ create table Job
    departmentCode       VARCHAR(45),
    isEnabled            INT,
    jsonField            VARCHAR(3000),
+   permissionCode       VARCHAR(255),
    primary key (jobCode)
 );
 
@@ -226,6 +233,18 @@ create table Materiel
    materielSize         VARCHAR(45),
    materielABC          VARCHAR(45),
    primary key (materielCode)
+);
+
+/*==============================================================*/
+/* Table: Permission                                            */
+/*==============================================================*/
+create table Permission
+(
+   permissionCode       varchar(45) not null,
+   permissionName       varchar(255),
+   permissionRmark      varchar(500),
+   permissionParentCode varchar(45),
+   primary key (permissionCode)
 );
 
 /*==============================================================*/
@@ -457,7 +476,7 @@ create table UnitType
 create table wasMateriel
 (
    materielCode         VARCHAR(45) not null,
-   wasCode              VARCHAR(45) not null,
+   wasCode              varchar(45) not null,
    wasNumber            int,
    wasMoney             decimal,
    wasCause             VARCHAR(500),
@@ -472,7 +491,9 @@ create table wastage
    wasCode              varchar(45) not null,
    wasType              int,
    wasTime              bigint,
-   operator             varchar(45),
+   optionor             varchar(45),
+   wasState             int,
+   wasDoc               varchar(45),
    primary key (wasCode)
 );
 
@@ -566,9 +587,9 @@ alter table TransferOrderHasMateriel add constraint FK_Reference_52 foreign key 
 alter table Unit add constraint fk_Unit_UnitType foreign key (unitTypeCode)
       references UnitType (unitTypeCode);
 
+alter table wasMateriel add constraint FK_Reference_38 foreign key (wasCode)
+      references wastage (wasCode) on delete restrict on update restrict;
+
 alter table wasMateriel add constraint FK_Reference_44 foreign key (materielCode)
       references Materiel (materielCode) on delete restrict on update restrict;
-
-alter table wasMateriel add constraint FK_Reference_45 foreign key (wasCode)
-      references wastage (wasCode) on delete restrict on update restrict;
 
