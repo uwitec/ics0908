@@ -4,7 +4,6 @@
 
 <Workspace>
 	<Local Expanded="Yes">
-		<Model Expanded="Yes" ID="{4B7D6568-D817-4D28-BC81-23E5927FB7E0}" Loaded="No" Name="PhysicalDataModel_icdb" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="PhysicalDataModel_icdb.pdm"/>
 		<Model Expanded="Yes" ID="{4B7D6568-D817-4D28-BC81-23E5927FB7E0}" Name="PhysicalDataModel_icdb" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="PhysicalDataModel_icdb.pdm"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
