@@ -13,5 +13,26 @@
 <action name="AddCheckStock" class="com.action.storage.CheckStockAction" method="addCheckStock">
 	<result name="success" type="redirect">ShowCheck.action</result>
 </action>
+<action name="ShowHistroy" class="com.action.storage.CheckStockAction" method="showHistroy">
+	<result name="success">/storage/checkStock/CheckHistroy.jsp</result>
+</action>
+<action name="FindCheck" class="com.action.storage.CheckStockAction" method="findCheck">
+	<result name="success">/storage/checkStock/CheckStockOne.jsp</result>
+</action>
+<action name="UpdateCheckStock" class="com.action.storage.CheckStockAction" method="updateCheckStock">
+	<result name="success" type="redirect">ShowCheck.action</result>
+</action>
+<action name="EditCheckStock" class="com.action.storage.CheckStockAction" method="editCheckStock">
+	<result name="success">/storage/checkStock/CheckStockAdd.jsp</result>
+</action>
+<action name="ShowCheckApprove" class="com.action.storage.CheckStockAction" method="showCheckApprove">
+	<result name="success">/storage/checkStock/CheckApprove.jsp</result>
+</action>
+<action name="GoCheckApprove" class="com.action.storage.CheckStockAction" method="goCheckApprove">
+	<result name="success">/storage/checkStock/CheckApproveEdit.jsp</result>
+</action>
+<action name="UpdateCheckApprove" class="com.action.storage.CheckStockAction" method="updateCheckApprove">
+	<result name="success" type="redirect">ShowCheckApprove.action</result>
+</action>
 </package>
 </struts>
