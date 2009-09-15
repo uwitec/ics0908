@@ -40,7 +40,12 @@
 	values(#cargoSpaceCode#,#materielCode#,#stockPrice#,#stockAmount#,#jsonField#)
 	</insert>
 	<update id="updateStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
-		</update>
+	update stock
+	set 
+	stockPrice=#stockPrice#,
+	stockAmount=#stockAmount#
+	where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
+	</update>
 	<delete id="deleteStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
 	</delete> 
 </sqlMap>

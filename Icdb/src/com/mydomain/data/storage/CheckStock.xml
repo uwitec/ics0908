@@ -5,6 +5,78 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CheckStock">
+	<select id="getCheckHouse" parameterClass="String" resultClass="com.mydomain.bean.baseset.StorehouseBean">
+		select 
+		s.storehouseCode,
+		s.storehouseName
+		from Storehouse as s
+		where s.storehouseCode not in(
+		 select cs.storehouseCode from CheckStock as cs 
+		 where locate(#csDate#,cs.csDate)>0)
+	</select>
+	<select id="getCheckNoComCount"  resultClass="com.mydomain.bean.storage.CheckStockBean">
+		select 
+		count(*) as countValue
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		cs.csState=1 and
+		cs.csStartStock!=1 and
+		cs.csApproveState!=1
+	</select>
+	<select id="getCheckNoComDef" resultClass="com.mydomain.bean.storage.CheckStockBean">
+		select 
+		cs.csCode,
+		cs.storehouseCode,
+		s.storehouseName,
+		cs.csDate,
+		cs.csApprove,
+		cs.csApproveMessage,
+		cs.csApproveState,
+		cs.csCheckPerson,
+		cs.csOptionor,
+		p.personName,
+		cs.csState,
+		cs.csStartStock
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		cs.csState=1 and
+		cs.csStartStock!=1 and
+		cs.csApproveState!=1
+		limit #startValue#,#endValue# 
+	</select>
+	<select id="getCheckStateCount"  resultClass="com.mydomain.bean.storage.CheckStockBean">
+		select 
+		count(*) as countValue
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		(cs.csState!=1 or cs.csApproveState!=1)
+		and cs.csStartStock!=1
+	</select>
+	<select id="getCheckStateDef" resultClass="com.mydomain.bean.storage.CheckStockBean">
+		select 
+		cs.csCode,
+		cs.storehouseCode,
+		s.storehouseName,
+		cs.csDate,
+		cs.csApprove,
+		cs.csApproveMessage,
+		cs.csApproveState,
+		cs.csCheckPerson,
+		cs.csOptionor,
+		p.personName,
+		cs.csState,
+		cs.csStartStock
+		from CheckStock as cs,Storehouse as s,person as p
+		where s.storehouseCode=cs.storehouseCode and
+		cs.csOptionor=p.personCode and 
+		(cs.csState!=1 or cs.csApproveState!=1)
+		and cs.csStartStock!=1
+		limit #startValue#,#endValue# 
+	</select>
+	
 	<select id="selectCheckStockCount" resultClass="com.mydomain.bean.storage.CheckStockBean">
 		select 
 		count(*) as countValue
@@ -48,7 +120,7 @@
 		limit #startValue#,#endValue# 
 	</select>
 	<select id="getCheckStockBean" parameterClass="String" resultClass="com.mydomain.bean.storage.CheckStockBean">
-				select 
+		select 
 		cs.csCode,
 		cs.storehouseCode,
 		s.storehouseName,
@@ -70,13 +142,13 @@
 	insert into CheckStock 
 	(csCode,storehouseCode,csDate,csApprove,csApproveMessage,csApproveState,csCheckPerson,
 	csOptionor,csState,csStartStock) 
-	values(#csCode#,#storehouseCode#,#csDate#,#csApprove#,#csApproveMessage#,#csApproveState#,#csCheckPerson#,
-	#csOptionor#,#csState#,#csStartStock#)
+	values(#csCode#,#storehouseCode#,#csDate#,#csApprove#,#csApproveMessage#,0,#csCheckPerson#,
+	#csOptionor#,#csState#,0)
 	</insert>
 	<update id="updateCheckStockBean" parameterClass="com.mydomain.bean.storage.CheckStockBean">
 	update CheckStock
 	set
-	storehouseName=#storehouseName#,
+	storehouseCode=#storehouseCode#,
 	csDate=#csDate#,
 	csApprove=#csApprove#,
 	csApproveMessage=#csApproveMessage#,

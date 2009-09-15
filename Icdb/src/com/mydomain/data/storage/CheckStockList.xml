@@ -8,7 +8,7 @@
 	<select id="selectCheckStockListCount" resultClass="com.mydomain.bean.storage.CheckStockListBean">
 		select 
 		count(*) as countValue
-		from CheckStockListList as csl,materiel as m,CargoSpace as c
+		from CheckStockList as csl,materiel as m,CargoSpace as c
 		where csl.materielCode=m.materielCode and 
 		csl.cargoSpaceCode=c.cargoSpaceCode and
 		and csCode=#csCode#
@@ -27,11 +27,30 @@
 		csl.csDiffMessage,
 		csl.csRemark,
 		csl.csGM
-		from CheckStockListList as csl,materiel as m,CargoSpace as c
+		from CheckStockList as csl,materiel as m,CargoSpace as c
 		where csl.materielCode=m.materielCode and 
 		csl.cargoSpaceCode=c.cargoSpaceCode and
 		and csCode=#csCode#
 		limit #startValue#,#endValue# 
+	</select>
+	<select id="selectOneCheckList" resultClass="com.mydomain.bean.storage.CheckStockListBean">
+		select 
+		csl.csCode,
+		csl.materielCode,
+		m.materielName,
+		csl.cargoSpaceCode,
+		c.cargoSpaceName,
+		csl.csStartPrice,
+		csl.csStartNumber,
+		csl.csCheckPrice,
+		csl.csCheckNumber,
+		csl.csDiffMessage,
+		csl.csRemark,
+		csl.csGM
+		from CheckStockList as csl,materiel as m,CargoSpace as c
+		where csl.materielCode=m.materielCode and 
+		csl.cargoSpaceCode=c.cargoSpaceCode and 
+		csl.csCode=#csCode#
 	</select>
 	<insert id="insertCheckStockListBean" parameterClass="com.mydomain.bean.storage.CheckStockListBean">
 		insert into CheckStockList
@@ -42,7 +61,6 @@
 	<update id="updateCheckStockListBean" parameterClass="com.mydomain.bean.storage.CheckStockListBean">
 	update CheckStockList
 	set
-	cargoSpaceCode=#cargoSpaceCode#,
 	csStartPrice=#csStartPrice#,
 	csStartNumber=#csStartNumber#,
 	csCheckPrice=#csCheckPrice#,
@@ -50,7 +68,7 @@
 	csDiffMessage=#csDiffMessage#,
 	csRemark=#csRemark#,
 	csGM=#csGM#
-	where materielCode=#materielCode# and csCode=#csCode#
+	where materielCode=#materielCode# and csCode=#csCode# and cargoSpaceCode=#cargoSpaceCode#
 	</update>
 	<delete id="deleteCheckStockListBean" parameterClass="com.mydomain.bean.storage.CheckStockListBean">
 
