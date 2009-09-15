@@ -41,4 +41,34 @@ public class StockManage {
 			return false;
 		}
 	}
+	
+	public boolean updateStock(StockBean stock){
+		try {
+			DBServer.quider.updateObject(stock);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
+		}
+	}
+	
+	public boolean updateStockList(List<StockBean> stock_list){
+		if(stock_list==null)
+			return false;
+		try {
+			DBServer.quider.startTransaction();
+			for(int i=0;i<stock_list.size();i++){
+				DBServer.quider.updateObject(stock_list.get(i));
+			}
+			DBServer.quider.commitTransaction();
+			DBServer.quider.endTransaction();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
+		}
+		
+	}
 }
