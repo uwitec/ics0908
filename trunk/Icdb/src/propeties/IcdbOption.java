@@ -10,6 +10,14 @@ import com.dbserver.conf.AutoConfiger;
 
 public class IcdbOption {
 	
+	public static int state_Complete=1;
+	public static int state_Delete=0;
+	public static int state_Unfinished=2;
+	
+	public static int check_Unaudited=0;
+	public static int check_Approved=1;
+	public static int check_Nopass=2;
+	
 	public static String getValue(String key){
 		AutoConfiger autoConfiger = null;
 		try {
@@ -101,7 +109,8 @@ public class IcdbOption {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(IcdbOption.getABCType());
+		String a=(String) IcdbOption.getTableState().get("2");
+		System.out.println(a);
 	}
 	
 }
