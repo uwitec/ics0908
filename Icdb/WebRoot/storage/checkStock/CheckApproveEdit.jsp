@@ -11,54 +11,44 @@ String base=request.getContextPath();
 %>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
-	
-	function submitComplete(){
-		if(confirm("是否完成，并提交审查？")){
-        	checkUpdate.submit();
+
+	function sub_approve(){
+		if(confirm("是否完成，并完成库存盘点？")){
+			document.getElementById("app_state").value=1;
+			document.getElementById("start_stock").value=1;
+        	ApproveCheck.submit();
     		}
     	else {
 	       return false;
 	    }
 	}
 	
-	function submitSava(){
-		if(confirm("确定无误后，请确定！")){
-			document.getElementById("sub_state").value=2;
-			dcheckUpdate.submit();
-		}else{
-			return false;
-		}
-	
+	function sub_noapprove(){
+		if(confirm("是否确定该审核不通过？")){
+			document.getElementById("app_state").value=2;
+			document.getElementById("cs_state").value=2;
+        	ApproveCheck.submit();
+    		}
+    	else {
+	       return false;
+	    }
 	}
 	
 	function get_init(){
 		var a=document.getElementById("checkListMater");
 		for(var i=3;i<a.rows.length;i++){
-			getPriceSum(i);
+			getPrice(i);
 		}
 	}
-	
-	function getPriceSum(tab){
+
+	function getPrice(tab){
 		var t_id=document.getElementById("checkListMater");
 	//	var row_id=tab.parentNode.parentNode.rowIndex;
 		var row_id=tab;
 		var amount_st = trim(t_id.rows.item(row_id).cells.item(2).innerText);
 		var price_st = trim(t_id.rows.item(row_id).cells.item(3).innerText);
-		var amount_end = t_id.rows.item(row_id).cells.item(5).firstChild.value;
-		var price_end = t_id.rows.item(row_id).cells.item(6).firstChild.value;
-	    t_id.rows.item(row_id).cells.item(7).innerHTML=parseFloat(amount_end)*parseFloat(price_end);
-	    getAmount(row_id,amount_st,amount_end,price_end);
-	    getMoney(row_id,price_st,price_end,amount_end);
-	}
-
-	function getPrice(tab){
-		var t_id=document.getElementById("checkListMater");
-		var row_id=tab.parentNode.parentNode.rowIndex;
-		var amount_st = trim(t_id.rows.item(row_id).cells.item(2).innerText);
-		var price_st = trim(t_id.rows.item(row_id).cells.item(3).innerText);
-		var amount_end = t_id.rows.item(row_id).cells.item(5).firstChild.value;
-		var price_end = t_id.rows.item(row_id).cells.item(6).firstChild.value;
-		
+		var amount_end = t_id.rows.item(row_id).cells.item(5).innerText;
+		var price_end = t_id.rows.item(row_id).cells.item(6).innerText;
 	    t_id.rows.item(row_id).cells.item(7).innerHTML=parseFloat(amount_end)*parseFloat(price_end);
 	    getAmount(row_id,amount_st,amount_end,price_end);
 	    getMoney(row_id,price_st,price_end,amount_end);
@@ -103,27 +93,35 @@ String base=request.getContextPath();
 	
 </SCRIPT>
     <body>
-    <s:form action="UpdateCheckStock" theme="simple" name="checkUpdate">
+    <s:form action="UpdateCheckApprove" theme="simple" name="ApproveCheck">
     <table width="120%" border="1">
 	    <tr>
 		    <td>
 			    <table>
 				    <tr>
 				    	<td>盘点单号:
-				    	<s:hidden name="checkStock.csCode" value="%{checkStock.csCode}"></s:hidden>
 				    	<s:property value="%{checkStock.csCode}"/>
+				    	<s:hidden name="checkStock.csCode" value="%{checkStock.csCode}"></s:hidden>
 				    	</td>
 				    	<td>盘点库房
-				    	<s:hidden name="checkStock.storehouseCode" value="%{checkStock.storehouseCode}"></s:hidden>
 				    	<s:property value="%{checkStock.storehouseName}"/>
+				    	<s:hidden name="checkStock.storehouseCode" value="%{checkStock.storehouseCode}"></s:hidden>
 				    	</td>
 				    </tr>
 				    <tr>
 				    	<td>盘点时间：
-				    	<s:hidden name="checkStock.csDate" value="%{checkStock.csDate}"></s:hidden>
 				    	<s:property value="%{checkStock.csDate}"/>
+				    	<s:hidden name="checkStock.csDate" value="%{checkStock.csDate}"></s:hidden>
 				    	</td>
 				    	<td>审批人：
+				    	<s:property value="%{checkStock.csCheckPerson}"/>
+				    	<s:hidden name="checkStock.csCheckPerson" value="%{checkStock.csCheckPerson}"></s:hidden>
+				    	</td>
+				    </tr>
+				    <tr>
+				    	<td>操作员：
+				    	<s:property value="%{checkStock.personName}"/>
+				    	<s:hidden name="checkStock.csOptionor" value="%{checkStock.csOptionor}"></s:hidden>
 				    	</td>
 				    </tr>
 			    </table>
@@ -167,24 +165,13 @@ String base=request.getContextPath();
 	    			</tr>
 	    			<s:iterator value="list_CheckstockList">
 	    				<tr align="right">
-	    					<td>
-	    					<s:property value="%{materielName}"/>
-	    					<s:hidden name="checkStockList.materielCode" value="%{materielCode}"/></td>
-	    					<td>
-	    					<s:property value="%{cargoSpaceName}"/>
-	    					<s:hidden name="checkStockList.cargoSpaceCode" value="%{cargoSpaceCode}"></s:hidden>
-	    					</td>
-	    					<td>
-	    					<s:property value="%{csStartNumber}"/>
-	    					<s:hidden name="checkStockList.t_StartNumber" value="%{csStartNumber}"/>
-	    					</td>
-	    					<td>
-	    					<s:property value="%{csStartPrice}"/>
-	    					<s:hidden name="checkStockList.t_StartPrice" value="%{csStartPrice}"/>
-	    					</td>
+	    					<td><s:property value="%{materielName}"/></td>
+	    					<td><s:property value="%{cargoSpaceName}"/></td>
+	    					<td><s:property value="%{csStartNumber}"/></td>
+	    					<td><s:property value="%{csStartPrice}"/></td>
 	    					<td><s:property value="%{csStartNumber*csStartPrice}"/></td>
-	    					<td><s:textfield size="5" name="checkStockList.t_CheckNumber" value="%{csCheckNumber}" onchange="getPrice(this)"/></td>
-	    					<td><s:textfield size="5" name="checkStockList.t_CheckPrice" value="%{csCheckPrice}" onchange="getPrice(this)"/></td>
+	    					<td><s:property value="%{csCheckNumber}"/></td>
+	    					<td><s:property value="%{csCheckPrice}"/></td>
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>
@@ -194,19 +181,49 @@ String base=request.getContextPath();
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>
-	    					<td><input size="10" type="text" name="checkStockList.csDiffMessage" value=" "></td>
-	    					<td><input size="10" type="text" name="checkStockList.csRemark" value=" "></td>
-	    					<td><input size="10" type="text" name="checkStockList.csGM" value=" "></td>
+	    					<td>
+	    					<s:if test="csDiffMessage!=''">
+	    					<s:property value="%{csDiffMessage}"/>
+	    					</s:if>
+	    					<s:else>
+	    					无
+	    					</s:else>
+	    					</td>
+	    					<td>
+	    					<s:if test="csRemark!=''">
+	    					<s:property value="%{csRemark}"/>
+	    					</s:if>
+	    					<s:else>
+	    					无
+	    					</s:else></td>
+	    					<td>
+	    					<s:if test="csGM!=''">
+	    					<s:property value="%{csGM}"/>
+	    					</s:if>
+	    					<s:else>
+	    					无
+	    					</s:else></td>
 	    				</tr>
 	    			</s:iterator>
-	    			<tr><td colspan="18">
-	    			<input id="sub_state" type="hidden" value="1" name="checkStock.csState">
-	    			<input type="button" value="保存" onclick="submitSava()">
-	    			<input type="button" value="完成" onclick="submitComplete()"/>
-	    			</td></tr>
 	    		</table>
 	    	</td>
 	    </tr>
+    </table>
+    <table>
+    	<tr>
+    		<td>
+    			<textarea rows="8" cols="40" name="checkStock.csApproveMessage"></textarea>
+    			<s:hidden id="app_state" name="checkStock.csApproveState" value="0"></s:hidden>
+    			<s:hidden id="start_stock" name="checkStock.csStartStock" value="%{checkStock.csStartStock}"></s:hidden>
+    			<s:hidden id="cs_state" name="checkStock.csState" value="%{checkStock.csState}"></s:hidden>
+    		</td>
+    	</tr> 		
+    	<tr>
+    		<td>
+    			<input type="button" value="审核通过" onclick="sub_approve()">
+    			<input type="button" value="审核不通过" onclick="sub_noapprove()">
+    		</td>
+    	</tr>
     </table>
     </s:form>
     <SCRIPT type="text/javascript">
