@@ -57,4 +57,6 @@
 	<sqlMap resource="com/mydomain/data/storage/StockStart.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/WasMateriel.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/WasTage.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/CheckStock.xml"/>
+	<sqlMap resource="com/mydomain/data/storage/CheckStockList.xml"/>
 	</sqlMapConfig>
