@@ -10,7 +10,7 @@ public class CheckStockBean extends BaseBean{
 	private String csDate;
 	private String csApprove;
 	private String csApproveMessage;
-	private String csApproveState;
+	private int csApproveState;
 	private String csCheckPerson;
 	private String csOptionor;
 	private String personName;
@@ -28,12 +28,7 @@ public class CheckStockBean extends BaseBean{
 	public String getCsApproveMessage() {
 		return csApproveMessage;
 	}
-	/**
-	 * @return the csApproveState
-	 */
-	public String getCsApproveState() {
-		return csApproveState;
-	}
+	
 	/**
 	 * @return the csCheckPerson
 	 */
@@ -94,10 +89,17 @@ public class CheckStockBean extends BaseBean{
 	public void setCsApproveMessage(String csApproveMessage) {
 		this.csApproveMessage = csApproveMessage;
 	}
+	
+	/**
+	 * @return the csApproveState
+	 */
+	public int getCsApproveState() {
+		return csApproveState;
+	}
 	/**
 	 * @param csApproveState the csApproveState to set
 	 */
-	public void setCsApproveState(String csApproveState) {
+	public void setCsApproveState(int csApproveState) {
 		this.csApproveState = csApproveState;
 	}
 	/**
