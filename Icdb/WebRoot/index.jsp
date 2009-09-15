@@ -25,6 +25,7 @@
    <a href="<s:url action="storage/ShowWas"/>">物料报损</a><br/>
    <a href="<s:url action="storage/ShowWasHistroy"/>">物料历史清单</a><br/>
    -------------------系统信息---------------------------------<br/>
-   
+   -------------------系统信息---------------------------------<br/>
+   <a href="<s:url action="storage/ShowCheckApprove"/>">盘点审批</a>
     </body>
 </html>
