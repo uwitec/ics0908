@@ -1,22 +1,10 @@
-ï»¿<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
-<HEAD>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link href="../css/sub.css" type="text/css" rel="stylesheet">
-<title>ç»„ç»‡æœºæž„</title>
-</head>
-<body>
-
+<%@ page language="java" contentType="text/html; charset=GB18030"
+	pageEncoding="GB18030"%>
 <div class="sub_con">
 <div class="lmenu">
-<div class="lmenu_tit">ç»„ç»‡æœºæž„</div>
-<div class="lmenu_item">æœºæž„ç®¡ç†</div>
-<div class="lmenu_item">éƒ¨é—¨ç®¡ç†</div>
-<div class="lmenu_item">å²—ä½ç®¡ç†</div>
+<div class="lmenu_tit">×éÖ¯»ú¹¹</div>
+<div class="lmenu_item">»ú¹¹¹ÜÀí</div>
+<div class="lmenu_item">²¿ÃÅ¹ÜÀí</div>
+<div class="lmenu_item">¸ÚÎ»¹ÜÀí</div>
 </div>
 </div>
-</body>
-</html>

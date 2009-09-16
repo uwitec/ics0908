@@ -1,19 +1,9 @@
-ï»¿<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
-<HEAD>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link href="../css/sub.css" type="text/css" rel="stylesheet">
-<title>ç»„ç»‡æœºæž„</title>
-</head>
+<%@ page language="java" contentType="text/html; charset=GB18030"
+	pageEncoding="GB18030"%>
 <% 
 	String base=request.getContextPath();
 %>
-<body>
 <div class="sub_top">
-<img src="<%=base%>/images/help.gif"> <a href="#" class="a_top">å¸®åŠ©</a>ã€€
-<img src="<%=base%>/images/quit.gif"> <a href="#" class="a_top">é€€å‡º</a>
+<img src="<%=base%>/images/help.gif"> <a href="#" class="a_top">°ïÖú</a>¡¡
+<img src="<%=base%>/images/quit.gif"> <a href="#" class="a_top">ÍË³ö</a>
 </div>
-</body>

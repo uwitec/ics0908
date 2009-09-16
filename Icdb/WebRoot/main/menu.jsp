@@ -1,30 +1,17 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
- <HEAD>
-  <TITLE> New Document </TITLE>
-  <META NAME="Generator" CONTENT="EditPlus">
-  <META NAME="Author" CONTENT="">
-  <META NAME="Keywords" CONTENT="">
-  <META NAME="Description" CONTENT="">
-  <link href="../css/sub.css" type="text/css" rel="stylesheet">
- </HEAD>
-
- <BODY>
+<%@ page language="java" contentType="text/html; charset=GB18030"
+	pageEncoding="GB18030"%>
     <div class="sub_menu_top">
-<div class="sub_menu_item1">åŸºæœ¬èµ„æ–™</div>
-<div class="sub_menu_item2">åº“å­˜ç®¡ç†</div>
-<div class="sub_menu_item3">åº“å­˜ä¸šåŠ¡</div>
-<div class="sub_menu_item4">è´¢åŠ¡æŠ¥è¡¨</div>
-<div class="sub_menu_item5">é¢†å¯¼å®¡æ‰¹</div>
+<div class="sub_menu_item1">»ù±¾×ÊÁÏ</div>
+<div class="sub_menu_item2">¿â´æ¹ÜÀí</div>
+<div class="sub_menu_item3">¿â´æÒµÎñ</div>
+<div class="sub_menu_item4">²ÆÎñ±¨±í</div>
+<div class="sub_menu_item5">Áìµ¼ÉóÅú</div>
 </div>
 <div class="sub_menu_bottom">
-<div class="sub_menu_subItem1">> ç»„ç»‡æœºæž„</div> 
-<div class="sub_menu_subItem2">> ä»“å‚¨åŠè´§æž¶</div>
-<div class="sub_menu_subItem3">> ç‰©å“ç®¡ç†</div>
-<div class="sub_menu_subItem4">> é“¶è¡Œå¸å·</div>
-<div class="sub_menu_subItem5">> äººåŠ›èµ„æº</div>
+<div class="sub_menu_subItem1">> ×éÖ¯»ú¹¹</div> 
+<div class="sub_menu_subItem2">> ²Ö´¢¼°»õ¼Ü</div>
+<div class="sub_menu_subItem3">> ÎïÆ·¹ÜÀí</div>
+<div class="sub_menu_subItem4">> ÒøÐÐÕÊºÅ</div>
+<div class="sub_menu_subItem5">> ÈËÁ¦×ÊÔ´</div>
 </div>
- </BODY>
-</HTML>
+
