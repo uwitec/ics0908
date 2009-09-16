@@ -128,6 +128,7 @@ public class EmployeeAction extends ActionSupport{
 		if(photoImg!=null){
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
+		employee.setPersonCode(person.getPersonCode());
 		if(pm.addPerson(person)){
 			if(em.addEmployee(employee)){
 				person.setMessage(ICTools.MESSAGE_OK);
