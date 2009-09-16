@@ -11,7 +11,7 @@
 %>
 </head>
 
-<frameset rows="80,78,400,49" cols="*" frameborder="no" framespacing="0">
+<frameset rows="80,78,400,49"  cols="*" frameborder="no" framespacing="0" STYLE="height:700px">
   <frame src="<%=base%>/main/head.jsp"   noresize="noresize" scrolling="no" frameborder="NO" border="0" framespacing="0">
   <frame src="<%=base%>/main/menu.jsp"   noresize="noresize" scrolling="no" frameborder="NO" border="0" framespacing="0">
   <frameset cols="194,629,*" frameborder="no" framespacing="0"  >

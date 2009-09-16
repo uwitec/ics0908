@@ -1,40 +1,25 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
- <HEAD>
-  <TITLE> New Document </TITLE>
-  <META NAME="Generator" CONTENT="EditPlus">
-  <META NAME="Author" CONTENT="">
-  <META NAME="Keywords" CONTENT="">
-  <META NAME="Description" CONTENT="">
-<link href="../css/sub.css" type="text/css" rel="stylesheet">
- </HEAD>
+<%@ page language="java" contentType="text/html; charset=GB18030"
+	pageEncoding="GB18030"%>
 <% 
 	String base=request.getContextPath();
 %>
- <BODY>
-  <div class="sub_con_message">
   <div class="rmenu01">
-<div class="rmenu_tit">ç”¨æˆ·ä¸­å¿ƒ</div>
+<div class="rmenu_tit">ÓÃ»§ÖÐÐÄ</div>
 <div class="rmenu01_con">
-<p><img src="<%=base%>/images/img02.gif"> <span class="rmenu01_con_user">å¼ ä¸‰</span></p>
-<p class="rmenu01_con_date">2009å¹´9æœˆ4æ—¥</p>
-<p class="rmenu01_con_indent">æ˜ŸæœŸäº”</p>
-<p class="rmenu01_con_indent">éƒ¨é—¨ç»ç†</p>
-<p class="rmenu01_con_edit"><a href="#" class="edit">ä¿®æ”¹å¯†ç </a>  <a href="#" class="edit">æ³¨é”€</a></span></p>
+<p><img src="<%=base%>/images/img02.gif"> <span class="rmenu01_con_user">ÕÅÈý</span></p>
+<p class="rmenu01_con_date">2009Äê9ÔÂ4ÈÕ</p>
+<p class="rmenu01_con_indent">ÐÇÆÚÎå</p>
+<p class="rmenu01_con_indent">²¿ÃÅ¾­Àí</p>
+<p class="rmenu01_con_edit"><a href="#" class="edit">ÐÞ¸ÄÃÜÂë</a>  <a href="#" class="edit">×¢Ïú</a></p>
 </div>
 </div>
 
 <div class="rmenu02">
-<div class="rmenu_tit">å·¥ä½œä¿¡æ¯</div>
+<div class="rmenu_tit">¹¤×÷ÐÅÏ¢</div>
 <div class="rmenu01_con">
-<p class="rmenu02_item_tit">>> å…¥åº“å®¡æ‰¹å•</p>
-<p class="rmenu02_item_con">æœªå®¡æ‰¹å•æ®å…± 5 å¼ </p>
-<p class="rmenu02_item_tit">>> è‡ªåŠ¨ä¿¡æ¯æç¤º</p>
-<p class="rmenu02_item_con">éœ€è¦è¿›è¡Œä»“åº“ç›˜ç‚¹éœ€è¦ç”ŸæˆæŠ¥è¡¨</p>
+<p class="rmenu02_item_tit">>> Èë¿âÉóÅúµ¥</p>
+<p class="rmenu02_item_con">Î´ÉóÅúµ¥¾Ý¹² 5 ÕÅ</p>
+<p class="rmenu02_item_tit">>> ×Ô¶¯ÐÅÏ¢ÌáÊ¾</p>
+<p class="rmenu02_item_con">ÐèÒª½øÐÐ²Ö¿âÅÌµãÐèÒªÉú³É±¨±í</p>
 </div>
 </div>
-</div>
-</BODY>
-</HTML>

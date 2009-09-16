@@ -1,39 +1,24 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=GB18030"
+	pageEncoding="GB18030"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
- <HEAD>
-  <TITLE> New Document </TITLE>
-  <META NAME="Generator" CONTENT="EditPlus">
-  <META NAME="Author" CONTENT="">
-  <META NAME="Keywords" CONTENT="">
-  <META NAME="Description" CONTENT="">
-  
-<link href="../css/sub.css" type="text/css" rel="stylesheet">
- </HEAD>
-<% 
-	String base=request.getContextPath();
-%>
- <BODY>
-<div class="sub_con">
-<div class="orgstructure_con_tit"><div class="orgstructure_con_tit_text">æœºæž„ç®¡ç†</div></div>
+<div class="orgstructure_con_tit"><div class="orgstructure_con_tit_text">»ú¹¹¹ÜÀí</div></div>
 
 <div class="orgstructure_table_operate">
-<img src="<%=base%>/images/img05.gif"> å…¨é€‰ã€€
-<img src="<%=base%>/images/img06.gif"> æ–°å»ºã€€
-<img src="<%=base%>/images/img07.gif"> ç¼–è¾‘ã€€
-<img src="<%=base%>/images/img08.gif"> åˆ é™¤ã€€
-<input type="text" class="search_border" value="è¾“å…¥æœºæž„åç§°">
-<img src="<%=base%>/images/img09.gif"  align="absmiddle">
+<img src="images/img05.gif"> È«Ñ¡¡¡
+<img src="images/img06.gif"> ÐÂ½¨¡¡
+<img src="images/img07.gif"> ±à¼­¡¡
+<img src="images/img08.gif"> É¾³ý¡¡
+<input type="text" class="search_border" value="ÊäÈë»ú¹¹Ãû³Æ">
+<img src="images/img09.gif"  align="absmiddle">
 </div>
 
 <div class="orgstructure_con">
 <div class="orgstructure_table_tit">
-<div class="orgstructure_table_th1">å…¨é€‰</div>
-<div class="orgstructure_table_th2">éƒ¨é—¨æ ‡è¯†</div>
-<div class="orgstructure_table_th3">æœºæž„åç§°</div>
-<div class="orgstructure_table_th4">è´Ÿè´£äºº</div>
-<div class="orgstructure_table_th5">æ“ä½œ</div>
+<div class="orgstructure_table_th1">È«Ñ¡</div>
+<div class="orgstructure_table_th2">²¿ÃÅ±êÊ¶</div>
+<div class="orgstructure_table_th3">»ú¹¹Ãû³Æ</div>
+<div class="orgstructure_table_th4">¸ºÔðÈË</div>
+<div class="orgstructure_table_th5">²Ù×÷</div>
 </div>
 
 <div class="orgstructure_table_odd">
@@ -41,29 +26,26 @@
     <tr>
     <td class="orgstructure_table_td_odd"><INPUT type="checkbox" value="checkbox" checked ></td>
     <td class="orgstructure_table_td_odd">0001</td>
-    <td class="orgstructure_table_td_odd">æœºæž„1</td>
-    <td class="orgstructure_table_td_odd">å¼ ä¸‰</td>
-    <td class="orgstructure_table_td_odd"><img src="<%=base%>/images/img03.gif">  <img src="<%=base%>/images/img04.gif"></td>
+    <td class="orgstructure_table_td_odd">»ú¹¹1</td>
+    <td class="orgstructure_table_td_odd">ÕÅÈý</td>
+    <td class="orgstructure_table_td_odd"><img src="images/img03.gif">  <img src="images/img04.gif"></td>
   </tr>
   <tr>
     <td class="orgstructure_table_td_even"><INPUT type="checkbox" value="checkbox" checked ></td>
     <td class="orgstructure_table_td_even">0001</td>
-    <td class="orgstructure_table_td_even">æœºæž„1</td>
-    <td class="orgstructure_table_td_even">å¼ ä¸‰</td>
-    <td class="orgstructure_table_td_even"><img src="<%=base%>/images/img03.gif">  <img src="<%=base%>/images/img04.gif"></td>
+    <td class="orgstructure_table_td_even">»ú¹¹1</td>
+    <td class="orgstructure_table_td_even">ÕÅÈý</td>
+    <td class="orgstructure_table_td_even"><img src="images/img03.gif">  <img src="images/img04.gif"></td>
   </tr>
     <tr>
     <td class="orgstructure_table_td_odd"><INPUT type="checkbox" value="checkbox" checked ></td>
     <td class="orgstructure_table_td_odd">0001</td>
-    <td class="orgstructure_table_td_odd">æœºæž„1</td>
-    <td class="orgstructure_table_td_odd">å¼ ä¸‰</td>
-    <td class="orgstructure_table_td_odd"><img src="<%=base%>/images/img03.gif">  <img src="<%=base%>/images/img04.gif"></td>
+    <td class="orgstructure_table_td_odd">»ú¹¹1</td>
+    <td class="orgstructure_table_td_odd">ÕÅÈý</td>
+    <td class="orgstructure_table_td_odd"><img src="images/img03.gif">  <img src="images/img04.gif"></td>
   </tr>
 </table>
-<div class="pages">å…± 70 æ¡  é¦–é¡µ  ä¸Šä¸€é¡µ  1/4  ä¸‹ä¸€é¡µ  æœ«é¡µ è·³è½¬åˆ°ï¼š<input type="text" class="pages_border"> é¡µ 
-<img src="<%=base%>/images/img10.gif" align="absmiddle"></div>
+<div class="pages">¹² 70 Ìõ  Ê×Ò³  ÉÏÒ»Ò³  1/4  ÏÂÒ»Ò³  Ä©Ò³ Ìø×ªµ½£º<input type="text" class="pages_border"> Ò³ 
+<img src="images/img10.gif" align="absmiddle"></div>
 </div>
 <div class="orgstructure_con_foot"></div>
-</div>
- </BODY>
-</HTML>
