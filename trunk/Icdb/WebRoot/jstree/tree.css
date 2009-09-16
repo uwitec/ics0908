@@ -1,0 +1,13 @@
+.tree{width:200px;clear:both;padding:10px 0;line-height:20px;text-align:left;overflow-x:auto}
+.tree span{display:block;white-space:nowrap;padding-right:14px;}
+.tree ul {width:160px; list-style: none; padding: 0px; margin: 0px; padding-left:10px;}
+.tree li {list-style: none;line-height:20px;clear:both;float:left;width:100%; cursor: pointer;}
+.tree span.hot{line-height:22px;font-weight:bold;background:url(mid_left_onclick.gif) no-repeat right top;}
+.tree span.hover{line-height:22px;font-weight:bold;background:#cbe4fc url(mid_left_onclick.gif) no-repeat right top;}
+.tree span.blank{width:10px;display:inline-block;padding-right:0px;}
+.tree span.clo{background:url(tree-clo.gif) no-repeat;}
+.tree span.open{font-weight:bold; background:url(tree-open.gif) no-repeat;}
+.tree span.hot{background:url(tree-clo.gif) no-repeat;}
+.tree span.leefhot{line-height:22px;font-weight:bold;background:url(tree-end.gif) no-repeat left top;}
+.tree span.leef{line-height:22px; background:url(tree-end.gif) no-repeat left; }
+.tree span.padding{display:block;width:24px;height:20px;float:left;}

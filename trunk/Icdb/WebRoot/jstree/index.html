@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<title>Insert title here</title>
+<script type="text/javascript" src="tree.js"></script>
+<link href="tree.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    var myTree = null;
+	// 初始化
+	function initTree() {
+		myTree = Tree.createTree('ttt', 'tree', false);
+	}
+	// 添加节点
+	function add() {
+		var sc = '';
+		Tree.addLeef('ttt', sc);
+	}
+
+	function remove() {
+		var sc = Tree.arr['ttt'].currNode;
+		//Tree.removeChild('ttt', sc);
+		myTree.removeSubNode();
+
+	}
+	function removeNode() {
+		var sc = Tree.arr['ttt'].currNode;
+		Tree.removeNode('ttt', sc);
+	}
+</script>
+</head>
+<body onload="initTree();">
+<ul id="ttt">
+	<li><a href="#">root</a>
+	<ul>
+		<li>asdasd 1</li>
+		<li><a href="#">asdasd 2</a></li>
+		<li>asdasd 3
+		<ul>
+			<li><a href="#">asdasd 3.1</a></li>
+			<li><a href="#">asdasd 3.2</a>
+			<ul>
+				<li><a href="#">asdasd 4</a></li>
+				<li><a href="#">asdasd 5</a></li>
+				<li><a href="#">asdasd 6</a></li>
+			</ul>
+			</li>
+			<li><a href="#">asdasd 3.3</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+	<li><a href="#">aaa</a>
+	<ul>
+		<li>asdasd 1</li>
+		<li><a href="#">asdasd 2</a></li>
+		<li>asdasd 3
+		<ul>
+			<li><a href="#">asdasd 3.1</a></li>
+			<li><a href="#">asdasd 3.2</a>
+			<ul>
+				<li><a href="#">asdasd 4</a></li>
+				<li><a href="#">asdasd 5</a></li>
+				<li><a href="#">asdasd 6</a></li>
+			</ul>
+			</li>
+			<li><a href="#">asdasd 3.3</a></li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+
+</ul>
+
+<span style="float:left; display: block;width: 40px;background-color: red;height: 20px;"></span>
+<a href="javascript:add()">添加节点</a>
+<a href="javascript:remove()">清空当前节点下的所有节点</a>
+<a href="javascript:removeNode()">删除当前节点</a>
+</body>
+</html>
