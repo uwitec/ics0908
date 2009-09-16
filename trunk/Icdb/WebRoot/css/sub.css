@@ -76,7 +76,7 @@ height:39px;
 background-image:url(../images/orgstructure_menu_bg_select.jpg);
 background-repeat:no-repeat;
 background-position:center;
-background-position:bottom;
+background-position:top;
 color:#0E5E8E;
 font-size:14px;
 font-weight:bold;
@@ -239,7 +239,6 @@ margin-bottom:12px;
 .lmenu_item{
 background-image:url(../images/lmenu_item_bg.jpg);
 background-repeat:no-repeat;
-background-position:center;
 width:167px;
 height:32px;
 color:#0C6A9D;
