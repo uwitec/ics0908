@@ -259,6 +259,16 @@ top:0px;
 left:0px;
 }
 
+.sub_con_message{
+background-image:url(../images/sub_con_bg.jpg);
+background-repeat:repeat-x;
+position:absolute; 
+width:160px;
+height:214px;
+top:0px;
+left:0px;
+}
+
 .sub_foot{
 background-image:url(../images/sub_foot_bg.jpg);
 background-repeat:repeat-x;
@@ -279,8 +289,8 @@ background-repeat:no-repeat;
 width:629px;
 height:62px;
 position:absolute; 
-top:16px;
-left:5px;
+top:15px;
+left:0px;
 }
 
 .orgstructure_con{
@@ -289,8 +299,8 @@ background-repeat:repeat-y;
 width:629px;
 height:407px;
 position:absolute; 
-top:77px;
-left:5px;
+top:75px;
+left:0px;
 }
 
 .orgstructure_con_tit_text{
@@ -315,8 +325,8 @@ left:0px;
 background-image:url(../images/rmenu01_tit_bg.jpg);
 background-repeat:no-repeat;
 position:absolute;
-left:834px;
-top:15px;
+left:20px;
+top:0px;
 width:160px;
 height:171px;
 }
@@ -363,8 +373,8 @@ margin-bottom:12px;
 background-image:url(../images/rmenu02_tit_bg.jpg);
 background-repeat:no-repeat;
 position:absolute;
-left:834px;
-top:197px;
+left:20px;
+top:192px;
 width:160px;
 height:298px;
 }
