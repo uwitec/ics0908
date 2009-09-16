@@ -17,7 +17,7 @@
 		<table>
 		<tr><td>
 		<table>
-			<s:textfield name="employee.employeeCode" label="人员编码" value="%{employee.personCode}"></s:textfield>
+			<s:textfield name="employee.employeeCode" label="人员编码" value="%{employee.employeeCode}"></s:textfield>
 			<s:textfield id="jobName" name="employee.jobName" label="岗位" onclick="showJob()"></s:textfield>
 			<s:hidden id="jobCode" name="employee.jobCode"></s:hidden>
 			<s:textfield id="departmentName" name="employee.departmentName" label="部门名称"></s:textfield>
