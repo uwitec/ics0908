@@ -7,8 +7,11 @@
 <action name="ShowBank" class="com.action.baseset.BankAction" method="showBank">
    <result name="success">/baseset/bank/BankShow.jsp</result>
 </action>
+<action name="GoAddBank" class="com.action.baseset.BankAction" method="goAddBank">
+	<result name="success">/baseset/bank/BankAdd.jsp</result>
+</action>
 <action name="AddBank" class="com.action.baseset.BankAction" method="addBank">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">GoAddBank.action</result>
 </action>
 <action name="UpdateBank" class="com.action.baseset.BankAction" method="updateBank">
 	<result name="success" type="redirect">ShowBank.action</result>
