@@ -5,70 +5,61 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="CargoSpace">
-	<select id="getHouseSpace" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
-	SELECT
-	cargoSpace.cargoSpaceCode,
-	cargoSpace.cargoSpaceName,
-	cargoSpace.cargoSpaceAddress,
-	cargoSpace.storehouseCode,
-	storehouse.storehouseName
-	from storehouse,cargoSpace
-	where storehouse.storehouseCode=cargoSpace.storehouseCode
-	and cargoSpace.isEnabled=1
-	and cargoSpace.storehouseCode=#storehouseCode#
+	<select id="getselectCargoSpaceByStoreHouseSpace"
+		resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		SELECT cargoSpace.cargoSpaceCode, cargoSpace.cargoSpaceName,
+		cargoSpace.cargoSpaceAddress, cargoSpace.storehouseCode,
+		storehouse.storehouseName from storehouse,cargoSpace where
+		storehouse.storehouseCode=cargoSpace.storehouseCode and
+		cargoSpace.isEnabled=1 and
+		cargoSpace.storehouseCode=#storehouseCode#
 
 	</select>
-	<select id="getCargoSpaceBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
-	SELECT
-	cargoSpace.cargoSpaceCode,
-	cargoSpace.cargoSpaceName,
-	cargoSpace.cargoSpaceAddress,
-	cargoSpace.storehouseCode,
-	storehouse.storehouseName
-	from storehouse,cargoSpace
-	where storehouse.storehouseCode=cargoSpace.storehouseCode
-	and cargoSpace.isEnabled=1
-	and cargoSpace.cargoSpaceCode=#cargoSpaceCode#
+	<select id="getCargoSpaceBean" parameterClass="String"
+		resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		SELECT cargoSpace.cargoSpaceCode, cargoSpace.cargoSpaceName,
+		cargoSpace.cargoSpaceAddress, cargoSpace.storehouseCode,
+		storehouse.storehouseName from storehouse,cargoSpace where
+		storehouse.storehouseCode=cargoSpace.storehouseCode and
+		cargoSpace.isEnabled=1 and
+		cargoSpace.cargoSpaceCode=#cargoSpaceCode#
 	</select>
-	<select id="selectAllCargoSpaceBean" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
-	SELECT
-	cargoSpace.cargoSpaceCode,
-	cargoSpace.cargoSpaceName,
-	cargoSpace.cargoSpaceAddress,
-	cargoSpace.storehouseCode,
-	storehouse.storehouseName
-	from storehouse,cargoSpace
-	where storehouse.storehouseCode=cargoSpace.storehouseCode
-	and cargoSpace.isEnabled=1
+	<select id="selectAllCargoSpaceBean"
+		resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		SELECT cargoSpace.cargoSpaceCode, cargoSpace.cargoSpaceName,
+		cargoSpace.cargoSpaceAddress, cargoSpace.storehouseCode,
+		storehouse.storehouseName from storehouse,cargoSpace where
+		storehouse.storehouseCode=cargoSpace.storehouseCode and
+		cargoSpace.isEnabled=1
 	</select>
-	<insert id="insertCargoSpaceBean" parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
-	insert into CargoSpace
-	(cargoSpaceCode,cargoSpaceName,cargoSpaceAddress,storehouseCode,isEnabled)
-	values
-	(#cargoSpaceCode#,#cargoSpaceName#,#cargoSpaceAddress#,#storehouseCode#,1)
+	<insert id="insertCargoSpaceBean"
+		parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		insert into CargoSpace
+		(cargoSpaceCode,cargoSpaceName,cargoSpaceAddress,storehouseCode,isEnabled)
+		values
+		(#cargoSpaceCode#,#cargoSpaceName#,#cargoSpaceAddress#,#storehouseCode#,1)
 	</insert>
-	<update id="updateCargoSpaceBean" parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
-	update CargoSpace
-	set
-	cargoSpaceName=#cargoSpaceName#,
-	cargoSpaceAddress=#cargoSpaceAddress#,
-	storehouseCode=#storehouseCode#,
-	isEnabled=1
-	where cargoSpaceCode=#cargoSpaceCode#
+	<update id="updateCargoSpaceBean"
+		parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		update CargoSpace set cargoSpaceName=#cargoSpaceName#,
+		cargoSpaceAddress=#cargoSpaceAddress#,
+		storehouseCode=#storehouseCode#, isEnabled=1 where
+		cargoSpaceCode=#cargoSpaceCode#
 	</update>
-	<delete id="deleteCargoSpaceBean" parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
-	update CargoSpace
-	set
-	isEnabled=0
-	where cargoSpaceCode=#cargoSpaceCode#
+	<delete id="deleteCargoSpaceBean"
+		parameterClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		update CargoSpace set isEnabled=0 where
+		cargoSpaceCode=#cargoSpaceCode#
 	</delete>
-	<select id="selectAllCargoSpace" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
-		SELECT
-		cargoSpace.cargoSpaceCode as cargoSpaceCode,
+	<select id="selectAllCargoSpace"
+		resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		SELECT cargoSpace.cargoSpaceCode as cargoSpaceCode,
 		cargoSpace.cargoSpaceName as cargoSpaceName,
 		cargoSpace.cargoSpaceAddress as cargoSpaceAddress,
-		cargoSpace.storehouseCode as storehouseCode
-		from cargoSpace
+		cargoSpace.storehouseCode as storehouseCode from cargoSpace
 		where cargoSpace.isEnabled=1
+		<isNotEmpty prepend="and" property="storehouseCode">
+			storehouseCode=#storehouseCode#
+		</isNotEmpty>
 	</select>
 </sqlMap>

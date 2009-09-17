@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StockOutOrder">
+	<typeAlias alias="stockOut"
+		type="com.mydomain.bean.storage.StockOutBean" />
+
+	<sql id="STOCK_OUT_COMMON_CONDITION">
+		<dynamic prepend="where">
+
+			<isNotEmpty prepend="and" property="stockOutStartDate">
+				<![CDATA[			stockOutWillDate >= CAST(#stockOutStartDate# as date) ]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutEndDate">
+				<![CDATA[			stockOutWillDate < CAST(#stockOutEndDate# as date)+1 ]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutOrderCode">
+				instr(stockOutOrderCode, #stockOutOrderCode#)>0
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="customerCode">
+				customerCode=#customerCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutState">
+				stockOutState =#stockOutState#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDealWith" prepend="and">
+				stockOutDealWith=#stockOutDealWith#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutDealMessage">
+				stockOutDealMessage=#stockOutDealMessage#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutDealDate">
+				stockOutDealDate=#stockOutDealDate#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutDealState">
+				stockOutDealState=#stockOutDealState#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutManager">
+				stockOutManager=#stockOutManager#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutDate">
+				stockOutDate=#stockOutDate#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutDestination">
+				stockOutDestination =#stockOutDestination#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutChecker">
+				stockOutChecker=#stockOutChecker#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutCheckState">
+				stockOutCheckState=#stockOutCheckState#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutCheckDate">
+				stockOutCheckDate=#stockOutCheckDate#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutMessage">
+				stockOutMessage=#stockOutMessage#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutStateType">
+				stockOutStateType=#stockOutStateType#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOrtherMoney">
+				stockOrtherMoney=#stockOrtherMoney#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOrtherMessage">
+				stockOrtherMessage=#stockOrtherMessage#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutWillDate">
+				stockOutWillDate=#stockOutWillDate#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutWith">
+				stockOutWith=#stockOutWith#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="stockOutWithState">
+				stockOutWithState=#stockOutWithState#
+			</isNotEmpty>
+		</dynamic>
+	</sql>
+	<sql id="COMMON_STOCK_OUT_SELECT">
+		select stockOutOrderCode, customerCode, stockOutState,
+		stockOutDealWith, stockOutDealMessage, stockOutDealDate,
+		stockOutDealState, stockOutManager, stockOutDate,
+		stockOutDestination, stockOutChecker, stockOutCheckState,
+		stockOutCheckDate, stockOutMessage, stockOutStateType,
+		stockOrtherMoney, stockOrtherMessage, stockOutWillDate,
+		stockOutWith, stockOutWithState from StockOutOrder
+	</sql>
+
+	<sql id="COMMON_STOCK_OUT_COUNT">
+		select count(stockOutOrderCode) from StockOutOrder
+	</sql>
+	<select id="STOCK_OUT_SELECT" resultClass="stockOut">
+		<include refid="COMMON_STOCK_OUT_SELECT" />
+		<include refid="STOCK_OUT_COMMON_CONDITION" />
+	</select>
+	<select id="STOCK_OUT_SELECT_BY_KEY" resultClass="stockOut">
+		<include refid="COMMON_STOCK_OUT_SELECT" />
+		<dynamic prepend="where">
+			<isNotEmpty property="stockOutOrderCode" prepend="and">
+				stockOutOrderCode = #stockOutOrderCode#
+			</isNotEmpty>
+		</dynamic>
+
+	</select>
+	<select id="STOCK_OUT_SELECT_PAGE" resultClass="stockOut">
+		<include refid="COMMON_STOCK_OUT_SELECT" />
+		<include refid="STOCK_OUT_COMMON_CONDITION" />
+		<include refid="COMMON_PAGE" />
+	</select>
+	<select id="SELECT_STOCK_OUT_COUNT" resultClass="Integer">
+		<include refid="COMMON_STOCK_OUT_COUNT" />
+		<include refid="STOCK_OUT_COMMON_CONDITION" />
+	</select>
+
+	<insert id="ADD_STOCK_OUT">
+
+		insert into StockOutOrder( stockOutOrderCode,
+		<isNotEmpty property="customerCode">customerCode,</isNotEmpty>
+		stockOutState, stockOutDealWith, stockOutDealMessage,
+		stockOutDealDate, stockOutDealState, stockOutManager,
+		stockOutDate, stockOutDestination, stockOutChecker,
+		stockOutCheckState, stockOutCheckDate, stockOutMessage,
+		stockOutStateType, stockOrtherMoney, stockOrtherMessage,
+		stockOutWillDate, stockOutWith, stockOutWithState )values(
+		#stockOutOrderCode#,
+		<isNotEmpty property="customerCode">#customerCode#,</isNotEmpty>
+		#stockOutState#, #stockOutDealWith#, #stockOutDealMessage#,
+		#stockOutDealDate#, #stockOutDealState#, #stockOutManager#,
+		#stockOutDate#, #stockOutDestination#, #stockOutChecker#,
+		#stockOutCheckState#, #stockOutCheckDate#, #stockOutMessage#,
+		#stockOutStateType#, #stockOrtherMoney#, #stockOrtherMessage#,
+		#stockOutWillDate#, #stockOutWith#, #stockOutWithState#)
+
+	</insert>
+
+	<delete id="DEKETE_STOCK_OUT">
+		delete from StockOutOrder
+		<dynamic prepend="where">
+			<isNotEmpty property="stockOutOrderCode" prepend="and">
+				stockOutOrderCode = #stockOutOrderCode#
+			</isNotEmpty>STOCK_OUT_SELECT_BY_KEY
+		</dynamic>
+	</delete>
+
+	<update id="UPDATE_SELECT_STOCK_OUT">
+		update StockOutOrder
+		<dynamic prepend="set">
+			<isNotEmpty property="customerCode" prepend=",">
+				customerCode = #customerCode#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutState" prepend=",">
+				stockOutState = #stockOutState#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDealWith" prepend=",">
+				stockOutDealWith = #stockOutDealWith#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDealMessage" prepend=",">
+				stockOutDealMessage = #stockOutDealMessage#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDealDate" prepend=",">
+				stockOutDealDate = #stockOutDealDate#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDealState" prepend=",">
+				stockOutDealState = #stockOutDealState#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutManager" prepend=",">
+				stockOutManager = #stockOutManager#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDate" prepend=",">
+				stockOutDate = #stockOutDate#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutDestination" prepend=",">
+				stockOutDestination = #stockOutDestination#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutChecker" prepend=",">
+				stockOutChecker = #stockOutChecker#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutCheckState" prepend=",">
+				stockOutCheckState = #stockOutCheckState#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutCheckDate" prepend=",">
+				stockOutCheckDate = #stockOutCheckDate#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutMessage" prepend=",">
+				stockOutMessage = #stockOutMessage#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutStateType" prepend=",">
+				stockOutStateType = #stockOutStateType#
+			</isNotEmpty>
+			<isNotEmpty property="stockOrtherMoney" prepend=",">
+				stockOrtherMoney=#stockOrtherMoney#
+			</isNotEmpty>
+			<isNotEmpty property="stockOrtherMessage" prepend=",">
+				stockOrtherMessage = #stockOrtherMessage#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutWillDate" prepend=",">
+				stockOutWillDate = #stockOutWillDate#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutWith" prepend=",">
+				stockOutWith = #stockOutWith#
+			</isNotEmpty>
+			<isNotEmpty property="stockOutWithState" prepend=",">
+				stockOutWithState = #stockOutWithState#
+			</isNotEmpty>
+		</dynamic>
+		where stockOutOrderCode = #stockOutOrderCode#
+	</update>
+</sqlMap>

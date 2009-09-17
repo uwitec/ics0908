@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StockOutHasMateriel">
+	<typeAlias alias="StockOutHasMaterielBean"
+		type="com.mydomain.bean.storage.StockOutHasMaterielBean" />
+
+	<sql id="STOCK_OUT_MATERIEL_COMMON_CONDITION">
+		<isNotEmpty prepend="and" property="cargoSpaceCode">
+			s.cargoSpaceCode = #cargoSpaceCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="materielCode">
+			s.materielCode = #materielCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockOutOrderCode">
+			s.stockOutOrderCode=#stockOutOrderCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockOutAmount">
+			s.stockOutAmount=#stockOutAmount#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="stockOutPrice">
+			s.stockOutPrice=#stockOutPrice#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="typeIsOk">
+			s.typeIsOk=#typeIsOk#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="amountIsOk">
+			s.amountIsOk=#amountIsOk#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="specificationIsOk">
+			s.specificationIsOk=#specificationIsOk#
+		</isNotEmpty>
+	</sql>
+	<sql id="STOCK_OUT_MATERIEL_COMMON_SELECT">
+		select * from StockOutHasMateriel s
+	</sql>
+	<sql id="STOCK_OUT_MATERIEL_COMMON_COUNT">
+		select count(*) from StockOutHasMateriel s
+	</sql>
+	<sql id="STOCK_OUT_MATERIEL_AND_STOCK_COMMONT_SELECT">
+		select s.cargoSpaceCode, s.materielCode, s.stockOutOrderCode,
+		s.stockOutAmount, s.stockOutPrice, s.typeIsOk, s.amountIsOk,
+		s.specificationIsOk,st.stockPrice,st.stockAmount,m.materielName
+		from StockOutHasMateriel s, Stock st,materiel m where
+		st.materielCode = s.materielCode and m.materielCode =
+		s.materielCode
+	</sql>
+
+	<select id="STOCK_OUT_MATEREIL_COUNT"
+		resultClass="java.lang.Integer">
+		<include refid="STOCK_OUT_MATERIEL_COMMON_COUNT" />
+		<dynamic prepend="where">
+			<include refid="STOCK_OUT_MATERIEL_COMMON_CONDITION" />
+		</dynamic>
+	</select>
+	<select id="STOCK_OUT_MATERIEL_AND_STOCK_SELECT"
+		resultClass="StockOutHasMaterielBean">
+		<include refid="STOCK_OUT_MATERIEL_AND_STOCK_COMMONT_SELECT" />
+		<include refid="STOCK_OUT_MATERIEL_COMMON_CONDITION" />
+	</select>
+	<select id="STOCK_OUT_MATERIEL_SELECT"
+		resultClass="StockOutHasMaterielBean">
+		<include refid="STOCK_OUT_MATERIEL_COMMON_SELECT" />
+		<dynamic prepend="where">
+			<include refid="STOCK_OUT_MATERIEL_COMMON_CONDITION" />
+		</dynamic>
+	</select>
+	<insert id="ADD_STOCK_OUT_MATERIEL">
+		<![CDATA[
+		insert into StockOutHasMateriel( cargoSpaceCode, materielCode, stockOutOrderCode,
+		stockOutAmount, stockOutPrice, typeIsOk, amountIsOk,
+		specificationIsOk )values( #cargoSpaceCode#, #materielCode#,
+		#stockOutOrderCode#, #stockOutAmount#, #stockOutPrice#,
+		#typeIsOk#, #amountIsOk#, #specificationIsOk# )
+		]]>
+	</insert>
+	<update id="UPDATE_STOCK_OUT_MATERIEL">
+		update StockOutHasMateriel set
+
+		stockOutAmount = #stockOutAmount#,
+
+		stockOutPrice = #stockOutPrice#,
+
+		typeIsOk = #typeIsOk#,
+
+		amountIsOk = #amountIsOk#,
+
+		specificationIsOk = #specificationIsOk#
+
+		where materielCode = #materielCode# and stockOutOrderCode =
+		#stockOutOrderCode# and cargoSpaceCode = #cargoSpaceCode#
+
+	</update>
+	<delete id="DELETE_STOCK_OUT_HAS_MATERIEL">
+		delete from StockOutHasMateriel
+		<dynamic prepend="where">
+			<isNotEmpty prepend="and" property="stockOutOrderCode">
+				stockOutOrderCode=#stockOutOrderCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="materielCode">
+				materielCode = #materielCode#
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+</sqlMap>

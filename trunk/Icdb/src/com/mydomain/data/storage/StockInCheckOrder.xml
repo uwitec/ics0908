@@ -119,23 +119,24 @@
 	</select>
 
 	<insert id="ADD_SELECT_STOCK_IN">
-		<![CDATA[
-			insert into StockInCheckOrder(  stockInCode , stockInDate ,
-		employeeCode , checkMessage ,
-		checkResult , orderNumber ,
-		checkRemark , sendTime ,
-		arriveTime, checkTime , stockInType ,
-		stockInState , stockInStateType , stockInGM , stockInExGM, stockInExDate , stockInExMessage , stockInWill,stockInCheckState
-			 )values(
-			    #stockInCode#, #stockInDate#,
-		#employeeCode#, #checkMessage#,
-		#checkResult#, #orderNumber#,
-		#checkRemark#, #sendTime#, #arriveTime#, #checkTime#, #stockInType#,
+		insert into StockInCheckOrder( stockInCode , stockInDate ,
+		<isNotEmpty property="employeeCode" prepend=",">
+			employeeCode
+		</isNotEmpty>
+		checkMessage , checkResult , orderNumber , checkRemark ,
+		sendTime , arriveTime, checkTime , stockInType , stockInState ,
+		stockInStateType , stockInGM , stockInExGM, stockInExDate ,
+		stockInExMessage , stockInWill,stockInCheckState )values(
+		#stockInCode#, #stockInDate#,
+		<isNotEmpty property="employeeCode" prepend=",">
+			#employeeCode#
+		</isNotEmpty>
+		#checkMessage#, #checkResult#, #orderNumber#, #checkRemark#,
+		#sendTime#, #arriveTime#, #checkTime#, #stockInType#,
 		#stockInState#, #stockInStateType#, #stockInGM#, #stockInExGM#,
 		#stockInExDate#, #stockInExMessage#, #stockInWill#,
-		#stockInCheckState#
-			)
-		]]>
+		#stockInCheckState# )
+
 	</insert>
 	<update id="UPDATE_SELECT_STOCK_IN">
 		update StockInCheckOrder

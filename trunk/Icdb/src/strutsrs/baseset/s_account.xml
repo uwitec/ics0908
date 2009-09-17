@@ -22,7 +22,7 @@
 <action name="FindAccount" class="com.action.baseset.AccountAction" method="findAccount">
 	<result name="success">/baseset/FindAccount.jsp</result>
 </action>
-<action name="goStockIn" class="com.action.storage.stockIn.StockInAction" method="goStockIn">
+<action name="goStockIn" class="com.action.storage.StockInAction" method="goStockIn">
 		<result name="success">/stockIn/stockIn.jsp</result>
 	</action>
 </package>

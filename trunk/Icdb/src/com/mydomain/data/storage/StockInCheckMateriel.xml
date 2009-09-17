@@ -104,10 +104,12 @@
 	</select>
 
 	<insert id="ADD_STOCK_IN_CHECK_MATERIEL">
-		<![CDATA[
+
 			insert into stockInCheckMateriel( materielCode,
 			   supplierCode,
-			   cargoSpaceCode,
+			   <isNotEmpty property="cargoSpaceCode">
+			  	 cargoSpaceCode,
+			   </isNotEmpty>
 			   stockInCode ,
 			   amountPercent,
 			   qualityPercent,
@@ -124,7 +126,9 @@
 			 )values(
 			   #materielCode#,
 			   #supplierCode#,
+			  <isNotEmpty property="cargoSpaceCode">
 			   #cargoSpaceCode#,
+			  </isNotEmpty>
 			   #stockInCode# ,
 			   #amountPercent#,
 			   #qualityPercent#,
@@ -139,7 +143,7 @@
 			   #onePrice#,
 			   #stockInType#
 			)
-		]]>
+
 	</insert>
 	<update id="UPDATE_STOCK_IN_CHECK_MATERIEL">
 		update stockInCheckMateriel
