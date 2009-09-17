@@ -91,7 +91,7 @@
 			newTd5.innerHTML= '<input type="text" name="stockInCheckstockInAmount" onchange="getPrice(this);">';
 			newTd6.innerHTML= '<input type="text" name="onPrice" onchange="getPrice(this);">'
 			newTd7.appendChild(supplier);
-			newTd8.appendChild(cargoSpace);
+			//newTd8.appendChild(cargoSpace);
 			newTd9.innerHTML= '';
 			newTd10.innerHTML= '<input type="button" value="删除" onclick = "deleteRow(this)">';
 
@@ -155,7 +155,7 @@
 		var stockInCode = trim(document.getElementById('stockInCode').value);
 
 		var checkRemark = document.getElementById('checkRemark').value;
-	  	var stockIn = new StockIn(stockInCode,'""','""','""',checkRemark,stockInType,'""','""','""','""','""','""','""');
+	  	var stockIn = new StockIn(stockInCode,'','','','',checkRemark,stockInType,'','','','','','','');
 	  	var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
@@ -175,15 +175,17 @@
 				alert("供应商不能为空");
 				return;
 			}
+			/**
 	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
 			if(cargoSpaceCode == null || cargoSpaceCode==''){
 				alert("货位不能为空");
 				return;
 			}
-	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,cargoSpaceCode,
-	  									stockInCode,'""','""','""','""',
-	  									'""','""','""',
-	  									'""',stockInAmount,onePrice,stockInType);
+			**/
+	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
+	  									stockInCode,'','','','',
+	  									'','','',
+	  									'',stockInAmount,onePrice,stockInType);
 	  		array.push(JSON.stringify(stockInCheckMaterielBean));
 	  	}
 
@@ -193,17 +195,13 @@
 		StockInAction.saveStockIn(stockInJson,array,callBack);
 	  }
 
-	  function preparData(){
-	  }
-
 	  function callBack(data){
-	  	alert(data);
 		 if(data!=null && data=="success"){
 		 	 window.location.href="searchStockIn.action?backurl="+window.location.href;
 		 }
 	  }
 
-	  function StockIn(stockInCode, checkMessage, checkResult, orderNumber,
+	  function StockIn(stockInCode, checkMessage, checkResult,employeeCode, orderNumber,
                 checkRemark,stockInType,  stockInState, stockInStateType,  stockInGM,
                 stockInExGM,
                 stockInExMessage,
@@ -213,6 +211,7 @@
 	  	         this.stockInCode = stockInCode;
    				this.checkMessage=checkMessage;
 				this.checkResult = checkResult;
+				this.employeeCode = employeeCode;
    				this.orderNumber = orderNumber;
   			 	this.checkRemark = checkRemark;
    				this.stockInType= stockInType;
@@ -267,7 +266,7 @@
 	  	}
 	  }
 
-	  function submitStokIn(){
+	  function submitStockIn(){
 	  	var stockInType = trim(document.getElementById('stockInType').value);
 		if(stockInType == null || stockInType==''){
 			alert("入库类型不能为空");
@@ -276,7 +275,7 @@
 		var stockInCode = trim(document.getElementById('stockInCode').value);
 
 		var checkRemark = document.getElementById('checkRemark').value;
-	  	var stockIn = new StockIn(stockInCode,'','','',checkRemark,stockInType,'','','','','','','');
+	  	var stockIn = new StockIn(stockInCode,'','','','',checkRemark,stockInType,'','','','','','','');
 	  	var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
@@ -296,12 +295,14 @@
 				alert("供应商不能为空");
 				return;
 			}
+			/**
 	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
 			if(cargoSpaceCode == null || cargoSpaceCode==''){
 				alert("货位不能为空");
 				return;
 			}
-	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,cargoSpaceCode,
+			**/
+	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
 	  									stockInCode,'','','','',
 	  									'','','',
 	  									'',stockInAmount,onePrice,stockInType);
@@ -313,6 +314,263 @@
 		var arrayJson = JSON.stringify(array);
 		StockInAction.submitStockIn(stockInJson,array,callBack);
 	  }
+
+	  function saveCheckStockIn(){
+	  	var stockInType = trim(document.getElementById('stockInType').value);
+		if(stockInType == null || stockInType==''){
+			alert("入库类型不能为空");
+			return;
+		}
+		var stockInCode = trim(document.getElementById('stockInCode').value);
+
+		var checkRemark = document.getElementById('checkRemark').value;
+		var checkMessage = document.getElementById('checkMessage').value;
+		var employeeCode = document.getElementById('employeeCode').value;
+	  	var stockIn = new StockIn(stockInCode,checkMessage,'',employeeCode,'',checkRemark,stockInType,'','','','','','','');
+	  	var array = new Array();
+	  	var a = document.getElementById("addMatail");
+	  	for(var row = 1; row < a.rows.length; row++){
+	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
+	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		if(isNaN(stockInAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		if(isNaN(onePrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		if(supplierCode == null || supplierCode==''){
+				alert("供应商不能为空");
+				return;
+			}
+			/**
+	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
+			if(cargoSpaceCode == null || cargoSpaceCode==''){
+				alert("货位不能为空");
+				return;
+			}
+			**/
+
+			var checkAmount = a.rows.item(row).cells.item(10).firstChild.value;
+	  		if(isNaN(checkAmount)){
+	  			alert("抽查数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+
+	  		var amountPercent = a.rows.item(row).cells.item(11).firstChild.value;
+	  		if(isNaN(amountPercent)){
+	  			alert("数量合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var qualityPercent = a.rows.item(row).cells.item(12).firstChild.value;
+	  		if(isNaN(qualityPercent)){
+	  			alert("质量合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var packagePercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		if(isNaN(packagePercent)){
+	  			alert("包装合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+
+			var errorStockPercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		if(isNaN(errorStockPercent)){
+	  			alert("商品串库率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
+	  									stockInCode,amountPercent,qualityPercent,packagePercent,errorStockPercent,
+	  									'',checkAmount,'',
+	  									'',stockInAmount,onePrice,stockInType);
+	  		array.push(JSON.stringify(stockInCheckMaterielBean));
+	  	}
+
+//		var parameter = new Array(stockIn,array);
+		var stockInJson = JSON.stringify(stockIn)
+		var arrayJson = JSON.stringify(array);
+		StockInAction.saveCheckStockIn(stockInJson,array,callBack);
+	  }
+
+	  function submitCheckStockIn(checkResult){
+	  	  	var stockInType = trim(document.getElementById('stockInType').value);
+		if(stockInType == null || stockInType==''){
+			alert("入库类型不能为空");
+			return;
+		}
+		var stockInCode = trim(document.getElementById('stockInCode').value);
+
+		var checkRemark = document.getElementById('checkRemark').value;
+		var checkMessage = document.getElementById('checkMessage').value;
+		var employeeCode = document.getElementById('employeeCode').value;
+
+		if(employeeCode == null || employeeCode==''){
+			alert("经手人不能为空");
+			return;
+		}
+	  	var stockIn = new StockIn(stockInCode,checkMessage,checkResult,employeeCode,'',checkRemark,stockInType,'','','','','','','');
+	  	var array = new Array();
+	  	var a = document.getElementById("addMatail");
+	  	for(var row = 1; row < a.rows.length; row++){
+	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
+	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		if(isNaN(stockInAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		if(isNaN(onePrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		if(supplierCode == null || supplierCode==''){
+				alert("供应商不能为空");
+				return;
+			}
+
+			/**
+	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
+			if(cargoSpaceCode == null || cargoSpaceCode==''){
+				alert("货位不能为空");
+				return;
+			}
+			**/
+			var checkAmount = a.rows.item(row).cells.item(10).firstChild.value;
+	  		if(isNaN(checkAmount)){
+	  			alert("抽查数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+
+	  		var amountPercent = a.rows.item(row).cells.item(11).firstChild.value;
+	  		if(isNaN(amountPercent)){
+	  			alert("数量合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var qualityPercent = a.rows.item(row).cells.item(12).firstChild.value;
+	  		if(isNaN(qualityPercent)){
+	  			alert("质量合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var packagePercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		if(isNaN(packagePercent)){
+	  			alert("包装合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+
+			var errorStockPercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		if(isNaN(errorStockPercent)){
+	  			alert("商品串库率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
+	  									stockInCode,amountPercent,qualityPercent,packagePercent,errorStockPercent,
+	  									'',checkAmount,'',
+	  									'',stockInAmount,onePrice,stockInType);
+	  		array.push(JSON.stringify(stockInCheckMaterielBean));
+	  	}
+
+//		var parameter = new Array(stockIn,array);
+		var stockInJson = JSON.stringify(stockIn)
+		var arrayJson = JSON.stringify(array);
+		StockInAction.submitCheckStockIn(stockInJson,array,callBack);
+	  }
+
+	   function approvalStockIn(stockInCheckState){
+			var stockInCode = trim(document.getElementById('stockInCode').value);
+			var stockInExMessage = trim(document.getElementById("stockInExMessage").value);
+	  		var stockIn = new StockIn(stockInCode,'','','','', '','','', '',  '', '',stockInExMessage,'',stockInCheckState);
+	  		StockInAction.approvalStockIn(JSON.stringify(stockIn),callBack);
+	   }
+
+	    function complStockIn(stockInStateType){
+	  	  	var stockInType = trim(document.getElementById('stockInType').value);
+		if(stockInType == null || stockInType==''){
+			alert("入库类型不能为空");
+			return;
+		}
+		var stockInCode = trim(document.getElementById('stockInCode').value);
+
+		var checkRemark = document.getElementById('checkRemark').value;
+		var checkMessage = document.getElementById('checkMessage').value;
+		var employeeCode = document.getElementById('employeeCode').value;
+		var stockInGM = document.getElementById("stock.stockInGM").value;
+	  	var stockIn = new StockIn(stockInCode,checkMessage,'',employeeCode,'',checkRemark,stockInType,'',stockInStateType,stockInGM,'','','','');
+	  	var array = new Array();
+	  	var a = document.getElementById("addMatail");
+	  	for(var row = 1; row < a.rows.length; row++){
+	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
+	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		if(isNaN(stockInAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		if(isNaN(onePrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		if(supplierCode == null || supplierCode==''){
+				alert("供应商不能为空");
+				return;
+			}
+
+	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.value);
+			if(cargoSpaceCode == null || cargoSpaceCode==''){
+				alert("货位不能为空");
+				return;
+			}
+
+			var checkAmount = a.rows.item(row).cells.item(10).firstChild.value;
+	  		if(isNaN(checkAmount)){
+	  			alert("抽查数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+
+	  		var amountPercent = a.rows.item(row).cells.item(11).firstChild.value;
+	  		if(isNaN(amountPercent)){
+	  			alert("数量合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var qualityPercent = a.rows.item(row).cells.item(12).firstChild.value;
+	  		if(isNaN(qualityPercent)){
+	  			alert("质量合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var packagePercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		if(isNaN(packagePercent)){
+	  			alert("包装合格率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+
+			var errorStockPercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		if(isNaN(errorStockPercent)){
+	  			alert("商品串库率填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,cargoSpaceCode,
+	  									stockInCode,amountPercent,qualityPercent,packagePercent,errorStockPercent,
+	  									'',checkAmount,'',
+	  									'',stockInAmount,onePrice,stockInType);
+	  		array.push(JSON.stringify(stockInCheckMaterielBean));
+	  	}
+
+//		var parameter = new Array(stockIn,array);
+		var stockInJson = JSON.stringify(stockIn)
+		var arrayJson = JSON.stringify(array);
+		StockInAction.complStockIn(stockInJson,array,callBack);
+	  }
+
+	   function showCargoSpace(tab){
+
+	  	  var returnValue = window.showModalDialog("showCargoSpace.action?tempid="+Math.random(),"","dialogHeight:400px;dialogWidth:500px");
+
+	  	  tab.value=returnValue;
+	  	}
+
 	</script>
 
 
@@ -327,26 +585,47 @@
 				<tr>
 					<td>
 						入库类型：
-						<s:select id='stockInType' name='stockInType'
-							list="#{'1':'生产入库','2':'采购入库','3':'其他入库'}" value="stock.stockInType" headerKey=""
-							headerValue="请选择" />
+						<s:if test="stock.stockInStateType!=1">
+							<s:select id='stockInType' name='stockInType'
+								list="#{'1':'生产入库','2':'采购入库','3':'其他入库'}"
+								value="stock.stockInType" headerKey="" headerValue="请选择" />
+						</s:if>
+
+						<s:else>
+							<s:select id='stockInType' name='stockInType'
+								list="#{'1':'生产入库','2':'采购入库','3':'其他入库'}"
+								value="stock.stockInType" headerKey="" headerValue="请选择"
+								disabled="true" />
+						</s:else>
+
+
 						<s:select id='cargoSpace' cssStyle="display:none"
 							name='cargoSpaceCode' list='#request.cargoSpaceList'
 							listKey='cargoSpaceCode' listValue='cargoSpaceName'
 							theme='simple' headerKey='' headerValue='请选择' />
-						<s:select id='supplier' cssStyle="display:none" name='supplierCode'
-							list='#request.supplierList' listKey='supplierCode'
-							listValue='supplierName' theme='simple' headerKey=''
-							headerValue='请选择' />
+						<s:select id='supplier' cssStyle="display:none"
+							name='supplierCode' list='#request.supplierList'
+							listKey='supplierCode' listValue='supplierName' theme='simple'
+							headerKey='' headerValue='请选择' />
 					</td>
 					<td>
 						入库编号：
-						<input type="text" id="stockInCode" name="stock.stockInCode"
-							value="<%=request.getAttribute("stock.stockInCode")%>">
+						<s:textfield id="stockInCode" name="stock.stockInCode"
+							disabled="true" />
 					</td>
+					<s:if test="stock.stockInStateType==1">
+						<td>
+							入库申请时间
+						</td>
+						<td>
+							<s:property value="stock.stockInDate" />
+						</td>
+					</s:if>
 				</tr>
 			</table>
-			<input value="添加物料" type="button" onclick="showMateriels();" />
+			<s:if test="stock.stockInStateType!=1">
+				<input value="添加物料" type="button" onclick="showMateriels();" />
+			</s:if>
 			<table cellpadding="0" cellspacing="1" width="100%" border="0">
 				<tr>
 					<td colspan="6">
@@ -377,17 +656,37 @@
 									供应商
 								</th>
 								<th bgcolor="white">
-									货位
+									货位编号
 								</th>
 								<th bgcolor="white">
 									金额
 								</th>
-								<th bgcolor="white">
-									删除
-								</th>
+								<s:if test="stock.checkResult!=-1&& stock.stockInStateType==1 && stock.stockInCheckState ==1">
+									<th bgcolor="white">
+										抽查数量
+									</th>
+									<th bgcolor="white">
+										数量合格率
+									</th>
+									<th bgcolor="white">
+										质量合格率
+									</th>
+									<th bgcolor="white">
+										包装合格率
+									</th>
+									<th bgcolor="white">
+										商品串库率
+									</th>
+								</s:if>
+								<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
+									<th bgcolor="white">
+										操作
+									</th>
+								</s:if>
 							</tr>
 							<s:if test="StockInCheckMaterielBeanList.size()>0">
-								<s:iterator value="StockInCheckMaterielBeanList" status="stockInMateriel" >
+								<s:iterator value="StockInCheckMaterielBeanList"
+									status="stockInMateriel">
 									<tr>
 										<td align="center" bgcolor="white">
 											<%=index++%>
@@ -405,29 +704,99 @@
 											<s:property value="materielABC"></s:property>
 										</td>
 										<td bgcolor="white">
-											<s:textfield name="stockInAmount" onchange="getPrice(this);" />
+											<s:if test="stock.stockInStateType == 1||stock.checkResult==-1||stock.stockInCheckState == -1">
+												<s:textfield name="stockInAmount" disabled="true" size="5" />
+											</s:if>
+											<s:else>
+												<s:textfield name="stockInAmount" onchange="getPrice(this);"
+													size="5" />
+											</s:else>
 										</td>
 										<td bgcolor="white">
-											<s:textfield name="onePrice" onchange="getPrice(this);"/>
+											<s:if test="stock.stockInCheckState==0&&stock.stockInStateType == 1">
+												<s:textfield name="onePrice" disabled="true" size="5" />
+											</s:if>
+											<s:else>
+												<s:textfield name="onePrice" onchange="getPrice(this);"
+													size="5" />
+											</s:else>
 										</td>
 										<td bgcolor="white">
-											<s:select
-												name='supplierCode' list='#request.supplierList'
-												listKey='supplierCode' listValue='supplierName'
-												theme='simple' value="supplierCode" headerKey='' headerValue='请选择' />
+											<s:if test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
+												<s:select name='supplierCode' list='#request.supplierList'
+													listKey='supplierCode' listValue='supplierName'
+													theme='simple' value="supplierCode" headerKey=''
+													headerValue='请选择' />
+											</s:if>
+											<s:else>
+												<s:select name='supplierCode' list='#request.supplierList'
+													listKey='supplierCode' listValue='supplierName'
+													theme='simple' value="supplierCode" disabled="true" />
+											</s:else>
 										</td>
 										<td bgcolor="white">
-											<s:select name='cargoSpaceCode'
-												list='#request.cargoSpaceList' listKey='cargoSpaceCode'
-												listValue='cargoSpaceName' value="cargoSpaceCode" theme='simple' headerKey=''
-												headerValue='请选择' />
+											<s:if
+												test="stock.stockInStateType==1 && stock.checkResult==1">
+												<s:textfield name="cargoSpaceCode" onclick="showCargoSpace(this);" />
+											</s:if>
 										</td>
 										<td bgcolor="white">
 											<s:property value="(stockInAmount*onePrice)" />
 										</td>
-										<td bgcolor="white">
-											<input type="button" value="删除" onclick="deleteMateriel(this);">
-										</td>
+										<s:if test="stock.checkResult!=-1&&stock.stockInStateType==1 && stock.stockInCheckState==1">
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="checkAmount" size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="checkAmount" size="10" disabled="true"></s:textfield>
+												</s:else>
+											</td>
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="amountPercent" size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="amountPercent" size="10" disabled="true"></s:textfield>
+												</s:else>
+											</td>
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="qualityPercent" size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="qualityPercent" size="10"
+														disabled="true"></s:textfield>
+												</s:else>
+											</td>
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="packagePercent" size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="packagePercent" size="10"
+														disabled="true"></s:textfield>
+												</s:else>
+											</td>
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="errorStockPercent" size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="errorStockPercent" size="10"
+														disabled="true"></s:textfield>
+												</s:else>
+											</td>
+										</s:if>
+
+										<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
+											<td bgcolor="white">
+
+												<input type="button" value="删除"
+													onclick="deleteMateriel(this);">
+
+											</td>
+										</s:if>
 									</tr>
 								</s:iterator>
 							</s:if>
@@ -448,21 +817,73 @@
 									备注
 								</td>
 								<td colspan="5" bgcolor="white">
-									<textarea id="checkRemark" name="stock.checkRemark" cols="100%"></textarea>
+									<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState == -1">
+										<s:textarea id="checkRemark" name="stock.checkRemark"
+											cols="100%" />
+									</s:if>
+									<s:else>
+										<s:textarea id="checkRemark" name="stock.checkRemark"
+											cols="100%" disabled="true" />
+									</s:else>
 								</td>
 							</tr>
+							<s:if test="stock.stockInStateType == 1">
+								<tr>
+									<td bgcolor="white">
+										审批意见
+									</td>
+									<td colspan="5" bgcolor="white">
+										<s:if test="stock.stockInCheckState == 1">
+											<s:textarea id="stockInExMessage" name="stock.stockInExMessage"
+												cols="100%" disabled="true" />
+										</s:if>
+										<s:else>
+											<s:textarea id="stockInExMessage" name="stock.stockInExMessage"
+												cols="100%" />
+										</s:else>
+									</td>
+								</tr>
+							</s:if>
+
+							<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState==1 ">
+								<tr>
+									<td bgcolor="white">
+										检测意见
+									</td>
+									<td colspan="5" bgcolor="white">
+										<s:if test="stock.checkResult==0">
+											<s:textarea id="checkMessage" name="stock.checkMessage"
+												cols="100%"/>
+										</s:if>
+										<s:else>
+											<s:textarea id="checkMessage" name="stock.checkMessage"
+												cols="100%"  disabled="true" />
+										</s:else>
+									</td>
+								</tr>
+							</s:if>
+
+
 							<tr>
-								<td bgcolor="white">
+								<td bgcolor="white" width="20%">
 									经手人
 								</td>
-								<td colspan="2" bgcolor="white">
-									<input type="text" />
+								<td colspan="2" bgcolor="white" width="30%">
+									<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState==1 && stock.checkResult ==0">
+										<s:textfield id="employeeCode" name="stock.employeeCode" />
+									</s:if>
+									<s:else>
+										<s:textfield id="employeeCode" name="stock.employeeCode"
+											disabled="true" />
+									</s:else>
 								</td>
-								<td bgcolor="white">
+								<td bgcolor="white" width="20%">
 									库管员
 								</td>
 								<td colspan="2" bgcolor="white">
-									<input type="text" />
+									<s:if test="stock.checkResult == 1">
+										<s:textfield id="stock.stockInGM" name="stock.stockInGM"/>
+									</s:if>
 								</td>
 
 							</tr>
@@ -470,9 +891,24 @@
 					</td>
 				</tr>
 			</table>
+			<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
+				<input type="button" value="保存" onclick="saveStockIn();" />
+				<input type="button" value="提交" onclick="submitStockIn();" />
+			</s:if>
+			<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState == 0">
+				<input type="button" value="通过" onclick="approvalStockIn(1)"/>
+				<input type="button" value="不通过" onclick="approvalStockIn(-1)"/>
+			</s:if>
+			<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState == 1 && stock.checkResult == 0">
+				<input type="button" value="保存" onclick="saveCheckStockIn();" />
+				<input type="button" value="通过" onclick="submitCheckStockIn(1);" />
+				<input type="button" value="不通过" onclick="submitCheckStockIn(-1);" />
+			</s:if>
 
-			<input type="button" value="保存" onclick="saveStockIn();" />
-			<input type="button" value="提交" onclick="submitStockIn();" />
+			<s:if test="stock.checkResult == 1">
+				<input type="button" value="保存" onclick="complStockIn(1)"/>
+				<input type="button" value="完成" onclick="complStockIn(3)"/>
+			</s:if>
 		</s:form>
 	</body>
 	<SCRIPT type="text/javascript">
