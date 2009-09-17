@@ -1,0 +1,41 @@
+
+.body_div{
+	margin:0 auto; 
+	background-repeat:no-repeat;
+	width:1002px;
+	position: relative;
+	height:700;
+	top:0px;
+}
+
+
+.body_head{
+background-image:url(../images/orgstructure_con_tit_bg.jpg);
+background-repeat:no-repeat;
+width:80%;
+height:80%;
+top:20%;
+left:50%;
+}
+
+.body_text{
+font-size:15px;
+color:#0C5F8F;
+font-weight:bold;
+margin-top:16px;
+margin-left:49px;
+}
+
+.body_foot{
+background-image:url(../images/sub_foot_bg.jpg);
+background-repeat:repeat-x;
+width:1002px;
+height:46px;
+position:absolute;
+left:0px;
+margin-top:500px;
+text-align:center;
+padding-top:18px;
+font-size:14px;
+color:#E5F4FA;
+}

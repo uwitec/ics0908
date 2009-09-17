@@ -20,6 +20,11 @@ try{
 }
 catch(e){}
   
+  	function page_close(){
+    		window.opener=null;
+	  			window.close();
+    	}
+  
   	function trim(s){
 	  	var str = s||"";
 	   	str = str.replace(/(^\s*)|(\s*$)/g,'');
