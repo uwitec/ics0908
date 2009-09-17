@@ -19,6 +19,7 @@ public class BaseBean extends ReSourceBean{
 		this.endValue=this.startSize*countNumber;
 	}
 
+	
 	/**
 	 * @return the startSize
 	 */

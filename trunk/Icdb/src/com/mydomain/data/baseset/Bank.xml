@@ -5,13 +5,19 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Bank">
-
+	<select id="selectBankPage" resultClass="com.mydomain.bean.baseset.BankBean">
+	SELECT
+	count(*) as countValue
+	FROM BANK
+	WHERE locate(#bankName#,BANKNAME)>0 and isEnabled!=0
+	</select>
 	<select id="selectAllFind" resultClass="com.mydomain.bean.baseset.BankBean">
 	SELECT
 	BANKCODE,
 	BANKNAME
 	FROM BANK
 	WHERE locate(#bankName#,BANKNAME)>0 and isEnabled!=0
+	limit #startValue#,#endValue#
 	</select>
 	<select id="getBankBean" parameterClass="int" resultClass="com.mydomain.bean.baseset.BankBean">
 		SELECT 
