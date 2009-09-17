@@ -13,7 +13,7 @@
 <body>
 <table>
 <tr>
-	<td colspan="3"><jsp:include flush="true" page="/main/head.jsp"></jsp:include></td>
+	<td colspan="3" width="1002"><jsp:include flush="true" page="/main/head.jsp"></jsp:include></td>
 </tr>
 <tr>
 	<td colspan="3"><jsp:include flush="true" page="/main/menu.jsp"></jsp:include></td>
