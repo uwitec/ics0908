@@ -44,8 +44,8 @@ public class ICTools {
 	}
 	public static String randId(String id_char){
 		StringBuffer id_code=new StringBuffer();
-		SimpleDateFormat sdf=new SimpleDateFormat( "yyyyMMddHHmmss");
-		int num=(int)(Math.random()*100);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+		int num=(int)((Math.random()+1)*100);
 		id_code.append(id_char);
 		id_code.append(sdf.format(new Date()));
 		id_code.append(num);
@@ -54,6 +54,10 @@ public class ICTools {
 		//return id_code;
 	}
 	
+	public static int randId(){
+		int num=(int)(Math.random()*100000);
+		return num;
+	}
 	
 	public static String likeString(String s_value){
 			s_value="%"+s_value+"%";
@@ -138,4 +142,7 @@ public class ICTools {
 
 	     return imageFileName;
 	 }
+	 public static void main(String[] args) {
+		ICTools.randId();
+	}
 }
