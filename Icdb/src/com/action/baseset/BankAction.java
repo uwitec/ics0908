@@ -55,14 +55,9 @@ public class BankAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String showBank(){
-		if(bank==null){
-			bank=new BankBean();
-			ICTools.setBean(bank, "");
-			bank.setS_value("");
-		}else{
-			ICTools.setBean(bank,bank.getS_value());
-		}
+		bank=bm.getPageBank(bank);
 		lhp=bm.getBankList(bank);
+		
 		return SUCCESS;
 	}
 	
@@ -75,6 +70,11 @@ public class BankAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	public String goAddBank(){
+		bank=new BankBean();
+		bank.setBankCode(ICTools.randId());
+		return SUCCESS;
+	}
 	public String getOneBank(){
 		bank=bm.getBankOne(bank.getBankCode());
 		return SUCCESS;
