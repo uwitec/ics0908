@@ -21,4 +21,5 @@
 <include file="strutsrs/report/s_report.xml"></include>
 <include file="strutsrs/storage/s_was.xml"></include>
 <include file="strutsrs/storage/s_checkStock.xml"></include>
+<include file="strutsrs/permission/s_permission.xml"></include>
 </struts>
