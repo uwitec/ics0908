@@ -58,7 +58,7 @@
 	height: 39px;
 	text-align: center;
 	float: left;
-    line-height:39px;
+	line-height: 39px;
 }
 
 .menu .item {
@@ -68,7 +68,7 @@
 	width: 138px;
 	text-align: center;
 	float: left;
-    line-height:39px;
+	line-height: 39px;
 }
 
 .sub_menu {
@@ -85,6 +85,43 @@
 	width: 94px;
 	text-align: center;
 	float: left;
-	line-height:39px;
+	line-height: 39px;
+}
 
+.mid_bg {
+	background-image: url(../images/sub_con_bg.jpg);
+	background-repeat: repeat-x;
+	width: 1002px;
+	height: 214px;
+}
+
+.lmenu {
+	background-image: url(../images/lmenu_bg.jpg);
+	background-repeat: no-repeat;
+	height: 481px;
+	margin: 15px 0px 0px 5px;
+}
+
+.lmenu_tit {
+	width: 179px;
+	height: 35px;
+	color: #E0F2F9;
+	font-size: 13px;
+	font-weight: bold;
+	padding-top: 12px;
+	padding-left: 53px;
+	margin-bottom: 12px;
+}
+
+.lmenu_item {
+	background-image: url(../images/lmenu_item_bg.jpg);
+	background-repeat: no-repeat;
+	width: 167px;
+	height: 32px;
+	color: #0C6A9D;
+	font-size: 13px;
+	font-weight: bold;
+	padding-top: 12px;
+	padding-left: 53px;
+	margin-left: 11px;
 }
