@@ -102,7 +102,7 @@
 	margin: 15px 0px 0px 5px;
 }
 
-.lmenu_tit {
+.lmenu div {
 	width: 179px;
 	height: 35px;
 	color: #E0F2F9;
@@ -113,7 +113,7 @@
 	margin-bottom: 12px;
 }
 
-.lmenu_item {
+.lmenu .item {
 	background-image: url(../images/lmenu_item_bg.jpg);
 	background-repeat: no-repeat;
 	width: 167px;
@@ -124,4 +124,100 @@
 	padding-top: 12px;
 	padding-left: 53px;
 	margin-left: 11px;
+}
+
+.lmenutree {
+	clear: both;
+	padding: 10px 0;
+	line-height: 20px;
+	text-align: left;
+	overflow-x: auto
+}
+
+.lmenutree span {
+	display: block;
+	white-space: nowrap;
+	padding-right: 0px;
+}
+
+.lmenutree ul {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+	padding-left: 2px;
+}
+
+.lmenutree li {
+	list-style: none;
+	line-height: 20px;
+	clear: both;
+	float: left;
+	width: 100%;
+	cursor: pointer;
+}
+
+.lmenutree span.hot {
+	line-height: 22px;
+	font-weight: bold;
+	background: url(mid_left_onclick.gif) no-repeat right top;
+}
+
+.lmenutree span.hover {
+	line-height: 22px;
+	font-weight: bold;
+	background: #cbe4fc url(mid_left_onclick.gif) no-repeat right top;
+}
+
+.lmenutree span.blank {
+	width: 10px;
+	display: inline-block;
+	padding-right: 0px;
+}
+
+.lmenutree span.clo {
+	background: url(tree-clo.gif) no-repeat;
+}
+
+.lmenutree span.open {
+	font-weight: bold;
+	background: url(tree-open.gif) no-repeat;
+}
+
+.lmenutree span.hot {
+	background: url(tree-clo.gif) no-repeat;
+}
+
+.lmenutree span.leefhot {
+	line-height: 22px;
+    background-image: url(../images/lmenu_item_bg.jpg);
+    background-repeat: no-repeat;
+    width: 167px;
+    height: 32px;
+    color: #0C6A9D;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 12px;
+    padding-left: 53px;
+    margin-left: 11px;
+}
+
+.lmenutree span.leef {
+	line-height: 22px;
+	background-image: url(../images/lmenu_item_bg.jpg);
+    background-repeat: no-repeat;
+    width: 167px;
+    height: 32px;
+    color: #0C6A9D;
+    font-size: 13px;
+    font-weight: bold;
+    padding-top: 12px;
+    padding-left: 53px;
+    margin-left: 11px;
+}
+
+.lmenutree span.padding {
+	display: block;
+	width: 2px;
+	height: 20px;
+	float: left;
 }
