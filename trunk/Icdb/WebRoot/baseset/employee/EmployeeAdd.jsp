@@ -1,44 +1,62 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-
 <% String base=request.getContextPath(); %>
+<html>
     <head>
         <title>添加新员工</title>
-    </head>
-    <SCRIPT type="text/javascript">
-    function showJob(){
-	window.showModalDialog("<%=base%>/baseset/FindJob.jsp","","dialogHeight:400px;dialogWidth:500px");
-}
+		<link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+	</head>
+<body>
+<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<SCRIPT type="text/javascript">
+
+    function Addbank(){
+    	var href_="GoAddBank.action";
+    	window.showModalDialog(href_,"","center:1;resizable:0;dialogHeight:250px;dialogWidth:450px");
+		location.reload();
+	}
+	function Updatebank(value_str){
+		var url="GetOneBank.action?bank.bankCode="+value_str;
+		window.showModalDialog(url,"","dialogHeight:250px;dialogWidth:450px");
+		location.reload();
+	}
+	
+	function Deletebank(value_str){
+		var url="DeleteBank.action?bank.bankCode="+value_str;
+		if(confirm("是否确定删除？")){
+    				window.location.href=url;
+    		}
+	}
     </SCRIPT>
-    <body>
-		<s:form action="AddEmployee" namespace="/baseset" method="post" enctype ="multipart/form-data">
-		<table>
-		<tr><td>
-		<table>
-			<s:textfield name="employee.employeeCode" label="人员编码" value="%{employee.employeeCode}"></s:textfield>
-			<s:textfield id="jobName" name="employee.jobName" label="岗位" onclick="showJob()"></s:textfield>
-			<s:hidden id="jobCode" name="employee.jobCode"></s:hidden>
-			<s:textfield id="departmentName" name="employee.departmentName" label="部门名称"></s:textfield>
-			<s:hidden id="departmentCode" name="employee.departmentCode"></s:hidden>
-			<s:textfield id="structName" name="employee.structName" label="所属公司"></s:textfield>
-			<s:hidden id="structCode" name="semployee.tructCode"></s:hidden>
-		</table>
-		</td>
-		<td>
-		<table>
-			<s:textfield name="person.personCode" label="人员编码" value="%{employee.personCode}"></s:textfield>
-			<s:textfield name="person.personName" label="姓名"></s:textfield>
-			<s:textfield name="person.personPhone" label="电话"></s:textfield>
-			<s:textfield name="person.personEmail" label="电邮"></s:textfield> 
-			<s:radio list="{'男','女'}" name="person.personSex" label="性别"></s:radio>
-			<s:file name="photoImg" label="照片"></s:file> 
-		</table>
-		</td>
-		</tr>
-		<tr><td align="center" colspan="2"><s:submit value="确认"></s:submit></td></tr>
-		</table>
-		</s:form>
-    </body>
+<table>
+<tr>
+	<td colspan="3" width="1002"><jsp:include flush="true" page="/main/head.jsp"></jsp:include></td>
+</tr>
+<tr>
+	<td colspan="3"><jsp:include flush="true" page="/main/menu.jsp"></jsp:include></td>
+</tr>
+<tr>
+	<td><jsp:include flush="true" page="/main/left.jsp"></jsp:include></td>
+	<td>
+   <div class="orgstructure_con_tit">
+		<div class="orgstructure_con_tit_text">银行信息</div>
+	</div>
+	
+	<div class="orgstructure_table_operate">
+	</div> 
+	<div class="orgstructure_table_tit">
+	<div class="orgstructure_con">
+<div class="orgstructure_table_tit">
+</div>
+	    <table class="orgstructure_table" cellspacing="1" cellpadding="0">
+	     </table>
+  	  	</div>
+  	<div class="orgstructure_con_foot"></div>
+	</td>
+	<td><jsp:include flush="true" page="/main/message.jsp"></jsp:include></td>
+</tr>
+<tr><td colspan="3">&nbsp;<jsp:include flush="true" page="/main/bottom.jsp"></jsp:include></td></tr>
+</table>
+</body>
 </html>

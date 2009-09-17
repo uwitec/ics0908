@@ -12,7 +12,7 @@
 	
 		function isEmpty(){
 			var v_name=document.getElementById("bank_name");
-			if(v_name.value==''){
+			if(trim(v_name.value)==''){
 				alert("银行名称不能为空");
 				return false;
 			}else{

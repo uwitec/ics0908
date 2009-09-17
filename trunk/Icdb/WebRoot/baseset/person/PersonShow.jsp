@@ -1,14 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<% String base=request.getContextPath(); %>
 <html>
     <head>
         <title>人员信息</title>
-    </head>
- <% 
-String base=request.getContextPath();
-%>  
-
+		<link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+	</head>
     <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <SCRIPT type="text/javascript">
     function AddPerson(){
@@ -21,41 +19,70 @@ String base=request.getContextPath();
 		location.reload();
 	}
     </SCRIPT>
-    <body>
-    <table>
-    <tr><td>
-    <s:form action="ShowPerson" namespace="/baseset" theme="simple">
-	    <s:textfield name="person.s_value"></s:textfield>
-	    <s:hidden name="person.personCode"></s:hidden>
-	    <s:submit value="查询"></s:submit>
-    </s:form>
-    </td></tr>
-    </table>
-    <s:if test="lhp.size>0">
-    <table border="1">
+<body>
+<table>
+<tr>
+	<td colspan="3" width="1002"><jsp:include flush="true" page="/main/head.jsp"></jsp:include></td>
+</tr>
+<tr>
+	<td colspan="3"><jsp:include flush="true" page="/main/menu.jsp"></jsp:include></td>
+</tr>
+<tr>
+	<td><jsp:include flush="true" page="/main/left.jsp"></jsp:include></td>
+	<td>
+   <div class="orgstructure_con_tit">
+		<div class="orgstructure_con_tit_text">人员信息</div>
+	</div>
+	
+	<div class="orgstructure_table_operate">
+		<s:form action="ShowPerson" namespace="/baseset" theme="simple" >
+		<a href="#" onclick="AddPerson()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
+		<input type="text" name="person.s_value" value="<s:property value="person.s_value"/>" class="search_border" size="20"/>
+		<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+		</s:form>
+	</div> 
+	<div class="orgstructure_table_tit">
+	<div class="orgstructure_con">
+<div class="orgstructure_table_tit">
+</div>
+	    <table class="orgstructure_table" cellspacing="1" cellpadding="0">
+	    <s:if test="lhp.size>0">
+	    	<tr class="orgstructure_table_th">
+	    		<td class="orgstructure_table_tit_m">人员编号</td>
+	    		<td class="orgstructure_table_tit_m">姓名</td>
+	    		<td class="orgstructure_table_tit_m">电话</td>
+	    		<td class="orgstructure_table_tit_m">性别</td>
+	    		<td class="orgstructure_table_tit_m">操作</td>
+	    	</tr>
+	    </s:if>
+	    <s:else>
+	    	<tr>
+	    	<td class="orgstructure_table_td_odd_r" colspan="3">
+	    		未找到符合的信息!
+	    	</td>
+	    	</tr>
+	    </s:else>
     	<tr>
-    	<th>人员编号</th>
-    	<th>姓名</th>
-		<th>电话</th>
-		<th>电邮</th>
-		<th>性别</th>
-		<th>操作</th>
 		</tr>
        <s:iterator value="lhp" status="stat">
-       	<tr>
+	       	<s:if test="#stat.even">
+	       		<tr class="orgstructure_table_td_odd">
+	       	</s:if>
+	       	<s:else>
+	       		<tr class="orgstructure_table_td_even">
+	       	</s:else>
        	<td><s:property value="personCode"></s:property></td>
         <td><s:property value="personName"></s:property></td>
         <td><s:property value="personPhone"></s:property></td>
-        <td><s:property value="personEmail"></s:property></td>
         <td><s:property value="personSex"></s:property></td>
         <td>
-        	<a href="#" onclick="UpdatePerson('<s:property value='personCode'/>')">修改</a>
+        	<a href="#" onclick="UpdatePerson('<s:property value='personCode'/>')"><img src="<%=base%>/images/img03.gif" border="0"></a>
         </td>
         </tr>
        </s:iterator>
-       <tr><td colspan="6">
-     
-       <s:form action="ShowPerson" namespace="/baseset" theme="simple" name="pageform">
+	   </table>
+  	<div class="pages">
+  	<s:form action="ShowPerson" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="person">
        <s:hidden name="person.s_value" value="%{person.s_value}"></s:hidden>
        <s:hidden id="countsize" name="person.countSize" value="%{person.countSize}"></s:hidden>
@@ -66,6 +93,7 @@ String base=request.getContextPath();
        <s:else>
       	   <input size="10" type="button" onclick="pageSet(-1)" value="上一页"/>
        </s:else>
+       <s:property value="person.startSize"/>/<s:property value="person.countSize"/>
        <s:if test="person.startSize+1>person.countSize">
        		<font color="gray">下一页</font>
        </s:if>
@@ -73,16 +101,16 @@ String base=request.getContextPath();
       	 	<input size="10" type="button" onclick="pageSet(1)" value="下一页"/>
        </s:else>
        		<input size="10" type="button" onclick="pageSet(2)" value="末页"/>
-        第<s:textfield id="size" size="2" name="person.startSize"></s:textfield>页
-       <font><s:property value="person.startSize"/>/<s:property value="person.countSize"/>页数</font>
+        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="person.startSize" cssClass="pages_border"/>页</font>
        </s:push> 
        </s:form>
-       </td></tr>
-     </table>
-     	</s:if>
-	<s:else>
-		未找到相关信息！
-	</s:else>
-     <a href="#" onclick="AddPerson()">添加</a>
-    </body>
+  	</div>
+  	 </div>
+  	<div class="orgstructure_con_foot"></div>
+	</td>
+	<td><jsp:include flush="true" page="/main/message.jsp"></jsp:include></td>
+</tr>
+<tr><td colspan="3">&nbsp;<jsp:include flush="true" page="/main/bottom.jsp"></jsp:include></td></tr>
+</table>
+</body>
 </html>
