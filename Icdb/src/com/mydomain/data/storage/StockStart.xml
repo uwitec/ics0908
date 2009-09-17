@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!DOCTYPE sqlMap      
-    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Stock">
 	<select id="selectStockOfStoreHouse"  resultClass="com.mydomain.bean.storage.StockBean">
-	Select 
+	Select
 	s.cargoSpaceCode,
 	c.cargoSpaceName,
 	s.materielCode,
@@ -15,24 +15,24 @@
 	s.stockAmount,
 	s.jsonField
 	from stock as s,CargoSpace as c,Materiel as m
-	where 
-	s.cargoSpaceCode=c.cargoSpaceCode and 
+	where
+	s.cargoSpaceCode=c.cargoSpaceCode and
 	s.materielCode=m.materielCode and
 	s.cargoSpaceCode in
 	(select cargoSpaceCode from cargoSpace where storehouseCode=#storehouseCode#)
 	</select>
 	<select id="selectStockDef" resultClass="com.mydomain.bean.storage.StockBean">
-	Select 
+	Select
 	count(*) as countValue
 	from stock as s,CargoSpace as c,Materiel as m
-	where 
-	s.cargoSpaceCode=c.cargoSpaceCode and 
+	where
+	s.cargoSpaceCode=c.cargoSpaceCode and
 	s.materielCode=m.materielCode and
 	s.cargoSpaceCode in
 	(select cargoSpaceCode from cargoSpace where storehouseCode=#storehouseCode#)
 	</select>
 	<select id="getStockBean" parameterClass="String" resultClass="com.mydomain.bean.storage.StockBean">
-	
+
 	</select>
 	<insert id="insertStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
 	insert into stock
@@ -47,5 +47,14 @@
 	where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
 	</update>
 	<delete id="deleteStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
-	</delete> 
+	</delete>
+
+
+	<!-- daiying -->
+	<select id="STOCK_SELECT_BY_KEY" resultClass="com.mydomain.bean.storage.StockBean">
+		select * from stock where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
+	</select>
+	<update id="STOCK_UPDATE_FOR_STOCK_OUT">
+		update stock set stockAmount=#stockAmount#
+	</update>
 </sqlMap>

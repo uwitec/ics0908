@@ -65,12 +65,12 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.startTransaction();
 			stockInBean.setStockInStateType(2);
 			stockInBean.setStockInCheckState(0);
-			stockInBean.setCheckResult(-1);
-			stockInBean.setStockInDate(new Date());
-			if (this.getStockInCount(stockInBean)>0) {
+			stockInBean.setCheckResult(0);
+			if (this.getStockInCount(stockInBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN",
 						stockInBean);
 			} else {
+				stockInBean.setStockInDate(new Date());
 				DBServer.quider
 						.insertObject("ADD_SELECT_STOCK_IN", stockInBean);
 			}
@@ -103,13 +103,14 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.startTransaction();
 			stockInBean.setStockInStateType(1);
 			stockInBean.setStockInCheckState(0);
-			stockInBean.setCheckResult(-1);
-			stockInBean.setStockInDate(new Date());
+			stockInBean.setCheckResult(0);
 			if (this.getStockInCount(stockInBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN",
 						stockInBean);
+			} else {
+				DBServer.quider
+						.insertObject("ADD_SELECT_STOCK_IN", stockInBean);
 			}
-			DBServer.quider.insertObject("ADD_SELECT_STOCK_IN", stockInBean);
 			for (StockInCheckMaterielBean stockInCheckMaterielBean : stockInCheckMaterielList) {
 				if (this.getStockInCheckMaterielCount(stockInCheckMaterielBean) > 0) {
 					DBServer.quider.updateObject(
@@ -119,6 +120,75 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 					DBServer.quider.insertObject("ADD_STOCK_IN_CHECK_MATERIEL",
 							stockInCheckMaterielBean);
 				}
+			}
+
+			DBServer.quider.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error("", e);
+			return false;
+		} finally {
+			DBServer.quider.endTransaction();
+		}
+		return true;
+	}
+
+	public boolean approvalSave(StockInBean stockInBean)throws SQLException{
+
+		try {
+			DBServer.quider.startTransaction();
+			stockInBean.setStockInExDate(new Date());
+
+			DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN", stockInBean);
+			DBServer.quider.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error("", e);
+			return false;
+		} finally {
+			DBServer.quider.endTransaction();
+		}
+		return true;
+	}
+
+	public boolean checkSave(StockInBean stockInBean,
+			List<StockInCheckMaterielBean> stockInCheckMaterielList) throws SQLException {
+		try {
+			DBServer.quider.startTransaction();
+			stockInBean.setStockInDate(new Date());
+
+			DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN", stockInBean);
+
+			for (StockInCheckMaterielBean stockInCheckMaterielBean : stockInCheckMaterielList) {
+
+				DBServer.quider.updateObject("UPDATE_STOCK_IN_CHECK_MATERIEL",
+						stockInCheckMaterielBean);
+
+			}
+
+			DBServer.quider.commitTransaction();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			log.error("", e);
+			return false;
+		} finally {
+			DBServer.quider.endTransaction();
+		}
+		return true;
+	}
+
+	public boolean complStockIn(StockInBean stockInBean,
+			List<StockInCheckMaterielBean> stockInCheckMaterielList) throws SQLException {
+		try {
+			DBServer.quider.startTransaction();
+
+			DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN", stockInBean);
+
+			for (StockInCheckMaterielBean stockInCheckMaterielBean : stockInCheckMaterielList) {
+
+				DBServer.quider.updateObject("UPDATE_STOCK_IN_CHECK_MATERIEL",
+						stockInCheckMaterielBean);
+
 			}
 
 			DBServer.quider.commitTransaction();
@@ -151,7 +221,6 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 
 		// return count;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	private int getStockInCount(StockInBean stockInBean) throws SQLException {

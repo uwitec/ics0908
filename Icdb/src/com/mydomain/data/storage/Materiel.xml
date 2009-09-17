@@ -7,65 +7,80 @@
 <sqlMap namespace="StockInCheckMateriel">
 	<typeAlias alias="materiel"
 		type="com.mydomain.bean.storage.MaterielBean" />
+	<typeAlias alias="materielExt"
+		type="com.mydomain.bean.storage.MaterielBeanExt" />
 
 	<sql id="MATERIEL_COMMON_CONDITION">
-		<dynamic prepend="where">
+
 			<isNotEmpty property="materielCode" prepend="and">
-				materielCode = #materielCode#
+				m.materielCode = #materielCode#
 			</isNotEmpty>
 			<isNotEmpty property="materielName" prepend="and">
-				materielName = #materielName#
+				m.materielName = #materielName#
 			</isNotEmpty>
 			<isNotEmpty property="materielPrice" prepend="and">
-				materielPrice = #materielPrice#
+				m.materielPrice = #materielPrice#
 			</isNotEmpty>
 			<isNotEmpty property="materielMadeIn" prepend="and">
-				materielMadeIn = #materielMadeIn#
+				m.materielMadeIn = #materielMadeIn#
 			</isNotEmpty>
 			<isNotEmpty property="materielMaxStore" prepend="and">
-				materielMaxStore =#materielMaxStore#
+				m.materielMaxStore =#materielMaxStore#
 			</isNotEmpty>
 			<isNotEmpty property="materielMinStore" prepend="and">
-				materielMinStore = #materielMinStore#
+				m.materielMinStore = #materielMinStore#
 			</isNotEmpty>
 			<isNotEmpty property="materielSpell" prepend="and">
-				materielSpell = #materielSpell#
+				m.materielSpell = #materielSpell#
 			</isNotEmpty>
 			<isNotEmpty property="isEnabled">
-				isEnabled = #isEnabled#
+				m.isEnabled = #isEnabled#
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="jsonField">
-				jsonField = #jsonField#
+				m.jsonField = #jsonField#
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="materielSize">
-				materielSize = #materielSize#
+				m.materielSize = #materielSize#
 			</isNotEmpty>
 			<isNotEmpty property="materielABC" prepend="and">
-				materielABC = #materielABC#
+				m.materielABC = #materielABC#
 			</isNotEmpty>
 			<isNotNull property="materielIds" prepend="and">
-				materielCode not in
-				<iterate open="(" close=")" conjunction="," property="materielIds">
+				m.materielCode not in
+				<iterate open="(" close=")" conjunction=","
+					property="materielIds">
 					#materielIds[]#
 				</iterate>
 			</isNotNull>
-		</dynamic>
+
 	</sql>
 
 	<sql id="MATERIEL_COMMON_SELECT">
 		<![CDATA[
-			select materielCode, materielName, materielMadeIn,
-			materielPrice, materielMaxStore, materielMinStore,
-			materielSpell, isEnabled, jsonField, materielSize, materielABC
-			from Materiel
+			select m.materielCode, m.materielName, m.materielMadeIn,
+			m.materielPrice, m.materielMaxStore, m.materielMinStore,
+			m.materielSpell, m.isEnabled, m.jsonField, m.materielSize, m.materielABC
+			from Materiel m
 		]]>
 	</sql>
 
 	<select id="SHOW_MATERIEL" resultClass="materiel">
 		<include refid="MATERIEL_COMMON_SELECT" />
-		<include refid="MATERIEL_COMMON_CONDITION" />
+		<dynamic prepend="where">
+			<include refid="MATERIEL_COMMON_CONDITION" />
+		</dynamic>
 	</select>
 
+	<select id="SHOW_MATERIEL_AND_CARGOSPACE" resultClass="materielExt">
+		<![CDATA[
+			select m.materielCode, m.materielName, m.materielMadeIn,
+			m.materielPrice, m.materielMaxStore, m.materielMinStore,
+			m.materielSpell, m.isEnabled, m.jsonField, m.materielSize, m.materielABC,s.cargoSpaceCode,
+			s.stockPrice,s.stockAmount
+			from Materiel m,Stock s where m.materielCode = s.materielCode
+		]]>
+		<include refid="MATERIEL_COMMON_CONDITION"/>
+	</select>
 	<insert id="ADD_MATERIEL">
 		<![CDATA[
 			insert into Materiel(
