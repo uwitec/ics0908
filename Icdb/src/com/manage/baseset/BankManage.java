@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.mydomain.bean.baseset.BankBean;
+import com.tools.ICTools;
 
 public class BankManage {
 
@@ -19,6 +20,18 @@ public class BankManage {
 			com.dbserver.DBServer.logger.exception(e);
 			return new ArrayList<BankBean>();
 		}
+	}
+	
+	public BankBean getPageBank(BankBean bank){
+		PageManage pm=new PageManage();
+		if(bank==null){
+			bank=new BankBean();
+			ICTools.setBean(bank, "");
+			bank.setS_value("");
+		}else{
+			ICTools.setBean(bank,bank.getS_value());
+		}
+		return   (BankBean) pm.setPage(bank,"selectBankPage");
 	}
 	
 	public boolean addBank(BankBean bank){
