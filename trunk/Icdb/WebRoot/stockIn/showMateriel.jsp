@@ -47,6 +47,7 @@
 	%>
 
 	<body>
+
 		<s:if test="materielList.size()>0">
 			<table border="1" id="materielTable" bgcolor ="black">
 				<tr>
@@ -66,6 +67,7 @@
 						单位
 					</th>
 				</tr>
+				<tbody id="materielTbody">
 				<s:iterator value="materielList" status="materiel">
 					<tr>
 						<td align="center" bgcolor="white">
@@ -85,6 +87,7 @@
 						</td>
 					</tr>
 				</s:iterator>
+				</tbody>
 				<tr>
 					<td colspan="5"  bgcolor="white">
 						<input type="button" onclick="sendTo();" value="确认" />

@@ -8,12 +8,19 @@
 	<allow>
 		<create creator="new" javascript="StockInAction">
 			<param name="class"
-				value="com.action.storage.stockIn.StockInAction" />
+				value="com.action.storage.StockInAction" />
 			<include method="getMaterielCode" />
 			<include method="saveStockIn" />
+			<include method="submitStockIn"/>
 			<include method="deleteStockInMateriel"/>
 			<include method="deleteStockIn"/>
+			<include method="saveCheckStockIn"/>
+			<include method="submitCheckStockIn"/>
+			<include method="findCargoSpaceList"/>
+			<include method="approvalStockIn" />
+			<include method="complStockIn"/>
 		</create>
+		<!--
 		<convert converter="bean"
 			match="com.mydomain.bean.storage.StockInCheckMaterielBean">
 			<param name="include"
@@ -22,8 +29,6 @@
 	  									packagePercent,errorStockPercent,
 	  									checkNote,checkAmount,checkRemark,
 	  									lastAmount,stockInAmount,onePrice,stockInType" />
-
-
 		</convert>
 		<convert converter="bean"
 			match="com.mydomain.bean.storage.StockInBean">
@@ -32,8 +37,26 @@
 				 checkResult, orderNumber,checkRemark,stockInType, stockInState,
 				 stockInStateType,stockInGM,stockInExGM,stockInExMessage, stockInWill" />
 		</convert>
+		-->
+		<convert converter="bean"
+			match="com.mydomain.bean.storage.CargoSpaceBean">
+		</convert>
+
+		<create creator="new" javascript="StockOutAction">
+			<param name="class"
+				value="com.action.storage.StockOutAction" />
+			<include method="saveStockOut" />
+			<include method="submitStockOut" />
+			<include method="deleteStockOut" />
+			<include method="deleteStockOutMateriel" />
+			<include method="approvalStockOut" />
+			<include method="saveCheckStockOut"/>
+			<include method="submitCheckStockOut"/>
+			<include method="comStockOut"/>
+		</create>
 
 	</allow>
+	<!--
 	<signatures>
 
 		<![CDATA[ import java.util.List;
@@ -49,4 +72,5 @@
 			]]>
 
 	</signatures>
+	 -->
 </dwr>
