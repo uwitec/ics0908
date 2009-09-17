@@ -1,20 +1,45 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
+<% String base=request.getContextPath(); %>
     <head>
-        <title>银行信息维护</title>
-    </head>
-    <body>
-    <s:push value="bank">
-      <s:form action="UpdateBank" namespace="/baseset" >
-      <table>
-	  <tr><td><s:textfield name="bank.bankCode" value="%{bankCode}" label="银行编码" readonly="true"></s:textfield></td></tr>
-	  <tr><td><s:textfield name="bank.bankName" value="%{bankName}" label="银行名称"></s:textfield></td></tr>
-	  <tr><td colspan="2"><s:submit value="修改"></s:submit></td></tr>
-	  </table>
-     </s:form>
-     </s:push>
+       <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+	   <title>修改银行信息</title>
+	</HEAD>
+	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+	<SCRIPT type="text/javascript">
+	
+		function isEmpty(){
+			var v_name=document.getElementById("bank_name");
+			if(v_name.value==''){
+				alert("银行名称不能为空");
+				return false;
+			}else{
+				return true;
+			}
+		}
+		function save_close(){
+			if(isEmpty()){
+				insertForm.submit();
+				window.opener=null;
+	  			window.close();
+  			}   
+		}
+		
+	</SCRIPT>
+	<body class="sub1_body">
+		<div class="sub1_title"><img src="<%=base%>/images/img01.gif"> 添加银行</div>
+		<div class="sub1_con">
+		<s:form action="UpdateBank" namespace="/baseset" theme="simple" name="insertForm">
+			<div>银行编号：
+			<s:textfield name="bank.bankCode" cssClass="sub1_border" readonly="true"/>
+			</div>
+			<div>银行名称：
+			<s:textfield name="bank.bankName" cssClass="sub1_border" id="bank_name"/>
+			<div><input type="button" class="sub1_btn_save_closed" onclick="save_close()"/></div>
+			</div>
+		</s:form>
+		</div>
     </body>
 </html>
