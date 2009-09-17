@@ -17,6 +17,11 @@
     <a href="<s:url action="baseset/ShowAccount"/>">帐号信息</a><br/>
     <a href="<s:url action="baseset/ShowSupplier"/>">供应商信息</a><br/>
    <a href="<s:url action="baseset/ShowEmployee"/>">员工信息</a><br/>
+
+   <a href="<s:url action="baseset/ShowStorehouse"/>">仓库信息</a><br/>
+   <a href="<s:url action="stockIn/searchStockIn"/>">入库管理</a><br/>
+   <a href="<s:url action="stockOut/searchStockOut"/>">出库管理</a><br/>
+
    <a href="<s:url action="baseset/ShowStorehouse"/>">仓库信息</a><br/>
    <a href="<s:url action="baseset/ShowMateriel"/>">物料信息</a><br/>
    -------------------库存业务---------------------------------<br/>
@@ -27,5 +32,6 @@
    -------------------系统信息---------------------------------<br/>
    -------------------系统信息---------------------------------<br/>
    <a href="<s:url action="storage/ShowCheckApprove"/>">盘点审批</a>
+
     </body>
 </html>
