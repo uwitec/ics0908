@@ -704,7 +704,7 @@
 											<s:property value="materielABC"></s:property>
 										</td>
 										<td bgcolor="white">
-											<s:if test="stock.stockInStateType == 1||stock.checkResult==-1||stock.stockInCheckState == -1">
+											<s:if test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
 												<s:textfield name="stockInAmount" disabled="true" size="5" />
 											</s:if>
 											<s:else>
@@ -713,7 +713,7 @@
 											</s:else>
 										</td>
 										<td bgcolor="white">
-											<s:if test="stock.stockInCheckState==0&&stock.stockInStateType == 1">
+											<s:if test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
 												<s:textfield name="onePrice" disabled="true" size="5" />
 											</s:if>
 											<s:else>
