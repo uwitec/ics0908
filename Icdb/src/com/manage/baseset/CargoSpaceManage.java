@@ -14,7 +14,7 @@ public class CargoSpaceManage {
 	@SuppressWarnings("unchecked")
 	public List<CargoSpaceBean> getCargoSpaceList(CargoSpaceBean cargoSpace){
 		try {
-			return (List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace", cargoSpace);
+			return (List<CargoSpaceBean>) DBServer.quider.queryForList("selectAllCargoSpaceBean", cargoSpace);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
@@ -25,7 +25,9 @@ public class CargoSpaceManage {
 	@SuppressWarnings("unchecked")
 	public List<CargoSpaceBean> getCargoSapceOfStoreHouse(StorehouseBean storehouse){
 		try {
-			return (List<CargoSpaceBean>) DBServer.quider.queryForList("getHouseSpace",storehouse);
+			CargoSpaceBean csb=new CargoSpaceBean();
+			csb.setStorehouseCode(storehouse.getStorehouseCode());
+			return (List<CargoSpaceBean>) DBServer.quider.queryForList("getselectCargoSpaceByStoreHouseSpace",csb);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
