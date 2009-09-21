@@ -10,7 +10,6 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import net.sf.json.JSONObject;
 
-import com.action.baseset.StorehouseAction;
 import com.manage.storage.CargoSpaceManage;
 import com.manage.storage.MaterielManage;
 import com.manage.storage.StockInManage;
@@ -205,7 +204,7 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 	/**
-	 * 保存入库单
+	 * 保存入库卄1�7
 	 *
 	 * @return
 	 * @throws SQLException
