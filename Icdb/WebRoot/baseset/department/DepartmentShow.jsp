@@ -1,68 +1,109 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
+<% String base=request.getContextPath(); %>
 <html>
     <head>
         <title>部门信息</title>
-    </head>
-<% 
-String base=request.getContextPath();
-%>  
-    <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
-    <body>
-    <s:form action="ShowDepartment">
-    	<s:textfield name="department.s_value" label="内容"></s:textfield>
-    	<s:hidden name="department.departmentCode"></s:hidden>
-    	<s:submit value="查询"></s:submit>
-    </s:form>
-    <table border="1">
-    	<s:if test="lhp.size>0">
-    	<tr><th>部门编号</th><th>部门名称</th><th>所属机构</th><th>操作</th></tr>
-    	</s:if>
-    	<s:else>
-    		未找到符合的信息！
-    	</s:else>
-       <s:iterator value="lhp" status="stat">
-       	<tr>
-       	<td><s:property value="departmentCode"></s:property></td>
-        <td><s:property value="departmentName"></s:property></td>
-        <td><s:property value="structName"></s:property></td>
-        <td><s:url id="updateUrl" action="GetOneDepartment">
-			<s:param name="department.departmentCode" value="departmentCode"></s:param>      
-        	</s:url> 
-        	<s:url id="deleteUrl" action="DeleteDepartment">
-			<s:param name="department.departmentCode" value="departmentCode"></s:param>      
-        	</s:url>
-        	<s:a href="%{updateUrl}">修改</s:a>
-        </td>
-        </tr>
-       </s:iterator>
-       <tr><td colspan="4">
-       <s:form action="ShowDepartment" namespace="/baseset" theme="simple" name="pageform">
+    <link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+	</head>
+<body topmargin="0">
+<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<SCRIPT type="text/javascript">
+
+    function AddDep(){
+    	var href_="GoAddDepartment.action";
+    	window.showModalDialog(href_,"","center:1;resizable:0;dialogHeight:250px;dialogWidth:450px");
+		location.reload();
+	}
+	function UpdateDep(value_str){
+		var url="GetOneDepartment.action?department.departmentCode="+value_str;
+		window.showModalDialog(url,"","dialogHeight:250px;dialogWidth:450px");
+		location.reload();
+	}
+	
+
+    </SCRIPT>
+<body topmargin="0">
+	<div class="body_div">
+		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
+		<div class="center_body">
+			<div class="center_head_text">部门信息</div>
+			<div class="center_tools">
+			<s:form action="ShowDepartment" namespace="/baseset" theme="simple" >
+				<a href="#" onclick="AddDep()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" align="bottom">添加</a>
+				<input type="text" name="department.s_value" value="<s:property value="department.s_value"/>" class="search_border" size="20"/>
+				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+			</s:form>
+			</div>	
+		</div>
+		<div class="center_boder">
+		<table class="center_table" cellspacing="1" cellpadding="0">
+		   <s:if test="lhp.size>0">
+	    	<tr class="table_head">
+	    		<td>部门编号</td>
+	    		<td>部门名称</td>
+	    		<td>所属机构</td>
+	    		<td>操作</td>
+	    	</tr>
+	    </s:if>
+	    <s:else>
+	    	<tr>
+	    	<td class="table_tr_no" colspan="3">
+	    		未找到符合的信息!
+	    	</td>
+	    	</tr>
+	    </s:else>
+	       <s:iterator value="lhp" status="stat">
+	        <tr 
+       		<s:if test="#stat.even">
+       			class="table_tr_odd"
+	       	</s:if>
+	       	<s:else>
+       			class="table_tr__even"
+       		</s:else>
+	       	>
+	       	<td><s:property value="departmentCode"/></td>
+       		<td><s:property value="departmentName"/></td>
+        	<td><s:property value="structName"/></td>
+	       	<td>
+	       	<a href="#" onclick="UpdateDep('<s:property value="departmentCode"/>')">
+	       	<img src="<%=base%>/images/img03.gif" border="0" alt="修改">
+	       	</a>
+	        </td>
+	        </tr>
+	    	</s:iterator>
+	     </table>
+		<div class="pages">
+			<s:form action="ShowDepartment" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="department">
        <s:hidden name="department.s_value" value="%{department.s_value}"></s:hidden>
        <s:hidden id="countsize" name="department.countSize" value="%{department.countSize}"></s:hidden>
-        <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
        <s:if test="department.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input size="10" type="button" onclick="pageSet(-1)" value="上一页"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
        </s:else>
+       <s:property value="department.startSize"/>/<s:property value="department.countSize"/>
        <s:if test="department.startSize+1>department.countSize">
-       		<font color="gray">下一页</font>
+       		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input size="10" type="button" onclick="pageSet(1)" value="下一页"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
        </s:else>
-       		<input size="10" type="button" onclick="pageSet(2)" value="末页"/>
-        第<s:textfield id="size" size="2" name="department.startSize"></s:textfield>页
-       <font><s:property value="department.startSize"/>/<s:property value="department.countSize"/>页数</font>
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
+        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="department.startSize" cssClass="pages_border"/>页</font>
        </s:push> 
        </s:form>
-       </td></tr>
-     </table>
-  	<s:a href="GoAddDepartment.action">添加</s:a>
-    </body>
+		</div>
+		</div>
+		<div class="center_boder_foot"></div>
+		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+	</div>
+</body>
 </html>

@@ -4,36 +4,77 @@
 <html>
 <% String base=request.getContextPath(); %>
     <head>
-        <title>添加帐号信息</title>
-    </head>
-<script type="text/javascript">
-function showPerson(){
-	window.showModalDialog("<%=base%>/baseset/FindPerson.jsp","","dialogHeight:400px;dialogWidth:500px");
-}
-function showAccount(){
-	window.showModalDialog("<%=base%>/baseset/FindAccount.jsp","","dialogHeight:400px;dialogWidth:500px");
-}
-</script>
-
-    <body>
-		<s:form action="UpdateSupplier" namespace="/baseset">
-		<s:push value="supplier">
-		<s:textfield name="supplier.supplierCode" label="供应商编码" value="%{supplierCode}"></s:textfield>
-        <s:textfield name="supplier.supplierName" label="供应商名称" value="%{supplierName}"></s:textfield>
-        <s:textfield name="supplier.supplierAddress" label="供应商地址" value="%{supplierAddress}"></s:textfield>
-        <s:textfield name="supplier.supplierPhone" label="供应商电话" value="%{supplierPhone}"></s:textfield>
-        <s:textfield name="supplier.supplierFax" label="供应商传真" value="%{supplierFax}"></s:textfield>
-        <s:textfield name="supplier.supplierZipCode" label="供应商邮编" value="%{supplierZipCode}"></s:textfield>
-        <s:textfield name="supplier.supplierTaxFileNumber" label="税号" value="%{supplierTaxFileNumber}"></s:textfield>
-        <s:textfield name="supplier.supplierRemark" label="备注" value="%{supplierRemark}"></s:textfield>
-        <s:textfield id="personName" name="supplier.personName" value="%{personName}" label="联系人名称" onclick="showPerson()"></s:textfield>
-        <s:hidden id="personCode" name="supplier.personCode" value="%{personCode}"></s:hidden>
-        <s:textfield id="accountNumber" name="supplier.accountNumber" value="%{accountNumber}" label="银行帐号" onclick="showAccount()"></s:textfield>
-        <s:hidden id="accountCode" name="supplier.accountCode" value="%{accountCode}"></s:hidden>
-        <s:textfield id="bankName" name="supplier.bankName" value="%{bankName}" label="所属银行"></s:textfield>
-		<s:hidden id="bankCode" name="supplier.bankCode" value="%{bankCode}"></s:hidden>
-		<s:submit value="确认"></s:submit>
-		</s:push>
-		</s:form>
+       <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+	   <title>供应商信息</title>
+	</HEAD>
+	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+	<SCRIPT type="text/javascript">
+	
+		function isEmpty(){
+			var v_code=document.getElementById("decode");
+			var v_name=document.getElementById("dename");
+			if(trim(v_code.value)==''){
+				document.getElementById("decode_f").innerHTML="该信息不能为空";
+				return false;
+			}
+			if(trim(v_name.value)==''){
+				document.getElementById("dename_f").innerHTML="该信息不能为空";
+				return false;
+			}
+			return true;
+		}
+		
+		function save_next(){
+			if(isEmpty()){
+				insertForm.submit();
+			}
+		}
+		
+		function save_close(){
+			if(isEmpty()){
+				insertForm.submit();
+				window.opener=null;
+	  			window.close();
+  			}   
+		}
+		
+	</SCRIPT>
+	<base target="_self"> 
+	<body class="sub1_body">
+		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">修改供应商信息</div>
+		<div class="sub1_con">
+			<s:form action="UpdateSupplier" namespace="/baseset" theme="simple" name="insertForm">
+				<div>编码：
+					<s:textfield id="decode" name="supplier.supplierCode" cssClass="sub1_border" readonly="true"/>
+					<font id="decode_f" color="red"></font>
+				</div>
+				<div>名称：
+					<s:textfield id="dename" name="supplier.supplierName" cssClass="sub1_border"/>
+					<font id="dename_f" color="red"></font>
+				</div>
+				<div>地址：
+					<s:textfield name="supplier.supplierAddress" cssClass="sub1_border"/>
+				</div>
+				<div>电话：
+					<s:textfield name="supplier.supplierPhone" cssClass="sub1_border"/>
+				</div>
+				<div>传真：
+					<s:textfield name="supplier.supplierFax" cssClass="sub1_border"/>
+				</div>
+				<div>邮编：
+					<s:textfield name="supplier.supplierZipCode" cssClass="sub1_border"/>
+				</div>
+				<div>税号：
+					<s:textfield name="supplier.supplierTaxFileNumber" cssClass="sub1_border"/>
+				</div>
+				<div>联系人：
+					<s:textfield name="supplier.jsonField" cssClass="sub1_border"/>
+				</div>
+				<div>备注：
+					<s:textarea name="supplier.supplierRemark" cssClass="sub1_textarea"/>
+				</div>
+				<div><input type="button" class="sub1_btn_save_closed" onclick="save_close()"/></div>
+			</s:form>
+		</div>
     </body>
 </html>
