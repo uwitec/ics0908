@@ -31,6 +31,26 @@ catch(e){}
 	   	return str;
 	}
 	
+	function isEmptyNum(s) {
+	return !(s === 0)
+			&& (isNull(s) || s == "" || new String(s).toUpperCase() == "NULL");
+	}
+	
+	function isNull(o) {
+		return null == o && !(o === 0);
+	}
+	
+	function isNumber(sNumber, len) {
+	if (!isEmptyNum(sNumber)) {
+		if (sNumber.length <= (len || 16)) {
+			var regex = /^\d+(\.\d{1,2})?$/;
+			return sNumber.match(regex) ? true : false;
+		}
+	}
+	return false;
+
+}
+	
 	function pageSet(value_key){
     		var sizevalue=document.getElementById("size").value;
     		var countvalue=document.getElementById("countsize").value;
