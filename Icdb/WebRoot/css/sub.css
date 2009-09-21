@@ -502,6 +502,31 @@ border-color:#8195A0;
 color:#668395;
 font-family:Arial, Helvetica, ¡°ËÎÌå¡±}
 
+.sub2_border{
+width:150px;
+height:20px;
+margin-left:5px;
+padding-left:8px;
+margin-top:5px;
+background-color:#F6FDFF;
+border:1px solid;
+border-color:#8195A0;
+color:#668395;
+font-family:Arial, Helvetica, ¡°ËÎÌå¡±}
+
+.sub3_border{
+width:100px;
+height:20px;
+margin-left:5px;
+padding-left:8px;
+margin-top:5px;
+background-color:#F6FDFF;
+border:1px solid;
+border-color:#8195A0;
+color:#668395;
+font-family:Arial, Helvetica, ¡°ËÎÌå¡±}
+
+
 .sub1_textarea{
 width:340px;
 height:170px;
