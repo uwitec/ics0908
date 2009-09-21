@@ -21,6 +21,19 @@ public class SupplierBean extends BaseBean{
 	private String accountNumber;
 	private int bankCode; //ÒøÐÐ±àÂë
 	private String bankName;
+	private String jsonField;
+	/**
+	 * @return the jsonField
+	 */
+	public String getJsonField() {
+		return jsonField;
+	}
+	/**
+	 * @param jsonField the jsonField to set
+	 */
+	public void setJsonField(String jsonField) {
+		this.jsonField = jsonField;
+	}
 	/**
 	 * @return the accountNumber
 	 */

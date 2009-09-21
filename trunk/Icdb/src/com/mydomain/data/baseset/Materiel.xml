@@ -5,6 +5,7 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="Materiel">
+
 	<select id="selectMaterielCount" resultClass="com.mydomain.bean.baseset.MaterielBean">
 		SELECT				
 		count(*) as countValue
@@ -20,7 +21,6 @@
 		or locate(#materielSpell#,materielSpell)>0
 		or locate(#materielSize#,materielSize)>0
 		or locate(#materielABC#,materielABC)>0)
-
 	</select>
 	<select id="selectMaterielDef" resultClass="com.mydomain.bean.baseset.MaterielBean">
 		SELECT				
