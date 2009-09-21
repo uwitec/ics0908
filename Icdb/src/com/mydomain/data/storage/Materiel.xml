@@ -33,7 +33,7 @@
 			<isNotEmpty property="materielSpell" prepend="and">
 				m.materielSpell = #materielSpell#
 			</isNotEmpty>
-			<isNotEmpty property="isEnabled">
+			<isNotEmpty property="isEnabled" prepend="and">
 				m.isEnabled = #isEnabled#
 			</isNotEmpty>
 			<isNotEmpty prepend="and" property="jsonField">
