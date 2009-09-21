@@ -50,6 +50,24 @@ border:0px;
 margin-left:11px;
 }
 
+.table_tr_right{
+background-color:#FFFFFF;
+font-size:12px;
+text-align:right;
+vertical-align:middle;
+height:23px;
+color:#636B6D;
+}
+
+.table_tr_left{
+background-color:#FFFFFF;
+font-size:12px;
+text-align:left;
+vertical-align:middle;
+height:23px;
+color:#636B6D;
+}
+
 .table_tr_odd{
 background-color:#FFFFFF;
 font-size:12px;
@@ -67,7 +85,16 @@ vertical-align:middle;
 height:23px;
 color:#636B6D;
 }
-
+.table_tr_no{
+font-size:12px;
+text-align:center;
+vertical-align:middle;
+height:23px;
+color:#636B6D;
+border-bottom:1px #B9BABC solid;
+border-left:1px #B9BABC solid;
+border-right:1px #B9BABC solid;
+}
 .table_head{
 background-image:url(../images/orgstructure_table_tit_bg.jpg);
 background-repeat:no-repeat;
@@ -81,7 +108,8 @@ text-align:center;
 font-size:12px;
 text-align:right;
 padding-right:10px;
-padding-top:7px;}
+padding-top:10px;
+}
 
 .search_border{
 width:110px;
@@ -98,3 +126,24 @@ FONT-WEIGHT:normal;
 LINE-HEIGHT:normal;
 vertical-align:top;
 }
+.img_size{
+padding-top:0px;
+vertical-align:top;
+}
+a{text-decoration:none;}
+
+a.a_top:link{
+color:#0C6A9D;
+}
+a.a_top:active{
+color:#0280C5;
+}
+a.a_top:hover{
+color:#0280C5;
+text-decoration:underline;
+}
+a.a_top:visited{
+color:#0C6A9D;
+}
+
+
