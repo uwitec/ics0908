@@ -35,6 +35,7 @@
 		}
 		
 	</SCRIPT>
+	<base target="_self"> 
 	<body class="sub1_body">
 		<div class="sub1_title"><img src="<%=base%>/images/img01.gif"> 添加银行</div>
 		<div class="sub1_con">

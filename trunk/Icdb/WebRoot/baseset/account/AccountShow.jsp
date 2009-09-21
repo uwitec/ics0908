@@ -1,78 +1,116 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<% String base=request.getContextPath(); %>
 <html>
     <head>
         <title>帐号信息</title>
-    </head>
-    <body>
-<% 
-	String base=request.getContextPath();
-%>  
-    <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
-    <s:form action="ShowAccount">
-    <s:textfield label="内容" name="account.s_value"></s:textfield>
-    <s:hidden name="account.accountCode"></s:hidden>
-    <s:submit value="查询"></s:submit>
-    </s:form>
-    <table border="1">
-    <s:if test="lhp.size>0">
-    	<tr>
-    	<th>帐号</th>
-		<th>帐户名</th>
-		<th>帐号类型</th>
-		<th>所属人</th>
-		<th>所属银行</th>
-		<th>操作</th>
-		</tr>
-	</s:if>
-	<s:else>
-		未找到符合的信息!
-	</s:else>
-       <s:iterator value="lhp" status="stat">
-       	<tr>
-       	<td><s:property value="accountCode"></s:property></td>
-        <td><s:property value="accountNumber"></s:property></td>
-        <td><s:property value="accountName"></s:property></td>
-         <td><s:property value="personName"></s:property>
-         	<s:hidden value="personCode"></s:hidden>
-         </td>
-        <td><s:property value="bankName"></s:property>
-        	<s:hidden value="bankCode"></s:hidden>
-        </td>
-        <td><s:url id="updateUrl" action="GetOneAccount">
-			<s:param name="account.accountCode" value="accountCode"></s:param>       
-        	</s:url> 
-        	<s:a href="%{updateUrl}">修改</s:a>
-        </td>
-        </tr>
-       </s:iterator>
-       <tr><td colspan="6">
-     
-       <s:form action="ShowAccount" namespace="/baseset" theme="simple" name="pageform">
+    <link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+	</head>
+<body topmargin="0">
+<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<SCRIPT type="text/javascript">
+
+    function Addbank(){
+    	var href_="GoAddBank.action";
+    	window.showModalDialog(href_,"","center:1;resizable:0;dialogHeight:250px;dialogWidth:450px");
+		location.reload();
+	}
+	function Updatebank(value_str){
+		var url="GetOneBank.action?bank.bankCode="+value_str;
+		window.showModalDialog(url,"","dialogHeight:250px;dialogWidth:450px");
+		location.reload();
+	}
+	
+	function Deletebank(value_str){
+		var url="DeleteBank.action?bank.bankCode="+value_str;
+		if(confirm("是否确定删除？")){
+    				window.location.href=url;
+    		}
+	}
+    </SCRIPT>
+<body topmargin="0">
+	<div class="body_div">
+		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
+		<div class="center_body">
+			<div class="center_head_text">帐号信息</div>
+			<div class="center_tools">
+			<s:form action="ShowAccount" namespace="/baseset" theme="simple" >
+				<a href="GoAddAccount.action" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" align="bottom">添加</a>
+				<input type="text" name="account.s_value" value="<s:property value="account.s_value"/>" class="search_border" size="20"/>
+				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+			</s:form>
+			</div>	
+		</div>
+		<div class="center_boder">
+		<table class="center_table" cellspacing="1" cellpadding="0">
+		   <s:if test="lhp.size>0">
+	    	<tr class="table_head">
+	    		<td>帐号</td>
+				<td>帐户名</td>
+				<td>帐号类型</td>
+				<td>所属人</td>
+				<td>所属银行</td>
+				<td>操作</td>
+	    	</tr>
+	    </s:if>
+	    <s:else>
+	    	<tr>
+	    	<td class="table_tr_no" colspan="3">
+	    		未找到符合的信息!
+	    	</td>
+	    	</tr>
+	    </s:else>
+	       <s:iterator value="lhp" status="stat">
+	       	<tr 
+	       		<s:if test="#stat.even">
+	       			class="table_tr_odd"
+		       	</s:if>
+		       	<s:else>
+	       			class="table_tr__even"
+	       		</s:else>
+	       	>
+	       	<td><s:property value="accountCode"/></td>
+	        <td><s:property value="accountNumber"/></td>
+	        <td><s:property value="accountName"/></td>
+	        <td><s:property value="personName"/></td>
+	        <td><s:property value="bankName"/></td>
+	        <td>
+	        	<a href="GetOneAccount?account.accountCode=<s:property value="accountCode"/>"><img src="<%=base%>/images/img03.gif" border="0"></a>
+	        </td>
+	        </tr>
+	       </s:iterator>
+	     </table>
+		<div class="pages">
+			<s:form action="ShowAccount" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="account">
        <s:hidden name="account.s_value" value="%{account.s_value}"></s:hidden>
        <s:hidden id="countsize" name="account.countSize" value="%{account.countSize}"></s:hidden>
-        <input size="10" type="button" onclick="pageSet(0)" value="首页"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
        <s:if test="account.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input size="10" type="button" onclick="pageSet(-1)" value="上一页"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
        </s:else>
+       <s:property value="account.startSize"/>/<s:property value="account.countSize"/>
        <s:if test="account.startSize+1>account.countSize">
-       		<font color="gray">下一页</font>
+       		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input size="10" type="button" onclick="pageSet(1)" value="下一页"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
        </s:else>
-       		<input size="10" type="button" onclick="pageSet(2)" value="末页"/>
-        第<s:textfield id="size" size="2" name="account.startSize"></s:textfield>页
-       <font><s:property value="account.startSize"/>/<s:property value="account.countSize"/>页数</font>
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
+        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="account.startSize" cssClass="pages_border"/>页</font>
        </s:push> 
        </s:form>
-       </td></tr>
-     </table>
-     <s:a href="GoAddAccount.action">添加</s:a>
-    </body>
+		</div>
+		</div>
+		<div class="center_boder_foot"></div>
+		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+	</div>
+</body>
 </html>

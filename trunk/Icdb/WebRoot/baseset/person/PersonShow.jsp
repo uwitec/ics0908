@@ -65,12 +65,14 @@
     	<tr>
 		</tr>
        <s:iterator value="lhp" status="stat">
-	       	<s:if test="#stat.even">
-	       		<tr class="orgstructure_table_td_odd">
-	       	</s:if>
-	       	<s:else>
-	       		<tr class="orgstructure_table_td_even">
-	       	</s:else>
+  		<tr 
+	   		<s:if test="#stat.even">
+	   			class="table_tr_odd"
+	     	</s:if>
+	     	<s:else>
+	   			class="table_tr__even"
+	   		</s:else>
+	    >
        	<td><s:property value="personCode"></s:property></td>
         <td><s:property value="personName"></s:property></td>
         <td><s:property value="personPhone"></s:property></td>

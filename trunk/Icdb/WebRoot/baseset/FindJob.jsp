@@ -33,16 +33,13 @@ String base=request.getContextPath();
        	<tr>
        	<td align="center"><input type="radio" name="p_radio" value="<%=idtitle%>"/></td>
        	<td id="jobCode<%=idtitle%>"><s:property value="jobCode"></s:property></td>
-        <td id="jobName<%=idtitle%>"><s:property value="jobName"></s:property></td>
-        <td id="departmentName<%=idtitle%>"><s:property value="departmentName"></s:property></td>
-        <input id="departmentCode<%=idtitle%>" type="hidden" value="<s:property value='departmentCode'/>"/>
-        <input id="structCode<%=idtitle%>" type="hidden" value="<s:property value='structCode'/>"/>
-        <td id="structName<%=idtitle++%>"><s:property value="structName"></s:property></td>
-        	
+        <td id="jobName<%=idtitle++%>"><s:property value="jobName"></s:property></td>
+        <td><s:property value="departmentName"></s:property></td>
+        <td><s:property value="structName"></s:property></td>
         </tr>
        </s:iterator>
        <tr><td>
-       <input type="button" onclick="toSetId(new Array('jobCode','jobName','departmentCode','departmentName','structCode','structName'),'p_radio')" value="确认"/>
+       <input type="button" onclick="toSetId(new Array('jobCode','jobName'),'p_radio')" value="确认"/>
        </td></tr>
      </table>
      </s:if>
