@@ -42,7 +42,7 @@
 
 	  	var materiels = window.showModalDialog("<%=base%>/stockIn/showMateriel.action?materielIds=" + materielIds + "&tempid="+Math.random(),"","dialogHeight:400px;dialogWidth:500px");
 
-	  	if(!materiels){
+	  	if(materiels==null||materiels.length<1){
 	  		return;
 	  	}
 		var a = document.getElementById("addMatail");
@@ -598,6 +598,9 @@
 
 	  	  var returnValue = window.showModalDialog("showCargoSpace.action?tempid="+Math.random(),"","dialogHeight:400px;dialogWidth:500px");
 
+		  if(returnValue==null){
+		  	return;
+		  }
 	  	  tab.value=returnValue;
 	  	}
 
@@ -691,7 +694,8 @@
 								<th bgcolor="white">
 									金额
 								</th>
-								<s:if test="stock.checkResult!=-1&& stock.stockInStateType==1 && stock.stockInCheckState ==1">
+								<s:if
+									test="stock.checkResult!=-1&& stock.stockInStateType==1 && stock.stockInCheckState ==1">
 									<th bgcolor="white">
 										抽查数量
 									</th>
@@ -708,7 +712,8 @@
 										商品串库率
 									</th>
 								</s:if>
-								<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
+								<s:if
+									test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
 									<th bgcolor="white">
 										操作
 									</th>
@@ -720,7 +725,7 @@
 									<tr>
 										<td align="center" bgcolor="white">
 											<%=++index%>
-											<s:property value="#stockInMateriel.index"/>
+											<s:property value="#stockInMateriel.index" />
 										</td>
 										<td bgcolor="white">
 											<s:property value="materielCode"></s:property>
@@ -735,92 +740,117 @@
 											<s:property value="materielABC"></s:property>
 										</td>
 										<td bgcolor="white">
-											<s:if test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
-												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}' name="stockInAmount" disabled="true" size="5" />
+											<s:if
+												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
+												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
+													name="stockInAmount" disabled="true" size="5" />
 											</s:if>
 											<s:else>
-												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}' name="stockInAmount" onchange="getPrice(this);"
-													size="5" />
+												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
+													name="stockInAmount" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
 										<td bgcolor="white">
-											<s:if test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
-												<s:textfield id="onePrice_%{#stockInMateriel.index+1}" name="onePrice" disabled="true" size="5" />
+											<s:if
+												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
+												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
+													name="onePrice" disabled="true" size="5" />
 											</s:if>
 											<s:else>
-												<s:textfield id="onePrice_%{#stockInMateriel.index+1}" name="onePrice" onchange="getPrice(this);"
-													size="5" />
+												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
+													name="onePrice" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
 										<td bgcolor="white">
-											<s:if test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
-												<s:select name='supplierCode' id="supplierCode_%{#stockInMateriel.index+1}" list='#request.supplierList'
-													listKey='supplierCode' listValue='supplierName'
-													theme='simple' value="supplierCode" headerKey=''
-													headerValue='请选择' />
+											<s:if
+												test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
+												<s:select name='supplierCode'
+													id="supplierCode_%{#stockInMateriel.index+1}"
+													list='#request.supplierList' listKey='supplierCode'
+													listValue='supplierName' theme='simple'
+													value="supplierCode" headerKey='' headerValue='请选择' />
 											</s:if>
 											<s:else>
-												<s:select name='supplierCode'  id="supplierCode_%{#stockInMateriel.index+1}" list='#request.supplierList'
-													listKey='supplierCode' listValue='supplierName'
-													theme='simple' value="supplierCode" disabled="true" />
+												<s:select name='supplierCode'
+													id="supplierCode_%{#stockInMateriel.index+1}"
+													list='#request.supplierList' listKey='supplierCode'
+													listValue='supplierName' theme='simple'
+													value="supplierCode" disabled="true" />
 											</s:else>
 										</td>
 										<td bgcolor="white">
 											<s:if
 												test="stock.stockInStateType==1 && stock.checkResult==1">
-												<s:textfield name="cargoSpaceCode"  id="cargoSpaceCode_%{#stockInMateriel.index+1}" onclick="showCargoSpace(this);" />
+												<s:textfield name="cargoSpaceCode"
+													id="cargoSpaceCode_%{#stockInMateriel.index+1}"
+													onclick="showCargoSpace(this);" />
 											</s:if>
 										</td>
 										<td bgcolor="white">
 											<s:property value="(stockInAmount*onePrice)" />
 										</td>
-										<s:if test="stock.checkResult!=-1&&stock.stockInStateType==1 && stock.stockInCheckState==1">
+										<s:if
+											test="stock.checkResult!=-1&&stock.stockInStateType==1 && stock.stockInCheckState==1">
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="checkAmount"  id="checkAmount_%{#stockInMateriel.index+1}" size="10"></s:textfield>
+													<s:textfield name="checkAmount"
+														id="checkAmount_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="checkAmount"  id="checkAmount_%{#stockInMateriel.index+1}" size="10" disabled="true"></s:textfield>
-												</s:else>
-											</td>
-											<td bgcolor="white">
-												<s:if test="stock.checkResult!=1">
-													<s:textfield name="amountPercent" id="amountPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
-												</s:if>
-												<s:else>
-													<s:textfield name="amountPercent" id="amountPercent_%{#stockInMateriel.index+1}" size="10" disabled="true"></s:textfield>
-												</s:else>
-											</td>
-											<td bgcolor="white">
-												<s:if test="stock.checkResult!=1">
-													<s:textfield name="qualityPercent" id="qualityPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
-												</s:if>
-												<s:else>
-													<s:textfield name="qualityPercent" id="qualityPercent_%{#stockInMateriel.index+1}" size="10"
+													<s:textfield name="checkAmount"
+														id="checkAmount_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="packagePercent" id="packagePercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
+													<s:textfield name="amountPercent"
+														id="amountPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="packagePercent" id="packagePercent_%{#stockInMateriel.index+1}" size="10"
+													<s:textfield name="amountPercent"
+														id="amountPercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="errorStockPercent" id="errorStockPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
+													<s:textfield name="qualityPercent"
+														id="qualityPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="errorStockPercent" id="errorStockPercent_%{#stockInMateriel.index+1}" size="10"
+													<s:textfield name="qualityPercent"
+														id="qualityPercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
+												</s:else>
+											</td>
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="packagePercent"
+														id="packagePercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="packagePercent"
+														id="packagePercent_%{#stockInMateriel.index+1}" size="10"
+														disabled="true"></s:textfield>
+												</s:else>
+											</td>
+											<td bgcolor="white">
+												<s:if test="stock.checkResult!=1">
+													<s:textfield name="errorStockPercent"
+														id="errorStockPercent_%{#stockInMateriel.index+1}"
+														size="10"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:textfield name="errorStockPercent"
+														id="errorStockPercent_%{#stockInMateriel.index+1}"
+														size="10" disabled="true"></s:textfield>
 												</s:else>
 											</td>
 										</s:if>
 
-										<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
+										<s:if
+											test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
 											<td bgcolor="white">
 
 												<input type="button" value="删除"
@@ -848,7 +878,8 @@
 									备注
 								</td>
 								<td colspan="5" bgcolor="white">
-									<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState == -1">
+									<s:if
+										test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState == -1">
 										<s:textarea id="checkRemark" name="stock.checkRemark"
 											cols="100%" />
 									</s:if>
@@ -865,18 +896,19 @@
 									</td>
 									<td colspan="5" bgcolor="white">
 										<s:if test="stock.stockInCheckState == 1">
-											<s:textarea id="stockInExMessage" name="stock.stockInExMessage"
-												cols="100%" disabled="true" />
+											<s:textarea id="stockInExMessage"
+												name="stock.stockInExMessage" cols="100%" disabled="true" />
 										</s:if>
 										<s:else>
-											<s:textarea id="stockInExMessage" name="stock.stockInExMessage"
-												cols="100%" />
+											<s:textarea id="stockInExMessage"
+												name="stock.stockInExMessage" cols="100%" />
 										</s:else>
 									</td>
 								</tr>
 							</s:if>
 
-							<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState==1 ">
+							<s:if
+								test="stock.stockInStateType == 1 && stock.stockInCheckState==1 ">
 								<tr>
 									<td bgcolor="white">
 										检测意见
@@ -884,11 +916,11 @@
 									<td colspan="5" bgcolor="white">
 										<s:if test="stock.checkResult==0">
 											<s:textarea id="checkMessage" name="stock.checkMessage"
-												cols="100%"/>
+												cols="100%" />
 										</s:if>
 										<s:else>
 											<s:textarea id="checkMessage" name="stock.checkMessage"
-												cols="100%"  disabled="true" />
+												cols="100%" disabled="true" />
 										</s:else>
 									</td>
 								</tr>
@@ -900,7 +932,8 @@
 									经手人
 								</td>
 								<td colspan="2" bgcolor="white" width="30%">
-									<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState==1 && stock.checkResult ==0">
+									<s:if
+										test="stock.stockInStateType == 1 && stock.stockInCheckState==1 && stock.checkResult ==0">
 										<s:textfield id="employeeCode" name="stock.employeeCode" />
 									</s:if>
 									<s:else>
@@ -913,7 +946,7 @@
 								</td>
 								<td colspan="2" bgcolor="white">
 									<s:if test="stock.checkResult == 1">
-										<s:textfield id="stock.stockInGM" name="stock.stockInGM"/>
+										<s:textfield id="stock.stockInGM" name="stock.stockInGM" />
 									</s:if>
 								</td>
 
@@ -922,23 +955,26 @@
 					</td>
 				</tr>
 			</table>
-			<s:if test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
+			<s:if
+				test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
 				<input type="button" value="保存" onclick="saveStockIn();" />
 				<input type="button" value="提交" onclick="submitStockIn();" />
 			</s:if>
-			<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState == 0">
-				<input type="button" value="通过" onclick="approvalStockIn(1)"/>
-				<input type="button" value="不通过" onclick="approvalStockIn(-1)"/>
+			<s:if
+				test="stock.stockInStateType == 1 && stock.stockInCheckState == 0">
+				<input type="button" value="通过" onclick="approvalStockIn(1)" />
+				<input type="button" value="不通过" onclick="approvalStockIn(-1)" />
 			</s:if>
-			<s:if test="stock.stockInStateType == 1 && stock.stockInCheckState == 1 && stock.checkResult == 0">
+			<s:if
+				test="stock.stockInStateType == 1 && stock.stockInCheckState == 1 && stock.checkResult == 0">
 				<input type="button" value="保存" onclick="saveCheckStockIn();" />
 				<input type="button" value="通过" onclick="submitCheckStockIn(1);" />
 				<input type="button" value="不通过" onclick="submitCheckStockIn(-1);" />
 			</s:if>
 
 			<s:if test="stock.checkResult == 1">
-				<input type="button" value="保存" onclick="complStockIn(1)"/>
-				<input type="button" value="完成" onclick="complStockIn(3)"/>
+				<input type="button" value="保存" onclick="complStockIn(1)" />
+				<input type="button" value="完成" onclick="complStockIn(3)" />
 			</s:if>
 		</s:form>
 	</body>
