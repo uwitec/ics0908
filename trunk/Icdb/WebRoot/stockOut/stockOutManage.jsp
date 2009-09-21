@@ -42,7 +42,7 @@
 
 	  	var materiels = window.showModalDialog("<%=base%>/stockOut/showMateriel.action?materielIds=" + materielIds + "&tempid="+Math.random(),"","dialogHeight:400px;dialogWidth:500px");
 
-	  	if(!materiels){
+	  	if(materiels==null||materiels.length<1){
 	  		return;
 	  	}
 		var a = document.getElementById("addMatail");
