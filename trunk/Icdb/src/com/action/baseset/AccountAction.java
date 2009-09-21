@@ -73,7 +73,11 @@ public class AccountAction extends ActionSupport{
 		}else{
 			account.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		return SUCCESS;
+		if(account.getS_value()!=null && !account.getS_value().equals("")){
+			return "next";
+		}else{
+			return SUCCESS;
+		}
 	}
 
 	public String getOneAccount(){

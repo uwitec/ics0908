@@ -64,7 +64,11 @@ public class StorehouseAction extends ActionSupport{
 		}else{
 			storehouse.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		return SUCCESS;
+		if(storehouse.getS_value()!=null && !storehouse.getS_value().equals("")){
+			return SUCCESS;
+		}else{
+			return "next";
+		}
 	}
 	
 	public String getOneStorehouse(){
@@ -73,6 +77,7 @@ public class StorehouseAction extends ActionSupport{
 	}
 	
 	public String updateStorehouse(){	
+		storehouse.setIsEnabled(1);
 		if(sm.updateStorehouse(storehouse)){
 			storehouse.setMessage(ICTools.MESSAGE_UPDATEOK);
 		}else{

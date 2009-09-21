@@ -61,7 +61,9 @@ public class DepartmentAction extends ActionSupport{
 		}else{
 			department.setMessage(ICTools.MESSAGE_ERROR);
 		}
-		return SUCCESS;
+		
+			return SUCCESS;
+		
 	}
 	
 	public String getOneDepartment(){

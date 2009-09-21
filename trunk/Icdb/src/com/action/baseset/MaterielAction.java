@@ -61,6 +61,7 @@ public class MaterielAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String showMateriel(){
 		lsb=IcdbOption.getABCType();
+		lsb.remove("-1");
 		materiel=mm.getPageMateriel(materiel);
 		lhp=mm.getMaterielList(materiel);
 		return SUCCESS;
@@ -77,6 +78,7 @@ public class MaterielAction extends ActionSupport{
 
 	public String getOneMateriel(){
 		lsb=IcdbOption.getABCType();
+		lsb.remove("-1");
 		materiel=mm.getMaterielOne(materiel.getMaterielCode());
 		return SUCCESS;
 	}
@@ -95,7 +97,7 @@ public class MaterielAction extends ActionSupport{
 		materiel=new MaterielBean();
 		materiel.setMaterielCode(ICTools.randId("M"));
 		lsb=IcdbOption.getABCType();
-		
+		lsb.remove("-1");
 		return SUCCESS;
 	}
 	
