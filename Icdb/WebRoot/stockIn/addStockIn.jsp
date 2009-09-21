@@ -16,7 +16,7 @@
 
 		<%
 			String base = request.getContextPath();
-			int index = 1;
+			int index = 0;
 		%>
 		<script type='text/javascript'>
 
@@ -88,8 +88,8 @@
 			newTd2.innerHTML= materiels[i].materielName||'';
 			newTd3.innerHTML= materiels[i].meterielSize||'';
 			newTd4.innerHTML= materiels[i].meterielABC||'';
-			newTd5.innerHTML= '<input type="text" name="stockInCheckstockInAmount" onchange="getPrice(this);">';
-			newTd6.innerHTML= '<input type="text" name="onPrice" onchange="getPrice(this);">'
+			newTd5.innerHTML= '<input type="text" id="stockInAmount_"'+rownum+' name="stockInAmount" onchange="getPrice(this);">';
+			newTd6.innerHTML= '<input type="text" id="onePrice_"'+rownum+' name="onePrice" onchange="getPrice(this);">'
 			newTd7.appendChild(supplier);
 			//newTd8.appendChild(cargoSpace);
 			newTd9.innerHTML= '';
@@ -101,19 +101,20 @@
 	  function getPrice(tab){
 	  	var a = document.getElementById("addMatail");
 		var rownum = tab.parentNode.parentNode.rowIndex;
-
- 		var onPrice = a.rows.item(rownum).cells.item(6).firstChild.value;
- 		if(isNaN(onPrice)){
+		var onePriceId = "onePrice_"+rownum;
+ 		var onePrice = document.getElementById(onePriceId).value;
+ 		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
- 		var stockInAmount = a.rows.item(rownum).cells.item(5).firstChild.value;
+	  	var stockInAmountId = "stockInAmount_"+rownum;
+ 		var stockInAmount = document.getElementById(stockInAmountId).value;
 		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
- 		if(onPrice!='' && stockInAmount != ''){
- 			a.rows.item(rownum).cells.item(9).innerHTML=onPrice*stockInAmount;
+ 		if(onePrice!='' && stockInAmount != ''){
+ 			a.rows.item(rownum).cells.item(9).innerHTML=onePrice*stockInAmount;
  			getSumPrice();
  		}
 
@@ -160,17 +161,20 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		var stockInAmountId = "stockInAmount_"+row;
+	  		var stockInAmount = document.getElementById(stockInAmountId).value;
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		var onePriceId = "onePrice_"+row;
+	  		var onePrice =document.getElementById(onePriceId).value;
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		var supplierCodeId = "supplierCode_"+row;
+	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
@@ -280,17 +284,20 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		var stockInAmountId = "stockInAmount_"+row
+	  		var stockInAmount = document.getElementById(stockInAmountId).value;
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		var onePriceId="onePrice_"+row
+	  		var onePrice =document.getElementById(onePriceId).value;
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		var supplierCodeId = "supplierCode_"+row;
+	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
@@ -331,17 +338,20 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		var stockInAmountId = "stockInAmount_"+row;
+	  		var stockInAmount = document.getElementById(stockInAmountId).value;
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		var onePriceId = "onePrice_"+row;
+	  		var onePrice =document.getElementById(onePriceId).value;
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		var supplierCodeId = "supplierCode_"+row;
+	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
@@ -353,30 +363,34 @@
 				return;
 			}
 			**/
-
-			var checkAmount = a.rows.item(row).cells.item(10).firstChild.value;
+			var checkAmountId = "checkAmount_"+row;
+			var checkAmount = document.getElementById(checkAmountId).value;
 	  		if(isNaN(checkAmount)){
 	  			alert("抽查数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 
-	  		var amountPercent = a.rows.item(row).cells.item(11).firstChild.value;
+			var amountPercentId = "amountPercent_"+row;
+	  		var amountPercent = document.getElementById(amountPercentId).value;
 	  		if(isNaN(amountPercent)){
 	  			alert("数量合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var qualityPercent = a.rows.item(row).cells.item(12).firstChild.value;
+	  		var qualityPercentId = "qualityPercent_"+row;
+	  		var qualityPercent = document.getElementById(qualityPercentId).value;
 	  		if(isNaN(qualityPercent)){
 	  			alert("质量合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var packagePercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		var packagePercentId = "packagePercent_"+row;
+	  		var packagePercent = document.getElementById(packagePercentId).value;
 	  		if(isNaN(packagePercent)){
 	  			alert("包装合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 
-			var errorStockPercent = a.rows.item(row).cells.item(13).firstChild.value;
+			var errorStockPercentId = "errorStockPercent_"+row;
+			var errorStockPercent = document.getElementById(errorStockPercentId).value;
 	  		if(isNaN(errorStockPercent)){
 	  			alert("商品串库率填写错误，请输入正确的数字！！！");
 	  			return;
@@ -415,17 +429,20 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		var stockInAmountId = "stockInAmount_"+row;
+	  		var stockInAmount = document.getElementById(stockInAmountId).value;
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		var onePriceId ="onePrice_"+row;
+	  		var onePrice =document.getElementById(onePriceId).value;
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		var supplierCodeId = "supplierCode_"+row
+	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
@@ -438,29 +455,34 @@
 				return;
 			}
 			**/
-			var checkAmount = a.rows.item(row).cells.item(10).firstChild.value;
+			var checkAmountId = "checkAmount_"+row;
+			var checkAmount = document.getElementById(checkAmountId).value;
 	  		if(isNaN(checkAmount)){
 	  			alert("抽查数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 
-	  		var amountPercent = a.rows.item(row).cells.item(11).firstChild.value;
+			var amountPercentId = "amountPercent_"+row;
+	  		var amountPercent = document.getElementById(amountPercentId).value;
 	  		if(isNaN(amountPercent)){
 	  			alert("数量合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var qualityPercent = a.rows.item(row).cells.item(12).firstChild.value;
+	  		var qualityPercentId = "qualityPercent_"+row;
+	  		var qualityPercent = document.getElementById(qualityPercentId).value;
 	  		if(isNaN(qualityPercent)){
 	  			alert("质量合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var packagePercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		var packagePercentId = "packagePercent_"+row;
+	  		var packagePercent = document.getElementById(packagePercentId).value;
 	  		if(isNaN(packagePercent)){
 	  			alert("包装合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 
-			var errorStockPercent = a.rows.item(row).cells.item(13).firstChild.value;
+			var errorStockPercentId = "errorStockPercent_"+row;
+			var errorStockPercent = document.getElementById(errorStockPercentId).value;
 	  		if(isNaN(errorStockPercent)){
 	  			alert("商品串库率填写错误，请输入正确的数字！！！");
 	  			return;
@@ -502,51 +524,59 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmount = a.rows.item(row).cells.item(5).firstChild.value;
+	  		var stockInAmountId = "stockInAmount_"+row;
+	  		var stockInAmount = document.getElementById(stockInAmountId).value;
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var onePrice = a.rows.item(row).cells.item(6).firstChild.value;
+	  		var onePriceId ="onePrice_"+row;
+	  		var onePrice =document.getElementById(onePriceId).value;
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var supplierCode = trim(a.rows.item(row).cells.item(7).firstChild.options[a.rows.item(row).cells.item(7).firstChild.options.selectedIndex].value);
+	  		var supplierCodeId = "supplierCode_"+row
+	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
 			}
-
-	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.value);
+			var cargoSpaceCodeId = "cargoSpaceCode_"+row;
+	  		var cargoSpaceCode = trim(document.getElementById(cargoSpaceCodeId).value);
 			if(cargoSpaceCode == null || cargoSpaceCode==''){
 				alert("货位不能为空");
 				return;
 			}
 
-			var checkAmount = a.rows.item(row).cells.item(10).firstChild.value;
+			var checkAmountId = "checkAmount_"+row;
+			var checkAmount = document.getElementById(checkAmountId).value;
 	  		if(isNaN(checkAmount)){
 	  			alert("抽查数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 
-	  		var amountPercent = a.rows.item(row).cells.item(11).firstChild.value;
+			var amountPercentId = "amountPercent_"+row;
+	  		var amountPercent = document.getElementById(amountPercentId).value;
 	  		if(isNaN(amountPercent)){
 	  			alert("数量合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var qualityPercent = a.rows.item(row).cells.item(12).firstChild.value;
+	  		var qualityPercentId = "qualityPercent_"+row;
+	  		var qualityPercent = document.getElementById(qualityPercentId).value;
 	  		if(isNaN(qualityPercent)){
 	  			alert("质量合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var packagePercent = a.rows.item(row).cells.item(13).firstChild.value;
+	  		var packagePercentId = "packagePercent_"+row;
+	  		var packagePercent = document.getElementById(packagePercentId).value;
 	  		if(isNaN(packagePercent)){
 	  			alert("包装合格率填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 
-			var errorStockPercent = a.rows.item(row).cells.item(13).firstChild.value;
+			var errorStockPercentId = "errorStockPercent_"+row;
+			var errorStockPercent = document.getElementById(errorStockPercentId).value;
 	  		if(isNaN(errorStockPercent)){
 	  			alert("商品串库率填写错误，请输入正确的数字！！！");
 	  			return;
@@ -689,7 +719,8 @@
 									status="stockInMateriel">
 									<tr>
 										<td align="center" bgcolor="white">
-											<%=index++%>
+											<%=++index%>
+											<s:property value="#stockInMateriel.index"/>
 										</td>
 										<td bgcolor="white">
 											<s:property value="materielCode"></s:property>
@@ -705,31 +736,31 @@
 										</td>
 										<td bgcolor="white">
 											<s:if test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
-												<s:textfield name="stockInAmount" disabled="true" size="5" />
+												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}' name="stockInAmount" disabled="true" size="5" />
 											</s:if>
 											<s:else>
-												<s:textfield name="stockInAmount" onchange="getPrice(this);"
+												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}' name="stockInAmount" onchange="getPrice(this);"
 													size="5" />
 											</s:else>
 										</td>
 										<td bgcolor="white">
 											<s:if test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
-												<s:textfield name="onePrice" disabled="true" size="5" />
+												<s:textfield id="onePrice_%{#stockInMateriel.index+1}" name="onePrice" disabled="true" size="5" />
 											</s:if>
 											<s:else>
-												<s:textfield name="onePrice" onchange="getPrice(this);"
+												<s:textfield id="onePrice_%{#stockInMateriel.index+1}" name="onePrice" onchange="getPrice(this);"
 													size="5" />
 											</s:else>
 										</td>
 										<td bgcolor="white">
 											<s:if test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
-												<s:select name='supplierCode' list='#request.supplierList'
+												<s:select name='supplierCode' id="supplierCode_%{#stockInMateriel.index+1}" list='#request.supplierList'
 													listKey='supplierCode' listValue='supplierName'
 													theme='simple' value="supplierCode" headerKey=''
 													headerValue='请选择' />
 											</s:if>
 											<s:else>
-												<s:select name='supplierCode' list='#request.supplierList'
+												<s:select name='supplierCode'  id="supplierCode_%{#stockInMateriel.index+1}" list='#request.supplierList'
 													listKey='supplierCode' listValue='supplierName'
 													theme='simple' value="supplierCode" disabled="true" />
 											</s:else>
@@ -737,7 +768,7 @@
 										<td bgcolor="white">
 											<s:if
 												test="stock.stockInStateType==1 && stock.checkResult==1">
-												<s:textfield name="cargoSpaceCode" onclick="showCargoSpace(this);" />
+												<s:textfield name="cargoSpaceCode"  id="cargoSpaceCode_%{#stockInMateriel.index+1}" onclick="showCargoSpace(this);" />
 											</s:if>
 										</td>
 										<td bgcolor="white">
@@ -746,44 +777,44 @@
 										<s:if test="stock.checkResult!=-1&&stock.stockInStateType==1 && stock.stockInCheckState==1">
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="checkAmount" size="10"></s:textfield>
+													<s:textfield name="checkAmount"  id="checkAmount_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="checkAmount" size="10" disabled="true"></s:textfield>
+													<s:textfield name="checkAmount"  id="checkAmount_%{#stockInMateriel.index+1}" size="10" disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="amountPercent" size="10"></s:textfield>
+													<s:textfield name="amountPercent" id="amountPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="amountPercent" size="10" disabled="true"></s:textfield>
+													<s:textfield name="amountPercent" id="amountPercent_%{#stockInMateriel.index+1}" size="10" disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="qualityPercent" size="10"></s:textfield>
+													<s:textfield name="qualityPercent" id="qualityPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="qualityPercent" size="10"
+													<s:textfield name="qualityPercent" id="qualityPercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="packagePercent" size="10"></s:textfield>
+													<s:textfield name="packagePercent" id="packagePercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="packagePercent" size="10"
+													<s:textfield name="packagePercent" id="packagePercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="errorStockPercent" size="10"></s:textfield>
+													<s:textfield name="errorStockPercent" id="errorStockPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="errorStockPercent" size="10"
+													<s:textfield name="errorStockPercent" id="errorStockPercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>

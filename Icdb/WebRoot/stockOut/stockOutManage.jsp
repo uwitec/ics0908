@@ -86,8 +86,8 @@
 			newTd5.innerHTML= materiels[i].stockAmount||'';
 			newTd6.innerHTML=materiels[i].stockPrice||'';
 			newTd7.innerHTML=materiels[i].cargoSpaceCode||'';
-			newTd8.innerHTML= '<input type="text" name="stockInCheckstockInAmount" onchange="getPrice(this);">';
-			newTd9.innerHTML= '<input type="text" name="onPrice" onchange="getPrice(this);">';
+			newTd8.innerHTML= '<input type="text" id="stockOutAmount_"'+rownum+' name="stockOutAmount" onchange="getPrice(this);">';
+			newTd9.innerHTML= '<input type="text" id="stockOutPrice_"'+rownum+' name="stockOutPrice" onchange="getPrice(this);">';
 			newTd10.innerHTML= '';
 			newTd11.innerHTML= '<input type="button" value="删除" onclick = "deleteRow(this)">';
 
@@ -97,19 +97,20 @@
 	  function getPrice(tab){
 	  	var a = document.getElementById("addMatail");
 		var rownum = tab.parentNode.parentNode.rowIndex;
-
- 		var onPrice = a.rows.item(rownum).cells.item(9).firstChild.value;
- 		if(isNaN(onPrice)){
+		var stockOutPriceId = "stockOutPrice_"+rownum;
+ 		var stockOutPrice = document.getElementById(stockOutPriceId).value;
+ 		if(isNaN(stockOutPrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
- 		var stockInAmount = a.rows.item(rownum).cells.item(8).firstChild.value;
-		if(isNaN(stockInAmount)){
+	  	var stockOutAmountId = "stockOutAmount_"+rownum;
+ 		var stockOutAmount = document.getElementById(stockOutAmountId).value;
+		if(isNaN(stockOutAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
- 		if(onPrice!='' && stockInAmount != ''){
- 			a.rows.item(rownum).cells.item(10).innerHTML=onPrice*stockInAmount;
+ 		if(stockOutPrice !='' && stockOutAmount != ''){
+ 			a.rows.item(rownum).cells.item(10).innerHTML=stockOutPrice*stockOutAmount;
  			getSumPrice();
  		}
 
@@ -181,7 +182,8 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockOutAmount = a.rows.item(row).cells.item(8).firstChild.value;
+	  		var stockOutAmountId="stockOutAmount_"+row;
+	  		var stockOutAmount = document.getElementById(stockOutAmountId).value;
 	  		var stockAmount = a.rows.item(row).cells.item(5).innerText;
 	  		if(parseFloat(stockOutAmount) > parseFloat(stockAmount)){
 	  			alert("数量不能大于库存数，请重新输入！");
@@ -191,12 +193,12 @@
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var stockOutPrice = a.rows.item(row).cells.item(9).firstChild.value;
+	  		var stockOutPriceId="stockOutPrice_"+row;
+	  		var stockOutPrice = document.getElementById(stockOutPriceId).value;
 	  		if(isNaN(stockOutPrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-
 
 	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(7).innerText);
 			if(cargoSpaceCode == null || cargoSpaceCode==''){
@@ -249,7 +251,8 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockOutAmount = a.rows.item(row).cells.item(8).firstChild.value;
+	  		var stockOutAmountId="stockOutAmount_"+row;
+	  		var stockOutAmount = document.getElementById(stockOutAmountId).value;
 	  		var stockAmount = a.rows.item(row).cells.item(5).innerText;
 	  		if(parseFloat(stockOutAmount) > parseFloat(stockAmount)){
 	  			alert("数量不能大于库存数，请重新输入！");
@@ -263,7 +266,8 @@
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var stockOutPrice = a.rows.item(row).cells.item(9).firstChild.value;
+	  		var stockOutPriceId="stockOutPrice_"+row;
+	  		var stockOutPrice = document.getElementById(stockOutPriceId).value;
 	  		if(isNaN(stockOutPrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
@@ -398,9 +402,12 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var typeIsOk = trim(a.rows.item(row).cells.item(11).firstChild.options[a.rows.item(row).cells.item(11).firstChild.options.selectedIndex].value);
-	  		var amountIsOk = trim(a.rows.item(row).cells.item(12).firstChild.options[a.rows.item(row).cells.item(12).firstChild.options.selectedIndex].value);
-	  		var specificationIsOk = trim(a.rows.item(row).cells.item(13).firstChild.options[a.rows.item(row).cells.item(13).firstChild.options.selectedIndex].value);
+	  		var typeIsOkId="typeIsOk_"+row;
+	  		var typeIsOk = trim(document.getElementById(typeIsOkId).options[document.getElementById(typeIsOkId).options.selectedIndex].value);
+	  		var amountIsOkId="amountIsOk_"+row;
+	  		var amountIsOk = trim(document.getElementById(amountIsOkId).options[document.getElementById(amountIsOkId).options.selectedIndex].value);
+	  		var specificationIsOkId="specificationIsOk_"+row;
+	  		var specificationIsOk = trim(document.getElementById(specificationIsOkId).options[document.getElementById(specificationIsOkId).options.selectedIndex].value);
 			var cargoSpaceCode = trim(a.rows.item(row).cells.item(7).innerText);
 	  		var stockOutHasMaterielBean = new StockOutHasMaterielBean(cargoSpaceCode,materielCode,stockOutOrderCode, '','',typeIsOk, amountIsOk,specificationIsOk);
 	  		array.push(JSON.stringify(stockOutHasMaterielBean));
@@ -440,12 +447,17 @@
 	  	var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
-	  		var stockOutAmount = a.rows.item(row).cells.item(8).firstChild.value;
-	  		var stockOutPrice = a.rows.item(row).cells.item(9).firstChild.value;
+	  		var stockOutAmountId="stockOutAmount_"+row;
+	  		var stockOutAmount = document.getElementById(stockOutAmountId).value;
+	  		var stockOutPriceId = "stockOutPrice_"+row;
+	  		var stockOutPrice = document.getElementById(stockOutPriceId).value;
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var typeIsOk = trim(a.rows.item(row).cells.item(11).firstChild.options[a.rows.item(row).cells.item(11).firstChild.options.selectedIndex].value);
-	  		var amountIsOk = trim(a.rows.item(row).cells.item(12).firstChild.options[a.rows.item(row).cells.item(12).firstChild.options.selectedIndex].value);
-	  		var specificationIsOk = trim(a.rows.item(row).cells.item(13).firstChild.options[a.rows.item(row).cells.item(13).firstChild.options.selectedIndex].value);
+	  		var typeIsOkId="typeIsOk_"+row;
+	  		var typeIsOk = trim(document.getElementById(typeIsOkId).options[document.getElementById(typeIsOkId).options.selectedIndex].value);
+	  		var amountIsOkId="amountIsOk_"+row;
+	  		var amountIsOk = trim(document.getElementById(amountIsOkId).options[document.getElementById(amountIsOkId).options.selectedIndex].value);
+	  		var specificationIsOkId="specificationIsOk_"+row;
+	  		var specificationIsOk = trim(document.getElementById(specificationIsOkId).options[document.getElementById(specificationIsOkId).options.selectedIndex].value);
 			var cargoSpaceCode = trim(a.rows.item(row).cells.item(7).innerText);
 	  		var stockOutHasMaterielBean = new StockOutHasMaterielBean(cargoSpaceCode,materielCode,stockOutOrderCode, stockOutAmount,stockOutPrice,typeIsOk, amountIsOk,specificationIsOk);
 	  		array.push(JSON.stringify(stockOutHasMaterielBean));
@@ -512,12 +524,17 @@
 		var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
-	  		var stockOutAmount = a.rows.item(row).cells.item(8).firstChild.value;
-	  		var stockOutPrice = a.rows.item(row).cells.item(9).firstChild.value;
+	  		var stockOutAmountId="stockOutAmount_"+row;
+	  		var stockOutAmount = document.getElementById(stockOutAmountId).value;
+	  		var stockOutPriceId = "stockOutPrice_"+row;
+	  		var stockOutPrice = document.getElementById(stockOutPriceId).value;
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var typeIsOk = trim(a.rows.item(row).cells.item(11).firstChild.options[a.rows.item(row).cells.item(11).firstChild.options.selectedIndex].value);
-	  		var amountIsOk = trim(a.rows.item(row).cells.item(12).firstChild.options[a.rows.item(row).cells.item(12).firstChild.options.selectedIndex].value);
-	  		var specificationIsOk = trim(a.rows.item(row).cells.item(13).firstChild.options[a.rows.item(row).cells.item(13).firstChild.options.selectedIndex].value);
+	  		var typeIsOkId="typeIsOk_"+row;
+	  		var typeIsOk = trim(document.getElementById(typeIsOkId).options[document.getElementById(typeIsOkId).options.selectedIndex].value);
+	  		var amountIsOkId="amountIsOk_"+row;
+	  		var amountIsOk = trim(document.getElementById(amountIsOkId).options[document.getElementById(amountIsOkId).options.selectedIndex].value);
+	  		var specificationIsOkId="specificationIsOk_"+row;
+	  		var specificationIsOk = trim(document.getElementById(specificationIsOkId).options[document.getElementById(specificationIsOkId).options.selectedIndex].value);
 			var cargoSpaceCode = trim(a.rows.item(row).cells.item(7).innerText);
 	  		var stockOutHasMaterielBean = new StockOutHasMaterielBean(cargoSpaceCode,materielCode,stockOutOrderCode, stockOutAmount,stockOutPrice,typeIsOk, amountIsOk,specificationIsOk);
 	  		array.push(JSON.stringify(stockOutHasMaterielBean));
@@ -644,19 +661,19 @@
 										</td>
 										<td bgcolor="white">
 											<s:if test="stock.stockOutStateType != 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
-												<s:textfield name="stockOutAmount" size="5" />
+												<s:textfield id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount" size="5" onchange="getPrice(this);"  />
 											</s:if>
 											<s:else>
-												<s:textfield name="stockOutAmount"
-													onchange="getPrice(this);" size="5" disabled="true" />
+												<s:textfield id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount"
+													size="5" disabled="true" />
 											</s:else>
 										</td>
 										<td bgcolor="white">
 											<s:if test="stock.stockOutStateType!= 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
-												<s:textfield name="stockOutPrice" size="5" />
+												<s:textfield id="stockOutPrice_%{#stockOutMateriel.index+1}" name="stockOutPrice" size="5" onchange="getPrice(this);"/>
 											</s:if>
 											<s:else>
-												<s:textfield name="stockOutPrice" onchange="getPrice(this);"
+												<s:textfield id="stockOutPrice_%{#stockOutMateriel.index+1}" name="stockOutPrice"
 													size="5"  disabled="true"/>
 											</s:else>
 										</td>
@@ -667,35 +684,35 @@
 											test="stock.stockOutCheckState==1 && stock.stockOutStateType==1&&stock.stockOutDealState!=-1">
 											<td bgcolor="white">
 												<s:if test="stock.stockOutDealState!=1">
-													<s:select id="typeIsOk" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
+													<s:select id="typeIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
 														name="typeIsOk"></s:select>
 												</s:if>
 												<s:else>
-													<s:select id="typeIsOk" list="#{1:'符合',2:'不符合'}"
+													<s:select id="typeIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"
 														name="typeIsOk" disabled="true"></s:select>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.stockOutDealState!=1">
-													<s:select id="amountIsOk" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
+													<s:select id="amountIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
 														name="amountIsOk"></s:select>
 												</s:if>
 												<s:else>
-													<s:select id="amountIsOk" list="#{1:'符合',2:'不符合'}"
+													<s:select id="amountIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"
 														name="amountIsOk" disabled="true"></s:select>
 												</s:else>
 											</td>
 											<td bgcolor="white">
 												<s:if test="stock.stockOutDealState!=1">
-														<s:select id="specificationIsOk" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择" name="specificationIsOk"></s:select>
+														<s:select id="specificationIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择" name="specificationIsOk"></s:select>
 												</s:if>
 												<s:else>
-													<s:select id="specificationIsOk" list="#{1:'符合',2:'不符合'}"name="specificationIsOk" disabled="true"></s:select>
+													<s:select id="specificationIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"name="specificationIsOk" disabled="true"></s:select>
 												</s:else>
 											</td>
 										</s:if>
 
-										<s:if test="stock.stockOutStateType!=1">
+										<s:if test="stock.stockOutStateType!=1||stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
 											<td bgcolor="white">
 
 												<input type="button" value="删除"
