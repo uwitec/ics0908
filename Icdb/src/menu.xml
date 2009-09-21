@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ims>
+    <menu name="userMenu" code="0001">
+        <item viewName="基本资料" code="00010001" permissionIndex="1" level="1">
+            <item viewName="部门管理" code="000100010001" permissionIndex="2" level="2" />
+            <item viewName="员工管理" code="000100010002" permissionIndex="3" level="2" />
+            <item viewName="供应商管理" code="000100010003" permissionIndex="4" level="2" />
+        </item>
+        <item viewName="目录2" code="00010002" permissionIndex="5">
+            <item viewName="子目录1" code="000100020001" permissionIndex="6" level="2" />
+            <item viewName="子目录2" code="000100020002" permissionIndex="7" level="2" />
+            <item viewName="子目录3" code="000100020003" permissionIndex="8" level="2" />
+        </item>
+        <item viewName="目录3" code="00010001" permissionIndex="9">
+            <item viewName="子目录1" code="000100030001" permissionIndex="10" level="2" />
+            <item viewName="子目录2" code="000100030002" permissionIndex="11" level="2" />
+            <item viewName="子目录3" code="000100030003" permissionIndex="12" level="2" />
+        </item>
+    </menu>
+    <menu name="sysMenu" code="0002">
+        <item viewName=""></item>
+    </menu>
+</ims>
