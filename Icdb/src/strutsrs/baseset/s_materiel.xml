@@ -11,7 +11,7 @@
 	<result name="success">/baseset/materiel/MaterielAdd.jsp</result>
 </action>
 <action name="AddMateriel" class="com.action.baseset.MaterielAction" method="addMateriel">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">GoAddMateriel.action</result>
 </action>
 <action name="GetOneMateriel" class="com.action.baseset.MaterielAction" method="getOneMateriel">
 	<result name="success">/baseset/materiel/MaterielUpdate.jsp</result>

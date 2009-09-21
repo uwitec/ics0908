@@ -11,7 +11,7 @@
 	<result name="success">/baseset/department/DepartmentAdd.jsp</result>
 </action>
 <action name="AddDepartment" class="com.action.baseset.DepartmentAction" method="addDepartment">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">GoAddDepartment.action</result>
 </action>
 <action name="GetOneDepartment" class="com.action.baseset.DepartmentAction" method="getOneDepartment">
 	<result name="success">/baseset/department/DepartmentUpdate.jsp</result>

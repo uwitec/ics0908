@@ -11,7 +11,8 @@
 	<result name="success">/baseset/employee/EmployeeAdd.jsp</result>
 </action>
 <action name="AddEmployee" class="com.action.baseset.EmployeeAction" method="addEmployee">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">GoAddEmployee.action</result>
+	<result name="next" type="redirect">ShowEmployee.action</result>
 </action>
 <action name="UpdateEmployee" class="com.action.baseset.EmployeeAction" method="updateEmployee">
 	<result name="success" type="redirect">ShowEmployee.action</result>

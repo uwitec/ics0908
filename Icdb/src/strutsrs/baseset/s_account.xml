@@ -11,7 +11,8 @@
 	<result name="success">/baseset/account/AccountAdd.jsp</result>
 </action>
 <action name="AddAccount" class="com.action.baseset.AccountAction" method="addAccount">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">ShowAccount.action</result>
+	<result name="next" type="redirect">GoAddAccount.action</result>
 </action>
 <action name="GetOneAccount" class="com.action.baseset.AccountAction" method="getOneAccount">
 	<result name="success">/baseset/account/AccountUpdate.jsp</result>

@@ -4,7 +4,7 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 <package name="cargoSpace" extends="struts-default" namespace="/baseset">
-<action name="ShowCargoSpace" class="com.action.baseset.CargoSpaceAction" method="getHouseSapce">
+<action name="ShowCargoSpace" class="com.action.baseset.CargoSpaceAction" method="showCargoSpace">
 	<result name="success">/baseset/cargoSpace/CargoSpaceShow.jsp</result>
 </action>
 <action name="GoAddCargoSpace" class="com.action.baseset.CargoSpaceAction" method="goAddCargoSpace">
