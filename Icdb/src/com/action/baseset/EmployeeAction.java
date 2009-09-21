@@ -138,11 +138,16 @@ public class EmployeeAction extends ActionSupport{
 		}else{
 			person.setMessage(ICTools.MESSAGE_ERROR);	
 		}
-		return SUCCESS;
+		if(employee.getS_value()!=null && !employee.getS_value().equals("")){
+			return SUCCESS;
+		}else{
+			return "next";
+		}
+			
+		
 	}
 
 	public String getOneEmployee(){
-	
 		employee=em.getEmployeeOne(employee.getEmployeeCode());
 		person=pm.getPersonOne(employee.getPersonCode());
 		return SUCCESS;
