@@ -11,7 +11,8 @@
 	<result name="success">/baseset/storehouse/StorehouseAdd.jsp</result>
 </action>
 <action name="AddStorehouse" class="com.action.baseset.StorehouseAction" method="addStorehouse">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">ShowStorehouse.action</result>
+	<result name="next" type="redirect">GoAddStorehouse.action</result>
 </action>
 <action name="GetOneStorehouse" class="com.action.baseset.StorehouseAction" method="getOneStorehouse">
 	<result name="success">/baseset/storehouse/StorehouseUpdate.jsp</result>

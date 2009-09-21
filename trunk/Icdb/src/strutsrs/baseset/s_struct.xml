@@ -11,7 +11,7 @@
 	<result name="success">/baseset/struct/StructAdd.jsp</result>
 </action>
 <action name="AddStruct" class="com.action.baseset.StructAction" method="addStruct">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">GoAddStruct.action</result>
 </action>
 <action name="UpdateStruct" class="com.action.baseset.StructAction" method="updateStruct">
 	<result name="success" type="redirect">ShowStruct.action</result>
