@@ -12,7 +12,7 @@
     		tab_dis.style.display="block";
     	}
     	function showMateriel(){
-		window.showModalDialog("<%=base%>/baseset/FindMateriel.jsp","","dialogHeight:400px;dialogWidth:500px");
+		window.showModalDialog("<%=base%>/baseset/FindMateriel.action","","dialogHeight:400px;dialogWidth:650px");
 		}
     </SCRIPT>
     <body>
