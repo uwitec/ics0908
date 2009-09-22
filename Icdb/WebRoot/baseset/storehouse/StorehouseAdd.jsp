@@ -94,7 +94,8 @@
 	    		<a href="#" onclick="showEmployee()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
 				<s:hidden id="employeeCode" name="storehouse.employeeCode"></s:hidden>
 	    	</tr>
-	    	<tr class="table_tr_right"><td><font id="employeeCode_r" color="red"/>
+	    	<tr class="table_tr_odd"><td><font id="employeeCode_r" color="red"/></td></tr>
+	    	<tr class="table_tr_right"><td>
 				<s:hidden id="evalue" name="storehouse.s_value" value=""></s:hidden>
 			</td></tr>
 	    	<tr class="table_tr_right">
