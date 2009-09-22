@@ -27,19 +27,22 @@ function initFunTree(){
 
 <div class="body_div"><jsp:include flush="true"
 	page="/pagecom/head.jsp"></jsp:include>
-<div>
 
-<div class="sub_con">
-<div class="lmenu">
-<div class="lmenu_tit">组织机构</div>
-<ul id="funTree">
-	<li><s:url action="ShowEmployeeList" id="ShowEmployeeList"></s:url><s:a
-		href="%{ShowEmployeeList}">用户</s:a></li>
-	<li>用户组</li>
-</ul>
+<div class="left_body">
+<div class="left_menu">
+<div class="left_menu_head">组织机构</div>
+<table class="left_menu_table" border="0">
+	<tr height="40">
+		<td class="left_menu_table_td"><s:url action="ShowEmployeeList"
+			id="ShowEmployeeList"></s:url><s:a href="%{ShowEmployeeList}">用户</s:a></td>
+	</tr>
+	<tr height="40">
+		<td class="left_menu_table_td">用户组</td>
+	</tr>
+</table>
 </div>
 </div>
-</div>
+
 <div class="center_body">
 <div class="center_head_text">功能信息</div>
 <div class="center_tools"><input type="text" class="search_border" /><input
