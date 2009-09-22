@@ -75,13 +75,17 @@ public class CargoSpaceAction extends ActionSupport{
 	public String showCargoSpace(){
 		CargoSpaceManage csm=new CargoSpaceManage();
 		StorehouseManage sm=new StorehouseManage();
+		goAddCargoSpace();
 		storehouse=sm.getStorehouseOne(cargoSpace.getStorehouseCode());
 		lhp=csm.getCargoSapceOfStoreHouse(storehouse);
+		storehouse.setS_value("none");
 		return SUCCESS;
 	}
 	
 	
 	public String goAddCargoSpace(){
+		if(cargoSpace==null)
+			cargoSpace=new CargoSpaceBean();
 		cargoSpace.setCargoSpaceCode(ICTools.randId("C"));
 		return SUCCESS;
 	}
@@ -92,6 +96,10 @@ public class CargoSpaceAction extends ActionSupport{
 			cargoSpace.setMessage(ICTools.MESSAGE_OK);
 		}else{
 			cargoSpace.setMessage(ICTools.MESSAGE_ERROR);
+		}
+		showCargoSpace();
+		if(!cargoSpace.getS_value().equals("")){
+			storehouse.setS_value("block");
 		}
 		return SUCCESS;
 	}
@@ -109,6 +117,8 @@ public class CargoSpaceAction extends ActionSupport{
 		}else{
 			cargoSpace.setMessage(ICTools.MESSAGE_ERROR);
 		}
+		showCargoSpace();
+		storehouse.setS_value("none");
 		return SUCCESS;
 	}
 
