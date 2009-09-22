@@ -19,7 +19,7 @@
 	window.showModalDialog("<%=base%>/baseset/FindPerson.jsp","","dialogHeight:400px;dialogWidth:500px");
 	}
 	function showBank(){
-		window.showModalDialog("<%=base%>/baseset/FindBank.jsp","","dialogHeight:400px;dialogWidth:500px");
+		window.showModalDialog("FindBank.action","","dialogHeight:400px;dialogWidth:500px");
 	}
 	function save(){
 		if(checkMessage()){
