@@ -16,7 +16,7 @@
  
  
 	function showEmployee(){
-		window.showModalDialog("<%=base%>/baseset/FindEmployee.jsp","","dialogHeight:400px;dialogWidth:500px");
+		window.showModalDialog("FindEmployee.action","","dialogHeight:400px;dialogWidth:600px");
 	}
 	function save(){
 		if(checkMessage()){

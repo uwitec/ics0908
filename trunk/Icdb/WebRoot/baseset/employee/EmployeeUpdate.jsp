@@ -16,7 +16,7 @@
  
  
     function showJob(){
-		window.showModalDialog("<%=base%>/baseset/FindJob.jsp","","dialogHeight:400px;dialogWidth:500px");
+		window.showModalDialog("FindJob.action","","dialogHeight:400px;dialogWidth:600px");
 	}
 	function save(){
 		if(checkMessage()){

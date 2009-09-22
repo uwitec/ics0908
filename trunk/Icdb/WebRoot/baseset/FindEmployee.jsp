@@ -2,49 +2,88 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-    <head>
-        <title>y银行信息</title>
-    </head>
 <% 
+String base=request.getContextPath(); 
 int idtitle=1;
-String base=request.getContextPath();
 %>
-<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
-
-
-    <body>
-    <table>
-    <tr><td>
-    <s:form action="FindEmployee" namespace="/baseset">
-    <s:textfield name="employee.s_value" label="内容"></s:textfield>
-    <s:hidden name="employee.employeeCode"></s:hidden>
-    <s:submit value="查询"></s:submit>
-    </s:form>
-    </td></tr>
-    </table>
-    <s:if test="lhp!=null">
-    <table border="1">
-    	<tr>
-    	<td>选择</td>
-    	<th>员工编号</th>
-		<th>员工姓名</th>
-		<th>岗位</th>
-		<th>所属部门</th>
-		</tr>
-       <s:iterator value="lhp" status="stat">
-       	<tr>
-       	<td align="center"><input type="radio" name="p_radio" value="<%=idtitle%>"/></td>
-       	<td id="employeeCode<%=idtitle%>"><s:property value="employeeCode"></s:property></td>
-        <td id="personName<%=idtitle++%>"><s:property value="personName"></s:property></td>
-        <td><s:property value="jobName"></s:property></td>
-        <td><s:property value="departmentName"></s:property></td>
-        </tr>
-       </s:iterator>
-       <tr><td colspan="5"><input type="button" onclick="toSetId(new Array('employeeCode','personName'),'p_radio')" value="确认"/></td></tr>
-     </table>
-     </s:if>
-     <s:elseif test="lhp==null">
-     	未找到你需要的数据！
-     </s:elseif>
+    <head>
+        <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+        <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+	   <title>员工信息</title>
+	</HEAD>
+	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+	<base target="_self"> 
+	<body class="sub1_body">
+		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">员工信息</div>
+		<div class="sub1_con">
+		   <div align="right">
+		    <s:form action="FindEmployee" namespace="/baseset" theme="simple">
+		    <input type="text" name="employee.s_value" class="search_border"/><input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" align="top"/>
+		    </s:form>
+		  	</div>
+		<div>
+		<table width="450" style="background-color:#B4BCC2;border:0px;margin-left:11px;" cellspacing="1" cellpadding="0" id="up_tab">
+	    <s:if test="lhp.size>0">
+	    	<tr class="table_head">
+			    <td>选择</td>
+		    	<td>员工编号</td>
+				<td>员工姓名</td>
+				<td>岗位</td>
+				<td>所属部门</td>
+	    	</tr>
+	    </s:if>
+	    <s:else>
+	    	<tr>
+	    	<td class="orgstructure_table_td_odd_r" colspan="5">
+	    		未找到符合的信息!
+	    	</td>
+	    	</tr>
+	    </s:else>
+	       <s:iterator value="lhp" status="stat">
+	      	<tr 
+	       		<s:if test="#stat.even">
+	       			class="table_tr_odd"
+		       	</s:if>
+		       	<s:else>
+	       			class="table_tr__even"
+	       		</s:else>
+	       	>
+	        <td align="center"><input type="radio" name="p_radio" value="<%=idtitle%>"/></td>
+	       	<td id="employeeCode<%=idtitle%>"><s:property value="employeeCode"/></td>
+	        <td id="personName<%=idtitle++%>"><s:property value="personName"/></td>
+	        <td><s:property value="jobName"/></td>
+	        <td><s:property value="departmentName"></s:property></td>
+	        </tr>
+	       	</s:iterator>
+		    </table>
+       		<div style="margin-top: 8px;" align="right">  
+       		<s:form action="FindEmployee" namespace="/baseset" theme="simple" name="pageform">
+		       <s:push value="employee">
+		       <s:hidden name="employee.s_value" value="%{employee.s_value}"></s:hidden>
+		       <s:hidden id="countsize" name="employee.countSize" value="%{employee.countSize}"></s:hidden>
+		       <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
+		       <s:if test="employee.startSize-1<1">
+		       		<font color="gray">上一页</font>
+		       </s:if>
+		       <s:else>
+		      	  <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
+		       </s:else>
+		       <s:property value="employee.startSize"/>/<s:property value="employee.countSize"/>
+		       <s:if test="employee.startSize+1>employee.countSize">
+		       		<font color="gray">下一页</font>
+		       </s:if>
+		       <s:else>
+		      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
+		       </s:else>
+		       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
+		        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="employee.startSize" cssClass="pages_border"/>页</font>
+		       </s:push> 
+      		 </s:form>
+		       </div>
+				<div align="right">
+       			<a href="#" onclick="toSetId(new Array('bankCode','bankName'),'p_radio')"><img src="<%=base%>/images/sub1_btn_hand.jpg" border="0"></a>
+	      		</div>
+	     </div>
+		</div>
     </body>
 </html>
