@@ -60,7 +60,6 @@
 					<s:select  list="ldb" listKey="departmentCode" cssClass="sub2_border" listValue="departmentName" name="job.departmentCode"/>		
 				</div>
 				<div><input type="button" class="sub1_btn_save_closed" onclick="save_close()"/></div>
-				</div>
 			</s:form>
 		</s:else>
 		</div>

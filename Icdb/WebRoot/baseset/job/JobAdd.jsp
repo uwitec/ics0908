@@ -61,7 +61,6 @@
 				</div>
 				<div><input type="button" class="sub1_btn_save_closed" onclick="save_close()"/></div>
 				<div><input type="button" class="sub1_btn_save_add" onclick="save_next()"/></div>
-				</div>
 			</s:form>
 		</s:else>
 		</div>
