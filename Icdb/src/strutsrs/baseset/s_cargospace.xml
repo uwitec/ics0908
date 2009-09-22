@@ -7,17 +7,11 @@
 <action name="ShowCargoSpace" class="com.action.baseset.CargoSpaceAction" method="showCargoSpace">
 	<result name="success">/baseset/cargoSpace/CargoSpaceShow.jsp</result>
 </action>
-<action name="GoAddCargoSpace" class="com.action.baseset.CargoSpaceAction" method="goAddCargoSpace">
-	<result name="success">/baseset/cargoSpace/CargoSpaceAdd.jsp</result>
-</action>
 <action name="AddCargoSpace" class="com.action.baseset.CargoSpaceAction" method="addCargoSpace">
-	<result name="success">/baseset/AddEnd.jsp</result>
-</action>
-<action name="GetOneCargoSpace" class="com.action.baseset.CargoSpaceAction" method="getOneCargoSpace">
-	<result name="success">/baseset/cargoSpace/CargoSpaceUpdate.jsp</result>
+	<result name="success">/baseset/cargoSpace/CargoSpaceShow.jsp</result>
 </action>
 <action name="UpdateCargoSpace" class="com.action.baseset.CargoSpaceAction" method="updateCargoSpace">
-	<result name="success" type="redirect">ShowStorehouse.action</result>
+	<result name="success">/baseset/cargoSpace/CargoSpaceShow.jsp</result>
 </action>
 </package>
 </struts>
