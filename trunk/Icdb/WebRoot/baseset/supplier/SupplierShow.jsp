@@ -60,12 +60,14 @@
 	    	</tr>
 	    </s:else>
 	       <s:iterator value="lhp" status="stat">
-	       	<s:if test="#stat.even">
-	       		<tr class="table_tr_odd">
-	       	</s:if>
-	       	<s:else>
-	       		<tr class="table_tr__even">
-	       	</s:else>
+	        <tr 
+	       		<s:if test="#stat.even">
+	       			class="table_tr_odd"
+		       	</s:if>
+		       	<s:else>
+	       			class="table_tr__even"
+	       		</s:else>
+	       	>
 	 		<td><s:property value="supplierName"></s:property></td>
 	        <td><s:property value="supplierAddress"></s:property></td>
 	        <td><s:property value="jsonField"></s:property></td>
