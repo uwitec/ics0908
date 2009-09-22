@@ -13,7 +13,7 @@
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
-
+ 
     function AddMat(){
     	var href_="GoAddMateriel.action";
     	window.showModalDialog(href_,"","center:1;resizable:0;dialogHeight:450px;dialogWidth:500px");
@@ -43,7 +43,7 @@
 		</div>
 		<div class="center_boder">
 		
-		   <table class="center_table" cellspacing="1" cellpadding="0">
+		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
 	    	<tr class="table_head">
 			   <td>物品编号</td>

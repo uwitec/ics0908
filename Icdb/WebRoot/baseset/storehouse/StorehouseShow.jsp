@@ -16,7 +16,7 @@
 	
 	function showCargo(valur_str){
 		var url="ShowCargoSpace.action?cargoSpace.storehouseCode="+valur_str;
-		window.showModalDialog(url,"","dialogHeight:250px;dialogWidth:450px");
+		window.showModalDialog(url,"","dialogHeight:350px;dialogWidth:700px");
 		location.reload();
 	}
 
