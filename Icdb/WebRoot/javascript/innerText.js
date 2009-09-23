@@ -92,13 +92,15 @@ catch(e){}
 		          }
 		        } 
 		   }
-		   if(JSP_value!=null){
+		   
+		   if(JSP_value!=null && temp!=null){
 		   		for(var k=0;k<value_list.length;k++){
 		   	
 		    		window.opener.document.getElementById(value_list[k]).value=JSP_value[k];
 		    	}
     		window.close();
     		}else{
+    			
     			alert("请选择一条有效的信息");
     		}
     	}
