@@ -81,9 +81,7 @@ catch(e){}
     		for(var i=0; i<idtitle.length;i++){
 		       if(idtitle[i].checked){
 		       for(var j=0;j<value_list.length;j++){
-		       	  temp=value_list[j]+idtitle[i].value;
-		       	  
-		             
+		       	  temp=value_list[j]+idtitle[i].value;		             
 		          if(document.getElementById(temp).value!=null){
 		          	   JSP_value[j]=document.getElementById(temp).value; 
 			          }else{
