@@ -13,6 +13,20 @@ public class JobBean extends BaseBean{
 	private String departmentName;
 	private String structCode;
 	private String structName;
+	private String permissionCode;
+	
+	/**
+	 * @return the permissionCode
+	 */
+	public String getPermissionCode() {
+		return permissionCode;
+	}
+	/**
+	 * @param permissionCode the permissionCode to set
+	 */
+	public void setPermissionCode(String permissionCode) {
+		this.permissionCode = permissionCode;
+	}
 	/**
 	 * @return the structCode
 	 */
