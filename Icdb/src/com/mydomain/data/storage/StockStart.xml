@@ -48,7 +48,19 @@
 	</update>
 	<delete id="deleteStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
 	</delete>
-
+	<update id="outStock" parameterClass="com.mydomain.bean.storage.StockBean">
+	update stock
+	set 
+	stockAmount=stockAmount-#stockAmount#
+	where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
+	</update>
+	<update id="inStock" parameterClass="com.mydomain.bean.storage.StockBean">
+	update stock
+	set 
+	stockAmount=stockAmount+#stockAmount#
+	where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
+	</update>
+	
 
 	<!-- daiying -->
 	<select id="STOCK_SELECT_BY_KEY" resultClass="com.mydomain.bean.storage.StockBean">

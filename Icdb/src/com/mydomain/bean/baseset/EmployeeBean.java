@@ -16,6 +16,59 @@ public class EmployeeBean extends BaseBean{
 	private String departmentName;
 	private String structCode;//»ú¹¹±àÂë
 	private String structName;
+	private String userName;
+	private String passWord;
+	private String permissionCode;
+	private int isAlowLogin;
+	
+	/**
+	 * @return the isAlowLogin
+	 */
+	public int getIsAlowLogin() {
+		return isAlowLogin;
+	}
+	/**
+	 * @return the passWord
+	 */
+	public String getPassWord() {
+		return passWord;
+	}
+	/**
+	 * @return the permissionCode
+	 */
+	public String getPermissionCode() {
+		return permissionCode;
+	}
+	/**
+	 * @return the userName
+	 */
+	public String getUserName() {
+		return userName;
+	}
+	/**
+	 * @param isAlowLogin the isAlowLogin to set
+	 */
+	public void setIsAlowLogin(int isAlowLogin) {
+		this.isAlowLogin = isAlowLogin;
+	}
+	/**
+	 * @param passWord the passWord to set
+	 */
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
+	}
+	/**
+	 * @param permissionCode the permissionCode to set
+	 */
+	public void setPermissionCode(String permissionCode) {
+		this.permissionCode = permissionCode;
+	}
+	/**
+	 * @param userName the userName to set
+	 */
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	/**
 	 * @return the departmentCode
 	 */
