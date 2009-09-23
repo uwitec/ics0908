@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Stock">
+	<select id="showMaxCount" resultClass="com.mydomain.bean.stockmanage.StockMaxMin">
+		select
+		count(*) as countValue
+		from materiel as m,
+		(select materielCode,sum(stockamount) as stocknum 
+		from stock group by materielCode) as st
+		where 
+		m.materielCode=st.materielCode and
+		st.stocknum>m.materielMaxStore
+	</select>
+	<select id="showMaxStockAll" resultClass="com.mydomain.bean.stockmanage.StockMaxMin">
+		select
+		m.materielCode,
+		m.materielName,
+		m.materielMinStore,
+		m.materielMaxStore,
+		m.materielABC,
+		st.stocknum
+		from materiel as m,
+		(select materielCode,sum(stockamount) as stocknum 
+		from stock group by materielCode) as st
+		where 
+		m.materielCode=st.materielCode and
+		st.stocknum>m.materielMaxStore
+		limit #startValue#,#endValue#
+	</select>
+	
+	<select id="showStockMaxDefCount" resultClass="com.mydomain.bean.stockmanage.StockMaxMin">
+		select
+		count(*) as countValue
+		from materiel as m,
+		(select materielCode,sum(stockamount) as stocknum 
+		from stock group by materielCode) as st
+		where 
+		m.materielCode=st.materielCode and
+		st.stocknum>m.materielMaxStore and
+		m.materielABC=#materielABC#
+	</select>
+	<select id="showStockMaxDef" resultClass="com.mydomain.bean.stockmanage.StockMaxMin">
+		select
+		m.materielCode,
+		m.materielName,
+		m.materielMinStore,
+		m.materielMaxStore,
+		m.materielABC,
+		st.stocknum
+		from materiel as m,
+		(select materielCode,sum(stockamount) as stocknum 
+		from stock group by materielCode) as st
+		where 
+		m.materielCode=st.materielCode and
+		st.stocknum>m.materielMaxStore and
+		m.materielABC=#materielABC#
+		limit #startValue#,#endValue#
+	</select>
+</sqlMap>
