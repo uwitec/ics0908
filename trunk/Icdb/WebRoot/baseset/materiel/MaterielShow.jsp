@@ -5,10 +5,9 @@
 <html>
     <head>
         <title>物料信息</title>
-		<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
-		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
-		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
-		<link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
+		 <link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
+	    <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+	    <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
@@ -56,7 +55,7 @@
 	    </s:if>
 	    <s:else>
 	    	<tr>
-	    	<td class="orgstructure_table_td_odd_r" colspan="5">
+	    	<td class="table_tr_no" colspan="5">
 	    		未找到符合的信息!
 	    	</td>
 	    	</tr>
