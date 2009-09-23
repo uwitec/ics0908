@@ -8,6 +8,9 @@ public class Item {
 	private Integer permissionIndex;
 	private List<Item> subItemList;
 	private Integer level;
+	private Integer userPermissionCode;
+
+	private String action;
 
 	public Integer getLevel() {
 		return level;
@@ -47,6 +50,22 @@ public class Item {
 
 	public void setPermissionIndex(Integer permissionIndex) {
 		this.permissionIndex = permissionIndex;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	public Integer getUserPermissionCode() {
+		return userPermissionCode;
+	}
+
+	public void setUserPermissionCode(Integer userPermissionCode) {
+		this.userPermissionCode = userPermissionCode;
 	}
 
 }

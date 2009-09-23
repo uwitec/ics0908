@@ -71,13 +71,20 @@ public class MenuHandler extends DefaultHandler {
 					aItem.setPermissionIndex(i);
 					aItem.setLevel(lev);
 					aItem.setViewName(attributes.getValue("viewName"));
+					aItem.setAction(attributes.getValue("action"));
 					aItem.setSubItemList(new ArrayList<Item>());
+					aItem.setUserPermissionCode(18);
 
 					if (null != this.item
-							&& this.item.getLevel() > aItem.getLevel()) {
+							&& this.item.getLevel() < aItem.getLevel()) {
 						this.item.getSubItemList().add(aItem);
 					} else if (null != this.menu) {
 						this.menu.getItemList().add(aItem);
+					}
+
+					if (null == this.item
+							|| this.item.getLevel() >= aItem.getLevel()) {
+						this.item = aItem;
 					}
 				}
 			}

@@ -40,7 +40,9 @@ public class MenuReader {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(readMenu("userMenu").viewMenu());
+		Menu menu = readMenu("userMenu");
+		System.out.println(menu.getItemList().size());
+		System.out.println(menu.viewMenu());
 	}
 
 }
