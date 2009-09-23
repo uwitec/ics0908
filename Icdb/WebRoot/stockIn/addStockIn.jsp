@@ -102,13 +102,23 @@
 	  	var a = document.getElementById("addMatail");
 		var rownum = tab.parentNode.parentNode.rowIndex;
 		var onePriceId = "onePrice_"+rownum;
- 		var onePrice = document.getElementById(onePriceId).value;
+		var onePrice;
+		if(document.getElementById(onePriceId)==null){
+			onePrice = document.getElementById("addMatail").rows[rownum].cells[6].firstChild.value;
+		}else{
+ 			onePrice = document.getElementById(onePriceId).value;
+ 		}
  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 	  	var stockInAmountId = "stockInAmount_"+rownum;
- 		var stockInAmount = document.getElementById(stockInAmountId).value;
+	  	var stockInAmount;
+	  	if(document.getElementById(stockInAmountId)==null){
+	  		stockInAmount = document.getElementById("addMatail").rows[rownum].cells[5].firstChild.value;
+	  	}else{
+ 		stockInAmount = document.getElementById(stockInAmountId).value;
+ 		}
 		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
@@ -162,19 +172,36 @@
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
 	  		var stockInAmountId = "stockInAmount_"+row;
-	  		var stockInAmount = document.getElementById(stockInAmountId).value;
+	  		var stockInAmount;
+		  	if(document.getElementById(stockInAmountId)==null){
+		  		stockInAmount = document.getElementById("addMatail").rows[row].cells[5].firstChild.value;
+		  	}else{
+	 		stockInAmount = document.getElementById(stockInAmountId).value;
+	 		}
+
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 	  		var onePriceId = "onePrice_"+row;
-	  		var onePrice =document.getElementById(onePriceId).value;
+	  		var onePrice;
+	  		if(document.getElementById(onePriceId)==null){
+			onePrice = document.getElementById("addMatail").rows[row].cells[6].firstChild.value;
+			}else{
+	 			onePrice = document.getElementById(onePriceId).value;
+	 		}
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 	  		var supplierCodeId = "supplierCode_"+row;
-	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
+	  		var supplierCode;
+		  	if(document.getElementById(supplierCodeId)==null){
+		  		supplierCode = document.getElementById("addMatail").rows[row].cells[7].firstChild.options[document.getElementById("addMatail").rows[row].cells[7].firstChild.selectedIndex].value;
+		  	}else{
+	 			supplierCode = document.getElementById(supplierCodeId).value;
+	 		}
+
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
@@ -284,20 +311,38 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmountId = "stockInAmount_"+row
-	  		var stockInAmount = document.getElementById(stockInAmountId).value;
+	  		var stockInAmountId = "stockInAmount_"+row;
+	  		var stockInAmount;
+		  	if(document.getElementById(stockInAmountId)==null){
+		  		stockInAmount = document.getElementById("addMatail").rows[row].cells[5].firstChild.value;
+		  	}else{
+	 		stockInAmount = document.getElementById(stockInAmountId).value;
+	 		}
+
 	  		if(isNaN(stockInAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
-	  		var onePriceId="onePrice_"+row
-	  		var onePrice =document.getElementById(onePriceId).value;
+	  		var onePriceId = "onePrice_"+row;
+	  		var onePrice;
+	  		if(document.getElementById(onePriceId)==null){
+			onePrice = document.getElementById("addMatail").rows[row].cells[6].firstChild.value;
+			}else{
+	 			onePrice = document.getElementById(onePriceId).value;
+	 		}
+
 	  		if(isNaN(onePrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 	  		var supplierCodeId = "supplierCode_"+row;
-	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
+	  		var supplierCode;
+		  	if(document.getElementById(supplierCodeId)==null){
+		  		supplierCode = document.getElementById("addMatail").rows[row].cells[7].firstChild.options[document.getElementById("addMatail").rows[row].cells[7].firstChild.selectedIndex].value;
+		  	}else{
+	 			supplierCode = document.getElementById(supplierCodeId).value;
+	 		}
+
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;

@@ -98,13 +98,23 @@
 	  	var a = document.getElementById("addMatail");
 		var rownum = tab.parentNode.parentNode.rowIndex;
 		var stockOutPriceId = "stockOutPrice_"+rownum;
- 		var stockOutPrice = document.getElementById(stockOutPriceId).value;
+		var stockOutPrice;
+  		if(document.getElementById(stockOutPriceId)==null){
+			stockOutPrice = document.getElementById("addMatail").rows[rownum].cells[9].firstChild.value;
+		}else{
+ 			stockOutPrice = document.getElementById(stockOutPriceId).value;
+ 		}
  		if(isNaN(stockOutPrice)){
 	  			alert("单价填写错误，请输入正确的数字！！！");
 	  			return;
 	  		}
 	  	var stockOutAmountId = "stockOutAmount_"+rownum;
- 		var stockOutAmount = document.getElementById(stockOutAmountId).value;
+ 		var stockOutAmount;
+		  	if(document.getElementById(stockOutAmountId)==null){
+		  		stockOutAmount = document.getElementById("addMatail").rows[rownum].cells[8].firstChild.value;
+		  	}else{
+	 			stockOutAmount = document.getElementById(stockOutAmountId).value;
+	 		}
 		if(isNaN(stockOutAmount)){
 	  			alert("数量填写错误，请输入正确的数字！！！");
 	  			return;
@@ -182,23 +192,34 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockOutAmountId="stockOutAmount_"+row;
-	  		var stockOutAmount = document.getElementById(stockOutAmountId).value;
+	  		var stockOutPriceId = "stockOutPrice_"+row;
+			var stockOutPrice;
+	  		if(document.getElementById(stockOutPriceId)==null){
+				stockOutPrice = document.getElementById("addMatail").rows[row].cells[9].firstChild.value;
+			}else{
+	 			stockOutPrice = document.getElementById(stockOutPriceId).value;
+	 		}
+ 			if(isNaN(stockOutPrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  		var stockOutAmountId = "stockOutAmount_"+row;
+ 			var stockOutAmount;
+		  	if(document.getElementById(stockOutAmountId)==null){
+		  		stockOutAmount = document.getElementById("addMatail").rows[row].cells[8].firstChild.value;
+		  	}else{
+	 			stockOutAmount = document.getElementById(stockOutAmountId).value;
+	 		}
+			if(isNaN(stockOutAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
 	  		var stockAmount = a.rows.item(row).cells.item(5).innerText;
 	  		if(parseFloat(stockOutAmount) > parseFloat(stockAmount)){
 	  			alert("数量不能大于库存数，请重新输入！");
 	  			return;
 	  		}
-	  		if(isNaN(stockOutAmount)){
-	  			alert("数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var stockOutPriceId="stockOutPrice_"+row;
-	  		var stockOutPrice = document.getElementById(stockOutPriceId).value;
-	  		if(isNaN(stockOutPrice)){
-	  			alert("单价填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
+
 
 	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(7).innerText);
 			if(cargoSpaceCode == null || cargoSpaceCode==''){
@@ -251,8 +272,28 @@
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
 	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockOutAmountId="stockOutAmount_"+row;
-	  		var stockOutAmount = document.getElementById(stockOutAmountId).value;
+	  		var stockOutPriceId = "stockOutPrice_"+row;
+		var stockOutPrice;
+  		if(document.getElementById(stockOutPriceId)==null){
+			stockOutPrice = document.getElementById("addMatail").rows[row].cells[9].firstChild.value;
+		}else{
+ 			stockOutPrice = document.getElementById(stockOutPriceId).value;
+ 		}
+ 		if(isNaN(stockOutPrice)){
+	  			alert("单价填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
+	  	var stockOutAmountId = "stockOutAmount_"+row;
+ 		var stockOutAmount;
+		  	if(document.getElementById(stockOutAmountId)==null){
+		  		stockOutAmount = document.getElementById("addMatail").rows[row].cells[8].firstChild.value;
+		  	}else{
+	 			stockOutAmount = document.getElementById(stockOutAmountId).value;
+	 		}
+		if(isNaN(stockOutAmount)){
+	  			alert("数量填写错误，请输入正确的数字！！！");
+	  			return;
+	  		}
 	  		var stockAmount = a.rows.item(row).cells.item(5).innerText;
 	  		if(parseFloat(stockOutAmount) > parseFloat(stockAmount)){
 	  			alert("数量不能大于库存数，请重新输入！");
@@ -262,16 +303,7 @@
 	  			alert("数量不能为空！！！");
 	  			return;
 	  		}
-	  		if(isNaN(stockOutAmount)){
-	  			alert("数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var stockOutPriceId="stockOutPrice_"+row;
-	  		var stockOutPrice = document.getElementById(stockOutPriceId).value;
-	  		if(isNaN(stockOutPrice)){
-	  			alert("单价填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
+
 			if(stockOutPrice == null && stockOutPrice ==''){
 	  			alert("单价不能为空！！！");
 	  			return;
