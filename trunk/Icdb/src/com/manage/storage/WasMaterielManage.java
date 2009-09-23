@@ -47,6 +47,13 @@ public class WasMaterielManage {
 				// TODO Auto-generated catch block
 				com.dbserver.DBServer.logger.exception(e);
 				return false;
+			}finally{
+				try {
+					DBServer.quider.endTransaction();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					com.dbserver.DBServer.logger.exception(e);
+				}
 			}
 		}else{
 			return false;
@@ -66,6 +73,13 @@ public class WasMaterielManage {
 				// TODO: handle exception
 				com.dbserver.DBServer.logger.exception(e);
 				return false;
+			}finally{
+				try {
+					DBServer.quider.endTransaction();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					com.dbserver.DBServer.logger.exception(e);
+				}
 			}			
 		}else{
 			return false;
@@ -80,11 +94,19 @@ public class WasMaterielManage {
 					DBServer.quider.updateObject((WasMaterielBean)w_List.get(i));
 				}
 				DBServer.quider.commitTransaction();
+				
 				return true;
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				com.dbserver.DBServer.logger.exception(e);
 				return false;
+			}finally{
+				try {
+					DBServer.quider.endTransaction();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					com.dbserver.DBServer.logger.exception(e);
+				}
 			}
 		}else{
 			return false;
