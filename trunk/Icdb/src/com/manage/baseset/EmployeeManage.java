@@ -22,6 +22,19 @@ public class EmployeeManage {
 		
 	}
 	
+	public EmployeeBean login(String userName,String passWord){
+		EmployeeBean temp_embean=new EmployeeBean();
+		temp_embean.setUserName(userName);
+		temp_embean.setPassWord(passWord);
+		try {
+			return (EmployeeBean) DBServer.quider.queryForObject("loginEmp", temp_embean);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return null;
+		}
+	}
+	
 	public boolean addEmployee(EmployeeBean employee){
 	
 		try {
