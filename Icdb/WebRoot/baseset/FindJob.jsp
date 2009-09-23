@@ -14,7 +14,7 @@ int idtitle=1;
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<base target="_self"> 
 	<body class="sub1_body">
-		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">银行信息</div>
+		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">岗位信息</div>
 		<div class="sub1_con">
 		   <div align="right">
 		    <s:form action="FindJob" namespace="/baseset" theme="simple">

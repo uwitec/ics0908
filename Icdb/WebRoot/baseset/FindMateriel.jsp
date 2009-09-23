@@ -9,12 +9,12 @@ int idtitle=1;
     <head>
         <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
         <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
-	   <title>岗位信息</title>
+	   <title>物料信息</title>
 	</HEAD>
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<base target="_self"> 
 	<body class="sub1_body">
-		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">银行信息</div>
+		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">物料信息</div>
 		<div class="sub1_con">
 		   <div align="right">
 		    <s:form action="FindMateriel" namespace="/baseset" theme="simple">
