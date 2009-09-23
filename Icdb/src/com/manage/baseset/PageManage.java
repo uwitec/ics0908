@@ -18,6 +18,7 @@ public class PageManage {
 			List<BaseBean> countList=(List<BaseBean>) DBServer.quider.queryForList(paramert,obj);
 			BaseBean tempObj=countList.get(0);
 			int countnum=Integer.valueOf(IcdbOption.getValue("pageCount"));
+			
 			obj.setCountSize(ICTools.mathCeil(tempObj.getCountValue(),countnum));
 			return obj;
 		} catch (SQLException e) {
