@@ -26,11 +26,12 @@
    <a href="<s:url action="storage/ShowCheck"/>">盘点</a><br/>
    <a href="<s:url action="storage/ShowWas"/>">物料报损</a><br/>
    <a href="<s:url action="storage/ShowWasHistroy"/>">物料历史清单</a><br/>
-   
+   <a href="<s:url action="storage/ShowCheckApprove"/>">盘点审批</a>
    <a href="<s:url action="stockIn/searchStockIn"/>">入库管理</a><br/>
    <a href="<s:url action="stockOut/searchStockOut"/>">出库管理</a><br/>
-   -------------------系统信息---------------------------------<br/>
-   <a href="<s:url action="storage/ShowCheckApprove"/>">盘点审批</a>
-
+   -------------------库存管理---------------------------------<br/>
+   
+ 	<a href="<s:url action="stockmanage/ShowMax"/>">呆滞物料</a><br/>
+ 	<a href="<s:url action="stockmanage/ShowMin"/>">物料不足</a><br/>
     </body>
 </html>
