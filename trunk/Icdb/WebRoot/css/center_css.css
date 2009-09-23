@@ -50,6 +50,12 @@ border:0px;
 margin-left:11px;
 }
 
+.center_table_def{
+background-color:#B4BCC2;
+border:0px;
+margin-left:11px;
+}
+
 .table_tr_right{
 background-color:#FFFFFF;
 font-size:12px;
@@ -103,6 +109,9 @@ margin-left:0px;
 font-size:15px;
 font-weight:bold;
 text-align:center;
+border-left:0;
+border-right:0;
+border-top:0;
 }
 .pages{
 font-size:12px;
