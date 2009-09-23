@@ -27,7 +27,8 @@
 	sd.departmentName,
 	sd.departmentCode,
 	sd.structCode,
-	sd.structName
+	sd.structName,
+	job.permissionCode
 	from job,
 	(select 
 	department.departmentCode,
@@ -46,7 +47,8 @@
 		jobCode,
 		jobName,
 		job.departmentCode,
-		department.departmentName
+		department.departmentName,
+		job.permissionCode
 		FROM job,department
 		WHERE 
 		job.departmentCode=department.departmentCode and
@@ -56,14 +58,15 @@
 	<insert id="insertJobBean" parameterClass="com.mydomain.bean.baseset.JobBean">
 		INSERT INTO 
 		 job
-		(jobCode,jobName,departmentCode,isEnabled) VALUES
-		(#jobCode#,#jobName#,#departmentCode#,1)
+		(jobCode,jobName,departmentCode,isEnabled,permissionCode) VALUES
+		(#jobCode#,#jobName#,#departmentCode#,1,#permissionCode#)
 	</insert>
 	<update id="updateJobBean" parameterClass="com.mydomain.bean.baseset.JobBean">
 		UPDATE job
 		SET
 		jobName=#jobName#,
 		departmentCode=#departmentCode#,
+		permissionCode=#permissionCode#,
 		isEnabled=1
 		WHERE jobCode=#jobCode#
 	</update>
