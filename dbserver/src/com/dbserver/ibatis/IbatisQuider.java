@@ -128,7 +128,7 @@ public class IbatisQuider implements IQuider {
 	public Object queryForObject(String methodName, Object parameterBean)
 			throws SQLException {
 		if (null != parameterBean) {
-			return sqlMapper.queryForObject(methodName);
+			return sqlMapper.queryForObject(methodName,parameterBean);
 		}
 		return null;
 	}

@@ -3,65 +3,69 @@ package com.mydomain.data;
 import java.util.Date;
 
 public class Person {
-	private int id;
-	private String firstName;
-	private String lastName;
-	private Date birthDate;
-	private double weightInKilograms;
-	private double heightInMeters;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private Date birthDate;
+    private double weightInKilograms;
+    private double heightInMeters;
 
-	public int getId() {
-		return id;
-	}
+    public Person() {
+        // TODO Auto-generated constructor stub
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public Date getBirthDate() {
-		return birthDate;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
+    public Date getBirthDate() {
+        return birthDate;
+    }
 
-	public double getWeightInKilograms() {
-		return weightInKilograms;
-	}
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
 
-	public void setWeightInKilograms(double weightInKilograms) {
-		this.weightInKilograms = weightInKilograms;
-	}
+    public double getWeightInKilograms() {
+        return weightInKilograms;
+    }
 
-	public double getHeightInMeters() {
-		return heightInMeters;
-	}
+    public void setWeightInKilograms(double weightInKilograms) {
+        this.weightInKilograms = weightInKilograms;
+    }
 
-	public void setHeightInMeters(double heightInMeters) {
-		this.heightInMeters = heightInMeters;
-	}
+    public double getHeightInMeters() {
+        return heightInMeters;
+    }
 
-	@Override
-	public String toString() {
-		return id + " " + firstName + " " + lastName + " " + birthDate + " "
-				+ weightInKilograms + " " + heightInMeters;
-	}
+    public void setHeightInMeters(double heightInMeters) {
+        this.heightInMeters = heightInMeters;
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + firstName + " " + lastName + " " + birthDate + " "
+                + weightInKilograms + " " + heightInMeters;
+    }
 
 }
