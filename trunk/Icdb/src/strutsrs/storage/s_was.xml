@@ -16,5 +16,14 @@
 <action name="GetOneWas" class="com.action.storage.WasAction" method="getOneWas">
 	<result name="success">/storage/was/WasOne.jsp</result>
 </action>
+<action name="UpdateOneWas" class="com.action.storage.WasAction" method="updateOneWas">
+	<result name="success">/storage/was/WasUpdate.jsp</result>
+</action>
+<action name="UpdateWasTage" class="com.action.storage.WasAction" method="updateWasTage">
+	<result name="success" type="redirect">ShowWas.action</result>
+</action>
+<action name="GoAddWas" class="com.action.storage.WasAction" method="goAddWas">
+	<result name="success">/storage/was/WasAdd.jsp</result>
+</action>
 </package>
 </struts>
