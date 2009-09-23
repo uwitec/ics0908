@@ -210,6 +210,7 @@ public class WasAction extends ActionSupport{
 		WasTageManage wtm=new WasTageManage();
 		wasTage=wtm.getPageWasTage(wasTage);
 		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
+		wasComplete=(LinkedHashMap<String, String>) IcdbOption.getTableState();
 		lhp=wtm.getWasTageList(wasTage);
 		return SUCCESS;
 	}
