@@ -10,6 +10,46 @@ public class WasMaterielBean extends BaseBean{
 	private String wasNumber;
 	private String wasMoney;
 	private String wasCause;
+	private String cargoSpaceCode;
+	private String cargoSpaceName;
+	private double stockAmount;
+	
+	/**
+	 * @return the stockAmount
+	 */
+	public double getStockAmount() {
+		return stockAmount;
+	}
+	/**
+	 * @param stockAmount the stockAmount to set
+	 */
+	public void setStockAmount(double stockAmount) {
+		this.stockAmount = stockAmount;
+	}
+	/**
+	 * @return the cargoSpaceCode
+	 */
+	public String getCargoSpaceCode() {
+		return cargoSpaceCode;
+	}
+	/**
+	 * @return the cargoSpaceName
+	 */
+	public String getCargoSpaceName() {
+		return cargoSpaceName;
+	}
+	/**
+	 * @param cargoSpaceCode the cargoSpaceCode to set
+	 */
+	public void setCargoSpaceCode(String cargoSpaceCode) {
+		this.cargoSpaceCode = cargoSpaceCode;
+	}
+	/**
+	 * @param cargoSpaceName the cargoSpaceName to set
+	 */
+	public void setCargoSpaceName(String cargoSpaceName) {
+		this.cargoSpaceName = cargoSpaceName;
+	}
 	/**
 	 * @return the materielCode
 	 */

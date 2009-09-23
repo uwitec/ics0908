@@ -9,7 +9,7 @@
 		select 
 		count(*) as countValue
 		from wastage as w,person as p
-		where p.personCode=w.operator and w.wasState!=0
+		where p.personCode=w.operator and w.wasState=#wasState#
 		and (
 		locate(#wasCode#,w.wasCode)>0  or
 		locate(#personName#,p.personName)>0 or
@@ -23,7 +23,7 @@
 		w.wasDoc
 		from wastage as w,person as p
 		where p.personCode=w.operator
-		and w.wasState!=0
+		and w.wasState=#wasState#
 		and (
 		locate(#wasCode#,w.wasCode)>0  or
 		locate(#personName#,p.personName)>0 or

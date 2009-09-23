@@ -42,7 +42,11 @@
 			jsd.jobCode,
 			jsd.jobName,
 			jsd.departmentCode,
-			jsd.departmentName
+			jsd.departmentName,
+			employee.userName,
+			employee.passWord,
+			employee.permissionCode,
+			employee.isAlowLogin
 			 from employee,
 			(select 
 			job.jobCode,
@@ -78,7 +82,11 @@
 			jsd.jobCode,
 			jsd.jobName,
 			jsd.departmentCode,
-			jsd.departmentName
+			jsd.departmentName,
+			employee.userName,
+			employee.passWord,
+			employee.permissionCode,
+			employee.isAlowLogin
 			 from employee,
 			(select 
 			job.jobCode,
@@ -98,12 +106,47 @@
 			and employee.isEnabled=1 
 			and employee.employeeCode=#employeeCode#
 	</select>
+	<select id="loginEmp" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
+		select
+			employee.employeeCode,
+			employee.personCode,
+			person.personName,
+			jsd.structCode,
+			jsd.structName,
+			jsd.jobCode,
+			jsd.jobName,
+			jsd.departmentCode,
+			jsd.departmentName,
+			employee.userName,
+			employee.passWord,
+			employee.permissionCode,
+			employee.isAlowLogin
+			 from employee,
+			(select 
+			job.jobCode,
+			job.jobName,
+			sd.*
+			from job,
+			(select 
+			department.departmentCode,
+			department.departmentName,
+			struct.structCode,
+			struct.structName
+			from department,struct where department.structCode=struct.structCode) as sd
+			where job.departmentCode=sd.departmentCode) as jsd,person
+			where 
+			employee.personCode=person.personCode 
+			and employee.jobCode=jsd.jobCode
+			and employee.isEnabled=1 
+			and employee.userName=#userName# and employee.passWord=#passWord#
+	</select>
+	
 	<insert id="insertEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			insert into 
 			employee
-			(employeeCode,personCode,jobCode,isEnabled)
+			(employeeCode,personCode,jobCode,isEnabled,userName,passWord,permissionCode,isAlowLogin)
 			values
-			(#employeeCode#,#personCode#,#jobCode#,1)
+			(#employeeCode#,#personCode#,#jobCode#,1,#userName#,#passWord#,#permissionCode#,#isAlowLogin#)
 	</insert>
 	<update id="updateEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			update employee

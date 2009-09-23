@@ -11,18 +11,25 @@
 	m.materielName,
 	w.wasNumber,
 	w.wasMoney,
-	w.wasCause
-	from wasMateriel as w,materiel as m
-	where w.materielCode=m.materielCode
-	and w.wasCode=#wasCode#
+	w.wasCause,
+	c.cargoSpaceName,
+	w.cargoSpaceCode,
+	s.stockAmount
+	from wasMateriel as w,materiel as m,cargospace as c,stock as s
+	where 
+	w.materielCode=m.materielCode and
+	w.cargoSpaceCode=c.cargoSpaceCode and 
+	s.cargoSpaceCode=w.cargoSpaceCode and
+	s.materielCode = w.materielCode and
+	w.wasCode=#wasCode#
 	</select>
 	<select id="getWasMaterielBean" parameterClass="String" resultClass="com.mydomain.bean.storage.WasMaterielBean">	
 	</select>
 	<insert id="insertWasMaterielBean" parameterClass="com.mydomain.bean.storage.WasMaterielBean">
 	insert into wasMateriel
-	(wasCode,materielCode,wasNumber,wasMoney,wasCause)
+	(wasCode,materielCode,wasNumber,wasMoney,wasCause,cargoSpaceCode)
 	values
-	(#wasCode#,#materielCode#,#wasNumber#,#wasMoney#,#wasCause#)
+	(#wasCode#,#materielCode#,#wasNumber#,#wasMoney#,#wasCause#,#cargoSpaceCode#)
 	</insert>
 	<update id="updateWasMaterielBean" parameterClass="com.mydomain.bean.storage.WasMaterielBean">
 	update wasMateriel
@@ -30,10 +37,10 @@
 	wasNumber=#wasNumber#,
 	wasMoney=#wasMoney#,
 	wasCause=#wasCause#
-	where wasCode=#wasCode# and materielCode=#materielCode#
+	where wasCode=#wasCode# and materielCode=#materielCode# and cargoSpaceCode=#cargoSpaceCode#
 	</update>
 	<delete id="deleteWasMaterielBean" parameterClass="com.mydomain.bean.storage.WasMaterielBean">
-		delete WasMateriel
-		WHERE wasCode=#wasCode# and materielCode=#materielCode#
+		delete from WasMateriel
+		WHERE wasCode=#wasCode#
 	</delete> 
 </sqlMap>
