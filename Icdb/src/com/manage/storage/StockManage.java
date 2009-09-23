@@ -62,13 +62,64 @@ public class StockManage {
 				DBServer.quider.updateObject(stock_list.get(i));
 			}
 			DBServer.quider.commitTransaction();
-			DBServer.quider.endTransaction();
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
 			return false;
+		}finally{
+			try {
+				DBServer.quider.endTransaction();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				com.dbserver.DBServer.logger.exception(e);
+			}
 		}
+	}
+	
+	public boolean outStockList(List<StockBean> stock_list){
 		
+		try {
+			DBServer.quider.startTransaction();
+			for(int i=0;i<stock_list.size();i++){
+				DBServer.quider.updateObject("outStock", stock_list.get(i));
+			}
+			DBServer.quider.commitTransaction();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
+		}finally{
+			try {
+				DBServer.quider.endTransaction();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				com.dbserver.DBServer.logger.exception(e);
+			}
+		}
+	}
+	
+	public boolean inStockList(List<StockBean> stock_list){
+		
+		try {
+			DBServer.quider.startTransaction();
+			for(int i=0;i<stock_list.size();i++){
+				DBServer.quider.updateObject("inStock", stock_list.get(i));
+			}
+			DBServer.quider.commitTransaction();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
+		}finally{
+			try {
+				DBServer.quider.endTransaction();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				com.dbserver.DBServer.logger.exception(e);
+			}
+		}
 	}
 }

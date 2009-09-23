@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.manage.baseset.PageManage;
+import com.mydomain.bean.storage.WasMaterielBean;
 import com.mydomain.bean.storage.WasTageBean;
 import com.tools.ICTools;
 
@@ -25,13 +26,6 @@ public class WasTageManage {
 	
 	public WasTageBean getPageWasTagePerson(WasTageBean wasTage){
 		PageManage pm=new PageManage();
-		if(wasTage==null){
-			wasTage=new WasTageBean();
-			ICTools.setBean(wasTage, "");
-			wasTage.setS_value("");
-		}else{
-			ICTools.setBean(wasTage,wasTage.getS_value());
-		}
 		return (WasTageBean) pm.setPage(wasTage, "selectWasPersonCount");
 	}
 	
@@ -79,14 +73,35 @@ public class WasTageManage {
 		}
 	}
 	
-	public boolean updateWasTage(WasTageBean wasTage){
-		try {
-			DBServer.quider.updateObject(wasTage);
-			return true;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			com.dbserver.DBServer.logger.exception(e);
+	public boolean updateWasTageAll(List<WasMaterielBean> w_List,WasTageBean wasTage){
+		if(w_List!=null){
+			try {
+				WasMaterielBean temp_wmb=new WasMaterielBean();
+				temp_wmb.setWasCode(wasTage.getWasCode());
+				
+				DBServer.quider.startTransaction();
+				DBServer.quider.deleteObject(temp_wmb);
+				DBServer.quider.updateObject(wasTage);
+				for(int i=0;i<w_List.size();i++){
+					DBServer.quider.insertObject((WasMaterielBean)w_List.get(i));
+				}
+				DBServer.quider.commitTransaction();
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				com.dbserver.DBServer.logger.exception(e);
+				return false;
+			}finally{
+				try {
+					DBServer.quider.endTransaction();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					com.dbserver.DBServer.logger.exception(e);
+				}
+			}
+		}else{
 			return false;
 		}
 	}
+	
 }
