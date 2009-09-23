@@ -29,8 +29,12 @@ String base=request.getContextPath();
 		 	for(var i=0; i<isChecked.length;i++){
 		 		if(isChecked[i].checked){
 
-		 			var materiel = new Materiel(table.rows.item(i+1).cells.item(1).innerHTML,table.rows.item(i+1).cells.item(2).innerHTML
-		 											,table.rows.item(i+1).cells.item(3).innerHTML,table.rows.item(i+1).cells.item(4).innerHTML);
+		 			var materiel = new Materiel(table.rows.item(i+1).cells.item(1).innerHTML,
+		 										table.rows.item(i+1).cells.item(2).innerHTML,
+		 										table.rows.item(i+1).cells.item(3).innerHTML,
+		 										table.rows.item(i+1).cells.item(4).innerHTML,
+		 										table.rows.item(i+1).cells.item(5).firstChild.value,
+		 										table.rows.item(i+1).cells.item(5).innerHTML);
 
 					materiels.push(materiel);
 		 		}
@@ -40,11 +44,13 @@ String base=request.getContextPath();
 			return materiels;
 		 }
 
-		 function Materiel(materielCode,materielName,stockPrice,stockAmount){
+		 function Materiel(materielCode,materielName,stockPrice,stockAmount,cargoSpaceCode,cargoSpaceName){
 		 	this.materielCode = materielCode;
 		 	this.materielName = materielName;
 		 	this.stockPrice = stockPrice;
 		 	this.stockAmount = stockAmount;
+		 	this.cargoSpaceCode = cargoSpaceCode;
+		 	this.cargoSpaceName = cargoSpaceName;
 		 }
 		 
 		 function formsubmit(){
@@ -63,19 +69,20 @@ String base=request.getContextPath();
 		    </s:form>
 		  	</div>
 		<div>
-		<table width="600" style="background-color:#B4BCC2;border:0px;margin-left:11px;" cellspacing="1" cellpadding="0" id="mat_tab">
+		<table width="400" style="background-color:#B4BCC2;border:0px;margin-left:11px;" cellspacing="1" cellpadding="0" id="mat_tab">
 	    <s:if test="lhp.size>0">
 	    	<tr class="table_head">
 	    		<td>选择</td>
-		    	<td>物料编号</td>
-		    	<td>物料名称</td>
-				<td>物料价格</td>
-				<td>物料数量</td>
+		    	<td>编号</td>
+		    	<td>名称</td>
+				<td>价格</td>
+				<td>数量</td>
+				<td>库位</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
 	    	<tr>
-	    	<td class="orgstructure_table_td_odd_r" colspan="5">
+	    	<td class="table_tr_no" colspan="5">
 	    		未找到符合的信息!
 	    	</td>
 	    	</tr>
@@ -94,6 +101,7 @@ String base=request.getContextPath();
 				<td><s:property value="materielName"/></td>
 				<td><s:property value="stockPrice"/></td>
 				<td><s:property value="stockAmount"/></td>
+				<td><s:property value="cargoSpaceName"/><s:hidden name="cargoSpaceCode" value="%{cargoSpaceCode}"/></td>
 			</tr>
        		</s:iterator>
 		    </table>
