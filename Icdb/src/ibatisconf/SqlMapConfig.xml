@@ -51,7 +51,7 @@
 	<sqlMap resource="com/mydomain/data/storage/Common.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/StockInCheckOrder.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/StockInCheckMateriel.xml"/>
-	<sqlMap resource="com/mydomain/data/storage/Materiel.xml"/>
+	<sqlMap resource="com/mydomain/data/baseset/Materiel.xml"/>
 	<sqlMap resource="com/mydomain/data/report/ABCReport.xml"/>
 	<sqlMap resource="com/mydomain/data/report/CheckStockList.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/StockStart.xml"/>
@@ -61,4 +61,6 @@
 	<sqlMap resource="com/mydomain/data/storage/StockOutHasMateriel.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/CheckStock.xml"/>
 	<sqlMap resource="com/mydomain/data/storage/CheckStockList.xml"/>
+	<sqlMap resource="com/mydomain/data/stockmanage/StockMax.xml"/>
+	<sqlMap resource="com/mydomain/data/stockmanage/StockMin.xml"/>
 	</sqlMapConfig>
