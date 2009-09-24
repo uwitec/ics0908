@@ -34,9 +34,6 @@ public class StockInAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static final String ADD_STOCK_IN = "addStockIn";
-	public static final String CHECK_STOCK_IN = "checkStockIn";
-	public static final String APPROVAL_STOCK_IN ="approvalStockIn";
 	private StockInBean stock;
 
 	private Page page;
@@ -65,26 +62,9 @@ public class StockInAction extends ActionSupport {
 			page = new Page();
 		}
 
-		if(StringUtil.isEmpty(flag)){
-			flag = StockInAction.ADD_STOCK_IN;
-		}
-
 		if (stock == null) {
 			stock = new StockInBean();
-			stock.setStockInStateType(2);
-			stock.setStockInCheckState(-2);
-			if(StockInAction.ADD_STOCK_IN.equals(flag)){
-				stock.setStockInStateType(2);
-				stock.setStockInCheckState(-2);
-			}else if(StockInAction.CHECK_STOCK_IN.equals(flag)){
-				stock.setStockInStateType(1);
-				stock.setStockInCheckState(0);
-			}else if(StockInAction.APPROVAL_STOCK_IN.equals(flag)){
-				stock.setStockInStateType(1);
-				stock.setCheckResult(1);
-			}
 		}
-
 
 		StockInManage stockInManage = new StockInManage();
 
@@ -98,6 +78,53 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String searchCheckStockIn() {
+
+		if (page == null) {
+			page = new Page();
+		}
+
+		if (stock == null) {
+			stock = new StockInBean();
+		}
+		stock.setStockInStateType(1);
+		stock.setStockInCheckState(1);
+
+		StockInManage stockInManage = new StockInManage();
+
+		try {
+			stockInList = stockInManage.findStockIn(stock, page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return ERROR;
+		}
+
+		return SUCCESS;
+	}
+
+	public String searchApprovalStockIn() {
+
+		if (page == null) {
+			page = new Page();
+		}
+
+		if (stock == null) {
+			stock = new StockInBean();
+		}
+
+		stock.setStockInStateType(1);
+
+		StockInManage stockInManage = new StockInManage();
+
+		try {
+			stockInList = stockInManage.findStockIn(stock, page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return ERROR;
+		}
+
+		return SUCCESS;
+	}
 
 	public String goAddStockIn() throws SQLException {
 		stock = new StockInBean();
@@ -111,11 +138,12 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String goEditStockIn() throws SQLException{
+	public String goEditStockIn() throws SQLException {
 
 		StockInManage stockInManage = new StockInManage();
 		stock = stockInManage.getStockInInfo(stock.getStockInCode());
-		this.StockInCheckMaterielBeanList = stockInManage.getStockInCheckMateriel(stock.getStockInCode());
+		this.StockInCheckMaterielBeanList = stockInManage
+				.getStockInCheckMateriel(stock.getStockInCode());
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
 		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
 
@@ -125,29 +153,44 @@ public class StockInAction extends ActionSupport {
 
 	}
 
-	public String goCheckStockIn() throws SQLException{
+	public String goCheckStockIn() throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		stock = stockInManage.getStockInInfo(stock.getStockInCode());
-		this.StockInCheckMaterielBeanList = stockInManage.getStockInCheckMateriel(stock.getStockInCode());
+		this.StockInCheckMaterielBeanList = stockInManage
+				.getStockInCheckMateriel(stock.getStockInCode());
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
 		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
 
 		SupplierManange supplierManage = new SupplierManange();
 		this.supplierList = supplierManage.getSupliers();
-		this.flag = StockInAction.CHECK_STOCK_IN;
 		return SUCCESS;
 	}
 
-	public String goApprovalStockIn()throws SQLException{
+	public String goApprovalStockIn() throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		stock = stockInManage.getStockInInfo(stock.getStockInCode());
-		this.StockInCheckMaterielBeanList = stockInManage.getStockInCheckMateriel(stock.getStockInCode());
+		this.StockInCheckMaterielBeanList = stockInManage
+				.getStockInCheckMateriel(stock.getStockInCode());
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
 		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
 
 		SupplierManange supplierManage = new SupplierManange();
 		this.supplierList = supplierManage.getSupliers();
-		this.flag = StockInAction.APPROVAL_STOCK_IN;
+
+		return SUCCESS;
+	}
+
+	public String goStockInOver() throws SQLException {
+		StockInManage stockInManage = new StockInManage();
+		stock = stockInManage.getStockInInfo(stock.getStockInCode());
+		this.StockInCheckMaterielBeanList = stockInManage
+				.getStockInCheckMateriel(stock.getStockInCode());
+		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
+		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
+
+		SupplierManange supplierManage = new SupplierManange();
+		this.supplierList = supplierManage.getSupliers();
+
 		return SUCCESS;
 	}
 
@@ -168,20 +211,23 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public List<?> findCargoSpaceList(String storehouseCode) throws SQLException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+	public List<?> findCargoSpaceList(String storehouseCode)
+			throws SQLException, IllegalAccessException,
+			InvocationTargetException, NoSuchMethodException {
 
 		StorehouseManage storehouseManage = new StorehouseManage();
 		this.storehouseList = storehouseManage.findStorehouse();
 		CargoSpaceBean cargoSpaceBean = new CargoSpaceBean();
 
-		if(StringUtil.isNotEmpty(storehouseCode)){
+		if (StringUtil.isNotEmpty(storehouseCode)) {
 			cargoSpaceBean.setStorehouseCode(storehouseCode);
 		}
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
-		cargoSpaceList = cargoSpaceManage.getCargoSListByCondition(cargoSpaceBean);
+		cargoSpaceList = cargoSpaceManage
+				.getCargoSListByCondition(cargoSpaceBean);
 
-		List list  = new ArrayList<String>();
-		for(CargoSpaceBean ca:cargoSpaceList){
+		List list = new ArrayList<String>();
+		for (CargoSpaceBean ca : cargoSpaceList) {
 			Map<String, String> map = BeanUtils.describe(ca);
 			list.add(map);
 		}
@@ -189,22 +235,24 @@ public class StockInAction extends ActionSupport {
 		return list;
 	}
 
-	public String addCargoSpaceList() throws SQLException{
+	public String addCargoSpaceList() throws SQLException {
 
 		StorehouseManage storehouseManage = new StorehouseManage();
 		this.storehouseList = storehouseManage.findStorehouse();
 		CargoSpaceBean cargoSpaceBean = new CargoSpaceBean();
 
-		if(StringUtil.isNotEmpty(storehouseCode)){
+		if (StringUtil.isNotEmpty(storehouseCode)) {
 			cargoSpaceBean.setStorehouseCode(storehouseCode);
 		}
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
-		cargoSpaceList = cargoSpaceManage.getCargoSListByCondition(cargoSpaceBean);
+		cargoSpaceList = cargoSpaceManage
+				.getCargoSListByCondition(cargoSpaceBean);
 
 		return SUCCESS;
 	}
+
 	/**
-	 * 保存入库卄1�7
+	 * 保存入库卄1�7
 	 *
 	 * @return
 	 * @throws SQLException
@@ -234,7 +282,8 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
-	public String submitStockIn(String json, String[] json2) throws SQLException {
+	public String submitStockIn(String json, String[] json2)
+			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
@@ -254,7 +303,8 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
-	public String saveCheckStockIn(String json, String[] json2) throws SQLException{
+	public String saveCheckStockIn(String json, String[] json2)
+			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
@@ -273,7 +323,9 @@ public class StockInAction extends ActionSupport {
 			return ERROR;
 		}
 	}
-	public String submitCheckStockIn(String json, String[] json2) throws SQLException{
+
+	public String submitCheckStockIn(String json, String[] json2)
+			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
@@ -293,7 +345,7 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
-	public String complStockIn(String json, String[] json2) throws SQLException{
+	public String complStockIn(String json, String[] json2) throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
@@ -313,19 +365,20 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
-	public String approvalStockIn(String json) throws SQLException{
+	public String approvalStockIn(String json) throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
 				StockInBean.class);
 
-		if(stockInManage.approvalSave(stockInBean)){
+		if (stockInManage.approvalSave(stockInBean)) {
 			return SUCCESS;
-		}else{
+		} else {
 			return ERROR;
 		}
 
 	}
+
 	public String deleteStockIn() {
 		return SUCCESS;
 	}
@@ -339,9 +392,9 @@ public class StockInAction extends ActionSupport {
 		return ERROR;
 	}
 
-	public String deleteStockIn(String stockInCode) throws SQLException{
+	public String deleteStockIn(String stockInCode) throws SQLException {
 		StockInManage stockInManage = new StockInManage();
-		if(stockInManage.deleteStockIn(stockInCode)){
+		if (stockInManage.deleteStockIn(stockInCode)) {
 			return SUCCESS;
 		}
 		return ERROR;
@@ -425,36 +478,28 @@ public class StockInAction extends ActionSupport {
 		this.supplierList = supplierList;
 	}
 
-
 	public String getFlag() {
 		return flag;
 	}
-
 
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
 
-
 	public String getStorehouseCode() {
 		return storehouseCode;
 	}
-
 
 	public void setStorehouseCode(String storehouseCode) {
 		this.storehouseCode = storehouseCode;
 	}
 
-
 	public List<StorehouseBean> getStorehouseList() {
 		return storehouseList;
 	}
 
-
 	public void setStorehouseList(List<StorehouseBean> storehouseList) {
 		this.storehouseList = storehouseList;
 	}
-
-
 
 }

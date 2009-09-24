@@ -10,25 +10,40 @@
 			method="searchStockIn">
 			<result name="success">/stockIn/stockIn.jsp</result>
 		</action>
+		<action name="searchCheckStockIn"
+			class="com.action.storage.StockInAction"
+			method="searchCheckStockIn">
+			<result name="success">/stockIn/checkStockIn.jsp</result>
+		</action>
+		<action name="searchApprovalStockIn"
+			class="com.action.storage.StockInAction"
+			method="searchApprovalStockIn">
+			<result name="success">/stockIn/approvalStockIn.jsp</result>
+		</action>
 		<action name="goAddStockIn"
 			class="com.action.storage.StockInAction"
 			method="goAddStockIn">
-			<result name="success">/stockIn/addStockIn.jsp</result>
+			<result name="success">/stockIn/addStockInManage.jsp</result>
 		</action>
 		<action name="goEditStockIn"
 			class="com.action.storage.StockInAction"
 			method="goEditStockIn">
-			<result name="success">/stockIn/addStockIn.jsp</result>
+			<result name="success">/stockIn/addStockInManage.jsp</result>
 		</action>
 		<action name="goCheckStockIn"
 			class="com.action.storage.StockInAction"
 			method="goCheckStockIn">
-			<result name="success">/stockIn/addStockIn.jsp</result>
+			<result name="success">/stockIn/checkStockInManage.jsp</result>
 		</action>
 		<action name="goApprovalStockIn"
 			class="com.action.storage.StockInAction"
 			method="goApprovalStockIn">
-			<result name="success">/stockIn/addStockIn.jsp</result>
+			<result name="success">/stockIn/approvalStockInManage.jsp</result>
+		</action>
+		<action name="goStockInOver"
+			class="com.action.storage.StockInAction"
+			method="goStockInOver">
+			<result name="success">/stockIn/stockInOverManage.jsp</result>
 		</action>
 		<action name="saveStockIn"
 			class="com.action.storage.StockInAction"
