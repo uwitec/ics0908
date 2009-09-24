@@ -85,6 +85,13 @@ public class ICTools {
         return nowTime;
 	}
 	
+	public static String getSearchTime(){
+		Date dt=new Date();//如果不需要格式,可直接用dt,dt就是当前系统时间
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置显示格式
+        String nowTime=df.format(dt);
+        return nowTime;
+	}
+	
 	public static void setBean(Object obj,String set_value){
 		 Class<?> c=obj.getClass();
 		 Method[] methods = c.getDeclaredMethods();
