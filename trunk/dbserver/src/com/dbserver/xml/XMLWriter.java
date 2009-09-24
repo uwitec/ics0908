@@ -69,7 +69,6 @@ public class XMLWriter {
 					fw.append(sbd.toString());
 					fw.flush();
 
-					System.out.println("write over.\r\n" + sbd.toString());
 				} catch (IOException e) {
 					e.printStackTrace();
 				} finally {

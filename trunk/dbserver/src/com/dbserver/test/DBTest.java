@@ -1,5 +1,12 @@
 package com.dbserver.test;
 
+import org.junit.Test;
+
+import com.dbserver.xml.XMLBean;
+import com.dbserver.xml.XMLReader;
+import com.dbserver.xml.XMLWriter;
+import com.mydomain.data.Person;
+
 public class DBTest {
 	String[] tgarr = { "¼×", "ÒÒ", "±û", "¶¡", "Îì", "¼º", "¸ý", "ÐÁ", "ÈÉ", "¹ï" };
 	String[] dzarr = { "×Ó", "³ó", "Òú", "Ã®", "³½", "ËÈ", "Îç", "Î´", "Éê", "ÓÏ", "Ðç",
@@ -31,8 +38,20 @@ public class DBTest {
 	public String getHYear(int year, boolean isBeforeZero) {
 		int a = 6 - (year % 10) / 2;
 		int b = (year - a) / 10 % 6;
-		
-		return tgarr[(year % 10-5)%10]+ dzarr[afterZero[(a + b) % 6] * 2 - 1];
+
+		return tgarr[(year % 10 - 5) % 10]
+				+ dzarr[afterZero[(a + b) % 6] * 2 - 1];
+
+	}
+
+	@Test
+	public void testXML() {
+
+		XMLBean b = new XMLBean("/ibatisconf/NewFile.xml");
+		XMLReader.readXMLBean(b);
+		System.out.println(b.getItemList());
+		b.setPath("/ibatisconf/test.xml");
+		XMLWriter.writeXMLBean(b);
 
 	}
 
@@ -41,9 +60,10 @@ public class DBTest {
 	 */
 	public static void main(String[] args) {
 		// new DBTest().test();
-		System.out.println(new DBTest().getHYear(2009, false));
-
-		System.out.println("end!");
+		new DBTest().testXML();
+//		System.out.println(new DBTest().getHYear(2009, false));
+//
+//		System.out.println("end!");
 		// com.dbserver.DBServer.logger.exception(e);
 	}
 }
