@@ -31,11 +31,8 @@ public class DBTest {
 	public String getHYear(int year, boolean isBeforeZero) {
 		int a = 6 - (year % 10) / 2;
 		int b = (year - a) / 10 % 6;
-		System.out.println(year % (10));
-		System.out.println(Integer.toBinaryString(year));
-		System.out.println(Integer.toBinaryString(0x000f));
-		System.out.println(Integer.toBinaryString(year & 0x000f));
-		return dzarr[afterZero[(a + b) % 6] * 2 - 1];
+		
+		return tgarr[(year % 10-5)%10]+ dzarr[afterZero[(a + b) % 6] * 2 - 1];
 
 	}
 
