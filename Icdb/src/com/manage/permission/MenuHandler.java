@@ -73,7 +73,6 @@ public class MenuHandler extends DefaultHandler {
 					aItem.setViewName(attributes.getValue("viewName"));
 					aItem.setAction(attributes.getValue("action"));
 					aItem.setSubItemList(new ArrayList<Item>());
-					aItem.setUserPermissionCode(18);
 
 					if (null != this.item
 							&& this.item.getLevel() < aItem.getLevel()) {

@@ -9,6 +9,38 @@ public class Menu {
 	final private int MAX_LOOP = 2000;
 	private int maxLoop = MAX_LOOP;
 
+	public void setItemPermission(String str) {
+		if (null != str && !"".equals(str)) {
+			if (null != itemList) {
+				for (int i = 0; i < itemList.size(); i++) {
+					setItemPerm(itemList.get(i), str);
+				}
+			}
+		}
+	}
+	
+	private void setItemPerm(Item item, String str){
+		if (--maxLoop <= 0) {
+			return;
+		}
+		
+		if (null != item) {
+			Integer pi = item.getPermissionIndex();
+			if (null != pi && pi < str.length()) {
+				if ('1' == str.charAt(pi)) {
+					item.setUserPermissionCode(pi);
+				} else {
+					item.setUserPermissionCode(-1);
+				}
+			}
+			List<Item> list = item.getSubItemList();
+			if (null != list)
+				for (int i = 0; i < list.size(); i++) {
+					setItemPerm(list.get(i), str);
+				}
+		}
+	}
+
 	public String viewMenu() {
 		StringBuilder sbd = new StringBuilder();
 

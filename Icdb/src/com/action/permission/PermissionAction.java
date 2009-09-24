@@ -22,8 +22,17 @@ public class PermissionAction extends ActionSupport {
 	private JobBean job;
 	private List<JobBean> jobList;
 
+	private String role;
 	private Menu userMenu;
 	private Menu sysMenu;
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String showEmployeeList() {
 		EmployeeManage em = new EmployeeManage();
@@ -48,7 +57,15 @@ public class PermissionAction extends ActionSupport {
 	}
 
 	public String showPermissioinList() {
+		String ps = "";
+		if ("employee".equals(role) && null != employee) {
+			ps = employee.getPermissionCode();
+		} else if ("job".equals(role) && null != job) {
+			ps = job.getPermissionCode();
+		}
+		System.out.println("ps: " + ps + " job: " + role);
 		userMenu = MenuReader.readMenu("userMenu");
+		userMenu.setItemPermission(ps);
 		return "SUCCESS";
 	}
 
