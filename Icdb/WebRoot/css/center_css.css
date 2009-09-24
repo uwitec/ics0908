@@ -42,6 +42,20 @@ top:30px;
 right:2%;
 vertical-align:text-bottom;
 }
+.searche_DIV{
+background-color:#E6ECF1;
+margin-left:450px;
+margin-top:150px;
+width:300px;
+height:150px;
+align:center;
+font-size:12px;
+color:#0C5F8F;
+position:absolute;
+z-index:2000;
+FILTER:Alpha(Opacity=100)
+bordercolor = "#FFFFFF";
+}
 
 .center_table{
 background-color:#B4BCC2;
