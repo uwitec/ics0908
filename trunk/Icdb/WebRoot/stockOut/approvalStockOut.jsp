@@ -125,12 +125,12 @@
 	%>
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<body>
-		<s:form id="searchForm" theme="simple" action="searchStockOut.action"
+		<s:form id="searchForm" theme="simple" action="searchApprovalStockOut.action"
 			namespace="/stockOut">
 			<table width="90%" align="center">
 				<tr>
 					<td>
-						<s:textfield name="stock.stockOutCode">入库单编号</s:textfield>
+						<s:textfield name="stock.stockOutCode">出库单编号</s:textfield>
 					</td>
 
 					<td>
@@ -155,40 +155,22 @@
                                 align      : "Tl"
                             });
                         </script>
-					<td>
-						<s:select id="stockOutStateSelect" name="stock.stockOutStateType"
-							list="#{'1':'完成','2':'未完成'}" value="2"
-							value="stock.stockInStateType" headerKey="" headerValue="全部"
-							 label="单据状态">单据状态</s:select>
-					</td>
-					<!--
+
 					<td id="stockInCheckStateTab">
-						<s:select id="stockInCheckStateSelect"
-							name="stock.stockInCheckState" list="#{'0':'未审核','-1':'审核未通过','1':'审核通过'}"
-							value="stock.stockInCheckState" label="审核状态" headerKey=""
-							headerValue="全部" onchange="checkStateChange();">审核状态</s:select>
+						<s:select id="stockOutCheckStateSelect"
+							name="stock.stockOutCheckState" list="#{'0':'未审核','-1':'审核未通过','1':'审核通过'}"
+							value="stock.stockOutCheckState" label="审核状态" headerKey=""
+							headerValue="全部">审核状态</s:select>
 					</td>
-					<td id="checkResultTab">
-						<s:select id="checkResultSelect" name="stock.checkResult"
-							list="#{'0':'未检查','1':'检查通过','-1':'检查未通过'}" value="2"
-							value="stock.checkResult" headerKey="" headerValue="全部"
-							 label="检测状态">检查状态</s:select>
-					</td>
+
 					<script type="text/javascript">
 					//	stockInStateChange();
 					</script>
-					-->
 					<td>
 						<input type="button" value="查询" onclick="javascript:check();" />
 					</td>
 				</tr>
-				<tr>
-					<td align="left" colspan="6">
-						<input type="button" value="新建出库申请单"
-							onclick="window.location.href='goAddStockOut.action'" />
-					</td>
 
-				</tr>
 			</table>
 
 			<p />
@@ -253,34 +235,10 @@
 								</td>
 								<td bgcolor="white">
 									<s:if
-										test="stockOutDealState==-1||stockOutCheckState==-1||(stockOutStateType!=1 && stockOutStateType!=3 && stockOutCheckState != 1 && stockOutDealState!= 1)">
-										<input type='button'
-											onclick='window.location.href="goEditStockOut.action?stock.stockOutOrderCode=<%=request.getAttribute("stockOutOrderCode")%>"'
-											value="编辑" />
-									</s:if>
-									<!--
-									<s:if
-										test="stockOutStateType==1 && stockOutCheckState==1 && stockOutDealState==0 ">
-										<input type='button'
-											onclick='window.location.href="goCheckStockOut.action?stock.stockOutOrderCode=<%=request.getAttribute("stockOutOrderCode")%>"'
-											value="检查" />
-									</s:if>
-									<s:if
 										test="stockOutStateType == 1 && stockOutCheckState==0">
 										<input type='button'
 											onclick='window.location.href="goApprovalStockOut.action?stock.stockOutOrderCode=<%=request.getAttribute("stockOutOrderCode")%>"'
 											value="审核">
-									</s:if>
-									<s:if
-										test="stockOutStateType == 1 && stockOutCheckState==1 && stockOutDealState==1 && stockOutWithState!=1">
-										<input type='button'
-											onclick='window.location.href="goApprovalStockOut.action?stock.stockOutOrderCode=<%=request.getAttribute("stockOutOrderCode")%>"'
-											value="出库">
-									</s:if>
-									 -->
-									<s:if test="stockOutDealState==-1||stockOutCheckState==-1||(stockOutStateType!=1 && stockOutStateType!=3)">
-										<input type="button" onclick="javasctipt:deleteStockOut(this);"
-											value="删除" />
 									</s:if>
 								</td>
 							</tr>

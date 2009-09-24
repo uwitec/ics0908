@@ -57,6 +57,74 @@ public class StockOutAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String searchApprovalStockOut() {
+
+		if (page == null) {
+			page = new Page();
+		}
+
+		if (stock == null) {
+			stock = new StockOutBean();
+		}
+		stock.setStockOutStateType(1);
+		StockOutManage stockOutManage = new StockOutManage();
+		try {
+			stockOutList = stockOutManage.findStockOut(stock, page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return ERROR;
+		}
+
+		return SUCCESS;
+	}
+
+	public String searchCheckStockOut() {
+
+		if (page == null) {
+			page = new Page();
+		}
+
+		if (stock == null) {
+			stock = new StockOutBean();
+		}
+		stock.setStockOutCheckState(1);
+		stock.setStockOutStateType(1);
+
+		StockOutManage stockOutManage = new StockOutManage();
+		try {
+			stockOutList = stockOutManage.findStockOut(stock, page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return ERROR;
+		}
+
+		return SUCCESS;
+	}
+
+	public String searchStockOutOver() {
+
+		if (page == null) {
+			page = new Page();
+		}
+
+		if (stock == null) {
+			stock = new StockOutBean();
+		}
+		stock.setStockOutDealState(1);
+		stock.setStockOutStateType(1);
+		stock.setStockOutCheckState(1);
+
+		StockOutManage stockOutManage = new StockOutManage();
+		try {
+			stockOutList = stockOutManage.findStockOut(stock, page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return ERROR;
+		}
+
+		return SUCCESS;
+	}
+
 	public String goAddStockOut() throws SQLException {
 		stock = new StockOutBean();
 		stockOutHasMaterielBean = new StockOutHasMaterielBean();
@@ -146,6 +214,15 @@ public class StockOutAction extends ActionSupport {
 				.getStockOutHaskMaterielAndStock(stock.getStockOutOrderCode());
 		return SUCCESS;
 	}
+
+	public String goStockOutOver() throws SQLException {
+		StockOutManage stockOutManage = new StockOutManage();
+		stock = stockOutManage.getStockOutInfo(stock.getStockOutOrderCode());
+		this.stockOutHasMaterielList = stockOutManage
+				.getStockOutHaskMaterielAndStock(stock.getStockOutOrderCode());
+		return SUCCESS;
+	}
+
 
 	public String deleteStockOutMateriel(String materielCode,
 			String stockOutCode) throws SQLException {
