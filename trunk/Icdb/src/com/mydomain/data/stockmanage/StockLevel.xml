@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StockOutIn">
+	<select id="showOutMaCount" resultClass="com.mydomain.bean.stockmanage.StockLevel">
+		select
+		count(*) as countValue
+		from materiel as m right outer join
+		(select 
+		sm.materielCode,
+	    sum(stockOutAmount) as smxiao
+		from stockouthasmateriel as sm
+		where sm.stockOutOrderCode in
+		(select stockOutOrderCode from stockoutorder
+		where stockOutDate between #startTime# and #endTime#)
+		group by sm.materielCode) as sout
+		on  m.materielCode=sout.materielCode 
+		where locate(#materielName#,m.materielName)>0
+	</select>
+	<select id="showOutMa" resultClass="com.mydomain.bean.stockmanage.StockLevel">
+		select
+		m.materielCode,
+		m.materielName,
+		sout.smxiao,	
+		m.materielABC,
+		m.materielMinStore,
+		m.materielMaxStore
+		from materiel as m right outer join
+		(select 
+		sm.materielCode,
+	        sum(stockOutAmount) as smxiao
+		from stockouthasmateriel as sm
+		where sm.stockOutOrderCode in
+		(select stockOutOrderCode from stockoutorder
+		where stockOutDealDate between #startTime# and #endTime#)
+		group by sm.materielCode) as sout
+		on  m.materielCode=sout.materielCode 
+		where locate(#materielName#,m.materielName)>0
+		limit #startValue#,#endValue#
+	</select>
+</sqlMap>

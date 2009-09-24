@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="StockTurn">
+	<select id="showStockTurnCount" resultClass="com.mydomain.bean.stockmanage.StockTurn">
+		select 
+		count(*) as countValue
+		from (materiel as m left outer join
+		(select 
+		materielcode,
+	    sum(lastAmount) as inamount
+		from stockincheckmateriel
+		where stockInCode in
+		(select stockInCode from stockincheckorder where stockInDate between #startTime# and #endTime#)
+		group by materielCode) as instock
+		 on m.materielcode=instock.materielcode)
+		left outer join
+		(select 
+		materielCode,
+	    sum(stockOutAmount) as outamount
+		from stockouthasmateriel
+		where stockOutOrderCode in
+		(select stockOutOrderCode from stockoutorder where stockOutDate between #startTime# and #endTime#)
+		group by materielCode) as outstock
+		on m.materielcode=outstock.materielCode
+		where (instock.inamount is not null or outstock.outamount is not null) and
+		locate(#materielName#,m.materielName)>0 and locate(#materielABC#,materielABC)>0
+	</select>
+	<select id="showStockTurnList" resultClass="com.mydomain.bean.stockmanage.StockTurn">
+		select 
+		m.materielCode,
+		m.materielName,
+		m.materielABC,
+		case 
+		when instock.inamount is null then 0
+		else instock.inamount
+		end inamount,
+		case 
+		when outstock.outamount is null then 0
+		else outstock.outamount
+		end outamount
+		from (materiel as m left outer join
+		(select 
+		materielcode,
+	    sum(lastAmount) as inamount
+		from stockincheckmateriel
+		where stockInCode in
+		(select stockInCode from stockincheckorder where stockInDate between #startTime# and #endTime#)
+		group by materielCode) as instock
+		 on m.materielcode=instock.materielcode)
+		left outer join
+		(select 
+		materielCode,
+	    sum(stockOutAmount) as outamount
+		from stockouthasmateriel
+		where stockOutOrderCode in
+		(select stockOutOrderCode from stockoutorder where stockOutDate between #startTime# and #endTime#)
+		group by materielCode) as outstock
+		on m.materielcode=outstock.materielCode
+		where (instock.inamount is not null or outstock.outamount is not null) and
+		locate(#materielName#,m.materielName)>0 and locate(#materielABC#,materielABC)>0
+		limit #startValue#,#endValue#
+	</select>
+</sqlMap>
