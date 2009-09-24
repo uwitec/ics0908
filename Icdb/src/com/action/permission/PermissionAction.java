@@ -12,109 +12,112 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class PermissionAction extends ActionSupport {
 
-	/**
+    /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private List<EmployeeBean> employeeList;
-	private EmployeeBean employee;
-	private JobBean job;
-	private List<JobBean> jobList;
+    private List<EmployeeBean> employeeList;
+    private EmployeeBean employee;
+    private JobBean job;
+    private List<JobBean> jobList;
 
-	private String role;
-	private Menu userMenu;
-	private Menu sysMenu;
+    private String role;
+    private Menu userMenu;
+    private Menu sysMenu;
 
-	public String getRole() {
-		return role;
-	}
+    public String getRole() {
+        return role;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public void setRole(String role) {
+        this.role = role;
+    }
 
-	public String showEmployeeList() {
-		EmployeeManage em = new EmployeeManage();
-		if (null == employee) {
-			employee = em.getPageEmployee(employee);
-		}
-		if (null == employeeList) {
-			employeeList = em.getEmployeeList(employee);
-		}
-		return "SUCCESS";
-	}
+    public String showEmployeeList() {
+        EmployeeManage em = new EmployeeManage();
+        if (null == employee) {
+            employee = em.getPageEmployee(employee);
+        }
+        if (null == employeeList) {
+            employeeList = em.getEmployeeList(employee);
+        }
+        return "SUCCESS";
+    }
 
-	public String showJobList() {
-		JobManage jm = new JobManage();
-		if (null == job) {
-			job = jm.getPageJob(job);
-		}
-		if (null == employeeList) {
-			jobList = jm.getJobList(job);
-		}
-		return "SUCCESS";
-	}
+    public String showJobList() {
+        JobManage jm = new JobManage();
+        if (null == job) {
+            job = jm.getPageJob(job);
+        }
+        if (null == employeeList) {
+            jobList = jm.getJobList(job);
+        }
+        return "SUCCESS";
+    }
 
-	public String showPermissioinList() {
-		String ps = "";
-		if ("employee".equals(role) && null != employee) {
-			ps = employee.getPermissionCode();
-		} else if ("job".equals(role) && null != job) {
-			ps = job.getPermissionCode();
-		}
-		System.out.println("ps: " + ps + " job: " + role);
-		userMenu = MenuReader.readMenu("userMenu");
-		userMenu.setItemPermission(ps);
-		return "SUCCESS";
-	}
+    public String showPermissioinList() {
+        String ps = "";
+        if ("employee".equals(role) && null != employee) {
+            employee = new EmployeeManage().getEmployeeOne(employee
+                    .getEmployeeCode());
+            ps = employee.getPermissionCode();
+        } else if ("job".equals(role) && null != job) {
+            job = new JobManage().getJobOne(job.getJobCode());
+            ps = job.getPermissionCode();
+        }
+        System.out.println("ps: " + ps + " job: " + role);
+        userMenu = MenuReader.readMenu("userMenu");
+        userMenu.setItemPermission(ps);
+        return "SUCCESS";
+    }
 
-	public List<EmployeeBean> getEmployeeList() {
-		return employeeList;
-	}
+    public List<EmployeeBean> getEmployeeList() {
+        return employeeList;
+    }
 
-	public void setEmployeeList(List<EmployeeBean> employeeList) {
-		this.employeeList = employeeList;
-	}
+    public void setEmployeeList(List<EmployeeBean> employeeList) {
+        this.employeeList = employeeList;
+    }
 
-	public EmployeeBean getEmployee() {
-		return employee;
-	}
+    public EmployeeBean getEmployee() {
+        return employee;
+    }
 
-	public void setEmployee(EmployeeBean employee) {
-		this.employee = employee;
-	}
+    public void setEmployee(EmployeeBean employee) {
+        this.employee = employee;
+    }
 
-	public JobBean getJob() {
-		return job;
-	}
+    public JobBean getJob() {
+        return job;
+    }
 
-	public void setJob(JobBean job) {
-		this.job = job;
-	}
+    public void setJob(JobBean job) {
+        this.job = job;
+    }
 
-	public List<JobBean> getJobList() {
-		return jobList;
-	}
+    public List<JobBean> getJobList() {
+        return jobList;
+    }
 
-	public void setJobList(List<JobBean> jobList) {
-		this.jobList = jobList;
-	}
+    public void setJobList(List<JobBean> jobList) {
+        this.jobList = jobList;
+    }
 
-	public Menu getUserMenu() {
-		return userMenu;
-	}
+    public Menu getUserMenu() {
+        return userMenu;
+    }
 
-	public void setUserMenu(Menu userMenu) {
-		this.userMenu = userMenu;
-	}
+    public void setUserMenu(Menu userMenu) {
+        this.userMenu = userMenu;
+    }
 
-	public Menu getSysMenu() {
-		return sysMenu;
-	}
+    public Menu getSysMenu() {
+        return sysMenu;
+    }
 
-	public void setSysMenu(Menu sysMenu) {
-		this.sysMenu = sysMenu;
-	}
+    public void setSysMenu(Menu sysMenu) {
+        this.sysMenu = sysMenu;
+    }
 
 }
