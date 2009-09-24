@@ -33,5 +33,7 @@
    
  	<a href="<s:url action="stockmanage/ShowMax"/>">呆滞物料</a><br/>
  	<a href="<s:url action="stockmanage/ShowMin"/>">物料不足</a><br/>
+ 	<a href="<s:url action="stockmanage/ShowOutLevel"/>">库存消耗</a><br/>
+ 	<a href="<s:url action="stockmanage/ShowStockTurn"/>">库存周转</a><br/>
     </body>
 </html>
