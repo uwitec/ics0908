@@ -26,11 +26,16 @@
    <a href="<s:url action="storage/ShowCheck"/>">盘点</a><br/>
    <a href="<s:url action="storage/ShowWas"/>">物料报损</a><br/>
    <a href="<s:url action="storage/ShowWasHistroy"/>">物料历史清单</a><br/>
-   <a href="<s:url action="storage/ShowCheckApprove"/>">盘点审批</a>
-   <a href="<s:url action="stockIn/searchStockIn"/>">入库管理</a><br/>
-   <a href="<s:url action="stockOut/searchStockOut"/>">出库管理</a><br/>
+   <a href="<s:url action="storage/ShowCheckApprove"/>">盘点审批</a><br/>
+   <a href="<s:url action="stockIn/searchStockIn"/>">入库申请管理</a><br/>
+   <a href="<s:url action="stockIn/searchApprovalStockIn"/>">入库审核管理</a><br/>
+   <a href="<s:url action="stockIn/searchCheckStockIn"/>">入库检查管理</a><br/>
+   <a href="<s:url action="stockOut/searchStockOut"/>">出库申请管理</a><br/>
+   <a href="<s:url action="stockOut/searchApprovalStockOut"/>">出库审核管理</a><br/>
+   <a href="<s:url action="stockOut/searchCheckStockOut"/>">出库检查管理</a><br/>
+   <a href="<s:url action="stockOut/searchStockOutOver"/>">出库</a><br/>
    -------------------库存管理---------------------------------<br/>
-   
+
  	<a href="<s:url action="stockmanage/ShowMax"/>">呆滞物料</a><br/>
  	<a href="<s:url action="stockmanage/ShowMin"/>">物料不足</a><br/>
  	<a href="<s:url action="stockmanage/ShowOutLevel"/>">库存消耗</a><br/>
