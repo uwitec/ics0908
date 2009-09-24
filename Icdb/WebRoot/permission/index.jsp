@@ -61,7 +61,7 @@ function initFunTree(){
 		</tr>
 		<s:iterator value="employeeList" status="stat">
 			<s:if test="stat.index\2==0">
-				<tr class="table_tr_odd"></tr>
+				<tr class="table_tr_odd">
 			</s:if>
 			<s:else>
 				<tr class="table_tr__even">
@@ -81,7 +81,7 @@ function initFunTree(){
 		</tr>
 		<s:iterator value="jobList" status="stat">
 			<s:if test="stat.index\2==0">
-				<tr class="table_tr_odd"></tr>
+				<tr class="table_tr_odd">
 			</s:if>
 			<s:else>
 				<tr class="table_tr__even">
@@ -89,7 +89,8 @@ function initFunTree(){
 			<td><s:property value="jobName" /></td>
 			<td><s:property value="departmentName" /></td>
 			<td><img src="<%=base%>/images/img03.gif"
-				onclick="window.showModalDialog('ShowPermissioinList.action', '', 'width=500,height=300');"></td>
+				onclick="window.showModalDialog('ShowPermissioinList.action?role=job&job.jobCode=<s:property value="jobCode" />', '', 'width=430px,height=300px');">
+			</td>
 			</tr>
 		</s:iterator>
 	</s:elseif>
