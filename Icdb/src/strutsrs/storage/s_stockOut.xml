@@ -9,21 +9,37 @@
 			class="com.action.storage.StockOutAction" method="searchStockOut">
 			<result name="success">/stockOut/stockOut.jsp</result>
 		</action>
+		<action name="searchCheckStockOut"
+			class="com.action.storage.StockOutAction" method="searchCheckStockOut">
+			<result name="success">/stockOut/checkStockOut.jsp</result>
+		</action>
+		<action name="searchApprovalStockOut"
+			class="com.action.storage.StockOutAction" method="searchApprovalStockOut">
+			<result name="success">/stockOut/approvalStockOut.jsp</result>
+		</action>
+		<action name="searchStockOutOver"
+			class="com.action.storage.StockOutAction" method="searchStockOutOver">
+			<result name="success">/stockOut/stockOutOver.jsp</result>
+		</action>
 		<action name="goAddStockOut"
 			class="com.action.storage.StockOutAction" method="goAddStockOut">
-			<result name="success">/stockOut/stockOutManage.jsp</result>
+			<result name="success">/stockOut/addStockOutManage.jsp</result>
 		</action>
 		<action name="goEditStockOut"
 			class="com.action.storage.StockOutAction" method="goEditStockOut">
-			<result name="success">/stockOut/stockOutManage.jsp</result>
+			<result name="success">/stockOut/addStockOutManage.jsp</result>
 		</action>
 		<action name="goApprovalStockOut"
 			class="com.action.storage.StockOutAction" method="goApprovalStockOut">
-			<result name="success">/stockOut/stockOutManage.jsp</result>
+			<result name="success">/stockOut/approvalStockOutManage.jsp</result>
 		</action>
 		<action name="goCheckStockOut"
 			class="com.action.storage.StockOutAction" method="goCheckStockOut">
-			<result name="success">/stockOut/stockOutManage.jsp</result>
+			<result name="success">/stockOut/checkStockOutManage.jsp</result>
+		</action>
+		<action name="goStockOutOver"
+			class="com.action.storage.StockOutAction" method="goStockOutOver">
+			<result name="success">/stockOut/stockOutOverManage.jsp</result>
 		</action>
 		<action name="showMateriel"
 			class="com.action.storage.StockOutAction" method="addMaterielList">

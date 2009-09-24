@@ -81,6 +81,7 @@ public class StockOutManage extends GenericManage<StockOutBean, Long> {
 			stockOutBean.setStockOutWithState(0);
 			stockOutBean.setStockOutDealState(0);
 			stockOutBean.setStockOutCheckState(0);
+			stockOutBean.setStockOutWithState(0);
 			stockOutBean.setStockOutStateType(2);
 			if (this.getStockOutCount(stockOutBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_OUT",
@@ -118,6 +119,7 @@ public class StockOutManage extends GenericManage<StockOutBean, Long> {
 			stockOutBean.setStockOutWithState(0);
 			stockOutBean.setStockOutDealState(0);
 			stockOutBean.setStockOutCheckState(0);
+			stockOutBean.setStockOutWithState(0);
 			stockOutBean.setStockOutStateType(1);
 			if (this.getStockOutCount(stockOutBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_OUT",
@@ -223,6 +225,7 @@ public class StockOutManage extends GenericManage<StockOutBean, Long> {
 		try {
 			DBServer.quider.startTransaction();
 			stockOutBean.setStockOutDealState(0);
+			stockOutBean.setStockOutWithState(0);
 			stockOutBean.setStockOutCheckDate(new Date());
 
 			DBServer.quider.updateObject("UPDATE_SELECT_STOCK_OUT",
