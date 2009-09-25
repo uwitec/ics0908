@@ -40,5 +40,7 @@
  	<a href="<s:url action="stockmanage/ShowMin"/>">物料不足</a><br/>
  	<a href="<s:url action="stockmanage/ShowOutLevel"/>">库存消耗</a><br/>
  	<a href="<s:url action="stockmanage/ShowStockTurn"/>">库存周转</a><br/>
+ 	<a href="<s:url action="stockmanage/ShowMaterInFrom"/>">物料流入</a><br/>
+ 	<a href="<s:url action="stockmanage/ShowMaterOutFrom"/>">物料流出</a><br/>
     </body>
 </html>
