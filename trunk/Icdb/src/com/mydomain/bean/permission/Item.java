@@ -9,6 +9,7 @@ public class Item {
 	private List<Item> subItemList;
 	private Integer level;
 	private Integer userPermissionCode;
+	private boolean isHidden;
 
 	private String action;
 
@@ -66,6 +67,14 @@ public class Item {
 
 	public void setUserPermissionCode(Integer userPermissionCode) {
 		this.userPermissionCode = userPermissionCode;
+	}
+
+	public boolean isHidden() {
+		return isHidden;
+	}
+
+	public void setHidden(boolean isHidden) {
+		this.isHidden = isHidden;
 	}
 
 }
