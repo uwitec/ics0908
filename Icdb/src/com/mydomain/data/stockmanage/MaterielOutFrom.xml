@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MaterielOutFrom">
+	<select id="materOutFromCount" resultClass="com.mydomain.bean.stockmanage.MaterOutFromBean">
+		select
+		count(*) as countValue
+		from 
+		(select 
+		so.materielcode,
+		so.stockOutOrderCode,
+	    so.stockOutAmount,
+		sor.customerCode,
+		c.storehousecode
+		from stockouthasmateriel as so,cargospace as c,stockoutorder as sor
+		where 
+		so.stockOutOrderCode in(select stockOutOrderCode from stockoutorder where stockOutDate between #startTime# and #endTime#) and
+		so.stockOutOrderCode=sor.stockOutOrderCode and
+		so.cargoSpaceCode=c.cargospaceCode) as outstock,storehouse as s,materiel as m,customer as c
+		where
+		outstock.materielcode=m.materielcode and
+		outstock.storehousecode=s.storehousecode and
+		c.customerCode=outstock.customerCode and
+		locate(#materielName#,m.materielName)>0 and 
+		locate(#materielABC#,m.materielABC)>0 and
+		locate(#customerCode#,c.customerCode)>0 and
+		locate(#storehouseName#,s.storehouseName)>0
+	</select>
+	<select id="materOutFromList" resultClass="com.mydomain.bean.stockmanage.MaterOutFromBean">
+		select
+		m.materielCode,
+		m.materielName,
+		s.storehouseName,
+		outstock.stockOutAmount,
+		c.customerCode,
+		m.materielABC
+		from 
+		(select 
+		so.materielcode,
+		so.stockOutOrderCode,
+	    so.stockOutAmount,
+		sor.customerCode,
+		c.storehousecode
+		from stockouthasmateriel as so,cargospace as c,stockoutorder as sor
+		where 
+		so.stockOutOrderCode in(select stockOutOrderCode from stockoutorder where stockOutDate between #startTime# and #endTime#) and
+		so.stockOutOrderCode=sor.stockOutOrderCode and
+		so.cargoSpaceCode=c.cargospaceCode) as outstock,storehouse as s,materiel as m,customer as c
+		where
+		outstock.materielcode=m.materielcode and
+		outstock.storehousecode=s.storehousecode and
+		c.customerCode=outstock.customerCode and
+		locate(#materielName#,m.materielName)>0 and 
+		locate(#materielABC#,m.materielABC)>0 and
+		locate(#customerCode#,c.customerCode)>0 and
+		locate(#storehouseName#,s.storehouseName)>0
+		limit #startValue#,#endValue#
+	</select>
+</sqlMap>

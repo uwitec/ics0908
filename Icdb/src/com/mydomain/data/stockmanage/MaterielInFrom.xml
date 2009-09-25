@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MaterielInFrom">
+	<select id="materInFromCount" resultClass="com.mydomain.bean.stockmanage.MaterInFromBean">
+		select
+		count(*) as countValue
+		from 
+		(select 
+		si.materielcode,
+	    si. lastAmount,
+		s.supplierName,
+		c.storehousecode
+		from stockincheckmateriel as si,supplier as s,cargospace as c
+		where 
+		si.stockInCode in(select stockInCode from stockincheckorder where stockInDate between #startTime# and #endTime#) and
+		s.suppliercode=si.suppliercode and 
+		si.cargoSpaceCode=c.cargospaceCode) as instock,storehouse as s,materiel as m
+		where
+		instock.materielcode=m.materielcode and
+		instock.storehousecode=s.storehousecode and
+		locate(#materielName#,m.materielName)>0 and 
+		locate(#materielABC#,m.materielABC)>0 and
+		locate(#supplierName#,instock.supplierName)>0 and
+		locate(#storehouseName#,s.storehouseName)>0
+	</select>
+	<select id="materInFromList" resultClass="com.mydomain.bean.stockmanage.MaterInFromBean">
+		select
+		m.materielCode,
+		m.materielName,
+		s.storehouseName,
+		instock.lastamount,
+		instock.supplierName,
+		m.materielABC
+		from 
+		(select 
+		si.materielcode,
+	     si.lastAmount,
+		s.supplierName,
+		c.storehousecode
+		from stockincheckmateriel as si,supplier as s,cargospace as c
+		where 
+		si.stockInCode in(select stockInCode from stockincheckorder  where stockInDate between #startTime# and #endTime#) and
+		s.suppliercode=si.suppliercode and 
+		si.cargoSpaceCode=c.cargospaceCode) as instock,storehouse as s,materiel as m
+		where
+		instock.materielcode=m.materielcode and
+		instock.storehousecode=s.storehousecode and
+		locate(#materielName#,m.materielName)>0 and 
+		locate(#materielABC#,m.materielABC)>0 and
+		locate(#supplierName#,instock.supplierName)>0 and
+		locate(#storehouseName#,s.storehouseName)>0
+		limit #startValue#,#endValue#
+	</select>
+</sqlMap>
