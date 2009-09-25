@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="materOutInFrom" extends="struts-default" namespace="/stockmanage">
+<action name="ShowMaterInFrom" class="com.action.stockmanage.MaterielOutInFromAction" method="showMaterInFrom">
+	<result name="success">/stockmanage/materOutInFrom/MaterInFrom.jsp</result>
+</action>
+<action name="ShowMaterOutFrom" class="com.action.stockmanage.MaterielOutInFromAction" method="showMaterOutFrom">
+	<result name="success">/stockmanage/materOutInFrom/MaterOutFrom.jsp</result>
+</action>
+</package>
+</struts>
