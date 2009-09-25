@@ -1,11 +1,19 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
-"http://www.w3.org/TR/html4/strict.dtd">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-	<head>
-		<title>新增出库单</title>
-		<script type='text/javascript'
+<% 
+String base=request.getContextPath(); 
+int index = 1;
+%>
+    <head>
+       <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
+	   <title>出库单</title>
+	</HEAD>
+	<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/interface/StockOutAction.js'></script>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/engine.js'></script>
@@ -13,12 +21,8 @@
 			src='<%=request.getContextPath()%>/dwr/util.js'></script>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/script/json.js'></script>
-
-		<%
-			String base = request.getContextPath();
-			int index = 1;
-		%>
-		<script type='text/javascript'>
+	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+				<script type='text/javascript'>
 
 	  function trim(s){
 	  	var str = s||"";
@@ -328,7 +332,7 @@
 
 	  function callBack(data){
 		 if(data!=null && data=="success"){
-		 	 window.location.href="searchStockOutOver.action?backurl="+window.location.href;
+		 	 window.location.href="searchStockOut.action?backurl="+window.location.href;
 		 }
 	  }
 
@@ -578,339 +582,215 @@
 	   }
 
 	</script>
-
-
-		<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
-
-	</head>
-	<body>
-		<s:form action="saveStockIn.action" theme="simple"
-			namespace="/stockIn">
-
-			<table cellpadding="0" cellspacing="0" width="100%" border="0">
-				<tr>
+	
+	<body class="stock_body">
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">出库单审核</div>
+		<div class="stock_con">
+			
+		<s:form action="saveStockIn.action" theme="simple" namespace="/stockIn">
+		<div>
+		<table class="stock_table" cellpadding="0" cellspacing="0" width="100%" border="0">
+			<tr class="stock_tr">
+				<td>
+					出库编号：
+					<s:textfield id="stockOutOrderCode" name="stock.stockOutOrderCode"
+						disabled="true" cssClass="stock_border"/>
+				</td>
+				<s:if test="stock.stockOutStateType==1">
 					<td>
-						出库编号：
-						<s:textfield id="stockOutOrderCode" name="stock.stockOutOrderCode"
-							disabled="true" />
+						出库申请时间
 					</td>
-					<s:if test="stock.stockOutStateType==1">
+					<td>
+						<s:property value="stock.stockOutWillDate" />
+					</td>
+				</s:if>
+			</tr>
+		</table>
+		</div>
+		<div style="margin-top: 8px;margin-left:10px;">
+		<s:if test="stock.stockOutStateType!=1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
+		<a href="#" onclick="showMateriels();" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">选择物料</a>
+		</s:if>
+		</div>
+		<div style="width: 800px;margin-top: 8px;">
+		<table id="addMatail"  class="stock_table" width="850">
+			<tr class="table_tr__even">
+				<th>序号</th><th>编号</th><th>品名</th><th>规格</th><th>单位</th><th>库存量</th>
+				<th>进价</th><th>货位编号</th><th>数量</th><th>单价</th><th>金额</th>
+				<th>型号是否符合</th><th>数量是否符合</th><th>规格是否符合</th>
+			</tr>
+			<s:if test="stockOutHasMaterielList.size()>0">
+				<s:iterator value="stockOutHasMaterielList"
+					status="stockOutMateriel">
+					<tr 
+			       		<s:if test="#stockOutMateriel.even">
+			       			class="table_tr_odd"
+				       	</s:if>
+				       	<s:else>
+			       			class="table_tr__even"
+			       		</s:else>
+			       	>
+						<td><%=index++%></td>
+						<td><s:property value="materielCode"/></td>
+						<td><s:property value="materielName"/></td>
+						<td><s:property value="materielSize"/></td>
+						<td><s:property value="materielABC"/></td>
+						<td><s:property value="stockAmount"/></td>
+						<td><s:property value="stockPrice"/></td>
+						<td><s:property value="cargoSpaceCode"/></td>
 						<td>
-							出库申请时间
+							<s:if test="stock.stockOutStateType != 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
+								<s:textfield cssClass="stock_small_border" id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount" cssStyle="stock_small_border" onchange="getPrice(this);"  />
+							</s:if>
+							<s:else>
+								<s:textfield id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount" cssClass="stock_small_border" disabled="true" />
+							</s:else>
 						</td>
 						<td>
-							<s:property value="stock.stockOutWillDate" />
+							<s:if test="stock.stockOutStateType!= 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
+								<s:textfield cssClass="stock_small_border" id="stockOutPrice_%{#stockOutMateriel.index+1}" name="stockOutPrice" cssStyle="stock_small_border" onchange="getPrice(this);"/>
+							</s:if>
+							<s:else>
+								<s:textfield cssClass="stock_small_border" id="stockOutPrice_%{#stockOutMateriel.index+1}"  name="stockOutPrice" cssStyle="stock_small_border" disabled="true"/>
+							</s:else>
 						</td>
+						<td>
+							<s:property value="(stockOutAmount*stockOutPrice)" />
+						</td>
+						<s:if test="stock.stockOutCheckState==1 && stock.stockOutStateType==1&&stock.stockOutDealState!=-1">
+							<td>
+								<s:if test="stock.stockOutDealState!=1">
+									<s:select id="typeIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
+										name="typeIsOk" cssClass="stock_select_border"></s:select>
+								</s:if>
+								<s:else>
+									<s:select id="typeIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"
+										name="typeIsOk"  cssClass="stock_select_border" disabled="true"></s:select>
+								</s:else>
+							</td>
+							<td>
+								<s:if test="stock.stockOutDealState!=1">
+									<s:select id="amountIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
+										name="amountIsOk" cssClass="stock_select_border"></s:select>
+								</s:if>
+								<s:else>
+									<s:select id="amountIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"
+										name="amountIsOk" cssClass="stock_select_border" disabled="true"></s:select>
+								</s:else>
+							</td>
+							<td>
+								<s:if test="stock.stockOutDealState!=1">
+										<s:select id="specificationIsOk_%{#stockOutMateriel.index+1}" cssClass="stock_select_border" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择" name="specificationIsOk"></s:select>
+								</s:if>
+								<s:else>
+									<s:select id="specificationIsOk_%{#stockOutMateriel.index+1}" cssClass="stock_select_border" list="#{1:'符合',2:'不符合'}"name="specificationIsOk" disabled="true"></s:select>
+								</s:else>
+							</td>
+						</s:if>
+					</tr>
+				</s:iterator>
+			</s:if>
+			</table>
+			<table class="stock_table" width="850">
+			<tr>
+				<td class="stock_tr" colspan="10">
+					其它费用:
+					<s:if test="stock.stockOutStateType!=1|| stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
+						<s:textfield id="otherPrice" name="stock.stockOrtherMoney" cssClass="stock_border" onchange="getSumPrice();" />
 					</s:if>
-				</tr>
+					<s:else>
+						<s:textfield id="otherPrice" name="stock.stockOrtherMoney" cssClass="stock_border" onchange="getSumPrice();" disabled="true" />
+					</s:else>
+				</td>
+				<td class="stock_right">
+					金额合计:
+				</td>
+				<td  align="right" id="sumPrice" class="stock_tr">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			</tr>
+			<tr class="stock_tr" >
+				<td colspan="12">
+					费用说明:<br/>
+					<s:if test="stock.stockOutStateType!=1 || stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
+						<s:textarea  id="stockOrtherMessage" cssClass="stock_textarea" name="stock.stockOrtherMessage" cols="100%" />
+					</s:if>
+					<s:else>
+						<s:textarea id="stockOrtherMessage" cssClass="stock_textarea"  name="stock.stockOrtherMessage"
+							cols="100%" disabled="true" />
+					</s:else>
+				</td>
+			</tr>
+			<tr class="stock_tr" >
+				<td colspan="12">
+					审批意见：<br/>
+					<s:if test="stock.stockOutCheckState == 1||stock.stockOutCheckState ==-1">
+						<s:textarea id="stockOutMessage" name="stock.stockOutMessage" cssClass="stock_textarea"  cols="100%" disabled="true" />
+					</s:if>
+					<s:else>
+						<s:textarea id="stockOutMessage" name="stock.stockOutMessage" cssClass="stock_textarea"  cols="100%" />
+					</s:else>
+				</td>
+			</tr>
+			<tr class="stock_tr" >
+				<td colspan="12">
+					检测意见：<br/>
+					<s:if test="stock.stockOutDealState == 1||stock.stockOutCheckState!=-1">
+						<s:textarea id="stockOutDealMessage" name="stock.stockOutDealMessage" cssClass="stock_textarea"
+							cols="100%" disabled="true" />
+					</s:if>
+					<s:else>
+						<s:textarea id="stockOutDealMessage" name="stock.stockOutDealMessage" cssClass="stock_textarea"
+							cols="100%" />
+					</s:else>
+				</td>
+			</tr>
+			<tr class="stock_tr">
+				<td colspan="12">
+					到货地址：<br/>
+					<s:textarea id="stockOutDestination" name="stock.stockOutDestination" cssClass="stock_textarea" cols="100%" />
+				</td>
+			</tr>
+			<tr class="stock_tr">
+				<td colspan="4">
+					申请人:
+					<s:if test="stock.stockOutStateType != 1|| stock.stockOutCheckState == -1||stock.stockOutDealState == -1">
+						<s:textfield id="stockOutWith" name="stock.stockOutWith" cssClass="stock_border"/>
+					</s:if>
+					<s:else>
+						<s:textfield id="stockOutWith" name="stock.stockOutWith" cssClass="stock_border" disabled="true" />
+					</s:else>
+				</td>
+				<td colspan="4">
+					检查人:
+					<s:if test="stock.stockOutDealState != 1 && stock.stockOutCheckState == 1">
+						<s:textfield id="stockOutDealWith" cssClass="stock_border" name="stock.stockOutDealWith" />
+					</s:if>
+					<s:else>
+						<s:textfield id="stockOutDealWith" cssClass="stock_border" name="stock.stockOutDealWith" disabled="true"/>
+					</s:else>
+				</td>
+				<td colspan="4">
+					审批人:
+					<s:if test="stock.stockOutStateType== 1 && stock.stockOutCheckState==0">
+						<s:textfield id="stockOutChecker" cssClass="stock_border" name="stock.stockOutChecker" />
+					</s:if>
+					<s:else>
+						<s:textfield id="stockOutChecker" cssClass="stock_border" name="stock.stockOutChecker" disabled="true" />
+					</s:else>
+				</td>
+
+			</tr>
 			</table>
-			<s:if test="stock.stockOutStateType!=1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
-				<input value="添加物料" type="button" onclick="showMateriels();" />
-			</s:if>
-			<table cellpadding="0" cellspacing="1" width="100%" border="0">
-				<tr>
-					<td colspan="6">
-						<table id="addMatail" bgcolor="black" cellspacing="1" width="100%">
-							<tr>
-								<th bgcolor="white">
-									序号
-								</th>
-								<th bgcolor="white">
-									编号
-								</th>
-								<th bgcolor="white">
-									品名
-								</th>
-								<th bgcolor="white">
-									规格
-								</th>
-								<th bgcolor="white">
-									单位
-								</th>
-								<th bgcolor="white">
-									库存量
-								</th>
-								<th bgcolor="white">
-									进价
-								</th>
-								<th bgcolor="white">
-									货位编号
-								</th>
-								<th bgcolor="white">
-									数量
-								</th>
-								<th bgcolor="white">
-									单价
-								</th>
-								<th bgcolor="white">
-									金额
-								</th>
-								<s:if
-									test="stock.stockOutCheckState==1 && stock.stockOutStateType ==1&&stock.stockOutDealState!=-1">
-									<th bgcolor="white">
-										型号是否符合
-									</th>
-									<th bgcolor="white">
-										数量是否符合
-									</th>
-									<th bgcolor="white">
-										规格是否符合
-									</th>
-								</s:if>
-								<s:if test="stock.stockOutStateType!=1||stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
-									<th bgcolor="white">
-										操作
-									</th>
-								</s:if>
-							</tr>
-							<s:if test="stockOutHasMaterielList.size()>0">
-								<s:iterator value="stockOutHasMaterielList"
-									status="stockOutMateriel">
-									<tr>
-										<td align="center" bgcolor="white">
-											<%=index++%>
-										</td>
-										<td bgcolor="white">
-											<s:property value="materielCode"></s:property>
-										</td>
-										<td bgcolor="white">
-											<s:property value="materielName"></s:property>
-										</td>
-										<td bgcolor="white">
-											<s:property value="materielSize"></s:property>
-										</td>
-										<td bgcolor="white">
-											<s:property value="materielABC"></s:property>
-										</td>
-										<td bgcolor="white">
-											<s:property value="stockAmount" />
-										</td>
-										<td bgcolor="white">
-											<s:property value="stockPrice" />
-										</td>
-										<td bgcolor="white">
-											<s:property value="cargoSpaceCode" />
-										</td>
-										<td bgcolor="white">
-											<s:if test="stock.stockOutStateType != 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
-												<s:textfield id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount" size="5" onchange="getPrice(this);"  />
-											</s:if>
-											<s:else>
-												<s:textfield id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount"
-													size="5" disabled="true" />
-											</s:else>
-										</td>
-										<td bgcolor="white">
-											<s:if test="stock.stockOutStateType!= 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
-												<s:textfield id="stockOutPrice_%{#stockOutMateriel.index+1}" name="stockOutPrice" size="5" onchange="getPrice(this);"/>
-											</s:if>
-											<s:else>
-												<s:textfield id="stockOutPrice_%{#stockOutMateriel.index+1}" name="stockOutPrice"
-													size="5"  disabled="true"/>
-											</s:else>
-										</td>
-										<td bgcolor="white">
-											<s:property value="(stockOutAmount*stockOutPrice)" />
-										</td>
-										<s:if
-											test="stock.stockOutCheckState==1 && stock.stockOutStateType==1&&stock.stockOutDealState!=-1">
-											<td bgcolor="white">
-												<s:if test="stock.stockOutDealState!=1">
-													<s:select id="typeIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
-														name="typeIsOk"></s:select>
-												</s:if>
-												<s:else>
-													<s:select id="typeIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"
-														name="typeIsOk" disabled="true"></s:select>
-												</s:else>
-											</td>
-											<td bgcolor="white">
-												<s:if test="stock.stockOutDealState!=1">
-													<s:select id="amountIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择"
-														name="amountIsOk"></s:select>
-												</s:if>
-												<s:else>
-													<s:select id="amountIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"
-														name="amountIsOk" disabled="true"></s:select>
-												</s:else>
-											</td>
-											<td bgcolor="white">
-												<s:if test="stock.stockOutDealState!=1">
-														<s:select id="specificationIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}" headerKey="" headerValue="请选择" name="specificationIsOk"></s:select>
-												</s:if>
-												<s:else>
-													<s:select id="specificationIsOk_%{#stockOutMateriel.index+1}" list="#{1:'符合',2:'不符合'}"name="specificationIsOk" disabled="true"></s:select>
-												</s:else>
-											</td>
-										</s:if>
-
-										<s:if test="stock.stockOutStateType!=1||stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
-											<td bgcolor="white">
-
-												<input type="button" value="删除"
-													onclick="deleteMateriel(this);">
-
-											</td>
-										</s:if>
-									</tr>
-								</s:iterator>
-							</s:if>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6">
-						<table bgcolor="black" cellspacing="1" border="0" width="100%">
-							<tr>
-								<td bgColor="white">
-									其它费用
-								</td>
-								<td colspan="2" align="right" bgColor="white">
-									<s:if test="stock.stockOutStateType!=1|| stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
-										<s:textfield id="otherPrice" name="stock.stockOrtherMoney"
-											onchange="getSumPrice();" />
-									</s:if>
-									<s:else>
-										<s:textfield id="otherPrice" name="stock.stockOrtherMoney"
-											onchange="getSumPrice();" disabled="true" />
-									</s:else>
-								</td>
-								<td bgColor="white">
-									金额合计
-								</td>
-								<td colspan="2" align="right" id="sumPrice" bgColor="white"></td>
-							</tr>
-							<tr>
-								<td bgcolor="white">
-									费用说明
-								</td>
-								<td colspan="5" bgcolor="white">
-									<s:if test="stock.stockOutStateType!=1 || stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
-										<s:textarea id="stockOrtherMessage"
-											name="stock.stockOrtherMessage" cols="100%" />
-									</s:if>
-									<s:else>
-										<s:textarea id="stockOrtherMessage" name="stock.stockOrtherMessage"
-											cols="100%" disabled="true" />
-									</s:else>
-								</td>
-							</tr>
-							<s:if test="stock.stockOutStateType == 1">
-								<tr>
-									<td bgcolor="white">
-										审批意见
-									</td>
-									<td colspan="5" bgcolor="white">
-										<s:if test="stock.stockOutCheckState == 1||stock.stockOutCheckState ==-1">
-											<s:textarea id="stockOutMessage" name="stock.stockOutMessage"
-												cols="100%" disabled="true" />
-										</s:if>
-										<s:else>
-											<s:textarea id="stockOutMessage" name="stock.stockOutMessage"
-												cols="100%" />
-										</s:else>
-									</td>
-								</tr>
-							</s:if>
-
-							<s:if
-								test="stock.stockOutStateType == 1 && stock.stockOutCheckState==1">
-								<tr>
-									<td bgcolor="white">
-										检测意见
-									</td>
-									<td colspan="5" bgcolor="white">
-										<s:if test="stock.stockOutDealState == 1||stock.stockOutCheckState!=-1">
-											<s:textarea id="stockOutDealMessage" name="stock.stockOutDealMessage"
-												cols="100%" disabled="true" />
-										</s:if>
-										<s:else>
-											<s:textarea id="stockOutDealMessage" name="stock.stockOutDealMessage"
-												cols="100%" />
-										</s:else>
-									</td>
-								</tr>
-							</s:if>
-
-							<s:if
-								test="stock.stockOutDealState == 1 ">
-								<tr>
-									<td bgcolor="white">
-										到货地址
-									</td>
-									<td colspan="5" bgcolor="white">
-											<s:textarea id="stockOutDestination" name="stock.stockOutDestination"
-												cols="100%" />
-									</td>
-								</tr>
-							</s:if>
-
-							<tr>
-								<td bgcolor="white" width="10%">
-									申请人
-								</td>
-								<td bgcolor="white" width="20%">
-									<s:if test="stock.stockOutStateType != 1|| stock.stockOutCheckState == -1||stock.stockOutDealState == -1">
-										<s:textfield id="stockOutWith" name="stock.stockOutWith" />
-									</s:if>
-									<s:else>
-										<s:textfield id="stockOutWith" name="stock.stockOutWith"
-											disabled="true" />
-									</s:else>
-								</td>
-								<td bgcolor="white" width="10%">
-									检查人
-								</td>
-								<td bgcolor="white" width="20%">
-									<s:if test="stock.stockOutDealState != 1 && stock.stockOutCheckState == 1">
-										<s:textfield id="stockOutDealWith" name="stock.stockOutDealWith" />
-									</s:if>
-									<s:else>
-										<s:textfield id="stockOutDealWith" name="stock.stockOutDealWith" disabled="true"/>
-									</s:else>
-								</td>
-								<td bgcolor="white" width="10%">
-									审批人
-								</td>
-								<td bgcolor="white">
-									<s:if
-										test="stock.stockOutStateType== 1 && stock.stockOutCheckState==0">
-										<s:textfield id="stockOutChecker" name="stock.stockOutChecker" />
-									</s:if>
-									<s:else>
-										<s:textfield id="stockOutChecker" name="stock.stockOutChecker"
-											disabled="true" />
-									</s:else>
-								</td>
-
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-			<s:if test="stock.stockOutStateType!=1||stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
-				<input type="button" value="保存" onclick="saveStockOut();" />
-				<input type="button" value="提交" onclick="submitStockOut();" />
-			</s:if>
-			<s:if
-				test="stock.stockOutStateType == 1 && stock.stockOutCheckState != 1 && stock.stockOutCheckState !=-1">
-				<input type="button" value="通过" onclick="approvalStockOut(1)" />
-				<input type="button" value="不通过" onclick="approvalStockOut(-1)" />
-			</s:if>
-			<s:if
-				test="stock.stockOutStateType == 1 && stock.stockOutCheckState == 1 && stock.stockOutDealState ==0">
-				<input type="button" value="保存" onclick="saveCheckStockOut();" />
-				<input type="button" value="通过" onclick="submitCheckStockOut(1);" />
-				<input type="button" value="不通过" onclick="submitCheckStockOut(-1);" />
-			</s:if>
-
+			</div>
+			<div style="margin-top: 8px;margin-left:10px;">
 			<s:if test="stock.stockOutDealState == 1">
-				<input type="button" value="保存" onclick="complStockOut(1)" />
-				<input type="button" value="完成" onclick="complStockOut(3)" />
+				<a href="#" onclick="complStockOut(1)"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
+				<a href="#" onclick="complStockOut(3)"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
 			</s:if>
+			</div>
 		</s:form>
-	</body>
-	<SCRIPT type="text/javascript">
-		getSumPrice();
-	</SCRIPT>
+		</div>
+		<SCRIPT type="text/javascript">
+			getSumPrice();
+		</SCRIPT>
+    </body>
 </html>

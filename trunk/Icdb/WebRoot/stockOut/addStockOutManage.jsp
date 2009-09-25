@@ -622,7 +622,7 @@ int index = 1;
 			       			class="table_tr_odd"
 				       	</s:if>
 				       	<s:else>
-			       			class="table_tr_even"
+			       			class="table_tr__even"
 			       		</s:else>
 			       	>
 						<td><%=index++%></td>
@@ -727,5 +727,8 @@ int index = 1;
 			</div>
 		</s:form>
 		</div>
+		<SCRIPT type="text/javascript">
+			getSumPrice();
+		</SCRIPT>
     </body>
 </html>
