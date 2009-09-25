@@ -15,7 +15,7 @@
 		emp = new EmployeeBean();
 		emp.setPermissionCode("1011110000000");
 		emp.setJobCode("J2009090809265880");
-		empObj = emp;
+		//empObj = emp;
 	}
 	if (null != empObj) {
 		if (empObj instanceof EmployeeBean) {
@@ -76,7 +76,7 @@ function menuChange(id){
 
 <div class="menu">
 <%
-	if (null != emp) {
+	if (null != emp && null != userMenu) {
 		List<Item> list = userMenu.getItemList();
 		itemCodes = "[";
 		for (int i = 0; i < list.size(); i++) {
