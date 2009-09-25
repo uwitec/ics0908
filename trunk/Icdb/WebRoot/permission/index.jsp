@@ -69,7 +69,8 @@ function initFunTree(){
 			<td><s:property value="personName" /></td>
 			<td><s:property value="jobName" /></td>
 			<td><s:property value="departmentName" /></td>
-			<td><img src="<%=base%>/images/img03.gif"></td>
+			<td><img src="<%=base%>/images/img03.gif" style="cursor: pointer;"
+				onclick="window.showModalDialog('ShowPermissioinList.action?role=employee&employee.employeeCode=<s:property value="employeeCode" />', '', 'width=430px,height=300px');" /></td>
 			</tr>
 		</s:iterator>
 	</s:if>
@@ -88,8 +89,8 @@ function initFunTree(){
 			</s:else>
 			<td><s:property value="jobName" /></td>
 			<td><s:property value="departmentName" /></td>
-			<td><img src="<%=base%>/images/img03.gif"
-				onclick="window.showModalDialog('ShowPermissioinList.action?role=job&job.jobCode=<s:property value="jobCode" />', '', 'width=430px,height=300px');">
+			<td><img src="<%=base%>/images/img03.gif" style="cursor: pointer;"
+				onclick="window.showModalDialog('ShowPermissioinList.action?role=job&job.jobCode=<s:property value="jobCode" />', '', 'width=430px,height=300px');" />
 			</td>
 			</tr>
 		</s:iterator>
