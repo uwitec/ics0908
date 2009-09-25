@@ -66,4 +66,6 @@
 	<sqlMap resource="com/mydomain/data/stockmanage/StockMin.xml"/>
 	<sqlMap resource="com/mydomain/data/stockmanage/StockLevel.xml"/>
 	<sqlMap resource="com/mydomain/data/stockmanage/StockTurn.xml"/>
+	<sqlMap resource="com/mydomain/data/stockmanage/MaterielInFrom.xml"/>
+	<sqlMap resource="com/mydomain/data/stockmanage/MaterielOutFrom.xml"/>
 	</sqlMapConfig>
