@@ -16,6 +16,14 @@
             <result name="SUCCESS">/permission/permissionlist.jsp</result>
             <result name="NULLRESULT">/index.jsp</result>
         </action>
+        <action name="UpdatePermission" class="com.action.permission.PermissionAction" method="updatePermission">
+            <result name="SUCCESS">/permission/index.jsp</result>
+            <result name="NULLRESULT">/index.jsp</result>
+        </action>
+        <action name="GetTopMenu" class="com.action.permission.PermissionAction" method="getTopMenu">
+            <result name="SUCCESS">/pagecom/topmenu.jsp</result>
+            <result name="NULLRESULT">/index.jsp</result>
+        </action>
     </package>
 
 </struts>
