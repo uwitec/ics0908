@@ -25,4 +25,5 @@
 	<include file="strutsrs/permission/s_permission.xml"></include>
 	<include file="strutsrs/stockmanage/s_stockMaxMin.xml"></include>
 	<include file="strutsrs/stockmanage/s_stockLevel.xml"></include>
+	<include file="strutsrs/stockmanage/s_materOutInFrom.xml"></include>
 </struts>
