@@ -39,10 +39,12 @@ public class MenuReader {
 	public MenuReader() {
 	}
 
-	public static void main(String[] args) {
-		Menu menu = readMenu("userMenu");
-		System.out.println(menu.getItemList().size());
-		System.out.println(menu.viewMenu());
-	}
+	public static Menu readMenu(String name, String userPremi, String jobPremi) {
+		Menu menu = readMenu(name);
+		System.out.println("menu: " + menu);
+		menu.setFilter(jobPremi);
+		menu.setItemPermission(userPremi);
+		return menu;
 
+	}
 }
