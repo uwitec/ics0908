@@ -83,7 +83,7 @@ int idtitle=1;
 				<div align="right">
        			<a href="#" onclick="toSetId(new Array('employeeCode','personName'),'p_radio')"><img src="<%=base%>/images/sub1_btn_hand.jpg" border="0"></a>
 	      		</div>
-	     </div>
+	    	</div>
 		</div>
     </body>
 </html>
