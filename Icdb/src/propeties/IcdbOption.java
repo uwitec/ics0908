@@ -108,6 +108,10 @@ public class IcdbOption {
 		return IcdbOption.getState("materiel_type");
 	}
 	
+	public static LinkedHashMap<?, ?> getManageSetMater(){
+		return IcdbOption.getState("ManageSetMater");
+	}
+	
 	public static void main(String[] args) {
 		String a=(String) IcdbOption.getTableState().get("2");
 		System.out.println(a);
