@@ -2,11 +2,11 @@
 <ims>
     <menu name="userMenu" code="0001" parent="">
         <item code="00010001" parent="0001" level="1" permissionIndex="0" viewName="基本资料">
-            <item code="000100010001" parent="00010001" level="2" permissionIndex="1" viewName="组织机构" action="baseset/ShowStruct" />
-            <item code="000100010002" parent="00010001" level="2" permissionIndex="2" viewName="仓储及货架" action="baseset/ShowStorehouse" />
-            <item code="000100010003" parent="00010001" level="2" permissionIndex="3" viewName="物品管理" action="baseset/ShowMateriel" />
-            <item code="000100010004" parent="00010001" level="2" permissionIndex="4" viewName="银行帐号" action="baseset/ShowBank" />
-            <item code="000100010005" parent="00010001" level="2" permissionIndex="5" viewName="人力资源" action="baseset/ShowPerson" />
+            <item code="000100010001" parent="00010001" level="2" permissionIndex="1" viewName="组织机构" action="baseset/ShowStruct.action" />
+            <item code="000100010002" parent="00010001" level="2" permissionIndex="2" viewName="仓储及货架" action="baseset/ShowStorehouse.action" />
+            <item code="000100010003" parent="00010001" level="2" permissionIndex="3" viewName="物品管理" action="baseset/ShowMateriel.action" />
+            <item code="000100010004" parent="00010001" level="2" permissionIndex="4" viewName="银行帐号" action="baseset/ShowBank.action" />
+            <item code="000100010005" parent="00010001" level="2" permissionIndex="5" viewName="人力资源" action="baseset/ShowPerson.action" />
         </item>
         <item code="00010002" parent="0001" level="1" permissionIndex="6" viewName="库存管理">
             <item code="000100020001" parent="00010002" level="2" permissionIndex="7" viewName="库存交易管理" />
@@ -23,7 +23,7 @@
             <item code="000100030006" parent="00010003" level="2" permissionIndex="17" viewName="初期库存" />
         </item>
         <item code="00010004" parent="0001" level="1" permissionIndex="18" viewName="财务报表">
-            <item code="000100040001" parent="00010004" level="2" permissionIndex="19" viewName="物料库存报表" />
+            <item code="000100040001" parent="00010004" level="2" permissionIndex="19" viewName="物料库存报表" action="report/CheckStockList.action"/>
             <item code="000100040002" parent="00010004" level="2" permissionIndex="20" viewName="财务结算" />
             <item code="000100040003" parent="00010004" level="2" permissionIndex="21" viewName="库存资产" />
         </item>
