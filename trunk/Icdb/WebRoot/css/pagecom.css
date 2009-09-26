@@ -9,6 +9,14 @@
 	height: 80px;
 }
 
+.report_body {
+	background-image: url(../images/sub_con_bg.jpg);
+	background-repeat: repeat-x;
+	width: 1002px;
+	height: 500px;
+	border: 0px solid red;
+}
+
 .page_top #logger {
 	position: absolute;
 	top: 5px;
@@ -54,11 +62,12 @@
 	color: #0E5E8E;
 	font-size: 14px;
 	font-weight: bold;
-	width: 155px;
+	width: 138px;
 	height: 39px;
 	text-align: center;
 	float: left;
 	line-height: 39px;
+	cursor: pointer;
 }
 
 .menu .item {
@@ -69,6 +78,7 @@
 	text-align: center;
 	float: left;
 	line-height: 39px;
+	cursor: pointer;
 }
 
 .sub_menu {
@@ -189,30 +199,30 @@
 
 .lmenutree span.leefhot {
 	line-height: 22px;
-    background-image: url(../images/lmenu_item_bg.jpg);
-    background-repeat: no-repeat;
-    width: 167px;
-    height: 32px;
-    color: #0C6A9D;
-    font-size: 13px;
-    font-weight: bold;
-    padding-top: 12px;
-    padding-left: 53px;
-    margin-left: 11px;
+	background-image: url(../images/lmenu_item_bg.jpg);
+	background-repeat: no-repeat;
+	width: 167px;
+	height: 32px;
+	color: #0C6A9D;
+	font-size: 13px;
+	font-weight: bold;
+	padding-top: 12px;
+	padding-left: 53px;
+	margin-left: 11px;
 }
 
 .lmenutree span.leef {
 	line-height: 22px;
 	background-image: url(../images/lmenu_item_bg.jpg);
-    background-repeat: no-repeat;
-    width: 167px;
-    height: 32px;
-    color: #0C6A9D;
-    font-size: 13px;
-    font-weight: bold;
-    padding-top: 12px;
-    padding-left: 53px;
-    margin-left: 11px;
+	background-repeat: no-repeat;
+	width: 167px;
+	height: 32px;
+	color: #0C6A9D;
+	font-size: 13px;
+	font-weight: bold;
+	padding-top: 12px;
+	padding-left: 53px;
+	margin-left: 11px;
 }
 
 .lmenutree span.padding {

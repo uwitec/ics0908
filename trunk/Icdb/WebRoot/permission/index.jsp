@@ -60,12 +60,14 @@ function initFunTree(){
 			<td>设置</td>
 		</tr>
 		<s:iterator value="employeeList" status="stat">
-			<s:if test="stat.index\2==0">
-				<tr class="table_tr_odd">
-			</s:if>
-			<s:else>
-				<tr class="table_tr__even">
-			</s:else>
+			<tr 
+                <s:if test="#stat.even">
+                    class="table_tr_odd"
+                </s:if>
+                <s:else>
+                    class="table_tr__even"
+                </s:else>
+            >
 			<td><s:property value="personName" /></td>
 			<td><s:property value="jobName" /></td>
 			<td><s:property value="departmentName" /></td>
@@ -81,12 +83,14 @@ function initFunTree(){
 			<td>设置</td>
 		</tr>
 		<s:iterator value="jobList" status="stat">
-			<s:if test="stat.index\2==0">
-				<tr class="table_tr_odd">
-			</s:if>
-			<s:else>
-				<tr class="table_tr__even">
-			</s:else>
+			<tr 
+                <s:if test="#stat.even">
+                    class="table_tr_odd"
+                </s:if>
+                <s:else>
+                    class="table_tr__even"
+                </s:else>
+            >
 			<td><s:property value="jobName" /></td>
 			<td><s:property value="departmentName" /></td>
 			<td><img src="<%=base%>/images/img03.gif" style="cursor: pointer;"

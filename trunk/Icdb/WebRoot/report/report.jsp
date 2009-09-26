@@ -1,18 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=GBK"
 	pageEncoding="GBK"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+    String base = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
+<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+<link href="<%=base%>/css/center_css.css" type="text/css"
+	rel="stylesheet">
+<link href="<%=base%>/css/pagecom.css" type="text/css" rel="stylesheet">
 <title>Insert title here</title>
 <SCRIPT type="text/javascript">
-
+	
 </SCRIPT>
 </head>
-<body>
-<div style="border: 1px solid gray;">
-<s:form name="abcFrom" action="ABCReportAction" method="post">
+<body topmargin="0">
+<div class="body_div"><jsp:include flush="true"
+	page="/pagecom/head.jsp"></jsp:include>
+	<div class="report_body">
+<div ><s:form name="abcFrom"
+	action="ABCReportAction" method="post">
 	<s:select label="请选择报表类型" name="reportType" list="reportTypeList"
 		listKey="key" listValue="name" onchange="javascript:abcFrom.submit()"></s:select>
 	<s:hidden name="abcReportBean.csCode" value="%{abcReportBean.csCode}"></s:hidden>
@@ -32,70 +43,76 @@
 	<table border="0" width="800px">
 		<tr>
 			<td>单位名称:XXXXXX</td>
-			<td>统计时间:<s:property value="%{abcReportBean.endDate}" /> </td>
+			<td>统计时间:<s:property value="%{abcReportBean.endDate}" /></td>
 			<td align="right">单位:元</td>
 		</tr>
 	</table>
 </s:form></div>
-<div style="border: 1px solid gray;"><s:if
+<div ><s:if
 	test="abcReportList!=null">
-	<table border="1" cellpadding="0" cellspacing="0" width="800px">
-		<tr>
-			<th colspan="2" rowspan="2">项目</th>
-			<th rowspan="2">规格型号</th>
-			<th rowspan="2">单位</th>
+	<table class="center_table" style="width: 1002px; margin: 0;">
+		<tr style="text-align: center; font-weight: bold;">
+			<td colspan="2" rowspan="2">项目</td>
+			<td rowspan="2">规格型号</td>
+			<td rowspan="2">单位</td>
 			<s:if test="'CCREPORT'.equals(reportType)">
-				<th colspan="2">库存数量基线</th>
-				<th colspan="2">实际数量</th>
+				<td colspan="2">库存数量基线</td>
+				<td colspan="2">实际数量</td>
 			</s:if>
 			<s:else>
 				<s:if test="!'WLJZREPORT'.equals(reportType)">
-					<th colspan="3">上期库存</th>
+					<td colspan="3">上期库存</td>
 				</s:if>
-				<th colspan="3"><s:if test="'WLJZREPORT'.equals(reportType)">库存</s:if><s:else>当期库存</s:else></th>
+				<td colspan="3"><s:if test="'WLJZREPORT'.equals(reportType)">库存</s:if><s:else>当期库存</s:else></td>
 				<s:if test="!'WLJZREPORT'.equals(reportType)">
-					<th colspan="3">本期入库</th>
-					<th colspan="3">本期出库</th>
+					<td colspan="3">本期入库</td>
+					<td colspan="3">本期出库</td>
 					<s:if test="'ZZREPORT'.equals(reportType)">
-						<th rowspan="2">周转率</th>
+						<td rowspan="2">周转率</td>
 					</s:if>
 				</s:if>
 			</s:else>
-			<th rowspan="2">备注</th>
+			<td rowspan="2">备注</td>
 		</tr>
-		<tr>
+		<tr style="text-align: center; font-weight: bold;">
 			<s:if test="'CCREPORT'.equals(reportType)">
-				<th>最大数量</th>
-				<th>最小数量</th>
-				<th>实际数量</th>
-				<th>实际状态</th>
+				<td>最大数量</td>
+				<td>最小数量</td>
+				<td>实际数量</td>
+				<td>实际状态</td>
 			</s:if>
 			<s:else>
 				<s:if test="!'WLJZREPORT'.equals(reportType)">
-					<th>单价</th>
-					<th>数量</th>
-					<th>金额</th>
+					<td>单价</td>
+					<td>数量</td>
+					<td>金额</td>
 				</s:if>
 
-				<th>单价</th>
-				<th>数量</th>
-				<th>金额</th>
+				<td>单价</td>
+				<td>数量</td>
+				<td>金额</td>
 
 				<s:if test="!'WLJZREPORT'.equals(reportType)">
-					<th>单价</th>
-					<th>数量</th>
-					<th>金额</th>
+					<td>单价</td>
+					<td>数量</td>
+					<td>金额</td>
 
-					<th>单价</th>
-					<th>数量</th>
-					<th>金额</th>
+					<td>单价</td>
+					<td>数量</td>
+					<td>金额</td>
 				</s:if>
 			</s:else>
 		</tr>
 		<s:iterator value="abcReportList" status="stat">
 			<s:if
 				test="!'CCREPORT'.equals(reportType) || null == stateType || (2 == stateType) || storeState == stateType">
-				<tr>
+				<tr
+					<s:if test="#stat.even">
+                    class="table_tr_odd"
+                </s:if>
+					<s:else>
+                    class="table_tr__even"
+                </s:else>>
 					<td><s:property value="materielType" /></td>
 					<td><s:property value="name" /></td>
 					<td><s:property value="specification" /></td>
@@ -135,9 +152,12 @@
 		</s:iterator>
 	</table>
 </s:if></div>
-<div>
-<s:url id="back" action="CheckStockList"></s:url><s:a  href="%{back}">返回盘点列表</s:a>
 </div>
-<s:debug></s:debug>
+<div><s:url id="back" action="CheckStockList"></s:url><s:a
+	href="%{back}">返回盘点列表</s:a></div>
+
+
+<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include></div>
+
 </body>
 </html>
