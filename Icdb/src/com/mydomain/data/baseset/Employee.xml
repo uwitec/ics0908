@@ -106,7 +106,7 @@
 			and employee.isEnabled=1 
 			and employee.employeeCode=#employeeCode#
 	</select>
-	<select id="loginEmp" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
+	<select id="loginEmp" parameterClass="com.mydomain.bean.baseset.EmployeeBean" resultClass="com.mydomain.bean.baseset.EmployeeBean">
 		select
 			employee.employeeCode,
 			employee.personCode,
