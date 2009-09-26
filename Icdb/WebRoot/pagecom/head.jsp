@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@page import="com.mydomain.bean.permission.Menu"%>
 <%@page import="com.mydomain.bean.baseset.EmployeeBean"%>
@@ -14,8 +15,8 @@
 	{
 		emp = new EmployeeBean();
 		emp.setPermissionCode("1011110000000");
-		emp.setJobCode("J2009090809265880");
-		//empObj = emp;
+		emp.setJobCode("J20090925223026114");
+		empObj = emp;
 	}
 	if (null != empObj) {
 		if (empObj instanceof EmployeeBean) {
@@ -100,7 +101,7 @@ function menuChange(id){
 	for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
 					Item subItem = subList.get(subIndex);
 %>
-<div class="item">&gt;  <%=subItem.getViewName()%></div>
+<div class="item">&gt;  <a href="<%=base+"/"+subItem.getAction() %>"><%=subItem.getViewName()%></a></div>
 <%
 	}
 %>
@@ -116,7 +117,8 @@ function menuChange(id){
 </div>
 <div class="sub_menu" id="subMenu"></div>
 <SCRIPT type="text/javascript">
-var items = <%=itemCodes%>;
+var items =<%=itemCodes%>;
+menuChange();
 </SCRIPT>
 </body>
 </html>
