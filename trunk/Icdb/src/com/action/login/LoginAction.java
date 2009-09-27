@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 import com.manage.baseset.EmployeeManage;
 import com.mydomain.bean.baseset.EmployeeBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
@@ -46,10 +47,10 @@ public class LoginAction extends ActionSupport {
         if (null != userName && null != passWord) {
             EmployeeBean employee = em.login(userName, toSHA(passWord));
             if (null != employee && null != employee.getPermissionCode()) {
+            	ActionContext.getContext().getSession().put("user", employee);
                 return "SUCCESS";
             }
         }
-        System.out.println(">>>>>>>>>>>>" + userName);
         return "NULLRESULT";
     }
 

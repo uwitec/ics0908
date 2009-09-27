@@ -3,28 +3,29 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<include file="strutsrs/baseset/s_bank.xml"></include>
-	<include file="strutsrs/baseset/s_account.xml"></include>
-	<include file="strutsrs/baseset/s_employee.xml"></include>
-	<include file="strutsrs/baseset/s_struct.xml"></include>
-	<include file="strutsrs/baseset/s_department.xml"></include>
-	<include file="strutsrs/baseset/s_unittype.xml"></include>
-	<include file="strutsrs/baseset/s_person.xml"></include>
-	<include file="strutsrs/baseset/s_unit.xml"></include>
-	<include file="strutsrs/baseset/s_job.xml"></include>
-	<include file="strutsrs/baseset/s_supplier.xml"></include>
-	<include file="strutsrs/baseset/s_storehouse.xml"></include>
-	<include file="strutsrs/baseset/s_cargospace.xml"></include>
-	<include file="strutsrs/storage/s_stockIn.xml"></include>
-	<include file="strutsrs/storage/s_stockOut.xml"></include>
-	<include file="strutsrs/baseset/s_materiel.xml"></include>
-	<include file="strutsrs/storage/s_stock.xml"></include>
-	<include file="strutsrs/report/s_report.xml"></include>
-	<include file="strutsrs/storage/s_was.xml"></include>
-	<include file="strutsrs/storage/s_checkStock.xml"></include>
-	<include file="strutsrs/permission/s_permission.xml"></include>
-	<include file="strutsrs/s_login.xml"></include>
-	<include file="strutsrs/stockmanage/s_stockMaxMin.xml"></include>
-	<include file="strutsrs/stockmanage/s_stockLevel.xml"></include>
-	<include file="strutsrs/stockmanage/s_materOutInFrom.xml"></include>
+    <include file="strutsrs/basedefault.xml"></include>
+    <include file="strutsrs/baseset/s_bank.xml"></include>
+    <include file="strutsrs/baseset/s_account.xml"></include>
+    <include file="strutsrs/baseset/s_employee.xml"></include>
+    <include file="strutsrs/baseset/s_struct.xml"></include>
+    <include file="strutsrs/baseset/s_department.xml"></include>
+    <include file="strutsrs/baseset/s_unittype.xml"></include>
+    <include file="strutsrs/baseset/s_person.xml"></include>
+    <include file="strutsrs/baseset/s_unit.xml"></include>
+    <include file="strutsrs/baseset/s_job.xml"></include>
+    <include file="strutsrs/baseset/s_supplier.xml"></include>
+    <include file="strutsrs/baseset/s_storehouse.xml"></include>
+    <include file="strutsrs/baseset/s_cargospace.xml"></include>
+    <include file="strutsrs/storage/s_stockIn.xml"></include>
+    <include file="strutsrs/storage/s_stockOut.xml"></include>
+    <include file="strutsrs/baseset/s_materiel.xml"></include>
+    <include file="strutsrs/storage/s_stock.xml"></include>
+    <include file="strutsrs/report/s_report.xml"></include>
+    <include file="strutsrs/storage/s_was.xml"></include>
+    <include file="strutsrs/storage/s_checkStock.xml"></include>
+    <include file="strutsrs/permission/s_permission.xml"></include>
+    <include file="strutsrs/s_login.xml"></include>
+    <include file="strutsrs/stockmanage/s_stockMaxMin.xml"></include>
+    <include file="strutsrs/stockmanage/s_stockLevel.xml"></include>
+    <include file="strutsrs/stockmanage/s_materOutInFrom.xml"></include>
 </struts>

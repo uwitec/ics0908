@@ -3,5 +3,17 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="names" extends="struts-default" namespace="sapces"></package>
+    <package name="base-default" extends="struts-default" abstract="true">
+        <interceptors>
+            <interceptor name="LoginActionFilter" class="com.icdb.filter.LoginActionFilter"></interceptor>
+            <interceptor-stack name="mydefalut">
+                <interceptor-ref name="defaultStack"></interceptor-ref>
+                <interceptor-ref name="LoginActionFilter"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="mydefalut"></default-interceptor-ref>
+        <global-results>
+            <result name="login">/login.jsp</result>
+        </global-results>
+    </package>
 </struts>

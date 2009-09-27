@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <package name="permission" extends="struts-default" namespace="/permission">
+    <package name="permission" extends="base-default" namespace="/permission">
         <action name="ShowEmployeeList" class="com.action.permission.PermissionAction" method="showEmployeeList">
             <result name="SUCCESS">/permission/index.jsp</result>
             <result name="NULLRESULT">/index.jsp</result>
