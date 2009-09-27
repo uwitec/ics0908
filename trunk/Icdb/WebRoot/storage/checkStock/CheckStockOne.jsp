@@ -2,13 +2,16 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-    <head>
-        <title>新增盘点信息</title>
-    </head>
-    <base/>
 <% 
-String base=request.getContextPath();
+String base=request.getContextPath(); 
 %>
+    <head>
+       <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
+	   <title>盘点</title>
+	</HEAD>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
 
@@ -70,35 +73,39 @@ String base=request.getContextPath();
 	}
 	
 </SCRIPT>
-    <body>
-    <s:form action="AddCheckStock" theme="simple">
-    <table width="120%" border="1">
-	    <tr>
-		    <td>
-			    <table>
-				    <tr>
-				    	<td>盘点单号:
-				    	<s:property value="%{checkStock.csCode}"/>
-				    	</td>
-				    	<td>盘点库房
-				    	<s:property value="%{checkStock.storehouseName}"/>
-				    	</td>
-				    </tr>
-				    <tr>
-				    	<td>盘点时间：
-				    	<s:property value="%{checkStock.csDate}"/>
-				    	</td>
-				    	<td>审批人：
-				    	<s:property value="%{checkStock.csCheckPerson}"/>
-				    	</td>
-				    </tr>
-			    </table>
-		    </td>
-	    </tr>
-	    <tr>
-	    	<td>
-	    		<table border="1" width="100%" id="checkListMater">
-	    			<tr align="center">
+	<body class="stock_body">
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">盘点信息</div>
+		<div class="stock_con">
+			
+		<div>
+		<table class="stock_table" cellpadding="0" cellspacing="0" width="100%" border="0">
+		    <tr class="stock_tr">
+		    	<td>盘点单号:
+		    	<s:property value="%{checkStock.csCode}"/>
+		    	</td>
+		    	<td>盘点库房
+		    	<s:property value="%{checkStock.storehouseName}"/>
+		    	</td>
+		    </tr>
+		    <tr class="stock_tr">
+		    	<td>盘点时间：
+		    	<s:property value="%{checkStock.csDate}"/>
+		    	</td>
+		    	<td>审批人：
+		    	<s:property value="%{checkStock.csCheckPerson}"/><s:hidden name="checkStock.csCheckPerson" value="%{checkStock.csCheckPerson}"></s:hidden>
+		    	</td>
+		    </tr>
+		    <tr class="stock_tr">
+		    	<td colspan="2">操作员：
+		    	<s:property value="%{checkStock.personName}"/>
+		    	<s:hidden name="checkStock.csOptionor" value="%{checkStock.csOptionor}"></s:hidden>
+		    	</td>
+		    </tr>
+		</table>
+		</div>
+		<div style="width: 800px;margin-top: 8px;">
+		<table id="addMatail"  class="stock_table" width="850">
+			<tr class="table_tr__even">
 	    				<td rowspan="3">产品名</td>
 	    				<td rowspan="3">库位</td>
 	    				<td rowspan="2" colspan="3">账面资料</td>
@@ -109,13 +116,13 @@ String base=request.getContextPath();
 	    				<td rowspan="3">责任人</td>
 	    				<td rowspan="3">备注</td>
 	    			</tr>
-	    			<tr align="center">
+	    			<tr  class="table_tr__even">
 	    				<td colspan="2">盘盈</td>
 	    				<td colspan="2">盘亏</td>
 	    				<td colspan="2">增价</td>
 	    				<td colspan="2">减价</td>
 	    			</tr>
-	    			<tr align="center">
+	    			<tr  class="table_tr__even">
 	    				<td>数量</td>
 	    				<td>单价</td>
 	    				<td>金额</td>
@@ -131,8 +138,15 @@ String base=request.getContextPath();
 	    				<td>单价</td>
 	    				<td>金额</td>
 	    			</tr>
-	    			<s:iterator value="list_CheckstockList">
-	    				<tr align="right">
+			<s:iterator value="list_CheckstockList">
+	    				<tr 
+			       		<s:if test="#list_CheckstockList.even">
+			       			class="table_tr_odd"
+				       	</s:if>
+				       	<s:else>
+			       			class="table_tr__even"
+			       		</s:else>
+			       	>
 	    					<td><s:property value="%{materielName}"/></td>
 	    					<td><s:property value="%{cargoSpaceName}"/></td>
 	    					<td><s:property value="%{csStartNumber}"/></td>
@@ -173,13 +187,17 @@ String base=request.getContextPath();
 	    					</s:else></td>
 	    				</tr>
 	    			</s:iterator>
-	    		</table>
-	    	</td>
-	    </tr>
-    </table>
-    </s:form>
-    <SCRIPT type="text/javascript">
-    	get_init();
-    </SCRIPT>
+	    			<tr class="stock_tr">
+			    		<td colspan="19">
+			    			审核意见:<br/>
+			    			<textarea Class="stock_textarea" rows="8" cols="90%" name="%{checkStock.csApproveMessage}"></textarea>
+			    		</td>
+    				</tr> 	
+			</table>
+			</div>
+		</div>
+		 <SCRIPT type="text/javascript">
+	    	get_init();
+	    </SCRIPT>
     </body>
 </html>

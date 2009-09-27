@@ -2,13 +2,16 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-    <head>
-        <title>新增盘点信息</title>
-    </head>
-    <base/>
 <% 
-String base=request.getContextPath();
+String base=request.getContextPath(); 
 %>
+    <head>
+       <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
+	   <title>新增盘点信息</title>
+	</HEAD>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
 	
@@ -32,14 +35,14 @@ String base=request.getContextPath();
 	}
 	
 	function get_init(){
-		var a=document.getElementById("checkListMater");
+		var a=document.getElementById("addMatail");
 		for(var i=3;i<a.rows.length;i++){
 			getPriceSum(i);
 		}
 	}
 	
 	function getPriceSum(tab){
-		var t_id=document.getElementById("checkListMater");
+		var t_id=document.getElementById("addMatail");
 	//	var row_id=tab.parentNode.parentNode.rowIndex;
 		var row_id=tab;
 		var amount_st = trim(t_id.rows.item(row_id).cells.item(2).innerText);
@@ -52,7 +55,7 @@ String base=request.getContextPath();
 	}
 
 	function getPrice(tab){
-		var t_id=document.getElementById("checkListMater");
+		var t_id=document.getElementById("addMatail");
 		var row_id=tab.parentNode.parentNode.rowIndex;
 		var amount_st = trim(t_id.rows.item(row_id).cells.item(2).innerText);
 		var price_st = trim(t_id.rows.item(row_id).cells.item(3).innerText);
@@ -65,7 +68,7 @@ String base=request.getContextPath();
 	}
 
 	function getAmount(row_id,num_s,num_e,price){
-		var t_id=document.getElementById("checkListMater");
+		var t_id=document.getElementById("addMatail");
 		var temp;
 		if(parseFloat(num_s)>parseFloat(num_e)){
 			temp=parseFloat(num_s)-parseFloat(num_e);
@@ -83,7 +86,7 @@ String base=request.getContextPath();
 	}
 	
 	function getMoney(row_id,prce_s,prce_e,amount){
-		var t_id=document.getElementById("checkListMater");
+		var t_id=document.getElementById("addMatail");
 		var temp;
 		if(parseFloat(prce_s)>parseFloat(prce_e)){
 			temp=parseFloat(prce_s)-parseFloat(prce_e);
@@ -102,37 +105,37 @@ String base=request.getContextPath();
 	}
 	
 </SCRIPT>
-    <body>
-    <s:form action="UpdateCheckStock" theme="simple" name="checkUpdate">
-    <table width="120%" border="1">
-	    <tr>
-		    <td>
-			    <table>
-				    <tr>
-				    	<td>盘点单号:
-				    	<s:hidden name="checkStock.csCode" value="%{checkStock.csCode}"></s:hidden>
-				    	<s:property value="%{checkStock.csCode}"/>
-				    	</td>
-				    	<td>盘点库房
-				    	<s:hidden name="checkStock.storehouseCode" value="%{checkStock.storehouseCode}"></s:hidden>
-				    	<s:property value="%{checkStock.storehouseName}"/>
-				    	</td>
-				    </tr>
-				    <tr>
-				    	<td>盘点时间：
-				    	<s:hidden name="checkStock.csDate" value="%{checkStock.csDate}"></s:hidden>
-				    	<s:property value="%{checkStock.csDate}"/>
-				    	</td>
-				    	<td>审批人：
-				    	</td>
-				    </tr>
-			    </table>
-		    </td>
-	    </tr>
-	    <tr>
-	    	<td>
-	    		<table border="1" width="100%" id="checkListMater">
-	    			<tr align="center">
+	<body class="stock_body">
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">新增盘点信息</div>
+		<div class="stock_con">
+			
+		<s:form action="UpdateCheckStock" theme="simple" namespace="/storage" name="checkUpdate">
+		<div>
+		<table class="stock_table" cellpadding="0" cellspacing="0" width="100%" border="0">
+		    <tr class="stock_tr">
+		    	<td>盘点单号:
+		    	<s:hidden name="checkStock.csCode" value="%{checkStock.csCode}"/>
+		    	<s:property value="%{checkStock.csCode}"/>
+		    	</td>
+		    	<td>盘点库房
+		    	<s:hidden name="checkStock.storehouseCode" value="%{checkStock.storehouseCode}"/>
+		    	<s:property value="%{checkStock.storehouseName}"/>
+		    	</td>
+		    </tr>
+		    <tr class="stock_tr">
+		    	<td>盘点时间：
+		    	<s:hidden name="checkStock.csDate" value="%{checkStock.csDate}"/>
+		    	<s:property value="%{checkStock.csDate}"/>
+		    	</td>
+		    	<td>审批人：
+		    	</td>
+		    </tr>
+		</table>
+		</div>
+
+		<div style="width: 800px;margin-top: 8px;">
+		<table id="addMatail"  class="stock_table" width="850">
+			<tr class="table_tr__even">
 	    				<td rowspan="3">产品名</td>
 	    				<td rowspan="3">库位</td>
 	    				<td rowspan="2" colspan="3">账面资料</td>
@@ -143,13 +146,13 @@ String base=request.getContextPath();
 	    				<td rowspan="3">责任人</td>
 	    				<td rowspan="3">备注</td>
 	    			</tr>
-	    			<tr align="center">
+	    			<tr  class="table_tr__even">
 	    				<td colspan="2">盘盈</td>
 	    				<td colspan="2">盘亏</td>
 	    				<td colspan="2">增价</td>
 	    				<td colspan="2">减价</td>
 	    			</tr>
-	    			<tr align="center">
+	    			<tr  class="table_tr__even">
 	    				<td>数量</td>
 	    				<td>单价</td>
 	    				<td>金额</td>
@@ -165,8 +168,15 @@ String base=request.getContextPath();
 	    				<td>单价</td>
 	    				<td>金额</td>
 	    			</tr>
-	    			<s:iterator value="list_CheckstockList">
-	    				<tr align="right">
+			<s:iterator value="list_CheckstockList">
+	    			<tr 
+			       		<s:if test="#list_CheckstockList.even">
+			       			class="table_tr_odd"
+				       	</s:if>
+				       	<s:else>
+			       			class="table_tr__even"
+			       		</s:else>
+			       	>
 	    					<td>
 	    					<s:property value="%{materielName}"/>
 	    					<s:hidden name="checkStockList.materielCode" value="%{materielCode}"/></td>
@@ -194,23 +204,22 @@ String base=request.getContextPath();
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>
-	    					<td><input size="10" type="text" name="checkStockList.csDiffMessage" value=" "></td>
-	    					<td><input size="10" type="text" name="checkStockList.csRemark" value=" "></td>
-	    					<td><input size="10" type="text" name="checkStockList.csGM" value=" "></td>
+	    					<td><input Class="stock_small_border" type="text" name="checkStockList.csDiffMessage" value=" "></td>
+	    					<td><input Class="stock_small_border" type="text" name="checkStockList.csRemark" value=" "></td>
+	    					<td><input Class="stock_small_border" type="text" name="checkStockList.csGM" value=" "></td>
 	    				</tr>
 	    			</s:iterator>
-	    			<tr><td colspan="18">
-	    			<input id="sub_state" type="hidden" value="1" name="checkStock.csState">
-	    			<input type="button" value="保存" onclick="submitSava()">
-	    			<input type="button" value="完成" onclick="submitComplete()"/>
-	    			</td></tr>
-	    		</table>
-	    	</td>
-	    </tr>
-    </table>
-    </s:form>
-    <SCRIPT type="text/javascript">
-    	get_init();
-    </SCRIPT>
+			</table>
+			</div>
+			<div style="margin-top: 8px;margin-left:10px;">
+				<input id="sub_state" type="hidden" value="1" name="checkStock.csState">
+	    		<a href="#" onclick="submitSava()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
+				<a href="#" onclick="submitComplete()"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
+			</div>
+		</s:form>
+		</div>
+		 <SCRIPT type="text/javascript">
+	    	get_init();
+	    </SCRIPT>
     </body>
 </html>
