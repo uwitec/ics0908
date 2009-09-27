@@ -1,8 +1,6 @@
 package com.manage.permission;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -12,7 +10,7 @@ import com.mydomain.bean.permission.Item;
 import com.mydomain.bean.permission.Menu;
 
 public class MenuHandler extends DefaultHandler {
-	private Map<String, Menu> ims = null;
+	// private Map<String, Menu> ims = null;
 	private boolean isFilter = false;
 	private Menu menu = null;
 
@@ -23,16 +21,20 @@ public class MenuHandler extends DefaultHandler {
 	public void setKeepName(String keepName) {
 		this.keepName = keepName;
 	}
-
-	public Map<String, Menu> getIms() {
-		return ims;
+	
+	public Menu getMenu(){
+		return this.menu;
 	}
+
+	// public Map<String, Menu> getIms() {
+	// return ims;
+	// }
 
 	@Override
 	public void startDocument() throws SAXException {
-		if (null == this.ims) {
-			ims = new HashMap<String, Menu>();
-		}
+		// if (null == this.ims) {
+		// ims = new HashMap<String, Menu>();
+		// }
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class MenuHandler extends DefaultHandler {
 					this.menu.setName(name);
 					this.menu.setCode(attributes.getValue("code"));
 					this.menu.setItemList(new ArrayList<Item>());
-					ims.put(this.menu.getName(), this.menu);
+					// ims.put(this.menu.getName(), this.menu);
 				} else {
 					isFilter = true;
 				}

@@ -8,8 +8,6 @@
             <result name="SUCCESS">/main.jsp</result>
             <result name="NULLRESULT">/login.jsp</result>
         </action>
-    
-       
     </package>
 
 </struts>

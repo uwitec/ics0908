@@ -11,27 +11,22 @@ import com.mydomain.bean.permission.Menu;
 
 public class MenuReader {
 
-	private static Map<String, Menu> ims = null;
-
 	public static Menu readMenu(String name) {
 		if (null != name) {
-			if (null == ims) {
-				String filename = null;
-				filename = Environment.getContext() + "/menu.xml";
-				SAXParserFactory spf = SAXParserFactory.newInstance();
-				SAXParser saxParser = null;
-				MenuHandler mr = new MenuHandler();
-				mr.setKeepName(name);
-				try {
-					saxParser = spf.newSAXParser();
-					saxParser.parse(new File(filename), mr);
-					ims = mr.getIms();
-				} catch (Exception ex) {
-					System.err.println(ex);
-					System.exit(1);
-				}
+			String filename = null;
+			filename = Environment.getContext() + "/menu.xml";
+			SAXParserFactory spf = SAXParserFactory.newInstance();
+			SAXParser saxParser = null;
+			MenuHandler mr = new MenuHandler();
+			mr.setKeepName(name);
+			try {
+				saxParser = spf.newSAXParser();
+				saxParser.parse(new File(filename), mr);
+			} catch (Exception ex) {
+				System.err.println(ex);
+				System.exit(1);
 			}
-			return ims.get(name);
+			return mr.getMenu();
 		}
 		return null;
 	}
@@ -41,7 +36,6 @@ public class MenuReader {
 
 	public static Menu readMenu(String name, String userPremi, String jobPremi) {
 		Menu menu = readMenu(name);
-		System.out.println("menu: " + menu);
 		menu.setFilter(jobPremi);
 		menu.setItemPermission(userPremi);
 		return menu;

@@ -12,7 +12,7 @@
             <item code="000100020001" parent="00010002" level="2" permissionIndex="7" viewName="库存交易管理" />
             <item code="000100020002" parent="00010002" level="2" permissionIndex="8" viewName="库存控制" />
             <item code="000100020003" parent="00010002" level="2" permissionIndex="9" viewName="库存水平" />
-            <item code="000100020004" parent="00010002" level="2" permissionIndex="10" viewName="库存货物差异分析" />
+            <item code="000100020004" parent="00010002" level="2" permissionIndex="10" viewName="货物差异分析" />
         </item>
         <item code="00010003" parent="0001" level="1" permissionIndex="11" viewName="库存业务">
             <item code="000100030001" parent="00010003" level="2" permissionIndex="12" viewName="入库" />
