@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@page import="com.opensymphony.xwork2.ActionContext"%>
 <%@page import="com.mydomain.bean.permission.Menu"%>
 <%@page import="com.mydomain.bean.baseset.EmployeeBean"%>
@@ -13,10 +13,12 @@
 	Object empObj = session.getAttribute("user");
 	EmployeeBean emp = null;
 	{
+		/**
 		emp = new EmployeeBean();
 		emp.setPermissionCode("1011110000000");
 		emp.setJobCode("J20090925223026114");
 		empObj = emp;
+		*/
 	}
 	if (null != empObj) {
 		if (empObj instanceof EmployeeBean) {
@@ -82,6 +84,9 @@ function menuChange(id){
 		itemCodes = "[";
 		for (int i = 0; i < list.size(); i++) {
 			Item item = list.get(i);
+			if (!item.getPermissionIndex().equals(item.getUserPermissionCode())) {
+				continue;
+			}
 			String className = "item";
 			if (i == 0) {
 				className = "selected";
@@ -89,25 +94,29 @@ function menuChange(id){
 				itemCodes += ",";
 			}
 			itemCodes += ("'" + item.getCode() + "'");
-%>
-<div id="m_<%=item.getCode()%>" class="<%=className%>"
-	onclick="menuChange('<%=item.getCode()%>')"><%=item.getViewName()%></div>
-<%
-	List<Item> subList = item.getSubItemList();
+			%>
+			<div id="m_<%=item.getCode()%>" class="<%=className%>"
+				onclick="menuChange('<%=item.getCode()%>')"><%=item.getViewName()%></div>
+			<%
+			List<Item> subList = item.getSubItemList();
 			if (null != subList) {
-%>
-<div style="display: none;" id="s_<%=item.getCode()%>">
-<%
-	for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
+				%>
+				<div style="display: none;" id="s_<%=item.getCode()%>">
+				<%
+				for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
 					Item subItem = subList.get(subIndex);
-%>
-<div class="item">&gt;  <a href="<%=base+"/"+subItem.getAction() %>"><%=subItem.getViewName()%></a></div>
-<%
-	}
-%>
-</div>
-<%
-	}
+					if (!subItem.getPermissionIndex().equals(subItem.getUserPermissionCode())) {
+		                continue;
+		            }
+					%>
+					<div class="item">&gt; <a
+						href="<%=base+"/"+subItem.getAction() %>"><%=subItem.getViewName()%></a></div>
+					<%
+			    }      
+				%>
+				</div>
+				<%
+			}
 		}
 		itemCodes += "]";
 	}
