@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <package name="base-default" extends="struts-default" abstract="true">
+    <package name="com" extends="struts-default" abstract="true">
         <interceptors>
             <interceptor name="LoginActionFilter" class="com.icdb.filter.LoginActionFilter"></interceptor>
             <interceptor-stack name="mydefalut">
