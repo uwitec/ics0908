@@ -126,6 +126,28 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	public String searchStockInOver() {
+
+		if (page == null) {
+			page = new Page();
+		}
+
+		if (stock == null) {
+			stock = new StockInBean();
+		}
+		stock.setCheckResult(1);
+
+		StockInManage stockInManage = new StockInManage();
+
+		try {
+			stockInList = stockInManage.findStockIn(stock, page);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			return ERROR;
+		}
+
+		return SUCCESS;
+	}
 	public String goAddStockIn() throws SQLException {
 		stock = new StockInBean();
 		stockInCheckMaterielBean = new StockInCheckMaterielBean();

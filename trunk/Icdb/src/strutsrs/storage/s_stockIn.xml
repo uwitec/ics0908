@@ -10,6 +10,11 @@
 			method="searchStockIn">
 			<result name="success">/stockIn/stockIn.jsp</result>
 		</action>
+		<action name="searchStockInOver"
+			class="com.action.storage.StockInAction"
+			method="searchStockInOver">
+			<result name="success">/stockIn/stockInOver.jsp</result>
+		</action>
 		<action name="searchCheckStockIn"
 			class="com.action.storage.StockInAction"
 			method="searchCheckStockIn">
