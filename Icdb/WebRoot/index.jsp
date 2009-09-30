@@ -30,6 +30,7 @@
    <a href="<s:url action="stockIn/searchStockIn"/>">入库申请管理</a><br/>
    <a href="<s:url action="stockIn/searchApprovalStockIn"/>">入库审核管理</a><br/>
    <a href="<s:url action="stockIn/searchCheckStockIn"/>">入库检查管理</a><br/>
+   <a href="<s:url action="stockIn/searchStockInOver"/>">入库</a><br/>
    <a href="<s:url action="stockOut/searchStockOut"/>">出库申请管理</a><br/>
    <a href="<s:url action="stockOut/searchApprovalStockOut"/>">出库审核管理</a><br/>
    <a href="<s:url action="stockOut/searchCheckStockOut"/>">出库检查管理</a><br/>

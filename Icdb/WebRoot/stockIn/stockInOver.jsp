@@ -175,7 +175,7 @@
 	%>
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<body>
-		<s:form id="searchForm" theme="simple" action="searchStockIn.action"
+		<s:form id="searchForm" theme="simple" action="searchStockInOver.action"
 			namespace="/stockIn">
 			<div class="body_div">
 				<div id="seachDIV" class="searche_DIV"
@@ -212,7 +212,7 @@
 
 					<s:select id="stockInStateSelect" cssClass="sub3_border"
 						name="stock.stockInStateType"
-						list="#{'1':'完成','2':'未完成'}"
+						list="#{'4':'未入库','3':'已入库'}"
 						value="stock.stockInStateType" headerKey="" headerValue="全部"
 						label="单据状态">单据状态:</s:select>
 
@@ -324,30 +324,8 @@
 								</td>
 								<td >
 									<s:if
-										test="checkResult==-1 || stockInCheckState==-1||(stockInStateType!=1 && stockInStateType!=3 && stockInCheckState != 1 && checkResult!= 1)">
-										<a href="#" onclick='window.location.href="goEditStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'><img src="<%=base%>/images/img03.gif" border="0"></a>|
-									</s:if>
-									<!--
-									<s:if
-										test="stockInStateType==1 && stockInCheckState==1 && checkResult==0 ">
-										<input type='button'
-											onclick='window.location.href="goCheckStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'
-											value="检查" />
-									</s:if>
-									<s:if
-										test="stockInStateType == 1 && stockInCheckState==0">
-										<input type='button'
-											onclick='window.location.href="goApprovalStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'
-											value="审核">
-									</s:if>
-									-->
-									<s:if
 										test="stockInStateType == 1 && stockInCheckState==1 && checkResult==1">
 										<a href="#"onclick='window.location.href="goStockInOver.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'><img src="<%=base%>/images/img01.gif" border="0"></a>
-									</s:if>
-									<s:if
-										test="checkResult==-1 || stockInCheckState==-1||(stockInStateType!=1 && stockInStateType!=3)">
-										<a href="#" onclick='javasctipt:deleteStockIn(this);'><img src="<%=base%>/images/quit.gif" border="0"></a>
 									</s:if>
 								</td>
 							</tr>

@@ -50,7 +50,13 @@
 				stockInState = #stockInState#
 			</isNotEmpty>
 			<isNotEmpty property="stockInStateType" prepend="and">
-				stockInStateType = #stockInStateType#
+				<isEqual compareValue="4" property="stockInStateType">
+					stockInStateType not in (3)
+				</isEqual>
+				<isNotEqual compareValue="4"
+					property="stockInStateType">
+					stockInStateType = #stockInStateType#
+				</isNotEqual>
 			</isNotEmpty>
 			<isNotEmpty property="stockInGM" prepend="and">
 				stockInGM = #stockInGM#
