@@ -246,9 +246,6 @@
 						入库单
 					</div>
 					<div class="center_tools">
-						<a href="#" onclick="window.location.href='goAddStockIn.action'"
-							class="a_top"><img src="<%=base%>/images/img06.gif"
-								border="0" class="a_top">添加入库申请单</a>
 						<a href="#" onclick="showSearch()">高级查询</a>
 					</div>
 				</div>
