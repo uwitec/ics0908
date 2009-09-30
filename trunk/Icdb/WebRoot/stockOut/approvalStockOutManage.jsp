@@ -2,8 +2,8 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<% 
-String base=request.getContextPath(); 
+<%
+String base=request.getContextPath();
 int index = 1;
 %>
     <head>
@@ -332,7 +332,7 @@ int index = 1;
 
 	  function callBack(data){
 		 if(data!=null && data=="success"){
-		 	 window.location.href="searchStockOut.action?backurl="+window.location.href;
+		 	 window.location.href="searchApprovalStockOut.action?backurl="+window.location.href;
 		 }
 	  }
 
@@ -582,11 +582,11 @@ int index = 1;
 	   }
 
 	</script>
-	
+
 	<body class="stock_body">
 		<div class="stock_title"><img src="<%=base%>/images/img01.gif">出库单审核</div>
 		<div class="stock_con">
-			
+
 		<s:form action="saveStockIn.action" theme="simple" namespace="/stockIn">
 		<div>
 		<table class="stock_table" cellpadding="0" cellspacing="0" width="100%" border="0">
@@ -621,7 +621,7 @@ int index = 1;
 			<s:if test="stockOutHasMaterielList.size()>0">
 				<s:iterator value="stockOutHasMaterielList"
 					status="stockOutMateriel">
-					<tr 
+					<tr
 			       		<s:if test="#stockOutMateriel.even">
 			       			class="table_tr_odd"
 				       	</s:if>
@@ -736,7 +736,7 @@ int index = 1;
 				test="stock.stockOutStateType == 1 && stock.stockOutCheckState != 1 && stock.stockOutCheckState !=-1">
 				<a href="#" onclick="approvalStockOut(1)"><img src="<%=base%>/images/pass.jpg" border="0" alt="通过"></a>
 				<a href="#" onclick="approvalStockOut(-1)"><img src="<%=base%>/images/no.jpg" border="0" alt="未通过"></a>
-			
+
 			</s:if>
 			</div>
 		</s:form>
