@@ -35,7 +35,7 @@
    <a href="<s:url action="stockOut/searchApprovalStockOut"/>">出库审核管理</a><br/>
    <a href="<s:url action="stockOut/searchCheckStockOut"/>">出库检查管理</a><br/>
    <a href="<s:url action="stockOut/searchStockOutOver"/>">出库</a><br/>
-   <a href="<s:url action="storage/ShowStockMove"/>"></a><br/>
+   <a href="<s:url action="storage/ShowStockMove"/>">调拨单</a><br/>
    -------------------库存管理---------------------------------<br/>
 
  	<a href="<s:url action="stockmanage/ShowMax"/>">呆滞物料</a><br/>
