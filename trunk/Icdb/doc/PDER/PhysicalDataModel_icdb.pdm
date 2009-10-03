@@ -2958,7 +2958,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o47">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-213819,33044), (-211830,46002))</a:Rect>
+<a:Rect>((-216448,33044), (-209324,46002))</a:Rect>
 <a:ListOfPoints>((-213819,33044),(-211830,46002))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -2998,7 +2998,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o54">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-213819,15951), (-209903,33044))</a:Rect>
+<a:Rect>((-215704,15951), (-208204,33044))</a:Rect>
 <a:ListOfPoints>((-213819,33044),(-209903,15951))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -3018,7 +3018,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o56">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-228658,72224), (-227658,82532))</a:Rect>
+<a:Rect>((-232286,72224), (-224036,82532))</a:Rect>
 <a:ListOfPoints>((-228064,72224),(-228252,82532))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -3038,7 +3038,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o60">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-228470,61230), (-227470,72224))</a:Rect>
+<a:Rect>((-231535,61230), (-224411,72224))</a:Rect>
 <a:ListOfPoints>((-227877,61230),(-228064,72224))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -3138,7 +3138,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o72">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-178211,80032), (-132443,81354))</a:Rect>
+<a:Rect>((-178211,79982), (-132443,81354))</a:Rect>
 <a:ListOfPoints>((-132443,81013),(-178211,81239))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -6533,7 +6533,7 @@ TableComment 0 新宋体,8,N</a:FontList>
 <a:Code>TransferOrderHasMateriel</a:Code>
 <a:CreationDate>1251362660</a:CreationDate>
 <a:Creator>Zhong Lizhi</a:Creator>
-<a:ModificationDate>1254528528</a:ModificationDate>
+<a:ModificationDate>1254528803</a:ModificationDate>
 <a:Modifier>admin</a:Modifier>
 <c:Columns>
 <o:Column Id="o325">
@@ -6590,9 +6590,9 @@ TableComment 0 新宋体,8,N</a:FontList>
 <a:Code>moveAmount</a:Code>
 <a:CreationDate>1254528528</a:CreationDate>
 <a:Creator>admin</a:Creator>
-<a:ModificationDate>1254528528</a:ModificationDate>
+<a:ModificationDate>1254528803</a:ModificationDate>
 <a:Modifier>admin</a:Modifier>
-<a:DataType>bigint</a:DataType>
+<a:DataType>decimal</a:DataType>
 </o:Column>
 </c:Columns>
 <c:Keys>
