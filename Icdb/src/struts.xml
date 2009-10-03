@@ -28,4 +28,5 @@
     <include file="strutsrs/stockmanage/s_stockMaxMin.xml"></include>
     <include file="strutsrs/stockmanage/s_stockLevel.xml"></include>
     <include file="strutsrs/stockmanage/s_materOutInFrom.xml"></include>
+    <include file="strutsrs/storage/s_transfer.xml"></include>
 </struts>
