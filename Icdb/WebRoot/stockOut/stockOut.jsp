@@ -139,7 +139,7 @@ String base = request.getContextPath();
 	<div align="right">
 	<a href="#" onclick="closeDIV()"><img src="<%=base%>/images/quit.gif" alt="关闭" border="0"></a>
 	</div>
-			
+
 						入库单号:<s:textfield cssClass="sub3_border" name="stock.stockOutCode" cssStyle="margin-top:5px;"/><br/>
 						开始时间:<s:textfield cssClass="sub3_border" id="stock.stockOutStartDate" name="stock.stockOutStartDate" cssStyle="margin-top:5px;"/><br/>
 						结束时间:<s:textfield cssClass="sub3_border" id="stock.stockOutEndDate" name="stock.stockOutEndDate" cssStyle="margin-top:5px;"/><br/>
@@ -148,20 +148,20 @@ String base = request.getContextPath();
                                 inputField : "stock.stockOutStartDate",
                                 ifFormat   : "%Y-%m-%d",
                                 align      : "Tl",
-                   
+
                             });
                             Calendar.setup({
                                 inputField : "stock.stockOutEndDate",
                                 ifFormat   : "%Y-%m-%d",
                                 align      : "Tl",
-                             
+
                             });
                         </script>
 						单据状态:<s:select cssClass="sub3_border" id="stockOutStateSelect" name="stock.stockOutStateType"
 							list="#{'1':'完成','2':'未完成'}" value="2"
 							value="stock.stockInStateType" headerKey="" headerValue="全部"/>
 						<a href="#" onclick="javascript:check();"><img src="<%=base%>/images/img09.gif" border="0" style="margin-bottom:-4px;"></a><br/>
-			
+
 		</div>
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
@@ -170,7 +170,7 @@ String base = request.getContextPath();
 			<div class="center_tools">
 				<a href="#" onclick="window.location.href='goAddStockOut.action'" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加出库单</a>
 				<a href="#" onclick="showSearch()">高级查询</a>
-			</div>	
+			</div>
 		</div>
 		<div class="center_boder">
 		<table class="center_table"  id="stockOutTable" cellspacing="1" cellpadding="0">
@@ -193,7 +193,7 @@ String base = request.getContextPath();
 	    	</tr>
 	    </s:else>
 	       <s:iterator value="stockOutList.items" status="stat">
-	      	<tr 
+	      	<tr
 	       		<s:if test="#stat.even">
 	       			class="table_tr_odd"
 		       	</s:if>
@@ -262,7 +262,7 @@ String base = request.getContextPath();
 								.getCurrentPage()%>" />
 		</div>
 		</div>
-		
+
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
 	</div>
