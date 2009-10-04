@@ -104,6 +104,10 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			stockInBean.setStockInStateType(1);
 			stockInBean.setStockInCheckState(0);
 			stockInBean.setCheckResult(0);
+
+			if(stockInBean.getStockInDate()==null){
+				stockInBean.setStockInDate(new Date());
+			}
 			if (this.getStockInCount(stockInBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_IN",
 						stockInBean);

@@ -121,6 +121,9 @@ public class StockOutManage extends GenericManage<StockOutBean, Long> {
 			stockOutBean.setStockOutCheckState(0);
 			stockOutBean.setStockOutWithState(0);
 			stockOutBean.setStockOutStateType(1);
+			if(stockOutBean.getStockOutDate()==null){
+				stockOutBean.setStockOutDate(new Date());
+			}
 			if (this.getStockOutCount(stockOutBean) > 0) {
 				DBServer.quider.updateObject("UPDATE_SELECT_STOCK_OUT",
 						stockOutBean);

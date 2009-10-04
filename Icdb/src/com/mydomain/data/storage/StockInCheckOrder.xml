@@ -55,9 +55,17 @@
 				</isEqual>
 				<isNotEqual compareValue="4"
 					property="stockInStateType">
-					stockInStateType = #stockInStateType#
+					<isEqual compareValue="5" property="stockInStateType">
+						checkResult= 1
+					</isEqual>
+					<isNotEqual compareValue="5" property="stockInStateType">
+						stockInStateType = #stockInStateType#
+					</isNotEqual>
 				</isNotEqual>
 			</isNotEmpty>
+			<isEmpty prepend="and" property="stockInStateType">
+				stockInStateType in (1,0,2) and checkResult!= 1
+			</isEmpty>
 			<isNotEmpty property="stockInGM" prepend="and">
 				stockInGM = #stockInGM#
 			</isNotEmpty>
@@ -149,6 +157,9 @@
 		<dynamic prepend="set">
 			<isNotEmpty property="employeeCode" prepend=",">
 				employeeCode = #employeeCode#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="stockInDate">
+				stockInDate =#stockInDate#
 			</isNotEmpty>
 			<isNotEmpty property="checkMessage" prepend=",">
 				checkMessage = #checkMessage#

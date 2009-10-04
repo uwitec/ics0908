@@ -134,6 +134,7 @@ public class StockInAction extends ActionSupport {
 
 		if (stock == null) {
 			stock = new StockInBean();
+			stock.setStockInStateType(4);
 		}
 		stock.setCheckResult(1);
 
