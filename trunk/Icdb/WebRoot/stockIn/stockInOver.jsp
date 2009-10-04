@@ -213,7 +213,7 @@
 					<s:select id="stockInStateSelect" cssClass="sub3_border"
 						name="stock.stockInStateType"
 						list="#{'4':'未入库','3':'已入库'}"
-						value="stock.stockInStateType" headerKey="" headerValue="全部"
+						value="stock.stockInStateType" headerKey="5" headerValue="全部"
 						label="单据状态">单据状态:</s:select>
 
 					<!--

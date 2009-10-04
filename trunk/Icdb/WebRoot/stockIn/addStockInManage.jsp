@@ -2,8 +2,16 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
+		<%
+			String base = request.getContextPath();
+			int index = 0;
+		%>
 <html>
 	<head>
+		  <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
 		<title>新增入库单</title>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/interface/StockInAction.js'></script>
@@ -14,10 +22,7 @@
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/script/json.js'></script>
 
-		<%
-			String base = request.getContextPath();
-			int index = 0;
-		%>
+
 		<script type='text/javascript'>
 
 	  function trim(s){
@@ -51,6 +56,13 @@
  			var rownum = a.rows.length;
 		  	var newTr = a.insertRow(rownum);
 		  	newTr.id = "row"+rownum;
+		  	newTr.style.backgroundColor="#FFFFFF";
+			newTr.style.fontSize="12px";
+			newTr.style.textAlign ="center";
+			newTr.style.verticalAlign ="middle";
+			newTr.style.height="23px";
+			newTr.style.color="#636B6D";
+
 		  	var newTd0 = newTr.insertCell(0);
 			var newTd1 = newTr.insertCell(1);
 			var newTd2 = newTr.insertCell(2);
@@ -88,8 +100,8 @@
 			newTd2.innerHTML= materiels[i].materielName||'';
 			newTd3.innerHTML= materiels[i].meterielSize||'';
 			newTd4.innerHTML= materiels[i].meterielABC||'';
-			newTd5.innerHTML= '<input type="text" id="stockInAmount_"'+rownum+' name="stockInAmount" onchange="getPrice(this);">';
-			newTd6.innerHTML= '<input type="text" id="onePrice_"'+rownum+' name="onePrice" onchange="getPrice(this);">'
+			newTd5.innerHTML= '<input class="stock_small_border" type="text" id="stockInAmount_"'+rownum+' name="stockInAmount" onchange="getPrice(this);">';
+			newTd6.innerHTML= '<input class="stock_small_border" type="text" id="onePrice_"'+rownum+' name="onePrice" onchange="getPrice(this);">'
 			newTd7.appendChild(supplier);
 			//newTd8.appendChild(cargoSpace);
 			newTd9.innerHTML= '';
@@ -655,12 +667,14 @@
 		<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 
 	</head>
-	<body>
+	<body class="stock_body">
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">新增入库单</div>
+		<div class="stock_con">
 		<s:form action="saveStockIn.action" theme="simple"
 			namespace="/stockIn">
-
-			<table cellpadding="0" cellspacing="0" width="100%" border="0">
-				<tr>
+			<div>
+			<table class="stock_table" cellpadding="0" cellspacing="0" width="850" border="0">
+				<tr  class="stock_tr">
 					<td>
 						入库类型：
 						<s:if test="stock.stockInStateType!=1">
@@ -689,7 +703,7 @@
 					<td>
 						入库编号：
 						<s:textfield id="stockInCode" name="stock.stockInCode"
-							disabled="true" />
+							disabled="true" cssClass="stock_border"/>
 					</td>
 					<s:if test="stock.stockInStateType==1">
 						<td>
@@ -701,65 +715,66 @@
 					</s:if>
 				</tr>
 			</table>
+			</div>
+			<div style="margin-top: 8px;margin-left:10px;">
 			<s:if test="stock.stockInStateType!=1">
-				<input value="添加物料" type="button" onclick="showMateriels();" />
+				<a href="#" onclick="showMateriels();" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">选择物料</a>
 			</s:if>
-			<table cellpadding="0" cellspacing="1" width="100%" border="0">
-				<tr>
-					<td colspan="6">
-						<table id="addMatail" bgcolor="black" cellspacing="1" width="100%">
-							<tr>
-								<th bgcolor="white">
+			</div>
+			<div style="width: 800px;margin-top: 8px;">
+						<table class="stock_table"  id="addMatail" cellspacing="1" width="850">
+							<tr class="table_tr__even">
+								<th>
 									序号
 								</th>
-								<th bgcolor="white">
+								<th>
 									编号
 								</th>
-								<th bgcolor="white">
+								<th>
 									品名
 								</th>
-								<th bgcolor="white">
+								<th>
 									规格
 								</th>
-								<th bgcolor="white">
+								<th>
 									单位
 								</th>
-								<th bgcolor="white">
+								<th>
 									数量
 								</th>
-								<th bgcolor="white">
+								<th>
 									单价
 								</th>
-								<th bgcolor="white">
+								<th>
 									供应商
 								</th>
-								<th bgcolor="white">
+								<th>
 									货位编号
 								</th>
-								<th bgcolor="white">
+								<th>
 									金额
 								</th>
 								<s:if
 									test="stock.checkResult!=-1&& stock.stockInStateType==1 && stock.stockInCheckState ==1">
-									<th bgcolor="white">
+									<th>
 										抽查数量
 									</th>
-									<th bgcolor="white">
+									<th>
 										数量合格率
 									</th>
-									<th bgcolor="white">
+									<th>
 										质量合格率
 									</th>
-									<th bgcolor="white">
+									<th>
 										包装合格率
 									</th>
-									<th bgcolor="white">
+									<th>
 										商品串库率
 									</th>
 								</s:if>
 								<s:if
 									test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
-									<th bgcolor="white">
+									<th>
 										操作
 									</th>
 								</s:if>
@@ -767,24 +782,30 @@
 							<s:if test="StockInCheckMaterielBeanList.size()>0">
 								<s:iterator value="StockInCheckMaterielBeanList"
 									status="stockInMateriel">
-									<tr>
-										<td align="center" bgcolor="white">
+									<tr
+										<s:if test="#stockInMateriel.even">
+											class="table_tr_odd"
+										</s:if>
+								       	<s:else>
+							       			class="table_tr__even"
+							       		</s:else>
+									>
+										<td align="center">
 											<%=++index%>
-											<s:property value="#stockInMateriel.index" />
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:property value="materielCode"></s:property>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:property value="materielName"></s:property>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:property value="materielSize"></s:property>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:property value="materielABC"></s:property>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:if
 												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
 												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
@@ -795,7 +816,7 @@
 													name="stockInAmount" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:if
 												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
 												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
@@ -806,7 +827,7 @@
 													name="onePrice" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:if
 												test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
 												<s:select name='supplierCode'
@@ -823,7 +844,7 @@
 													value="supplierCode" disabled="true" />
 											</s:else>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:if
 												test="stock.stockInStateType==1 && stock.checkResult==1">
 												<s:textfield name="cargoSpaceCode"
@@ -831,12 +852,12 @@
 													onclick="showCargoSpace(this);" />
 											</s:if>
 										</td>
-										<td bgcolor="white">
+										<td>
 											<s:property value="(stockInAmount*onePrice)" />
 										</td>
 										<s:if
-											test="stock.checkResult!=-1&&stock.stockInStateType==1 && stock.stockInCheckState==1">
-											<td bgcolor="white">
+											test="stock.checkResult!=-1 && stock.stockInStateType==1 && stock.stockInCheckState==1">
+											<td>
 												<s:if test="stock.checkResult!=1">
 													<s:textfield name="checkAmount"
 														id="checkAmount_%{#stockInMateriel.index+1}" size="10"></s:textfield>
@@ -847,7 +868,7 @@
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
-											<td bgcolor="white">
+											<td>
 												<s:if test="stock.checkResult!=1">
 													<s:textfield name="amountPercent"
 														id="amountPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
@@ -858,7 +879,7 @@
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
-											<td bgcolor="white">
+											<td  >
 												<s:if test="stock.checkResult!=1">
 													<s:textfield name="qualityPercent"
 														id="qualityPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
@@ -869,7 +890,7 @@
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
-											<td bgcolor="white">
+											<td>
 												<s:if test="stock.checkResult!=1">
 													<s:textfield name="packagePercent"
 														id="packagePercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
@@ -880,7 +901,7 @@
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
-											<td bgcolor="white">
+											<td>
 												<s:if test="stock.checkResult!=1">
 													<s:textfield name="errorStockPercent"
 														id="errorStockPercent_%{#stockInMateriel.index+1}"
@@ -896,7 +917,7 @@
 
 										<s:if
 											test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
-											<td bgcolor="white">
+											<td>
 
 												<input type="button" value="删除"
 													onclick="deleteMateriel(this);">
@@ -907,46 +928,44 @@
 								</s:iterator>
 							</s:if>
 						</table>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="6">
-						<table bgcolor="black" cellspacing="1" border="0" width="100%">
-							<tr>
-								<td bgColor="white">
-									金额合计
-								</td>
-								<td colspan="5" align="right" id="sumPrice" bgColor="white"></td>
+
+						<table class="stock_table" cellspacing="1" border="0" width="850">
+							<tr class="stock_tr">
+
+								<td class="stock_right">
+									金额合计:
+									</td>
+								<td colspan="3" align="right" id="sumPrice"></td>
 							</tr>
-							<tr>
-								<td bgcolor="white">
-									备注
-								</td>
-								<td colspan="5" bgcolor="white">
+							<tr class="stock_tr">
+
+
+								<td colspan="4" >
+									备注:<br/>
 									<s:if
 										test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState == -1">
 										<s:textarea id="checkRemark" name="stock.checkRemark"
-											cols="100%" />
+											cols="100%" cssClass="stock_textarea"/>
 									</s:if>
 									<s:else>
 										<s:textarea id="checkRemark" name="stock.checkRemark"
-											cols="100%" disabled="true" />
+											cols="100%" disabled="true" cssClass="stock_textarea"/>
 									</s:else>
 								</td>
 							</tr>
 							<s:if test="stock.stockInStateType == 1">
-								<tr>
-									<td bgcolor="white">
-										审批意见
-									</td>
-									<td colspan="5" bgcolor="white">
+								<tr class="stock_tr">
+
+
+									<td colspan="4" >
+										审批意见:<br/>
 										<s:if test="stock.stockInCheckState == 1">
 											<s:textarea id="stockInExMessage"
-												name="stock.stockInExMessage" cols="100%" disabled="true" />
+												name="stock.stockInExMessage" cols="100%" disabled="true" cssClass="stock_textarea"/>
 										</s:if>
 										<s:else>
 											<s:textarea id="stockInExMessage"
-												name="stock.stockInExMessage" cols="100%" />
+												name="stock.stockInExMessage" cols="100%" cssClass="stock_textarea"/>
 										</s:else>
 									</td>
 								</tr>
@@ -954,56 +973,56 @@
 
 							<s:if
 								test="stock.stockInStateType == 1 && stock.stockInCheckState==1 ">
-								<tr>
-									<td bgcolor="white">
-										检测意见
-									</td>
-									<td colspan="5" bgcolor="white">
+								<tr class="stock_tr">
+									<td colspan="4" >
+										检测意见:<br/>
 										<s:if test="stock.checkResult==0">
-											<s:textarea id="checkMessage" name="stock.checkMessage"
+											<s:textarea id="checkMessage" name="stock.checkMessage" cssClass="stock_textarea"
 												cols="100%" />
 										</s:if>
 										<s:else>
 											<s:textarea id="checkMessage" name="stock.checkMessage"
-												cols="100%" disabled="true" />
+												cols="100%" disabled="true" cssClass="stock_textarea"/>
 										</s:else>
 									</td>
 								</tr>
 							</s:if>
 
 
-							<tr>
-								<td bgcolor="white" width="20%">
+							<tr class="stock_tr">
+								<td>
 									经手人
 								</td>
-								<td colspan="2" bgcolor="white" width="30%">
+								<td>
 									<s:if
 										test="stock.stockInStateType == 1 && stock.stockInCheckState==1 && stock.checkResult ==0">
-										<s:textfield id="employeeCode" name="stock.employeeCode" />
+										<s:textfield id="employeeCode" cssClass="stock_border" name="stock.employeeCode" />
 									</s:if>
 									<s:else>
 										<s:textfield id="employeeCode" name="stock.employeeCode"
-											disabled="true" />
+											disabled="true" cssClass="stock_border" />
 									</s:else>
 								</td>
-								<td bgcolor="white" width="20%">
+								<td>
 									库管员
 								</td>
-								<td colspan="2" bgcolor="white">
+								<td>
 									<s:if test="stock.checkResult == 1">
-										<s:textfield id="stock.stockInGM" name="stock.stockInGM" />
+										<s:textfield id="stock.stockInGM" cssClass="stock_border" name="stock.stockInGM" />
 									</s:if>
+									<s:else>
+										<s:textfield id="stock.stockInGM" name="stock.stock.stockInGM"
+											disabled="true" cssClass="stock_border"/>
+									</s:else>
 								</td>
 
 							</tr>
 						</table>
-					</td>
-				</tr>
-			</table>
+			<div style="margin-top: 8px;margin-left:10px;">
 			<s:if
 				test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
-				<input type="button" value="保存" onclick="saveStockIn();" />
-				<input type="button" value="提交" onclick="submitStockIn();" />
+				<a href="#" onclick="saveStockIn();"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
+				<a href="#" onclick="submitStockIn();"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
 			</s:if>
 			<s:if
 				test="stock.stockInStateType == 1 && stock.stockInCheckState == 0">
@@ -1021,7 +1040,9 @@
 				<input type="button" value="保存" onclick="complStockIn(1)" />
 				<input type="button" value="完成" onclick="complStockIn(3)" />
 			</s:if>
+			</div>
 		</s:form>
+		</div>
 	</body>
 	<SCRIPT type="text/javascript">
 		getSumPrice();
