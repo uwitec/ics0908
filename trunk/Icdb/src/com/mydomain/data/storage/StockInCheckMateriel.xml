@@ -61,11 +61,13 @@
 
 	</sql>
 	<sql id="STOCK_IN_CHECK_MATERIEL_COMMON_SELECT">
-		select materielCode, supplierCode, cargoSpaceCode, stockInCode ,
-		amountPercent, qualityPercent, checkTime , packagePercent,
-		errorStockPercent , checkNote , checkAmount , checkRemark,
-		lastAmount, stockInAmount, onePrice, stockInType from
-		stockInCheckMateriel s
+		select s.materielCode, s.supplierCode, s.cargoSpaceCode,
+		s.stockInCode , s.amountPercent, s.qualityPercent, s.checkTime ,
+		s.packagePercent, s.errorStockPercent , s.checkNote ,
+		s.checkAmount , s.checkRemark, s.lastAmount, s.stockInAmount,
+		s.onePrice, s.stockInType, c.cargoSpaceName from
+		stockInCheckMateriel s left join cargospace c on
+		s.cargoSpaceCode = c.cargoSpaceCode
 	</sql>
 	<sql id="STOCK_IN_CHECK_MATERIEL_COMMON_COUNT">
 		select count(*) from stockInCheckMateriel s
@@ -81,9 +83,7 @@
 	<select id="STOCK_IN_CHECK_MATERIEL_SELECT"
 		resultClass="stockInCheckMateriel">
 		<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_SELECT" />
-		<dynamic prepend="where">
-			<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
-		</dynamic>
+		<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
 	</select>
 
 	<sql id="STOCK_IN_CHECK_MATERIEL_AND_MATERIEL">
@@ -91,58 +91,38 @@
 		s.stockInCode , s.amountPercent, s.qualityPercent, s.checkTime ,
 		s.packagePercent, s.errorStockPercent , s.checkNote ,
 		s.checkAmount , s.checkRemark, s.lastAmount, s.stockInAmount,
-		s.onePrice, s.stockInType,m.materielName from
-		stockInCheckMateriel s, materiel m where s.materielCode =
-		m.materielCode
+		s.onePrice, s.stockInType,m.materielName,c.cargoSpaceName from
+		stockInCheckMateriel s left join materiel m on s.materielCode =
+		m.materielCode left join cargospace c on s.cargoSpaceCode =
+		c.cargoSpaceCode
 	</sql>
 
 	<select id="STOCK_IN_CHECK_MATERIEL_AND_MATERIEL_SELECT"
 		resultClass="stockInCheckMateriel">
 		<include refid="STOCK_IN_CHECK_MATERIEL_AND_MATERIEL" />
-		<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
+		<dynamic prepend="where">
+			<include refid="STOCK_IN_CHECK_MATERIEL_COMMON_CONDITION" />
+		</dynamic>
 
 	</select>
 
 	<insert id="ADD_STOCK_IN_CHECK_MATERIEL">
 
-			insert into stockInCheckMateriel( materielCode,
-			   supplierCode,
-			   <isNotEmpty property="cargoSpaceCode">
-			  	 cargoSpaceCode,
-			   </isNotEmpty>
-			   stockInCode ,
-			   amountPercent,
-			   qualityPercent,
-			   checkTime ,
-			   packagePercent,
-			   errorStockPercent ,
-			   checkNote ,
-			   checkAmount ,
-			   checkRemark,
-			   lastAmount,
-			   stockInAmount,
-			   onePrice,
-			   stockInType
-			 )values(
-			   #materielCode#,
-			   #supplierCode#,
-			  <isNotEmpty property="cargoSpaceCode">
-			   #cargoSpaceCode#,
-			  </isNotEmpty>
-			   #stockInCode# ,
-			   #amountPercent#,
-			   #qualityPercent#,
-			   #checkTime# ,
-			   #packagePercent#,
-			   #errorStockPercent# ,
-			   #checkNote# ,
-			   #checkAmount# ,
-			   #checkRemark#,
-			   #lastAmount#,
-			   #stockInAmount#,
-			   #onePrice#,
-			   #stockInType#
-			)
+		insert into stockInCheckMateriel( materielCode, supplierCode,
+		<isNotEmpty property="cargoSpaceCode">
+			cargoSpaceCode,
+		</isNotEmpty>
+		stockInCode , amountPercent, qualityPercent, checkTime ,
+		packagePercent, errorStockPercent , checkNote , checkAmount ,
+		checkRemark, lastAmount, stockInAmount, onePrice, stockInType
+		)values( #materielCode#, #supplierCode#,
+		<isNotEmpty property="cargoSpaceCode">
+			#cargoSpaceCode#,
+		</isNotEmpty>
+		#stockInCode# , #amountPercent#, #qualityPercent#, #checkTime# ,
+		#packagePercent#, #errorStockPercent# , #checkNote# ,
+		#checkAmount# , #checkRemark#, #lastAmount#, #stockInAmount#,
+		#onePrice#, #stockInType# )
 
 	</insert>
 	<update id="UPDATE_STOCK_IN_CHECK_MATERIEL">
@@ -195,7 +175,8 @@
 				cargoSpaceCode = #cargoSpaceCode#
 			</isNotEmpty>
 		</dynamic>
-		where materielCode = #materielCode# and stockInCode = #stockInCode#
+		where materielCode = #materielCode# and stockInCode =
+		#stockInCode#
 
 	</update>
 	<delete id="DELETE_STOCK_IN_CHECK_MATERIEL">
