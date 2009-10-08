@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TransferOrder">
+	<select id="selectTransferCount" resultClass="com.mydomain.bean.storage.TransferOrderBean">
+	select
+	count(*) as countValue
+	from TransferOrder
+	where 
+	transferState!=0 and 
+	locate(#transferOrderType#,transferOrderType)>0
+	</select>
+	<select id="selectTransferDef" resultClass="com.mydomain.bean.storage.TransferOrderBean">
+	select
+	transferOrderCode,
+	transferOrderTime,
+	transferOrderType,
+	transferOrderCredence,
+	transferOrderChecker,
+	transferOrderPerson,
+	transferState,
+	storehouseCode
+	from TransferOrder
+	where 
+	transferState!=0 and 
+	locate(#transferOrderType#,transferOrderType)>0
+	</select>
+	<select id="getTransferBean"  resultClass="com.mydomain.bean.storage.TransferOrderBean">	
+	select
+	transferOrderCode,
+	transferOrderTime,
+	transferOrderType,
+	transferOrderCredence,
+	transferOrderChecker,
+	transferOrderPerson,
+	transferState,
+	storehouseCode
+	from TransferOrder
+	where 
+	transferState!=0 and
+	transferOrderCode=#transferOrderCode#
+	</select>
+	<insert id="insertTransferBean" parameterClass="com.mydomain.bean.storage.TransferOrderBean">
+	insert into TransferOrder(transferOrderCode,transferOrderTime,transferOrderType,
+	transferOrderCredence,transferOrderChecker,transferOrderPerson,transferState,storehouseCode)
+	values
+	(#transferOrderCode#,#transferOrderTime#,#transferOrderType#,#transferOrderCredence#,
+	#transferOrderChecker#,#transferOrderPerson#,#transferState#,#storehouseCode#)
+	</insert>
+	<update id="updateTransferBean" parameterClass="com.mydomain.bean.storage.TransferOrderBean">
+	update TransferOrder
+	set 
+	transferOrderTime=#transferOrderTime#,
+	transferOrderType=#transferOrderType#,
+	transferOrderCredence=#transferOrderCredence#,
+	transferOrderChecker=#transferOrderChecker#,
+	transferOrderPerson=#transferOrderPerson#,
+	transferState=#transferState#
+	where transferOrderCode=#transferOrderCode#
+	</update>
+	<delete id="deleteTransferBean" parameterClass="com.mydomain.bean.storage.TransferOrderBean">
+	update TransferOrder
+	set 
+	transferState=0
+	where transferOrderCode=#transferOrderCode#
+	</delete> 
+</sqlMap>

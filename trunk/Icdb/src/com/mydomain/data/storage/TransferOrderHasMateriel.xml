@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TransferOrderHasMateriel">
+	<select id="selectTransferOrderHasMateriel" resultClass="com.mydomain.bean.storage.TransferOrderHasMaterielBean">
+	select
+	toh.transferOrderCode,
+	toh.newcargoSpaceCode,
+	toh.cargoSpaceCode,
+	c.cargoSpaceName,
+	toh.materielCode,
+	m.materielName,
+	toh.moveAmount,
+	s.stockAmount,
+	s.stockPrice
+    from TransferOrderHasMateriel as toh,materiel as m,stock as s,cargospace as c
+    where 
+    toh.cargoSpaceCode=c.cargoSpaceCode and
+    s.materielCode=toh.materielCode and
+    s.cargoSpaceCode=toh.cargoSpaceCode and
+    toh.materielCode=m.materielCode and
+    toh.transferOrderCode=#transferOrderCode#
+	</select>
+	<insert id="insertTransferOrderHasMaterielBean" parameterClass="com.mydomain.bean.storage.TransferOrderHasMaterielBean">
+	insert into TransferOrderHasMateriel
+	(transferOrderCode,	newcargoSpaceCode,cargoSpaceCode,materielCode,moveAmount)
+	values
+	(#transferOrderCode#,#newcargoSpaceCode#,#cargoSpaceCode#,#materielCode#,#moveAmount#)
+	</insert>
+	<delete id="deleteTransferOrderHasMaterielBean" parameterClass="com.mydomain.bean.storage.TransferOrderHasMaterielBean">
+	delete from TransferOrderHasMateriel
+	where transferOrderCode=#transferOrderCode#
+	</delete> 
+</sqlMap>
