@@ -69,6 +69,6 @@
 	<sqlMap resource="com/mydomain/data/stockmanage/MaterielInFrom.xml"/>
 	<sqlMap resource="com/mydomain/data/stockmanage/MaterielOutFrom.xml"/>
     <sqlMap resource="com/mydomain/data/permission/Permission.xml" />
-    <sqlMap resource="com/mydomain/data/storage/TransferOrder"/>
-    <sqlMap resource="com/mydomain/data/storage/TransferOrderHsaMateriel"/>
+    <sqlMap resource="com/mydomain/data/storage/TransferOrder.xml"/>
+    <sqlMap resource="com/mydomain/data/storage/TransferOrderHasMateriel.xml"/>
 	</sqlMapConfig>
