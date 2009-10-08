@@ -67,5 +67,16 @@ public class CargoSpaceManage {
 		}
 	}
 	
+	public StorehouseBean getCargoSapceHouse(CargoSpaceBean cargo){
+		try {
+			return (StorehouseBean) DBServer.quider.queryForObject("findHouse", cargo.getCargoSpaceCode());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return new StorehouseBean();
+		}
+	}
+
+	
 	
 }
