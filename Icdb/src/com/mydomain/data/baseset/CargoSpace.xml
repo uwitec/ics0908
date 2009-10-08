@@ -62,4 +62,12 @@
 			storehouseCode=#storehouseCode#
 		</isNotEmpty>
 	</select>
+	<select id="findHouse" parameterClass="String" resultClass="com.mydomain.bean.baseset.CargoSpaceBean">
+		select 
+		s.storehouseCode,
+		s.storehouseName
+		from cargoSpace as c,storehouse as s
+		where c.storehouseCode=s.storehouseCode and
+		c.cargoSpaceCode=#ID#
+	</select>
 </sqlMap>
