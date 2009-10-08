@@ -31,8 +31,13 @@
 	s.cargoSpaceCode in
 	(select cargoSpaceCode from cargoSpace where storehouseCode=#storehouseCode#)
 	</select>
-	<select id="getStockBean" parameterClass="String" resultClass="com.mydomain.bean.storage.StockBean">
-
+	<select id="getStockBean"  resultClass="com.mydomain.bean.storage.StockBean">
+		select
+		count(*) as countValue
+		from stock 
+		where 
+		cargoSpaceCode=#cargoSpaceCode# and
+		materielCode=#materielCode#
 	</select>
 	<insert id="insertStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
 	insert into stock
