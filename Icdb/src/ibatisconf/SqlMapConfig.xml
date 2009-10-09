@@ -71,4 +71,7 @@
     <sqlMap resource="com/mydomain/data/permission/Permission.xml" />
     <sqlMap resource="com/mydomain/data/storage/TransferOrder.xml"/>
     <sqlMap resource="com/mydomain/data/storage/TransferOrderHasMateriel.xml"/>
+    <sqlMap resource="com/mydomain/data/storage/BackOrder.xml"/>
+    <sqlMap resource="com/mydomain/data/storage/BackOrderMateriel.xml"/>
+   	<sqlMap resource="com/mydomain/data/baseset/Customer.xml"/>
 	</sqlMapConfig>
