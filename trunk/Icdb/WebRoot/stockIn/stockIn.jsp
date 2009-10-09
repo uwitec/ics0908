@@ -74,6 +74,39 @@
 				tag.value=1;
 				document.getElementById("searchForm").submit();
 			}
+function nextPage(){
+				var tag = document.getElementById("currentPage");
+				var currentPage = parseInt(tag.value) + 1;
+				tag.value=currentPage;
+				document.getElementById("searchForm").submit();
+			}
+
+			function goPage(){
+				var toPageTab = document.getElementById("toPage");
+				var toPage = toPageTab.value;
+				if(!isNumber(toPage)){
+					alert("请输入数字！");
+					toPageTab.focus();
+					return;
+				}
+				var tag = document.getElementById("currentPage");
+				tag.value = toPage;
+				document.getElementById("searchForm").submit();
+			}
+
+			function goFirstPage(){
+				var tag = document.getElementById("currentPage");
+				tag.value = 1;
+				document.getElementById("searchForm").submit();
+			}
+
+			function goFinalPage(){
+
+				var tag = document.getElementById("currentPage");
+				var totalPage = "<%=((Page) request.getAttribute("page")).getTotalPage()%>";
+				tag.value = totalPage;
+				document.getElementById("searchForm").submit();
+			}
 
 			function deleteStockIn(tab){
 				var stockInTable = document.getElementById("stockInTable");
@@ -354,30 +387,43 @@
 						</s:iterator>
 					</table>
 					<div class="pages">
-
+<input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="goFirstPage();"/>
 						<s:if test="page.hasPrevious">
-							<input type="button" onclick="previousPage();" value="上一页" />
+							<input class="img_size" type="image"
+								src="<%=base%>/images/btn1_pre.gif" onclick="previousPage();" />
 						</s:if>
+						<s:else>
+							<font color="gray">上一页</font>
+						</s:else>
 						<s:property value="page.currentPage" />
 						/
-						<s:property value="page.totalPage" />
+						<s:property id="totalPage" value="page.totalPage" />
 
 
 						<s:if test="page.hasNext">
-							<input type="button" onclick="nextPage();" value="下一页" />
+							<input type="image" class="img_size"
+								src="<%=base%>/images/btn_next.gif" onclick="nextPage();" />
 						</s:if>
-						&nbsp; 每页
+						<s:else>
+							<font color="gray">下一页</font>
+						</s:else>
+						<input type="image" class="img_size" align="bottom"
+							src="<%=base%>/images/btn1_end.gif" onclick="goFinalPage();" />
+						<font color="gray">跳转到：<s:textfield id="size" size="2"
+								id="toPage" name="toPage" cssClass="pages_border" onblur="goPage();" />页</font>
+
+						<!--
+								 &nbsp; 每页
 						<input type="text" size="4" id="pageSize" name="page.pageSize"
 							value="<%=((Page) request.getAttribute("page")).getPageSize()%>"
 							onchange="pageSizeChange();" />
 						条 &nbsp;总共
 						<s:property value="page.totalRowsAmount" />
 						条记录
-
-
 						<input type="hidden" id="currentPage" name="page.currentPage"
 							value="<%=((Page) request.getAttribute("page"))
 								.getCurrentPage()%>" />
+						 -->
 					</div>
 				</div>
 				<div class="center_boder_foot"></div>
