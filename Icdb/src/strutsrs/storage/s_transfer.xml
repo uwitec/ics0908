@@ -4,6 +4,17 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 <package name="transfer" extends="struts-default" namespace="/storage">
-<action name=""></action>
+<action name="ShowStockMove" class="com.action.storage.StockMoveAction" method="showStockMove">
+	<result name="success">/storage/stockmove/StockMoveShow.jsp</result>
+</action>
+<action name="GoAddStockMove" class="com.action.storage.StockMoveAction" method="goAddStockMove">
+	<result name="success">/storage/stockmove/StockMoveAdd.jsp</result>
+</action>
+<action name="AddOrUpdateStockMove" class="com.action.storage.StockMoveAction" method="addOrUpdateStockMove">
+	<result name="success" type="redirect">ShowStockMove.action</result>
+</action>
+<action name="GetOneStockMove" class="com.action.storage.StockMoveAction" method="getOneStockMove">
+	<result name="success">/storage/stockmove/StockMoveAdd.jsp</result>
+</action>
 </package>
 </struts>

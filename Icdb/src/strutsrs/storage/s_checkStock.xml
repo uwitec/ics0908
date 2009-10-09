@@ -8,7 +8,7 @@
 	<result name="success">/storage/checkStock/CheckStockShow.jsp</result>
 </action>
 <action name="GoAddCheckStock" class="com.action.storage.CheckStockAction" method="goAddCheckStock">
-	<result name="success">/storage/checkStock/CheckStockAdd.jsp</result>
+	<result name="success" type="redirect">EditCheckStock.action</result>
 </action>
 <action name="AddCheckStock" class="com.action.storage.CheckStockAction" method="addCheckStock">
 	<result name="success" type="redirect">ShowCheck.action</result>
