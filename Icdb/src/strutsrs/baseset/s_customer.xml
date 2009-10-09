@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="customer" extends="struts-default" namespace="/baseset">
+<action name="ShowCustomer" class="com.action.baseset.CustomerAction" method="showCustomer">
+	<result name="success">/baseset/customer/CustomerShow.jsp</result>
+</action>
+<action name="GoAddCustomer" class="com.action.baseset.CustomerAction" method="goAddCustomer">
+	<result name="success">/baseset/customer/CustomerAdd.jsp</result>
+</action>
+<action name="GetOneCustomer" class="com.action.baseset.CustomerAction" method="getOneCustomer">
+	<result name="success">/baseset/customer/CustomerUpdate.jsp</result>
+</action>
+<action name="UpdateCustomer" class="com.action.baseset.CustomerAction" method="updateCustomer">
+	<result name="success" type="redirect">ShowCustomer.action</result>
+</action>
+<action name="AddCustomer" class="com.action.baseset.CustomerAction" method="addCustomer">
+	<result name="success" type="redirect">GoAddCustomer.action</result>
+</action>
+<action name="DeleteCustomer" class="com.action.baseset.CustomerAction" method="deleteCustomer">
+	<result name="success" type="redirect">ShowCustomer.action</result>
+</action>
+</package>
+</struts>
