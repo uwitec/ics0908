@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Customer">
+	<select id="selectCustomerCount" resultClass="com.mydomain.bean.baseset.CustomerBean">
+	select 
+	count(*) as countValue
+	from customer where
+	isEnabled!=0 and
+	(locate(#customerCode#,customerCode)>0 or
+	locate(#customerName#,customerName)>0 or
+	locate(#customerAddress#,customerAddress)>0 or
+	locate(#customerPhone#,customerPhone)>0 or
+	locate(#customerZipCode#,customerZipCode)>0 or
+	locate(#customerFax#,customerFax)>0 or
+	locate(#customerRemark#,customerRemark)>0)
+	</select>
+	<select id="selectCustomerDef" resultClass="com.mydomain.bean.baseset.CustomerBean">
+	select 
+	customerCode,
+	customerName,
+	customerAddress,
+	customerPhone,
+	customerZipCode,
+	customerFax,
+	customerRemark,
+	jsonField
+	from customer where
+	isEnabled!=0 and
+	(locate(#customerCode#,customerCode)>0 or
+	locate(#customerName#,customerName)>0 or
+	locate(#customerAddress#,customerAddress)>0 or
+	locate(#customerPhone#,customerPhone)>0 or
+	locate(#customerZipCode#,customerZipCode)>0 or
+	locate(#customerFax#,customerFax)>0 or
+	locate(#customerRemark#,customerRemark)>0)
+	limit #startValue#,#endValue#
+	</select>
+	<select id="getCustomerBean" parameterClass="String" resultClass="com.mydomain.bean.baseset.CustomerBean">
+	select 
+	customerCode,
+	customerName,
+	customerAddress,
+	customerPhone,
+	customerZipCode,
+	customerFax,
+	customerRemark,
+	jsonField
+	from customer where
+	isEnabled!=0 and customerCode=#customerCode#
+	</select>
+	<insert id="insertCustomerBean" parameterClass="com.mydomain.bean.baseset.CustomerBean">
+	insert into customer
+	(customerCode,customerName,customerAddress,customerPhone,customerZipCode,customerFax,customerRemark,jsonField,isEnabled)
+	values
+	(#customerCode#,#customerName#,#customerAddress#,#customerPhone#,#customerZipCode#,#customerFax#,#customerRemark#,#jsonField#,1)
+	</insert>
+	<update id="updateCustomerBean" parameterClass="com.mydomain.bean.baseset.CustomerBean">
+	update customer
+	set	
+	customerName=#customerName#,
+	customerAddress=#customerAddress#,
+	customerPhone=#customerPhone#,
+	customerZipCode=#customerZipCode#,
+	customerFax=#customerFax#,
+	customerRemark=#customerRemark#,
+	jsonField=#jsonField#
+	where customerCode=#customerCode#
+	</update>
+	<delete id="deleteCustomerBean" parameterClass="com.mydomain.bean.baseset.CustomerBean">
+	update customer
+	set	
+	isEnabled=0
+	where customerCode=#customerCode#
+	</delete> 
+</sqlMap>
