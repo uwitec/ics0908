@@ -16,6 +16,7 @@
     <include file="strutsrs/baseset/s_supplier.xml"></include>
     <include file="strutsrs/baseset/s_storehouse.xml"></include>
     <include file="strutsrs/baseset/s_cargospace.xml"></include>
+    <include file="strutsrs/baseset/s_customer.xml"></include>
     <include file="strutsrs/storage/s_stockIn.xml"></include>
     <include file="strutsrs/storage/s_stockOut.xml"></include>
     <include file="strutsrs/baseset/s_materiel.xml"></include>
@@ -29,4 +30,5 @@
     <include file="strutsrs/stockmanage/s_stockLevel.xml"></include>
     <include file="strutsrs/stockmanage/s_materOutInFrom.xml"></include>
     <include file="strutsrs/storage/s_transfer.xml"></include>
+    <include file="strutsrs/storage/s_backOrder.xml"></include>
 </struts>
