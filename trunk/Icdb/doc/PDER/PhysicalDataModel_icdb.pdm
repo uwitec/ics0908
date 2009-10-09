@@ -5506,11 +5506,11 @@ TableComment 0 新宋体,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o244">
 <a:ObjectID>B9A071D6-B572-4076-A2E6-EEA9EE001068</a:ObjectID>
-<a:Name>客户姓名</a:Name>
+<a:Name>客户名称</a:Name>
 <a:Code>customerName</a:Code>
 <a:CreationDate>1255059408</a:CreationDate>
 <a:Creator>admin</a:Creator>
-<a:ModificationDate>1255059408</a:ModificationDate>
+<a:ModificationDate>1255067604</a:ModificationDate>
 <a:Modifier>admin</a:Modifier>
 <a:DataType>VARCHAR(45)</a:DataType>
 <a:Length>45</a:Length>
