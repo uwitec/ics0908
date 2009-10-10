@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2009-09-14 17:15:45                          */
+/* Created on:     2009-10-10 14:27:17                          */
 /*==============================================================*/
 
 
@@ -56,6 +56,10 @@ drop table if exists Unit;
 
 drop table if exists UnitType;
 
+drop table if exists priceChange;
+
+drop table if exists priceChangeMateriel;
+
 drop table if exists wasMateriel;
 
 drop table if exists wastage;
@@ -98,8 +102,9 @@ create table BackOrderHasMateriel
    backOrderCode        VARCHAR(45) not null,
    materielCode         VARCHAR(45) not null,
    materelCount         decimal,
-   materelPirce         decimal,
-   primary key (backOrderCode, materielCode)
+   materelPrice         decimal,
+   cargoSpaceCode       VARCHAR(45) not null,
+   primary key (backOrderCode, materielCode, cargoSpaceCode)
 );
 
 /*==============================================================*/
@@ -169,6 +174,14 @@ create table CheckStockList
 create table Customer
 (
    customerCode         VARCHAR(45) not null,
+   customerName         VARCHAR(45),
+   customerAddress      VARCHAR(45),
+   customerPhone        VARCHAR(45),
+   customerZipCode      VARCHAR(45),
+   customerFax          VARCHAR(45),
+   customerRemark       VARCHAR(45),
+   isEnabled            int,
+   jsonField            VARCHAR(3000),
    primary key (customerCode)
 );
 
@@ -424,11 +437,12 @@ create table Supplier
 create table TransferOrder
 (
    transferOrderCode    varchar(45) not null,
-   transferOrderTime    bigint,
+   transferOrderTime    datetime,
    transferOrderType    int,
    transferOrderCredence varchar(45),
    transferOrderChecker varchar(45),
    transferOrderPerson  varchar(45),
+   storehouseCode       varchar(45),
    primary key (transferOrderCode)
 );
 
@@ -441,6 +455,7 @@ create table TransferOrderHasMateriel
    newcargoSpaceCode    VARCHAR(45) not null,
    cargoSpaceCode       VARCHAR(45) not null,
    materielCode         VARCHAR(45) not null,
+   moveAmount           decimal,
    primary key (transferOrderCode, newcargoSpaceCode, cargoSpaceCode, materielCode)
 );
 
@@ -471,6 +486,34 @@ create table UnitType
 );
 
 /*==============================================================*/
+/* Table: priceChange                                           */
+/*==============================================================*/
+create table priceChange
+(
+   pchangeCode          VARCHAR(45) not null,
+   pchangeDate          VARCHAR(45) not null,
+   optionar             VARCHAR(45),
+   pchangeMessage       VARCHAR(2000),
+   jsonField            VARCHAR(3000),
+   pchangeState         int,
+   primary key (pchangeCode)
+);
+
+/*==============================================================*/
+/* Table: priceChangeMateriel                                   */
+/*==============================================================*/
+create table priceChangeMateriel
+(
+   materielCode         VARCHAR(45) not null,
+   pchangeCode          VARCHAR(45) not null,
+   cargoSpaceCode       VARCHAR(45) not null,
+   stockPriceOld        DECIMAL,
+   stockPriceNew        DECIMAL,
+   jsonField            VARCHAR(3000),
+   primary key (materielCode, pchangeCode, cargoSpaceCode)
+);
+
+/*==============================================================*/
 /* Table: wasMateriel                                           */
 /*==============================================================*/
 create table wasMateriel
@@ -489,6 +532,7 @@ create table wasMateriel
 create table wastage
 (
    wasCode              varchar(45) not null,
+   cargoSpaceCode       VARCHAR(45),
    wasType              int,
    wasTime              bigint,
    optionor             varchar(45),
@@ -514,6 +558,9 @@ alter table BackOrderHasMateriel add constraint FK_Reference_30 foreign key (bac
 
 alter table BackOrderHasMateriel add constraint FK_Reference_31 foreign key (materielCode)
       references Materiel (materielCode) on delete restrict on update restrict;
+
+alter table BackOrderHasMateriel add constraint FK_Reference_40 foreign key (cargoSpaceCode)
+      references CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
 alter table CargoSpace add constraint fk_CargoSpace_Storehouse1 foreign key (storehouseCode)
       references Storehouse (storehouseCode);
@@ -587,9 +634,21 @@ alter table TransferOrderHasMateriel add constraint FK_Reference_52 foreign key 
 alter table Unit add constraint fk_Unit_UnitType foreign key (unitTypeCode)
       references UnitType (unitTypeCode);
 
+alter table priceChangeMateriel add constraint FK_Reference_41 foreign key (pchangeCode)
+      references priceChange (pchangeCode) on delete restrict on update restrict;
+
+alter table priceChangeMateriel add constraint FK_Reference_42 foreign key (cargoSpaceCode)
+      references CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
+
+alter table priceChangeMateriel add constraint FK_Reference_43 foreign key (materielCode)
+      references Materiel (materielCode) on delete restrict on update restrict;
+
 alter table wasMateriel add constraint FK_Reference_38 foreign key (wasCode)
       references wastage (wasCode) on delete restrict on update restrict;
 
 alter table wasMateriel add constraint FK_Reference_44 foreign key (materielCode)
       references Materiel (materielCode) on delete restrict on update restrict;
+
+alter table wastage add constraint FK_Reference_39 foreign key (cargoSpaceCode)
+      references CargoSpace (cargoSpaceCode) on delete restrict on update restrict;
 
