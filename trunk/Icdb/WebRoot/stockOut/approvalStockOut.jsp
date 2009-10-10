@@ -290,9 +290,8 @@ function nextPage(){
 						</s:else>
 						<input type="image" class="img_size" align="bottom"
 							src="<%=base%>/images/btn1_end.gif" onclick="goFinalPage();" />
-						<font color="gray">跳转到：<s:textfield id="size" size="2"
-								id="toPage" name="toPage" cssClass="pages_border" onblur="goPage();" />页</font>
-
+						<font color="gray">跳转到：<input type="text" size="2"
+								id="toPage" name="toPage" value="<%=((Page)request.getAttribute("page")).getCurrentPage()%>" cssClass="pages_border" onblur="goPage();" />页</font>
 						<!--
 								 &nbsp; 每页
 						<input type="text" size="4" id="pageSize" name="page.pageSize"
