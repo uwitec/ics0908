@@ -86,6 +86,13 @@
 	materielABC=#materielABC#
 	where materielCode=#materielCode#
 </update>
+<update id="updateMaterielPrice" parameterClass="com.mydomain.bean.baseset.MaterielBean">
+	update materiel
+	set
+	materielPrice=#materielPrice#
+	where materielCode=#materielCode#
+</update>
+
 <delete id="deleteMaterielBean" parameterClass="com.mydomain.bean.baseset.MaterielBean">
 	update materiel
 	set
