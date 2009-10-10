@@ -22,6 +22,7 @@ public class ICTools {
 	public static String MESSAGE_DELETEOK="<font color='green'>删除成功</font>";
 	public static String MESSAGE_ERROR="<font color='red'>数据有错误，请检查</font>";
 	private static final int BUFFER_SIZE = 16 * 1024 ;
+	public static String m_startTime="1980-01-01";
 	
 	public static int mathCeil(double arg0,double arg1){
 		return (int) Math.ceil(arg0/arg1);
@@ -150,6 +151,6 @@ public class ICTools {
 	     return imageFileName;
 	 }
 	 public static void main(String[] args) {
-		ICTools.randId();
+		ICTools.getSearchTime();
 	}
 }
