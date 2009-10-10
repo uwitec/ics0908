@@ -616,7 +616,7 @@ int index = 1;
 		<table id="addMatail"  class="stock_table" width="850">
 			<tr class="table_tr__even">
 				<th>序号</th><th>编号</th><th>品名</th><th>规格</th><th>单位</th><th>库存量</th>
-				<th>进价</th><th>货位编号</th><th>数量</th><th>单价</th><th>金额</th>
+				<th>进价</th><th>货位名</th><th>数量</th><th>单价</th><th>金额</th>
 				<th>型号是否符合</th><th>数量是否符合</th><th>规格是否符合</th>
 			</tr>
 			<s:if test="stockOutHasMaterielList.size()>0">
@@ -637,7 +637,7 @@ int index = 1;
 						<td><s:property value="materielABC"/></td>
 						<td><s:property value="stockAmount"/></td>
 						<td><s:property value="stockPrice"/></td>
-						<td><s:property value="cargoSpaceCode"/></td>
+						<td><s:property value="cargoSpaceName"/></td>
 						<td>
 							<s:if test="stock.stockOutStateType != 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
 								<s:textfield cssClass="stock_small_border" id="stockOutAmount_%{#stockOutMateriel.index+1}" name="stockOutAmount" cssStyle="stock_small_border" onchange="getPrice(this);"  />

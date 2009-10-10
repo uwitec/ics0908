@@ -43,10 +43,11 @@
 	<sql id="STOCK_OUT_MATERIEL_AND_STOCK_COMMONT_SELECT">
 		select s.cargoSpaceCode, s.materielCode, s.stockOutOrderCode,
 		s.stockOutAmount, s.stockOutPrice, s.typeIsOk, s.amountIsOk,
-		s.specificationIsOk,st.stockPrice,st.stockAmount,m.materielName
-		from StockOutHasMateriel s, Stock st,materiel m where
-		st.materielCode = s.materielCode and m.materielCode =
-		s.materielCode and s.cargoSpaceCode=st.cargoSpaceCode
+		s.specificationIsOk,st.stockPrice,st.stockAmount,m.materielName,c.cargoSpaceName
+		from StockOutHasMateriel s, Stock st,materiel m,cargoSpace c
+		where st.materielCode = s.materielCode and m.materielCode =
+		s.materielCode and s.cargoSpaceCode=st.cargoSpaceCode and
+		c.cargoSpaceCode = s.cargoSpaceCode
 	</sql>
 
 	<select id="STOCK_OUT_MATEREIL_COUNT"
