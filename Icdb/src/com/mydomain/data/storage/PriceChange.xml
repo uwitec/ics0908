@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PriceChange">
+	<select id="selectPriceChangeCount" resultClass="com.mydomain.bean.storage.PriceChangeBean">
+		select 
+		count(*) as countValue
+		from priceChange 
+		where pchangeState!=0 and
+		pchangeDate between #startTime# and #endTime#+1 and
+		(locate(#pchangeCode#,pchangeCode)>0 or
+		 locate(#pchangeMessage#,pchangeMessage)>0) 
+	</select>
+	<select id="selectPriceChangeDef" resultClass="com.mydomain.bean.storage.PriceChangeBean">
+		select 
+		pchangeCode,
+		pchangeDate,
+		optionar,
+		pchangeMessage,
+		pchangeState,
+		jsonField
+		from priceChange 
+		where pchangeState!=0 and
+		pchangeDate between #startTime# and #endTime#+1 and
+		(locate(#pchangeCode#,pchangeCode)>0 or
+		 locate(#pchangeMessage#,pchangeMessage)>0) 
+		limit #startValue#,#endValue# 
+	</select>
+	<select id="selectOnePriceChange" resultClass="com.mydomain.bean.storage.PriceChangeBean">
+		select 
+		pchangeCode,
+		pchangeDate,
+		optionar,
+		pchangeMessage,
+		pchangeState,
+		jsonField
+		from priceChange 
+		where pchangeState!=0 and pchangeCode=#pchangeCode#
+	</select>
+	<insert id="insertPriceChangeBean" parameterClass="com.mydomain.bean.storage.PriceChangeBean">
+		insert into priceChange
+		(pchangeCode,pchangeDate,optionar,pchangeMessage,jsonField,pchangeState)
+		values
+		(#pchangeCode#,#pchangeDate#,#optionar#,#pchangeMessage#,#jsonField#,#pchangeState#)		
+	</insert>
+	<update id="updatePriceChangeBean" parameterClass="com.mydomain.bean.storage.PriceChangeBean">
+		update priceChange
+		set
+		pchangeDate=#pchangeDate#,
+		optionar=#optionar#,
+		pchangeMessage=#pchangeMessage#,
+		jsonField=#jsonField#,
+		pchangeState=#pchangeState#
+		where
+		pchangeCode=#pchangeCode#
+	</update>
+	<delete id="deletePriceChangeBean" parameterClass="com.mydomain.bean.storage.PriceChangeBean">
+		update priceChange
+		set
+		pchangeState=0
+		where
+		pchangeCode=#pchangeCode#
+	</delete>
+</sqlMap>

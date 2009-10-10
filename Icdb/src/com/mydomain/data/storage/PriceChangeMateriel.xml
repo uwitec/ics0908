@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PriceChangeMateriel">
+	<select id="selectPriceChangeMaterieltDef" parameterClass="String" resultClass="com.mydomain.bean.storage.PriceChangeMaterBean">
+	select
+	m.materielCode,
+	m.materielName,
+	c.cargoSpaceCode,
+	c.cargoSpaceName,
+	pc.stockPriceOld,
+	pc.stockPriceNew,
+	pc.jsonField
+	from priceChangeMateriel as pc,cargoSpace as c,materiel as m
+	where 
+	pc.materielCode=m.materielCode and
+	pc.cargoSpaceCode=c.cargoSpaceCode and
+	pc.pchangeCode=#pchangeCode#
+	</select>
+	<insert id="insertPriceChangeMaterielBean" parameterClass="com.mydomain.bean.storage.PriceChangeMaterBean">
+	insert into priceChangeMateriel
+	(materielCode,cargoSpaceCode,pchangeCode,stockPriceOld,stockPriceNew,jsonField)
+	values
+	(#materielCode#,#cargoSpaceCode#,#pchangeCode#,#stockPriceOld#,#stockPriceNew#,#jsonField#)
+	</insert>
+	<delete id="deletePriceChangeMaterielBean" parameterClass="String">
+	delete from priceChangeMateriel
+	where pchangeCode=#pchangeCode#
+	</delete>
+</sqlMap>

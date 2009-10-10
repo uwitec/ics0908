@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BackOrder">
+	<select id="getBackOrderCount" resultClass="com.mydomain.bean.storage.BackStockBean">
+		select
+		count(*) as countValue
+		from backorder
+		where
+		stockOutState!=0 and
+		locate(#backOrderCode#,backOrderCode)>0 and
+		locate(#stockOutOrderCode#,stockOutOrderCode)>0 and
+		locate(#stockPersion#,stockPersion)>0 and
+		stockOutDate between #startTime# and #endTime#
+	</select>
+	<select id="selectBackOrderList" resultClass="com.mydomain.bean.storage.BackStockBean">
+ 		select
+ 		backOrderCode,
+ 		stockOutOrderCode,
+ 		stockOutDate,
+ 		stockOutOptionor,
+ 		stockOutState,
+ 		stockPersion
+ 		from backorder
+ 		where
+		stockOutState!=0 and
+		locate(#backOrderCode#,backOrderCode)>0 and
+		locate(#stockOutOrderCode#,stockOutOrderCode)>0 and
+		locate(#stockPersion#,stockPersion)>0 and
+		stockOutDate between #startTime# and #endTime#
+		limit #startValue#,#endValue# 
+	</select>
+	<select id="getBackOrderBean" parameterClass="String" resultClass="com.mydomain.bean.storage.BackStockBean">
+		select
+ 		backOrderCode,
+ 		stockOutOrderCode,
+ 		stockOutDate,
+ 		stockOutOptionor,
+ 		stockOutState,
+ 		stockPersion
+ 		from backorder
+ 		where
+		stockOutState!=0 and backOrderCode=#backOrderCode#
+	</select>
+	<insert id="insertBackOrderBean" parameterClass="com.mydomain.bean.storage.BackStockBean">
+		insert into backorder
+		(backOrderCode,stockOutOrderCode,stockOutDate,stockOutOptionor,stockOutState,stockPersion)
+		values
+		(#backOrderCode#,#stockOutOrderCode#,#stockOutDate#,#stockOutOptionor#,#stockOutState#,#stockPersion#)
+	</insert>
+	<update id="updateBackOrderBean" parameterClass="com.mydomain.bean.storage.BackStockBean">
+		update backorder
+		set
+ 		stockOutOrderCode=#stockOutOrderCode#,
+ 		stockOutDate=#stockOutDate#,
+ 		stockOutOptionor=#stockOutOptionor#,
+ 		stockOutState=#stockOutState#,
+ 		stockPersion=#stockPersion#
+ 		where 
+ 		backOrderCode=#backOrderCode#
+	</update>
+	<delete id="deleteBackOrderBean" parameterClass="com.mydomain.bean.storage.BackStockBean">
+		update backorder
+		set
+ 		stockOutState=0
+ 		where backOrderCode=#backOrderCode#
+	</delete>
+</sqlMap>

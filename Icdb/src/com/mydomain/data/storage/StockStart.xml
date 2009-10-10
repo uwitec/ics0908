@@ -51,6 +51,12 @@
 	stockAmount=#stockAmount#
 	where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
 	</update>
+	<update id="updateStockPriceBean" parameterClass="com.mydomain.bean.storage.StockBean">
+	update stock
+	set 
+	stockPrice=#stockPrice#
+	where cargoSpaceCode=#cargoSpaceCode# and materielCode=#materielCode#
+	</update>
 	<delete id="deleteStockBean" parameterClass="com.mydomain.bean.storage.StockBean">
 	</delete>
 	<update id="outStock" parameterClass="com.mydomain.bean.storage.StockBean">
