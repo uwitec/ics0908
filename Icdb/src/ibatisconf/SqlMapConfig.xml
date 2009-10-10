@@ -74,4 +74,6 @@
     <sqlMap resource="com/mydomain/data/storage/BackOrder.xml"/>
     <sqlMap resource="com/mydomain/data/storage/BackOrderMateriel.xml"/>
    	<sqlMap resource="com/mydomain/data/baseset/Customer.xml"/>
+   	<sqlMap resource="com/mydomain/data/storage/PriceChange.xml"/>
+   	<sqlMap resource="com/mydomain/data/storage/PriceChangeMateriel.xml"/>
 	</sqlMapConfig>
