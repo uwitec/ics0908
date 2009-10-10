@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BackOrderMateriel">
+	<select id="selectBackOrderMaterielrList" resultClass="com.mydomain.bean.storage.BackStockMaterielBean">
+ 	select 
+ 	m.materielCode,
+ 	m.materielName,
+ 	bm.materelCount,
+ 	bm.materelPrice,
+ 	c.cargoSpaceCode,
+ 	c.cargoSpaceName
+ 	from backorderhasmateriel as bm,materiel as m,cargospace as c
+ 	where backOrderCode=#backOrderCode# and
+ 	bm.cargoSpaceCode=c.cargoSpaceCode and
+ 	bm.materielCode=m.materielCode
+	</select>
+	<insert id="insertBackOrderMaterielBean" parameterClass="com.mydomain.bean.storage.BackStockMaterielBean">
+	insert into backorderhasmateriel
+	(backOrderCode,materielCode,materelCount,materelPrice,cargoSpaceCode)
+	values
+	(#backOrderCode#,#materielCode#,#materelCount#,#materelPrice#,#cargoSpaceCode#)
+	</insert>
+	<delete id="deleteBackOrderMaterielBean" parameterClass="String">
+	delete from backorderhasmateriel
+	where backOrderCode=#backOrderCode#
+	</delete>
+</sqlMap>
