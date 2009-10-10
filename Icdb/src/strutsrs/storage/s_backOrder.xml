@@ -7,5 +7,17 @@
 <action name="ShowBackStock" class="com.action.storage.BackStockAction" method="showBackStock">
 	<result name="success">/storage/backStock/BackStockShow.jsp</result>
 </action>
+<action name="FindStockOutOrder" class="com.action.storage.BackStockAction" method="findStockOutOver">
+	<result name="success">/storage/AddToStockOut.jsp</result>
+</action>
+<action name="GoAddBackStock" class="com.action.storage.BackStockAction" method="goAddBackStock">
+	<result name="success">/storage/backStock/BackStockAddOrUpdate.jsp</result>
+</action>
+<action name="GetOneBackOrder" class="com.action.storage.BackStockAction" method="getOneBackOrder">
+	<result name="success">/storage/backStock/BackStockAddOrUpdate.jsp</result>
+</action>
+<action name="AddOrUpdateBackOrder" class="com.action.storage.BackStockAction" method="addOrUpdateBackOrder">
+	<result name="success" type="redirect">ShowBackStock.action</result>
+</action>
 </package>
 </struts>
