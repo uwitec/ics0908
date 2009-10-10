@@ -94,7 +94,7 @@ catch(e){}
 		   if(JSP_value!=null && temp!=null){
 		   		for(var k=0;k<value_list.length;k++){
 		   	
-		    		window.opener.document.getElementById(value_list[k]).value=JSP_value[k];
+		    		window.opener.document.getElementById(value_list[k]).value=trim(JSP_value[k]);
 		    	}
     		window.close();
     		}else{
