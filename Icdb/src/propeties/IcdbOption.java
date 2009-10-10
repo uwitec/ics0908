@@ -112,6 +112,10 @@ public class IcdbOption {
 		return IcdbOption.getState("ManageSetMater");
 	}
 	
+	public static LinkedHashMap<?, ?>getMoveStype(){
+		return IcdbOption.getState("move_type");
+	}
+	
 	public static void main(String[] args) {
 		String a=(String) IcdbOption.getTableState().get("2");
 		System.out.println(a);
