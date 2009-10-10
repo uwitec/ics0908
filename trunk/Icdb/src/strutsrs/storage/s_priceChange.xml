@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+<package name="priceChange" extends="struts-default" namespace="/storage">
+<action name="ShowPriceChange" class="com.action.storage.PriceChangeAction" method="showPriceChange">
+	<result name="success">/storage/priceChange/PriceChangeShow.jsp</result>
+</action>
+<action name="GoAddPriceChange" class="com.action.storage.PriceChangeAction" method="goAddPriceChange">
+	<result name="success">/storage/priceChange/PriceChangeAddOrUpdate.jsp</result>
+</action>
+<action name="GetOnePriceChange" class="com.action.storage.PriceChangeAction" method="getOnePriceChange">
+	<result name="success">/storage/priceChange/PriceChangeAddOrUpdate.jsp</result>
+</action>
+<action name="AddOrUpdate" class="com.action.storage.PriceChangeAction" method="addOrUpdate">
+	<result name="success" type="redirect">ShowPriceChange.action</result>
+</action>
+<action name="DeletePriceChange" class="com.action.storage.PriceChangeAction" method="deletePriceChange">
+	<result name="success" type="redirect">ShowPriceChange.action</result>
+</action>
+</package>
+</struts>
