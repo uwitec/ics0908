@@ -14,6 +14,13 @@ public class StockOutHasMaterielBean {
 	private Float stockPrice;
 	private String  stockAmount;
 	private String materielName;
+	private String cargoSpaceName;
+	public String getCargoSpaceName() {
+		return cargoSpaceName;
+	}
+	public void setCargoSpaceName(String cargoSpaceName) {
+		this.cargoSpaceName = cargoSpaceName;
+	}
 	public String getCargoSpaceCode() {
 		return cargoSpaceCode;
 	}

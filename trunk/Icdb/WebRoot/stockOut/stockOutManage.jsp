@@ -634,7 +634,7 @@
 									进价
 								</th>
 								<th bgcolor="white">
-									货位编号
+									货位名
 								</th>
 								<th bgcolor="white">
 									数量
@@ -689,7 +689,7 @@
 											<s:property value="stockPrice" />
 										</td>
 										<td bgcolor="white">
-											<s:property value="cargoSpaceCode" />
+											<s:property value="cargoSpaceName" />
 										</td>
 										<td bgcolor="white">
 											<s:if test="stock.stockOutStateType != 1||stock.stockOutCheckState==-1||stock.stockOutDealState==-1">
