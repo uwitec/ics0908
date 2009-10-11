@@ -13,8 +13,8 @@
     <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 <title>报表列表</title>
 </head>
-<body>
-<div class="body_div"><jsp:include flush="true"
+<body topmargin="0" style="margin-top: 0px; padding-top: 0px">
+<div class="body_div" style="border:1px solid green;top: 0px;height: 800px;"><jsp:include flush="true"
 	page="/pagecom/head.jsp"></jsp:include>
 	<div class="left_body">
 <div class="left_menu">
