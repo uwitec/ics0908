@@ -94,6 +94,10 @@ public class SupplierAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	public String findSupplier(){
+		this.showSupplier();
+		return SUCCESS;
+	}
 	public String deleteSupplierString(){
 		supplier=new SupplierBean();
 		if(sm.deleteSupplier(supplier)){
