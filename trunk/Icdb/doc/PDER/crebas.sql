@@ -338,7 +338,7 @@ create table StockInCheckOrder
    stockInExDate        datetime,
    stockInExMessage     VARCHAR(450),
    stockInWill          VARCHAR(45),
-   stockiinCheckState   int,
+   stockInCheckState   int,
    primary key (stockInCode)
 );
 
@@ -443,6 +443,7 @@ create table TransferOrder
    transferOrderChecker varchar(45),
    transferOrderPerson  varchar(45),
    storehouseCode       varchar(45),
+   transferState	    int,
    primary key (transferOrderCode)
 );
 
