@@ -77,12 +77,24 @@
 <STYLE type="text/css">
 .mymenu div {
     float: left;
-    border: 1px solid black;
-    width: 120px;
+    width: 136px;
+    text-shadow: gray;
+    color: black;
+    margin-top: 5px;
+    margin-left: 15px;
+    
+    
+}
+
+.mymenu a {
+    text-shadow: gray;
+    color: black;
+    border-bottom: 1px solid;
+    
 }
 </STYLE>
 </head>
-<body onload="" topmargin="0">
+<body onload="" topmargin="0" onclick="menuClick()">
 
 <div class="page_top">
 <div id="logger">IMC</div>
@@ -105,7 +117,7 @@
             sbd.append(item.getCode());
             sbd.append("\" onmouseover='viewSub(\"div_m");
             sbd.append(item.getCode());
-            sbd.append("\", false)'><a href=\"");
+            sbd.append("\", false)'  style=\"height:30px;\"><a href=\"");
             sbd.append(base).append("/");
             sbd.append(item.getAction());
             sbd.append("\">");
@@ -118,7 +130,7 @@
             sbd.append(item.getCode());
             sbd.append("_sub\" onclick='menuClick()'");
             sbd
-                    .append("  style=\"display: none; position: absolute;\">");
+                    .append("  style=\"display: none; position: absolute;background-color: #4488dd\">");
             List<Item> subList = item.getSubItemList();
             if (null != subList) {
                 for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
@@ -130,7 +142,7 @@
                     sbd.append(subItem.getCode());
                     sbd.append("\" onmouseover='viewSub(\"div_m");
                     sbd.append(subItem.getCode());
-                    sbd.append("\", true)'><a href=\"");
+                    sbd.append("\", true)'  style=\"height:30px;\"><a href=\"");
                     sbd.append(base).append("/");
                     sbd.append(subItem.getAction());
                     sbd.append("\">");
@@ -143,7 +155,7 @@
                     sbd.append(subItem.getCode());
                     sbd.append("_sub\" onclick='menuClick()'");
                     sbd
-                            .append(" style=\"display: none; position: absolute;\">");
+                            .append(" style=\"display: none; position: absolute;background-color: #4488dd\">");
 
                     List<Item> threeList = subItem.getSubItemList();
                     if (null != threeList) {
