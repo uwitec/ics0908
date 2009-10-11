@@ -90,6 +90,5 @@ int idtitle=1;
 	     <div align="right" style="margin-top: 5px;	">
        			<a href="#" onclick="toSetId(new Array('stockOutOrderCode'),'p_radio')"><img src="<%=base%>/images/add.jpg"  border="0"></a>
 	    </div>
-		</div>
     </body>
 </html>
