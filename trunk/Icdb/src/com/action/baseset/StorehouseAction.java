@@ -64,10 +64,12 @@ public class StorehouseAction extends ActionSupport{
 		}else{
 			storehouse.setMessage(ICTools.MESSAGE_ERROR);
 		}
+		System.out.println(storehouse.getS_value());
 		if(storehouse.getS_value()!=null && !storehouse.getS_value().equals("")){
-			return SUCCESS;
-		}else{
 			return "next";
+		}else{
+			
+			return SUCCESS;
 		}
 	}
 	

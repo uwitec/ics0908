@@ -3,6 +3,7 @@ package com.action.baseset;
 import java.io.File;
 import java.util.List;
 
+import com.action.login.LoginAction;
 import com.manage.baseset.EmployeeManage;
 import com.manage.baseset.PersonManage;
 import com.mydomain.bean.baseset.EmployeeBean;
@@ -129,6 +130,7 @@ public class EmployeeAction extends ActionSupport{
 			person.setPersonPhoto(ICTools.sendImg(photoImgFileName, photoImg));
 		}
 		employee.setPersonCode(person.getPersonCode());
+		employee.setPassWord(LoginAction.toSHA(employee.getPassWord()));
 		if(pm.addPerson(person)){
 			if(em.addEmployee(employee)){
 				person.setMessage(ICTools.MESSAGE_OK);
