@@ -3058,7 +3058,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o60">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-216448,33044), (-209324,46002))</a:Rect>
+<a:Rect>((-216447,33044), (-209323,46002))</a:Rect>
 <a:ListOfPoints>((-213819,33044),(-211830,46002))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -3158,7 +3158,7 @@ CARD 0 新宋体,8,N</a:FontList>
 <o:ReferenceSymbol Id="o76">
 <a:CreationDate>1251339153</a:CreationDate>
 <a:ModificationDate>1253682644</a:ModificationDate>
-<a:Rect>((-227877,61230), (-204055,62613))</a:Rect>
+<a:Rect>((-227877,61230), (-204055,62563))</a:Rect>
 <a:ListOfPoints>((-204055,61724),(-227877,61230))</a:ListOfPoints>
 <a:ArrowStyle>1</a:ArrowStyle>
 <a:LineColor>12615680</a:LineColor>
@@ -6771,8 +6771,9 @@ TableComment 0 新宋体,8,N</a:FontList>
 <a:Code>transferState</a:Code>
 <a:CreationDate>1255255295</a:CreationDate>
 <a:Creator>admin</a:Creator>
-<a:ModificationDate>1255255295</a:ModificationDate>
+<a:ModificationDate>1255256905</a:ModificationDate>
 <a:Modifier>admin</a:Modifier>
+<a:DataType>int</a:DataType>
 </o:Column>
 </c:Columns>
 <c:Keys>
