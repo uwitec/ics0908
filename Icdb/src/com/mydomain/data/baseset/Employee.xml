@@ -167,7 +167,7 @@
 			update employee
 			set
 			userName=#userName#,
-			password=#password#,
+			passWord=#passWord#,
 			isEnabled=1
 			where employeeCode=#employeeCode#
 	</update>
