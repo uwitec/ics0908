@@ -15,6 +15,32 @@ public class AccountBean extends BaseBean{
 	private String personName;
 	private String bankName;
 	private int bankCode; //开户银行编码
+	private String supplierCode;
+	private String supplierName;
+	/**
+	 * @return the supplierCode
+	 */
+	public String getSupplierCode() {
+		return supplierCode;
+	}
+	/**
+	 * @return the supplierName
+	 */
+	public String getSupplierName() {
+		return supplierName;
+	}
+	/**
+	 * @param supplierCode the supplierCode to set
+	 */
+	public void setSupplierCode(String supplierCode) {
+		this.supplierCode = supplierCode;
+	}
+	/**
+	 * @param supplierName the supplierName to set
+	 */
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
 	/**
 	 * @return the accountCode
 	 */
