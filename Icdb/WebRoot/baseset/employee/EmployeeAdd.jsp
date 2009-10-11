@@ -95,13 +95,21 @@
 	    		<td colspan="2">性别:<s:radio  list="{'男','女'}" name="person.personSex"  value="'男'"/></td>
 	    	</tr>
 	    	<tr class="table_tr_left"><td>&nbsp;</td></tr>
-	    	<tr class="table_tr_left"><td colspan="2">电话:
+	    	<tr class="table_tr_left"><td>电话:
 	    		<s:textfield name="person.personPhone" cssClass="sub1_border"/>
-	    	</td></tr>
+	    	</td>
+	    	<td>用户名:
+	    		<s:textfield name="employee.userName" cssClass="sub1_border"/>
+	    	</td>
+	    	</tr>
 	    	<tr class="table_tr_left"><td colspan="2">&nbsp;</td></tr>
 	    	<tr class="table_tr_left">
-	    		<td colspan="2" colspan="2">电邮:
-	    		<s:textfield name="person.personEmail" cssClass="sub1_border"/></td>
+	    	<td>电邮:
+	    		<s:textfield name="person.personEmail" cssClass="sub1_border"/>
+	    	</td>
+	    	<td>密&nbsp;&nbsp;码:
+	    		<s:password name="employee.passWord" cssClass="sub1_border"/>
+	    	</td>
 	    	</tr>
 	    	<tr class="table_tr_left"><td colspan="2">
 				<s:hidden id="evalue" name="employee.s_value" value=""></s:hidden>
