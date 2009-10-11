@@ -15,8 +15,8 @@
     <SCRIPT type="text/javascript">
  
  
-    function showPerson(){
-	window.showModalDialog("<%=base%>/baseset/FindPerson.jsp","","dialogHeight:400px;dialogWidth:500px");
+    function showSupplier(){
+	window.showModalDialog("FindSupplier.action","","dialogHeight:400px;dialogWidth:700px");
 	}
 	function showBank(){
 		window.showModalDialog("FindBank.action","","dialogHeight:400px;dialogWidth:500px");
@@ -32,7 +32,7 @@
 	function checkMessage(){
 		var ccode=document.getElementById("ccode");
 		var cnumber=document.getElementById("cnumber");
-		var person=document.getElementById("personCode");
+		var supplier=document.getElementById("supplierCode");
 		var bank=document.getElementById("bankCode");
 		clear();
 		if(trim(ccode.value)==''){
@@ -43,8 +43,8 @@
 			document.getElementById("cnumber_td").innerHTML="<font color='red'>以上信息不能为空！</font>";
 			return false;
 		}
-			if(trim(person.value)==''){
-			document.getElementById("personCode_td").innerHTML="<font color='red'>以上信息不能为空！</font>";
+			if(trim(supplier.value)==''){
+			document.getElementById("supplierCode_td").innerHTML="<font color='red'>以上信息不能为空！</font>";
 			return false;
 		}
 			if(trim(bank.value)==''){
@@ -57,7 +57,7 @@
 	function clear(){
 		document.getElementById("ccode_td").innerHTML="";
 		document.getElementById("cnumber_td").innerHTML="";
-		document.getElementById("personCode_td").innerHTML="";
+		document.getElementById("supplierCode_td").innerHTML="";
 		document.getElementById("bankCode_tr").innerHTML="";
 	}
     </SCRIPT>
@@ -88,11 +88,11 @@
 	    	</tr>
 	    	<tr class="table_tr_right"><td>&nbsp;</td></tr>
 	    	<tr class="table_tr_right"><td>户主:
-	    		<s:textfield id="personName" name="account.personName" value="%{account.personName}" onclick="showPerson()" readonly="true" cssClass="sub1_border"/>
-	    		<a href="#" onclick="showPerson()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
-	    		<s:hidden id="personCode" value="%{account.personCode}" name="account.personCode"></s:hidden>
+	    		<s:textfield id="supplierName" name="account.supplierName" onclick="showSupplier()" readonly="true" cssClass="sub1_border"/>
+	    		<a href="#" onclick="showSupplier()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
+	    		<s:hidden id="supplierCode" name="account.supplierCode"></s:hidden>
 	    	</td></tr>
-	    	<tr class=table_tr_right><td id="personCode_td">&nbsp;</td></tr>
+	    	<tr class=table_tr_right><td id="supplierCode_td">&nbsp;</td></tr>
 	    	<tr class="table_tr_right">
 	    		<td>所属银行:
 	    		<s:textfield id="bankName" name="account.bankName" value="%{account.bankName}" onclick="showBank()" readonly="true"  cssClass="sub1_border"/>

@@ -52,7 +52,7 @@
 	    		<td>帐号</td>
 				<td>帐户名</td>
 				<td>帐号类型</td>
-				<td>所属人</td>
+				<td>所供应商</td>
 				<td>所属银行</td>
 				<td>操作</td>
 	    	</tr>
@@ -75,8 +75,8 @@
 	       	>
 	       	<td><s:property value="accountCode"/></td>
 	        <td><s:property value="accountNumber"/></td>
-	        <td><s:property value="accountName"/></td>
-	        <td><s:property value="personName"/></td>
+	        <td><s:property value="accountType"/></td>
+	        <td><s:property value="supplierName"/></td>
 	        <td><s:property value="bankName"/></td>
 	        <td>
 	        	<a href="GetOneAccount?account.accountCode=<s:property value="accountCode"/>"><img src="<%=base%>/images/img03.gif" border="0"></a>
