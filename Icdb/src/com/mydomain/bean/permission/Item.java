@@ -55,6 +55,8 @@ public class Item {
     }
 
     public String getAction() {
+        if (null == action || "".equals(action))
+            action = "#";
         return action;
     }
 
