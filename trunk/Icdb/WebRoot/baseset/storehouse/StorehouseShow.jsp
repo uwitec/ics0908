@@ -49,7 +49,7 @@
 	    </s:if>
 	    <s:else>
 	    	<tr>
-	    	<td class="orgstructure_table_td_odd_r" colspan="5">
+	    	<td class="table_tr_no" colspan="5">
 	    		未找到符合的信息!
 	    	</td>
 	    	</tr>

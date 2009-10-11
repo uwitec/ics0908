@@ -32,7 +32,7 @@
 		<div class="center_body">
 			<div class="center_head_text">供应商信息</div>
 			<div class="center_tools">
-			<s:form action="SelectSupplierDef" namespace="/baseset" theme="simple" >
+			<s:form action="ShowSupplier" namespace="/baseset" theme="simple" >
 				<a href="#" onclick="AddSup()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
 				<input type="text" name="supplier.s_value" value="<s:property value="supplier.s_value"/>" class="search_border" size="20"/>
 				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
@@ -78,7 +78,7 @@
 	       </s:iterator>
 	     </table>
 		<div class="pages">
-				<s:form action="SelectSupplierDef" namespace="/baseset" theme="simple" name="pageform">
+				<s:form action="ShowSupplier" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="supplier">
        <s:hidden name="supplier.s_value" value="%{supplier.s_value}"></s:hidden>
        <s:hidden id="countsize" name="supplier.countSize" value="%{supplier.countSize}"></s:hidden>
