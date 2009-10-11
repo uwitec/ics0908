@@ -101,12 +101,12 @@
 		<div class="sub1_con">
 		<div id="formdiv"  style="display:<s:property value="storehouse.s_value"/>">
 			<s:form action="AddCargoSpace" theme="simple" id="caForm" > 
-				<div>仓库编号:
+				<div>货位编号:
 					<s:textfield id="ccode" name="cargoSpace.cargoSpaceCode" value="%{cargoSpace.cargoSpaceCode}" readonly="true" cssClass="sub1_border"/>
 					<s:hidden id="hcode" value="%{cargoSpace.cargoSpaceCode}"></s:hidden>
 					<font color="red" id="ccode_f"></font>
 				</div>
-				<div>仓库名:&nbsp;&nbsp;&nbsp;&nbsp;
+				<div>货位名:&nbsp;&nbsp;&nbsp;&nbsp;
 					<s:textfield id="cname" name="cargoSpace.cargoSpaceName" value="" cssClass="sub1_border"/>
 					<font color="red" id="cname_f"></font>
 				</div>
