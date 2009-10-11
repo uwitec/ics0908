@@ -35,16 +35,31 @@
 		<s:if test="level==1 && !isHidden">
 			<s:iterator value="subItemList">
 				<s:if test="!hidden">
-					<s:if test="permissionIndex.equals(userPermissionCode)">
+					<b><s:if test="permissionIndex.equals(userPermissionCode)">
 						<s:checkbox name="permission" fieldValue="%{permissionIndex}"
 							value="1"></s:checkbox>
 						<s:property value="viewName" />
-					</s:if>
-					<s:else>
+					</s:if> <s:else>
 						<s:checkbox name="permission" fieldValue="%{permissionIndex}"
 							value="0"></s:checkbox>
 						<s:property value="viewName" />
-					</s:else>
+					</s:else></b>
+					<br />
+				</s:if>
+				<s:if test="level==2 && !isHidden">
+					<s:iterator value="subItemList">
+						<s:if test="permissionIndex.equals(userPermissionCode)">
+							<s:checkbox name="permission" fieldValue="%{permissionIndex}"
+								value="1"></s:checkbox>
+							<s:property value="viewName" />
+						</s:if>
+						<s:else>
+							<s:checkbox name="permission" fieldValue="%{permissionIndex}"
+								value="0"></s:checkbox>
+							<s:property value="viewName" />
+						</s:else>
+					</s:iterator>
+					<br />
 				</s:if>
 			</s:iterator>
 		</s:if>
