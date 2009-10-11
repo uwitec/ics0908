@@ -85,7 +85,7 @@ int idtitle=1;
        </s:form>
 		       </div>
 				<div align="right">
-       			<a href="#" onclick="toSetId(new  Array('materielCode','materielName','stockPrice'),'p_radio')"><img src="<%=base%>/images/sub1_btn_hand.jpg" border="0"></a>
+       			<a href="#" onclick="toSetId(new  Array('materielCode','materielName','stockPrice'),'p_radio')"><img src="<%=base%>/images/add.jpg" border="0"></a>
 	      		</div>
 	     </div>
 		</div>

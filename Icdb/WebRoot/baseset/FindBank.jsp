@@ -24,10 +24,10 @@ int idtitle=1;
 		<div>
 		<table style="background-color:#B4BCC2;border:0px;margin-left:11px;" cellspacing="1" cellpadding="0" id="up_tab">
 	    <s:if test="lhp.size>0">
-	    	<tr>
-			    <td class="table_head">单选</td>
-		    	<td class="table_head">银行编号</td>
-		    	<td class="table_head">银行名称</td>
+	    	<tr class="table_tr__even">
+			    <th>单选</th>
+		    	<th>银行编号</th>
+		    	<th>银行名称</th>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -77,7 +77,7 @@ int idtitle=1;
 		       </s:form>
 		       </div>
 				<div align="right">
-       			<a href="#" onclick="toSetId(new Array('bankCode','bankName'),'p_radio')"><img src="<%=base%>/images/sub1_btn_hand.jpg" border="0"></a>
+       			<a href="#" onclick="toSetId(new Array('bankCode','bankName'),'p_radio')"><img src="<%=base%>/images/add.jpg" border="0"></a>
 	      		</div>
 	     </div>
 		</div>
