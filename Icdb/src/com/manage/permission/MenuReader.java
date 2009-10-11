@@ -23,7 +23,8 @@ public class MenuReader {
 				saxParser = spf.newSAXParser();
 				saxParser.parse(new File(filename), mr);
 			} catch (Exception ex) {
-				System.err.println(ex);
+			    
+				ex.printStackTrace();
 				System.exit(1);
 			}
 			return mr.getMenu();
