@@ -534,7 +534,7 @@ create table wastage
    wasCode              varchar(45) not null,
    cargoSpaceCode       VARCHAR(45),
    wasType              int,
-   wasTime              bigint,
+   wasTime              datetime,
    optionor             varchar(45),
    wasState             int,
    wasDoc               varchar(45),
