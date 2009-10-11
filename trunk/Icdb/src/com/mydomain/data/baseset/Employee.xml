@@ -156,6 +156,21 @@
 			isEnabled=1
 			where employeeCode=#employeeCode#
 	</update>
+	<update id="updateUserPermission" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
+			update employee
+			set
+			permissionCode=#permissionCode#,
+			isEnabled=1
+			where employeeCode=#employeeCode#
+	</update>
+	<update id="updateUserPassword" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
+			update employee
+			set
+			userName=#userName#,
+			password=#password#,
+			isEnabled=1
+			where employeeCode=#employeeCode#
+	</update>
 	<delete id="deleteEmployeeBean" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			update employee
 			set
