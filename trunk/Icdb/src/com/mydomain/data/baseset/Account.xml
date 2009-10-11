@@ -8,17 +8,17 @@
 	<select id="selectAccountCount" resultClass="com.mydomain.bean.baseset.AccountBean">
 		SELECT
 		count(*) as countValue
-		FROM ACCOUNT,PERSON,BANK
+		FROM ACCOUNT,supplier,BANK
 		WHERE ACCOUNT.ISENABLED!=0
 		AND 
-		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		supplier.supplierCode=ACCOUNT.supplierCode
 		AND
 		ACCOUNT.BANKCODE=BANK.BANKCODE
 		AND
 		( locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER)>0
 		OR locate(#accountCode#,ACCOUNTCODE)>0
 		OR locate(#accountType#,ACCOUNTTYPE)>0 
-		OR locate(#personName#,PERSON.PERSONNAME)>0 
+		OR locate(#supplierName#,supplier.supplierName)>0 
 		OR locate(#bankName#,BANK.BANKNAME)>0)
 	</select>
 	<select id="selectAccountDef" resultClass="com.mydomain.bean.baseset.AccountBean">
@@ -26,21 +26,21 @@
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
 		ACCOUNTTYPE,
-		ACCOUNT.PERSONCODE,
-		PERSON.PERSONNAME,
+		ACCOUNT.supplierCode,
+		supplier.supplierName,
 		ACCOUNT.BANKCODE,
 		BANK.BANKNAME
-		FROM ACCOUNT,PERSON,BANK
+		FROM ACCOUNT,supplier,BANK
 		WHERE ACCOUNT.ISENABLED!=0
 		AND 
-		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		supplier.supplierCode=ACCOUNT.supplierCode
 		AND
 		ACCOUNT.BANKCODE=BANK.BANKCODE
 		AND
 		( locate(#accountNumber#,ACCOUNT.ACCOUNTNUMBER)>0
 		OR locate(#accountCode#,ACCOUNTCODE)>0
 		OR locate(#accountType#,ACCOUNTTYPE)>0 
-		OR locate(#personName#,PERSON.PERSONNAME)>0 
+		OR locate(#supplierName#,supplier.supplierName)>0 
 		OR locate(#bankName#,BANK.BANKNAME)>0)
 		limit #startValue#,#endValue#
 	</select>
@@ -49,14 +49,14 @@
 		ACCOUNTCODE,
 		ACCOUNTNUMBER,
 		ACCOUNTTYPE,
-		ACCOUNT.PERSONCODE,
-		PERSON.PERSONNAME,
+		ACCOUNT.supplierCode,
+		supplier.supplierName,
 		ACCOUNT.BANKCODE,
 		BANK.BANKNAME
-		FROM ACCOUNT,PERSON,BANK
+		FROM ACCOUNT,supplier,BANK
 		WHERE ACCOUNT.ISENABLED=1
 		AND 
-		PERSON.PERSONCODE=ACCOUNT.PERSONCODE
+		supplier.supplierCode=ACCOUNT.supplierCode
 		AND
 		ACCOUNT.BANKCODE=BANK.BANKCODE
 		AND
@@ -64,16 +64,16 @@
 	</select>
 	<insert id="insertAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		INSERT INTO ACCOUNT
-		(ACCOUNTCODE,ACCOUNTNUMBER,ACCOUNTTYPE,PERSONCODE,BANKCODE,ISENABLED) 
+		(ACCOUNTCODE,ACCOUNTNUMBER,ACCOUNTTYPE,BANKCODE,ISENABLED,supplierCode) 
 		VALUES
-		(#accountCode#,#accountNumber#,#accountType#,#personCode#,#bankCode#,1)
+		(#accountCode#,#accountNumber#,#accountType#,#bankCode#,1,#supplierCode#)
 	</insert>
 	<update id="updateAccountBean" parameterClass="com.mydomain.bean.baseset.AccountBean">
 		UPDATE ACCOUNT
 		SET 
 		ACCOUNTNUMBER=#accountNumber#,
 		ACCOUNTTYPE=#accountType#,
-		PERSONCODE=#personCode#,
+		supplierCode=#supplierCode#,
 		BANKCODE=#bankCode#,
 		ISENABLED=1
 		WHERE ACCOUNTCODE=#accountCode#
