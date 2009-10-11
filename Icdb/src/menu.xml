@@ -3,65 +3,70 @@
     <menu name="userMenu" code="0001" parent="">
         <item code="00010001" parent="0001" level="1" permissionIndex="0" viewName="基本资料">
             <item code="000100010001" parent="00010001" level="2" permissionIndex="1" viewName="组织机构" action="baseset/ShowStruct.action">
-            	<item code="0001000100010001" parent="000100010001" level="3" permissionIndex="111" viewName="机构信息" action="baseset/ShowStruct.action"/>
-            	<item code="0001000100010002" parent="000100010001" level="3" permissionIndex="102" viewName="部门信息" action="baseset/ShowDepartment.action"/>
-           	</item>
-            <item code="000100010002" parent="00010001" level="2" permissionIndex="2" viewName="仓储及货架" action="baseset/ShowStorehouse.action" />	
-			<item code="000100010003" parent="00010001" level="2" permissionIndex="3" viewName="物品管理" action="baseset/ShowMateriel.action" />
+                <item code="0001000100010001" parent="000100010001" level="3" permissionIndex="111" viewName="机构信息" action="baseset/ShowStruct.action" />
+                <item code="0001000100010002" parent="000100010001" level="3" permissionIndex="102" viewName="部门信息" action="baseset/ShowDepartment.action" />
+            </item>
+            <item code="000100010002" parent="00010001" level="2" permissionIndex="2" viewName="仓储及货架" action="baseset/ShowStorehouse.action" />
+            <item code="000100010003" parent="00010001" level="2" permissionIndex="3" viewName="物品管理" action="baseset/ShowMateriel.action" />
+            <item code="000100010006" parent="00010001" level="2" permissionIndex="26" viewName="类型信息" action="baseset/ShowUnitType.action" />
             <item code="000100010004" parent="00010001" level="2" permissionIndex="4" viewName="银行帐号" action="baseset/ShowBank.action">
-            	<item code="0001000100040001" parent="000100010004" level="3" permissionIndex="141" viewName="银行信息" action="baseset/ShowBank.action"/>
-            	<item code="0001000100040002" parent="000100010004" level="3" permissionIndex="142" viewName="帐号信息" action="baseset/ShowAccount.action"/>
+                <item code="0001000100040001" parent="000100010004" level="3" permissionIndex="141" viewName="银行信息" action="baseset/ShowBank.action" />
+                <item code="0001000100040002" parent="000100010004" level="3" permissionIndex="142" viewName="帐号信息" action="baseset/ShowAccount.action" />
             </item>
             <item code="000100010005" parent="00010001" level="2" permissionIndex="5" viewName="人力资源" action="baseset/ShowPerson.action">
-      			<item code="0001000100050001" parent="000100010005" level="3" permissionIndex="151" viewName="岗位信息" action="baseset/ShowJob.action"/>
-            	<item code="0001000100050002" parent="000100010005" level="3" permissionIndex="152" viewName="员工信息" action="baseset/ShowEmployee.action"/>
+                <item code="0001000100050001" parent="000100010005" level="3" permissionIndex="151" viewName="岗位信息" action="baseset/ShowJob.action" />
+                <item code="0001000100050002" parent="000100010005" level="3" permissionIndex="152" viewName="员工信息" action="baseset/ShowEmployee.action" />
             </item>
         </item>
         <item code="00010002" parent="0001" level="1" permissionIndex="6" viewName="库存管理">
             <item code="000100020001" parent="00010002" level="2" permissionIndex="7" viewName="库存交易管理" />
             <item code="000100020002" parent="00010002" level="2" permissionIndex="8" viewName="库存控制" />
             <item code="000100020003" parent="00010002" level="2" permissionIndex="9" viewName="库存水平">
-            	 <item code="0001000200030001" parent="000100020003" level="3" permissionIndex="191" viewName="物料消耗" action="stockmanage/ShowOutLevel.action"/>
-           		 <item code="0001000200030002" parent="000100020003" level="3" permissionIndex="192" viewName="库存周转" action="stockmanage/ShowStockTurn.action"/>
+                <item code="0001000200030001" parent="000100020003" level="3" permissionIndex="191" viewName="物料消耗" action="stockmanage/ShowOutLevel.action" />
+                <item code="0001000200030002" parent="000100020003" level="3" permissionIndex="192" viewName="库存周转" action="stockmanage/ShowStockTurn.action" />
             </item>
-            <item code="000100020004" parent="00010002" level="2" permissionIndex="10" viewName="库存警告">
-           		 <item code="0001000200040001" parent="000100020004" level="3" permissionIndex="211" viewName="呆滞物料" action="stockmanage/ShowMax.action"/>
-           		 <item code="0001000200040002" parent="000100020004" level="3" permissionIndex="212" viewName="库存不足" action="stockmanage/ShowMin.action"/>
-           	</item>
+            <item code="000100020004" parent="00010002" level="2" permissionIndex="10" viewName="库存警告" action="stockmanage/ShowMax.action" >
+                <item code="0001000200040001" parent="000100020004" level="3" permissionIndex="211" viewName="呆滞物料" action="stockmanage/ShowMax.action" />
+                <item code="0001000200040002" parent="000100020004" level="3" permissionIndex="212" viewName="库存不足" action="stockmanage/ShowMin.action" />
+            </item>
         </item>
         <item code="00010003" parent="0001" level="1" permissionIndex="11" viewName="库存业务">
-            <item code="000100030001" parent="00010003" level="2" permissionIndex="12" viewName="入库">
-            	<item code="0001000300010001" parent="000100030001" level="3" permissionIndex="221" viewName="入库申请" action="stockIn/searchStockIn.action"/>
-           		<item code="0001000300010002" parent="000100030001" level="3" permissionIndex="222" viewName="入库检查" action="stockIn/searchCheckStockIn.action"/>
-            	<item code="0001000300010003" parent="000100030001" level="3" permissionIndex="223" viewName="入库" action="stockIn/searchStockInOver.action"/>
+            <item code="000100030001" parent="00010003" level="2" permissionIndex="12" viewName="入库" action="stockIn/searchStockInOver.action">
+                <item code="0001000300010001" parent="000100030001" level="3" permissionIndex="221" viewName="入库申请" action="stockIn/searchStockIn.action" />
+                <item code="0001000300010002" parent="000100030001" level="3" permissionIndex="222" viewName="入库检查" action="stockIn/searchCheckStockIn.action" />
+                <item code="0001000300010003" parent="000100030001" level="3" permissionIndex="223" viewName="入库" action="stockIn/searchStockInOver.action" />
             </item>
-            <item code="000100030002" parent="00010003" level="2" permissionIndex="13" viewName="出库">
-           		<item code="0001000300020001" parent="000100030002" level="3" permissionIndex="231" viewName="出库申请" action="stockOut/searchStockOut.action"/>
-           		<item code="0001000300020002" parent="000100030002" level="3" permissionIndex="232" viewName="出库检查" action="stockOut/searchCheckStockOut.action"/>
-            	<item code="0001000300020003" parent="000100030002" level="3" permissionIndex="233" viewName="出库" action="stockOut/searchStockOutOver.action"/>
+            <item code="000100030002" parent="00010003" level="2" permissionIndex="13" viewName="出库" action="stockOut/searchStockOutOver.action">
+                <item code="0001000300020001" parent="000100030002" level="3" permissionIndex="231" viewName="出库申请" action="stockOut/searchStockOut.action" />
+                <item code="0001000300020002" parent="000100030002" level="3" permissionIndex="232" viewName="出库检查" action="stockOut/searchCheckStockOut.action" />
+                <item code="0001000300020003" parent="000100030002" level="3" permissionIndex="233" viewName="出库" action="stockOut/searchStockOutOver.action" />
             </item>
-            <item code="000100030003" parent="00010003" level="2" permissionIndex="14" viewName="调价、调拨">
-            	<item code="0001000300030001" parent="000100030003" level="3" permissionIndex="241" viewName="调价" action="stockOut/searchStockOut.action"/>
-           		<item code="0001000300030002" parent="000100030003" level="3" permissionIndex="242" viewName="调拨" action="storage/ShowStockMove.action"/>
+            <item code="000100030003" parent="00010003" level="2" permissionIndex="14" viewName="调价、调拨" action="storage/ShowStockMove.action">
+                <item code="0001000300030001" parent="000100030003" level="3" permissionIndex="241" viewName="调价" action="stockOut/searchStockOut.action" />
+                <item code="0001000300030002" parent="000100030003" level="3" permissionIndex="242" viewName="调拨" action="storage/ShowStockMove.action" />
             </item>
-            <item code="000100030004" parent="00010003" level="2" permissionIndex="15" viewName="盘点" action="storage/ShowCheck.action"/>
-            <item code="000100030005" parent="00010003" level="2" permissionIndex="16" viewName="物料损耗">
-            	<item code="0001000300050001" parent="000100030005" level="3" permissionIndex="261" viewName="物料报损" action="storage/ShowWas.action"/>
-           		<item code="0001000300050002" parent="000100030005" level="3" permissionIndex="262" viewName="报损历史" action="storage/ShowWasHistroy.action"/>
+            <item code="000100030004" parent="00010003" level="2" permissionIndex="15" viewName="盘点" action="storage/ShowCheck.action">
+                <item code="0001000300040001" parent="000100030004" level="3" permissionIndex="151" viewName="盘点审批" action="storage/ShowCheckApprove.action" />
             </item>
-            <item code="000100030006" parent="00010003" level="2" permissionIndex="17" viewName="初期库存" action="storage/ShowStockList.action"/>
+            <item code="000100030005" parent="00010003" level="2" permissionIndex="16" viewName="物料损耗" action="storage/ShowWas.action">
+                <item code="0001000300050001" parent="000100030005" level="3" permissionIndex="261" viewName="物料报损" action="storage/ShowWas.action" />
+                <item code="0001000300050002" parent="000100030005" level="3" permissionIndex="262" viewName="报损历史" action="storage/ShowWasHistroy.action" />
+            </item>
+            <item code="000100030006" parent="00010003" level="2" permissionIndex="17" viewName="初期库存" action="storage/ShowStockList.action" />
+            <item code="000100030007" parent="00010003" level="2" permissionIndex="117" viewName="物料历史清单" action="storage/ShowWasHistroy.action" />
         </item>
         <item code="00010004" parent="0001" level="1" permissionIndex="18" viewName="财务报表">
-            <item code="000100040001" parent="00010004" level="2" permissionIndex="19" viewName="物料库存报表" action="report/CheckStockList.action"/>
+            <item code="000100040001" parent="00010004" level="2" permissionIndex="19" viewName="物料库存报表" action="report/CheckStockList.action" />
             <item code="000100040002" parent="00010004" level="2" permissionIndex="20" viewName="财务结算" />
             <item code="000100040003" parent="00010004" level="2" permissionIndex="21" viewName="库存资产" />
         </item>
         <item code="00010005" parent="0001" level="1" permissionIndex="22" viewName="领导审批">
-            <item code="000100050001" parent="00010005" level="2" permissionIndex="23" viewName="出入库审批" action="stockIn/searchApprovalStockIn.action"/>
-            <item code="000100050002" parent="00010005" level="2" permissionIndex="24" viewName="出库审批" action="stockOut/searchApprovalStockOut.action"/>
-            <item code="000100050003" parent="00010005" level="2" permissionIndex="25" viewName="盘点审批" action="storage/ShowCheckApprove.action"/>
+            <item code="000100050001" parent="00010005" level="2" permissionIndex="23" viewName="出入库审批" action="stockIn/searchApprovalStockIn.action" />
+            <item code="000100050002" parent="00010005" level="2" permissionIndex="24" viewName="出库审批" action="stockOut/searchApprovalStockOut.action" />
+            <item code="000100050003" parent="00010005" level="2" permissionIndex="25" viewName="盘点审批" action="storage/ShowCheckApprove.action" />
         </item>
     </menu>
+
 
     <menu name="sysMenu" code="0001" parent=""></menu>
 </ims>  
