@@ -11,7 +11,7 @@
 	<result name="success">/baseset/supplier/SupplierAdd.jsp</result>
 </action>
 <action name="AddSupplier" class="com.action.baseset.SupplierAction" method="addSupplier">
-	<result name="success">/baseset/AddEnd.jsp</result>
+	<result name="success" type="redirect">GoAddSupplier.action</result>
 </action>
 <action name="GetOneSupplier" class="com.action.baseset.SupplierAction" method="getOneSupplier">
 	<result name="success">/baseset/supplier/SupplierUpdate.jsp</result>
@@ -19,8 +19,8 @@
 <action name="UpdateSupplier" class="com.action.baseset.SupplierAction" method="updateSupplier">
 	<result name="success" type="redirect">ShowSupplier.action</result>
 </action>
-<action name="SelectSupplierDef" class="com.action.baseset.SupplierAction" method="selectSupplierDef">
-	<result name="success">/baseset/supplier/SupplierShow.jsp</result>
+<action name="FindSupplier" class="com.action.baseset.SupplierAction" method="findSupplier">
+	<result name="success">/baseset/FindSupplier.jsp</result>
 </action>
 </package>
 </struts>
