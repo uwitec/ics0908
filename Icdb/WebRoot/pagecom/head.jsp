@@ -79,7 +79,6 @@
     float: left;
     width: 136px;
     text-shadow: gray;
-    color: black;
     margin-top: 5px;
     margin-left: 15px;
     
@@ -103,7 +102,7 @@
     src="<%=base%>/images/quit.gif"> <a href="#" class="a_top">退出</a></div>
 </div>
 <div class="menu" >
-<div id="mymenu" class="mymenu" style="position:relative; z-index: 9999;">
+<div id="mymenu"  class="mymenu" style="position:relative; z-index: 9999;">
 <%
     if (null != userMenu) {
         List<Item> list = userMenu.getItemList();
@@ -113,16 +112,19 @@
 
             // 一级菜单
             // <div id="div_m1" onmouseover='viewSub("div_m1", false)'>名称1</div>
-            sbd.append("<div id=\"div_m");
+            sbd.append("<a class=\"top\" href=\"#\"><div class='menu_level1' id=\"div_m");
             sbd.append(item.getCode());
             sbd.append("\" onmouseover='viewSub(\"div_m");
             sbd.append(item.getCode());
-            sbd.append("\", false)'  style=\"height:30px;\"><a href=\"");
-            sbd.append(base).append("/");
-            sbd.append(item.getAction());
-            sbd.append("\">");
+            sbd.append("\", false)'  style=\"line-height: 26px;margin-top: 0px;height:30px;background-image: url(");
+            sbd.append(base);
+            sbd.append("/images/menu_title1.gif)\">");
+         //   sbd.append("\", false)'  style=\"height:30px;\"><a class='sub_menu_item1' href=\"");
+         //   sbd.append(base).append("/");
+          //  sbd.append(item.getAction());
+          //  sbd.append("\">");
             sbd.append(item.getViewName());
-            sbd.append("</a></div>");
+            sbd.append("</div></a>");
 
             // 二级菜单外框
             // <div id="div_m1_sub" onclick='menuClick()' style="display: none; position: absolute;"> ... </div>
@@ -130,7 +132,7 @@
             sbd.append(item.getCode());
             sbd.append("_sub\" onclick='menuClick()'");
             sbd
-                    .append("  style=\"display: none; position: absolute;background-color: #4488dd\">");
+                    .append("  style=\"display: none; position: absolute;margin-top:0px;margin-left:-17px; width:150px;\">");
             List<Item> subList = item.getSubItemList();
             if (null != subList) {
                 for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
@@ -138,24 +140,25 @@
 
                     // 二级菜单
                     // <div id="div_m1_1" onmouseover='viewSub("div_m1_1", true)' >名称2</div>
-                    sbd.append("<div id=\"div_m");
-                    sbd.append(subItem.getCode());
-                    sbd.append("\" onmouseover='viewSub(\"div_m");
-                    sbd.append(subItem.getCode());
-                    sbd.append("\", true)'  style=\"height:30px;\"><a href=\"");
+                 	 sbd.append("<a href=\"");
                     sbd.append(base).append("/");
                     sbd.append(subItem.getAction());
                     sbd.append("\">");
+                    sbd.append("<div class='menu_level2' id=\"div_m");
+                    sbd.append(subItem.getCode());
+                    sbd.append("\" onmouseover='viewSub(\"div_m");
+                    sbd.append(subItem.getCode());
+                    sbd.append("\", true)'  style=\"width:150px;height:30px;margin-left:0px;margin-top:0px;\")>");
                     sbd.append(subItem.getViewName());
-                    sbd.append("</a></div>");
+                    sbd.append("</div></a>");
 
                     // 三级菜单外框
                     // <div id="div_m1_sub" onclick='menuClick()' style="display: none; position: absolute;"> ... </div>
-                    sbd.append("<div id=\"div_m");
+                    sbd.append("<div  id=\"div_m");
                     sbd.append(subItem.getCode());
                     sbd.append("_sub\" onclick='menuClick()'");
                     sbd
-                            .append(" style=\"display: none; position: absolute;background-color: #4488dd\">");
+                            .append(" style=\"display: none;margin-top:0px;margin-left:1px;position: absolute;\">");
 
                     List<Item> threeList = subItem.getSubItemList();
                     if (null != threeList) {
@@ -166,8 +169,9 @@
                             sbd.append(base).append("/");
                             sbd.append(threeItem.getAction());
                             sbd.append("\">");
+                            sbd.append("<div class='menu_level3' style=\"margin-top:0px;margin-left:1px;\">");
                             sbd.append(threeItem.getViewName());
-                            sbd.append("</a><br />");
+                            sbd.append("</div></a><br />");
                         }
                     }
 
