@@ -67,10 +67,9 @@
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
-			<div class="center_head_text">调拨单</div>
+			<div class="center_head_text">调拨单历史查询</div>
 			<div class="center_tools">
 			<s:form action="ShowStockMove" namespace="/storage" theme="simple" >
-				<a href="#" onclick="showSearch()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
 				<input type="text" name="transferOrder.s_value" value="<s:property value="transferOrder.s_value"/>" class="search_border" size="20"/>
 				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
 			</s:form>
