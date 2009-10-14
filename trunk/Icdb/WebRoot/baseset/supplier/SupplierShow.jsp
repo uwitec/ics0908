@@ -28,6 +28,7 @@
 <body topmargin="0">
 	<div class="body_div">
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
 			<div class="center_head_text">供应商信息</div>
@@ -43,13 +44,13 @@
 		
 		   <table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-				<td>供应商名称</td>
-		    	<td>供应商地址</td>
-		    	<td>联系人名称</td>
-		    	<td>供应商电话</td>
-		    	<td>邮编</td>
-		    	<td>操作</td>
+	    	<tr>
+				<td class="table_head">供应商名称</td>
+		    	<td class="table_head">供应商地址</td>
+		    	<td class="table_head">联系人名称</td>
+		    	<td class="table_head">供应商电话</td>
+		    	<td class="table_head">邮编</td>
+		    	<td class="table_head">操作</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -104,6 +105,7 @@
 		</div>
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>

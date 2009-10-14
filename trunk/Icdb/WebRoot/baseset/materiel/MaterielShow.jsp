@@ -29,6 +29,7 @@
 <body topmargin="0">
 	<div class="body_div">
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
 			<div class="center_head_text">物料信息</div>
@@ -44,13 +45,13 @@
 		
 		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-			   <td>物品编号</td>
-			   <td>物品名称</td>
-			   <td>产地</td>
-			   <td>规格</td>
-			   <td>ABC类别</td>
-			   <td>操作</td>
+	    	<tr>
+			   <td class="table_head">物品编号</td>
+			   <td class="table_head">物品名称</td>
+			   <td class="table_head">产地</td>
+			   <td class="table_head">规格</td>
+			   <td class="table_head">ABC类别</td>
+			   <td class="table_head">操作</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -111,6 +112,7 @@
 		</div>
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>
