@@ -16,6 +16,8 @@
             <item code="000100010005" parent="00010001" level="2" permissionIndex="5" viewName="人力资源" action="baseset/ShowPerson.action">
                 <item code="0001000100050001" parent="000100010005" level="3" permissionIndex="151" viewName="岗位信息" action="baseset/ShowJob.action" />
                 <item code="0001000100050002" parent="000100010005" level="3" permissionIndex="152" viewName="员工信息" action="baseset/ShowEmployee.action" />
+                <item code="0001000100050002" parent="000100010005" level="3" permissionIndex="153" viewName="客户信息" action="baseset/ShowCustomer.action" />
+                <item code="0001000100050002" parent="000100010005" level="3" permissionIndex="154" viewName="供应商信息" action="baseset/ShowSupplier.action" />
             </item>
         </item>
         <item code="00010002" parent="0001" level="1" permissionIndex="6" viewName="库存管理">
