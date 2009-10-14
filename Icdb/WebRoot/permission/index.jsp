@@ -105,7 +105,6 @@ function initFunTree(){
 <div class="center_boder_foot"></div>
 <jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include></div>
 <s:property value="#parameters.view" />
-<s:debug></s:debug>
 
 </body>
 </html>
