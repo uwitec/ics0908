@@ -76,13 +76,12 @@
 
 <STYLE type="text/css">
 .mymenu div {
-    float: left;
     width: 136px;
     text-shadow: gray;
     margin-top: 5px;
     margin-left: 15px;
     
-    
+    border: 0px solid red;
 }
 
 .mymenu a {
@@ -94,15 +93,14 @@
 </STYLE>
 </head>
 <body onload="" topmargin="0" onclick="menuClick()">
-
 <div class="page_top">
 <div id="logger">IMC</div>
 <div id="softname">库存管理软件</div>
 <div id="exit_help"><img src="<%=base%>/images/help.gif"> <a href="#" class="a_top">帮助</a> <img
     src="<%=base%>/images/quit.gif"> <a href="#" class="a_top">退出</a></div>
 </div>
-<div class="menu" >
-<div id="mymenu"  class="mymenu" style="position:relative; z-index: 9999;">
+<div class="menu">
+<div id="mymenu"  class="mymenu" style="position:relative; z-index: 9999;border:0px solid green;height:30px;">
 <%
     if (null != userMenu) {
         List<Item> list = userMenu.getItemList();
@@ -116,7 +114,7 @@
             sbd.append(item.getCode());
             sbd.append("\" onmouseover='viewSub(\"div_m");
             sbd.append(item.getCode());
-            sbd.append("\", false)'  style=\"line-height: 26px;margin-top: 0px;height:30px;background-image: url(");
+            sbd.append("\", false)'  style=\"float:left;line-height: 26px;margin-top: 0px;height:33px;background-image: url(");
             sbd.append(base);
             sbd.append("/images/menu_title1.gif)\">");
          //   sbd.append("\", false)'  style=\"height:30px;\"><a class='sub_menu_item1' href=\"");
