@@ -65,6 +65,9 @@
             <item code="000100050002" parent="00010005" level="2" permissionIndex="24" viewName="出库审批" action="stockOut/searchApprovalStockOut.action" />
             <item code="000100050003" parent="00010005" level="2" permissionIndex="25" viewName="盘点审批" action="storage/ShowCheckApprove.action" />
         </item>
+        <item code="00010006" parent="0001" level="1" permissionIndex="30" viewName="系统设置">
+            <item code="000100060001" parent="00010006" level="2" permissionIndex="31" viewName="权限设置" action="permission/index.jsp" />
+        </item>
     </menu>
 
 
