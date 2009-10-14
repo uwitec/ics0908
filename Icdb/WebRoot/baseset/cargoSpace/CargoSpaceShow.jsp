@@ -96,9 +96,9 @@
 	<base target="_self"> 
 	<body class="sub1_body">
 		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">货位信息</div>
-		<div><a href="#" onclick="addCa()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
 		</div>
 		<div class="sub1_con">
+		<div><a href="#" onclick="addCa()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
 		<div id="formdiv"  style="display:<s:property value="storehouse.s_value"/>">
 			<s:form action="AddCargoSpace" theme="simple" id="caForm" > 
 				<div>货位编号:
@@ -131,13 +131,13 @@
 			</s:form>
 		</div>
 		<div>
-		<table class="center_table" cellspacing="1" cellpadding="0" id="up_tab">
+		<table class="center_table" cellspacing="1" cellpadding="0" id="up_tab" style="width: 600px;">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-			    <td width="120">货位编号</td>
-	    		<td width="120">货位名</td>
-			    <td width="140">所在地</td>
-			    <td width="30">操作</td>
+	    	<tr>
+			    <td class="table_head">货位编号</td>
+	    		<td class="table_head">货位名</td>
+			    <td class="table_head">所在地</td>
+			    <td class="table_head">操作</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
