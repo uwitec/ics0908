@@ -148,7 +148,7 @@
                     sbd.append(subItem.getCode());
                     sbd.append("\" onmouseover='viewSub(\"div_m");
                     sbd.append(subItem.getCode());
-                    sbd.append("\", true)'  style=\"width:150px;height:30px;margin-left:0px;margin-top:0px;\")>");
+                    sbd.append("\", true)'  style=\"width:150px;height:30px;margin-left:0px;margin-top:1px;\")>");
                     sbd.append(subItem.getViewName());
                     sbd.append("</div></a>");
 
@@ -158,7 +158,7 @@
                     sbd.append(subItem.getCode());
                     sbd.append("_sub\" onclick='menuClick()'");
                     sbd
-                            .append(" style=\"display: none;margin-top:0px;margin-left:1px;position: absolute;\">");
+                            .append(" style=\"display: none;margin-top:1px;position: absolute;\">");
 
                     List<Item> threeList = subItem.getSubItemList();
                     if (null != threeList) {
@@ -169,9 +169,9 @@
                             sbd.append(base).append("/");
                             sbd.append(threeItem.getAction());
                             sbd.append("\">");
-                            sbd.append("<div class='menu_level3' style=\"margin-top:0px;margin-left:1px;\">");
+                            sbd.append("<div class='menu_level3' style=\"margin-top:1px;margin-left:1px;\">");
                             sbd.append(threeItem.getViewName());
-                            sbd.append("</div></a><br />");
+                            sbd.append("</div></a><br/>");
                         }
                     }
 
