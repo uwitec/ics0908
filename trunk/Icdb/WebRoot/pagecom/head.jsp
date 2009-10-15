@@ -97,7 +97,7 @@
 <div id="logger">IMC</div>
 <div id="softname">库存管理软件</div>
 <div id="exit_help"><img src="<%=base%>/images/help.gif"> <a href="#" class="a_top">帮助</a> <img
-    src="<%=base%>/images/quit.gif"> <a href="#" class="a_top">退出</a></div>
+    src="<%=base%>/images/quit.gif"><a href="#" class="a_top">退出</a></div>
 </div>
 <div class="menu">
 <div id="mymenu"  class="mymenu" style="position:relative; z-index: 9999;border:0px solid green;height:30px;">
@@ -126,19 +126,18 @@
 
             // 二级菜单外框
             // <div id="div_m1_sub" onclick='menuClick()' style="display: none; position: absolute;"> ... </div>
-            sbd.append("<div id=\"div_m");
+            sbd.append("<div class='menu_level2_body' id=\"div_m");
             sbd.append(item.getCode());
             sbd.append("_sub\" onclick='menuClick()'");
-            sbd
-                    .append("  style=\"display: none; position: absolute;margin-top:0px;margin-left:-17px; width:150px;\">");
+            sbd.append("style=\"margin-left:-16px;\">");
             List<Item> subList = item.getSubItemList();
             if (null != subList) {
                 for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
                     Item subItem = subList.get(subIndex);
-
+					int childsize=subItem.getSubItemList().size();
                     // 二级菜单
                     // <div id="div_m1_1" onmouseover='viewSub("div_m1_1", true)' >名称2</div>
-                 	 sbd.append("<a href=\"");
+                 	sbd.append("<a href=\"");
                     sbd.append(base).append("/");
                     sbd.append(subItem.getAction());
                     sbd.append("\">");
@@ -146,18 +145,19 @@
                     sbd.append(subItem.getCode());
                     sbd.append("\" onmouseover='viewSub(\"div_m");
                     sbd.append(subItem.getCode());
-                    sbd.append("\", true)'  style=\"width:150px;height:30px;margin-left:0px;margin-top:1px;\")>");
+                    sbd.append("\", true)'  style=\"width:150px;height:30px !important;height:35px;margin-left:0px;margin-top:1px !important;margin-top:2px;\")>");
                     sbd.append(subItem.getViewName());
+                    if(childsize>0){
+                    		 sbd.append("<div class=\"menu_rock\"></div>");
+                    }
                     sbd.append("</div></a>");
 
                     // 三级菜单外框
                     // <div id="div_m1_sub" onclick='menuClick()' style="display: none; position: absolute;"> ... </div>
-                    sbd.append("<div  id=\"div_m");
+                    sbd.append("<div class='menu_level3_body'  id=\"div_m");
                     sbd.append(subItem.getCode());
                     sbd.append("_sub\" onclick='menuClick()'");
-                    sbd
-                            .append(" style=\"display: none;margin-top:1px;position: absolute;\">");
-
+                    sbd .append("style=\"margin-left:0px;margin-top:0px;\">");
                     List<Item> threeList = subItem.getSubItemList();
                     if (null != threeList) {
                         for (int threeIndex = 0; threeIndex < threeList
@@ -167,12 +167,15 @@
                             sbd.append(base).append("/");
                             sbd.append(threeItem.getAction());
                             sbd.append("\">");
-                            sbd.append("<div class='menu_level3' style=\"margin-top:1px;margin-left:1px;\">");
+                            if(threeIndex==0){
+                            	sbd.append("<div class='menu_level3' style=\"height:30px !important;height:35px;width:150px;margin-top:0px;margin-left:1px;\">");
+                            }else{
+                            	sbd.append("<div class='menu_level3' style=\"height:30px !important;height:35px;width:150px;margin-top:-17px;margin-left:1px;\">");
+                            }
                             sbd.append(threeItem.getViewName());
                             sbd.append("</div></a><br/>");
                         }
                     }
-
                     sbd.append("</div>");
                 }
             }
