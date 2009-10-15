@@ -276,7 +276,6 @@ text-align:center;
 padding-top:6px;
 }
 .menu_level2_body{
-background-color:FFFFFF;
 display: none;
 position: absolute;
 margin-top:5px;
@@ -298,7 +297,6 @@ float:left;
 
 }
 .menu_level3_body{
-background-color:FFFFFF;
 display: none;
 position: absolute;
 width:150px;
