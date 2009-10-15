@@ -11,9 +11,7 @@
 <link href="<%=base%>/jstree/tree.css" rel="stylesheet" type="text/css" />
 <link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
 <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
-<link href="<%=base%>/css/center_css.css" type="text/css"
-	rel="stylesheet">
-<link href="<%=base%>/css/pagecom.css" type="text/css" rel="stylesheet">
+<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="<%=base%>/jstree/tree.js"></script>
 <title>Insert title here</title>
 <script type="text/javascript">
@@ -25,24 +23,10 @@ function initFunTree(){
 </head>
 <body onload="initFunTree()" style="margin-top: 0px; padding-top: 0px">
 
-<div class="body_div"><jsp:include flush="true"
-	page="/pagecom/head.jsp"></jsp:include>
-
+<div class="body_div"><jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
 <div class="left_body">
-<div class="left_menu">
-<div class="left_menu_head">权限</div>
-<table class="left_menu_table" border="0">
-	<tr height="40">
-		<td class="left_menu_table_td"><s:url action="ShowEmployeeList"
-			id="ShowEmployeeList"></s:url><s:a href="%{ShowEmployeeList}">用户</s:a></td>
-	</tr>
-	<tr height="40">
-		<td class="left_menu_table_td"><s:url action="ShowJobList"
-			id="ShowJobList"></s:url><s:a href="%{ShowJobList}">用户组</s:a></td>
-	</tr>
-</table>
-</div>
-</div>
+<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
+
 
 <div class="center_body">
 <div class="center_head_text"><s:if test="null != employee">用户</s:if><s:elseif
@@ -53,11 +37,11 @@ function initFunTree(){
 <div class="center_boder">
 <table class="center_table" cellspacing="1" cellpadding="0">
 	<s:if test="null != employee">
-		<tr class="table_head">
-			<td>姓名</td>
-			<td>岗位</td>
-			<td>部门</td>
-			<td>设置</td>
+		<tr>
+			<td class="table_head">姓名</td>
+			<td class="table_head">岗位</td>
+			<td class="table_head">部门</td>
+			<td class="table_head">设置</td>
 		</tr>
 		<s:iterator value="employeeList" status="stat">
 			<tr 
@@ -77,10 +61,10 @@ function initFunTree(){
 		</s:iterator>
 	</s:if>
 	<s:elseif test="null != job">
-		<tr class="table_head">
-			<td>岗位</td>
-			<td>部门</td>
-			<td>设置</td>
+		<tr>
+			<td class="table_head">岗位</td>
+			<td class="table_head">部门</td>
+			<td class="table_head">设置</td>
 		</tr>
 		<s:iterator value="jobList" status="stat">
 			<tr 
@@ -100,10 +84,10 @@ function initFunTree(){
 		</s:iterator>
 	</s:elseif>
 </table>
-<div class="pages">分页信息</div>
 </div>
 <div class="center_boder_foot"></div>
-<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include></div>
+		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 <s:property value="#parameters.view" />
 
 </body>
