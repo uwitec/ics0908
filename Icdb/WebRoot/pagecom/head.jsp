@@ -167,11 +167,8 @@
                             sbd.append(base).append("/");
                             sbd.append(threeItem.getAction());
                             sbd.append("\">");
-                            if(threeIndex==0){
-                            	sbd.append("<div class='menu_level3' style=\"height:30px !important;height:35px;width:150px;margin-top:0px;margin-left:1px;\">");
-                            }else{
-                            	sbd.append("<div class='menu_level3' style=\"height:30px !important;height:35px;width:150px;margin-top:-17px;margin-left:1px;\">");
-                            }
+                            	sbd.append("<div class='menu_level3' style=\"height:30px !important;height:35px;width:150px;margin-top:1px !important;margin-top:2px;margin-left:1px;\">");
+                           
                             sbd.append(threeItem.getViewName());
                             sbd.append("</div></a><br/>");
                         }
