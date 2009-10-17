@@ -14,7 +14,6 @@
 			rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css"
 			rel="stylesheet">
-		<link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<script language="JavaScript" type="text/javascript"
@@ -256,6 +255,7 @@ function nextPage(){
 
 </div>
 					<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+					<div class="left_body">
 					<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 					<div class="center_body">
 						<div class="center_head_text">
@@ -385,6 +385,7 @@ function nextPage(){
 					</div>
 					<div class="center_boder_foot"></div>
 					<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+					</div>
 				</div>
 		</s:form>
 	</body>

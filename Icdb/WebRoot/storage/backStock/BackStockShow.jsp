@@ -35,7 +35,7 @@
 </SCRIPT>
 <body topmargin="0">
 	<div class="body_div">
-	<div id="seachDIV" class="searche_DIV" >
+	<div id="seachDIV" class="searche_DIV" style="display: none">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td style="background:url(<%=base%>/images/menu_top_left.gif);" width="88" height="35">&nbsp;</td>
@@ -69,6 +69,7 @@
 </table>
 </div>
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
 			<div class="center_head_text">退货单</div>
@@ -155,6 +156,7 @@
 		</div>
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>

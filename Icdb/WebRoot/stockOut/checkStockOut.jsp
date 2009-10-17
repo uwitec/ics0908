@@ -14,7 +14,6 @@
 			rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css"
 			rel="stylesheet">
-		<link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<script language="JavaScript" type="text/javascript"
@@ -211,15 +210,13 @@
 
 				</div>
 				<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+				<div class="left_body">
 				<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 				<div class="center_body">
 					<div class="center_head_text">
 						出库检查
 					</div>
 					<div class="center_tools">
-						<a href="#" onclick="window.location.href='goAddStockOut.action'"
-							class="a_top"><img src="<%=base%>/images/img06.gif"
-								border="0" class="a_top">添加出库单</a>
 						<a href="#" onclick="showSearch()">高级查询</a>
 					</div>
 				</div>
@@ -341,9 +338,9 @@
 						 -->
 					</div>
 				</div>
-
-				<div class="center_boder_foot"></div>
-				<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+			<div class="center_boder_foot"></div>
+			<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+			</div>
 			</div>
 		</s:form>
 	</body>

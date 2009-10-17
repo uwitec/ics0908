@@ -60,7 +60,7 @@ String base=request.getContextPath();
 	    	<tr class="table_tr_left"><td colspan="6">报损相关单据：<s:property value="wasDoc"/></td></tr>
 	     </s:push>
 	     <tr class="table_tr_right"><td colspan="6" width="100%"  align="right" id="sumTD">总金额:0</td></tr>
-	     <tr class="table_head"><td>物料编号</td><td>物料</td><td>单价</td><td>数量</td><td>报损总额</td><td>报损原因</td></tr>
+	     <tr class="table_tr__even"><th>物料编号</th><th>物料</th><th>单价</th><th>数量</th><th>报损总额</th><th>报损原因</th></tr>
 	       <s:iterator value="lwb" status="stat">
 	      	<tr 
 	       		<s:if test="#stat.even">

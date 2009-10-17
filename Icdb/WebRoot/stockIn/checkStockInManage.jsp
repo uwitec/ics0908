@@ -8,7 +8,6 @@
 %>
 <html>
 	<head>
-		<link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/body_css.css" type="text/css"
 			rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css"

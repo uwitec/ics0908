@@ -4,7 +4,7 @@
 <% String base=request.getContextPath(); %>
 <html>
     <head>
-        <title>物料信息</title>
+        <title>盘点</title>
 		 <link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
 	    <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
 	    <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
@@ -24,9 +24,10 @@
 <body topmargin="0">
 	<div class="body_div">
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
-			<div class="center_head_text">物料信息</div>
+			<div class="center_head_text">盘点</div>
 			<div class="center_tools">
 			</div>	
 		</div>
@@ -98,8 +99,9 @@
 		<div class="pages">
 		</div>
 		</div>
-		<div class="center_boder_foot"></div>
+	<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>

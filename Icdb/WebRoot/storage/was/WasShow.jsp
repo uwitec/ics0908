@@ -11,9 +11,24 @@
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<SCRIPT type="text/javascript">
+	function Deletevalue(value_str){
+		var url="DeleteWas.action?wasTage.wasCode="+value_str;
+		if(confirm("是否确定删除？")){
+    				window.location.href=url;
+    		}
+	}
+	function getOneWas(str_url){
+    	var href_="GetOneWas.action?wasTage.wasCode="+str_url;
+    	window.showModalDialog(href_,"","center:1;resizable:0;dialogHeight:450px;dialogWidth:700px");
+		location.reload();
+	}
+
+</SCRIPT>
 <body topmargin="0">
 	<div class="body_div">
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
 			<div class="center_head_text">报损单</div>
@@ -29,13 +44,13 @@
 		
 		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-			    <td>报损编号</td>
-		    	<td>报损时间</td>
-		    	<td>报损类型</td>
-		    	<td>状态</td>
-		    	<td>操作员</td>
-				<td>编辑</td>
+	    	<tr>
+			    <td  class="table_head">报损编号</td>
+		    	<td class="table_head">报损时间</td>
+		    	<td class="table_head">报损类型</td>
+		    	<td class="table_head">状态</td>
+		    	<td class="table_head">操作员</td>
+				<td class="table_head">编辑</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -70,7 +85,13 @@
 	       	</td>
 	       	<td><s:property value="personName"/></td>
 	       	<td>
+	       	<s:if test="wasState==2">
 	       		<a href="UpdateOneWas.action?wasTage.wasCode=<s:property value="wasCode"/>"><img src="<%=base%>/images/img03.gif" border="0"></a>
+	       		<a href="#" onclick="Deletevalue('<s:property value="wasCode"/>')"><img src="<%=base%>/images/img04.gif" border="0"></a>
+	       	</s:if>
+	       	<s:if test="wasState==1">
+	       		<a href="#" onclick="getOneWas('<s:property value="wasCode"/>')"><img src="<%=base%>/images/chaxunyu_e.gif" border="0"></a>
+	       	</s:if>
 	       	</td>
 	       	</tr>
 	       </s:iterator>
@@ -102,6 +123,7 @@
 		</div>
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>

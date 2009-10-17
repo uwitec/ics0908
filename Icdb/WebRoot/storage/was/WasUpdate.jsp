@@ -1,17 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<% String base=request.getContextPath(); %>
 <html>
+<% 
+String base=request.getContextPath(); 
+%>
     <head>
-        <title>报损单</title>
-		<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
-		<link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
-	</head>
-<body>
-<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
+	   <title>报损信息</title>
+	</HEAD>
+	 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
      <SCRIPT type="text/javascript">    
     	
     	 function intiPrice(row_){
@@ -30,7 +31,7 @@
  		function intSumPrice(){
 		  	var a = document.getElementById("addMaterTab");
 		  	var sumPrice=0;
-		  	for(var row = 5; row < a.rows.length; row++){
+		  	for(var row = 2; row < a.rows.length; row++){
 		  			intiPrice(row);
 		  		var price = a.rows.item(row).cells.item(5).innerText;
 		  		if(price != ''){
@@ -55,7 +56,7 @@
     	function removeTable(){
     		  tblObj = document.getElementById("addMaterTab");
 			  var length= tblObj.rows.length ;
-			  for( var i=5; i<length; i++ ){
+			  for( var i=2; i<length; i++ ){
 			      tblObj.deleteRow(5);    
 			  } 
     	}
@@ -91,7 +92,7 @@
 	  	
 
 	  	var sumPrice=0;
-	  	for(var row = 5; row < a.rows.length; row++){
+	  	for(var row = 2; row < a.rows.length; row++){
 	  		var price = a.rows.item(row).cells.item(5).innerText;
 	  		if(price != ''){
 	  			sumPrice = parseFloat(sumPrice)+parseFloat(price);
@@ -108,7 +109,7 @@
 		var a = document.getElementById("addMaterTab");
 		var materielIds ="";
 	 	removeTable();
-		for(var row = 4;  row < a.rows.length; row++){
+		for(var row = 1;  row < a.rows.length; row++){
 			materielIds = materielIds + trim(a.rows.item(row).cells.item(1).innerHTML);
 			if(row != a.rows.length-1){
 			materielIds = materielIds + ","
@@ -151,34 +152,32 @@
  		}	
 	  }	
     </SCRIPT>
-<body topmargin="0">
-	<div class="body_div">
-		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
-		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
-		<div class="center_body">
-			<div class="center_head_text">修改报损单</div>
-			<div class="center_tools">
-			</div>	
-		</div>
-		<div class="center_boder">
+	<body class="stock_body">
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">修改报损单</div>
+		<div class="stock_con">
+			
 		<s:form theme="simple" action="UpdateWasTage" namespace="/storage" id="addform">
-		    <table id="addMaterTab"  border="0" class="center_table">
-		    	<tr class="table_tr_left"><td colspan="8">
+		  <div style="margin-top: 8px;">
 		    	报损单号：<s:textfield name="wasTage.wasCode" readonly="true" cssClass="sub1_border"/>
-		    	</td></tr>
-		    	<tr class="table_tr_left"><td colspan="8">
+		  </div>
+		  <div style="margin-top: 8px;">
 		    	报损类型：<s:select id="wasTypeM" list="wasTypeList" value="value" name="wasTage.wasType" cssClass="sub1_border" key="key"/>
-		    	</td></tr>
-		    	<tr class="table_tr_left"><td colspan="8">
+		  </div>
+		  <div style="margin-top: 8px;">
 		    	相关单据：<s:textfield id="DocNum" name="wasTage.wasDoc" readonly="true" cssClass="sub1_border"/>
 		    	<a href="#" onclick="showMateriels()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">选择物料</a>
-		    	<s:hidden name="wasTage.operator" value="%{wasTage.operator}"/>
-		    	<s:hidden name="wasTage.wasTime" value="%{wasTage.wasTime}"/>
-		    	</td>
-		    	</tr>
-		    		<tr class="table_tr_right"><td colspan="8" width="100%"  align="right" id="sumTD">总金额:0</td></tr>
-		    	<tr class="table_tr__even"><th>物料编号</th><th>物料</th><th>单价</th><th>数量</th><th>报损最大值</th><th>报损总额</th><td>库位</td><th>报损原因</th></tr>
-		   		<s:iterator value="lwb">
+		  </div>
+		  <div style="margin-top: 8px;">
+		  		报损时间：<s:textfield name="wasTage.wasTime" value="%{wasTage.wasTime}" readonly="true" cssClass="sub1_border"/>
+		  </div>
+		  <div style="margin-top: 8px;">
+		  		操作员：<s:textfield value="%{emp.personName}" cssClass="sub1_border" readonly="true"/>
+		  </div>
+		  <div style="margin-top: 8px;">
+		    <table id="addMaterTab"  border="0" class="center_table">
+		    		<tr class="stock_tr"><td colspan="8" width="100%"  align="right" id="sumTD">总金额:0</td></tr>
+		    	<tr class="table_tr__even"><th>物料编号</th><th>物料</th><th>单价</th><th>数量</th><th>报损最大值</th><th>报损总额</th><th>库位</th><th>报损原因</th></tr>
+		    	<s:iterator value="lwb">
 		   			<tr class="table_tr_odd">
 		       		<td><s:hidden name="materielCode" value="%{materielCode}"/><s:property value="materielCode"/></td>
 		       		<td><s:property value="materielName"/></td>
@@ -190,7 +189,8 @@
 		       		<td><s:textfield cssClass="sub1_border" name="wasCause"/></td>
 		       		</tr>
 		   		</s:iterator>
-			</table>
+		    </table>
+		  </div>
 		    <div align="right" style="margin-top: 8px;margin-right: 12px;">
 		    		<input id="save_" type="hidden" name="wasTage.s_value" value=""/>
 		    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0"/></a>
@@ -199,13 +199,8 @@
    			</div>
    		</s:form>
 		</div>
-			<SCRIPT type="text/javascript">
+		<SCRIPT type="text/javascript">
 			intSumPrice();
-	</SCRIPT>
-		<div class="center_boder_foot"></div>
-		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
-	</div>
-
-</body>
-		
+		</SCRIPT>
+    </body>
 </html>
