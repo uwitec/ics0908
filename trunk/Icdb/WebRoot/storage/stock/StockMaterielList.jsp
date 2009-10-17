@@ -62,6 +62,7 @@
 	<body topmargin="0">
 	<div class="body_div">
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
 			<div class="center_head_text">初期库存</div>
@@ -75,7 +76,7 @@
 		<div class="center_boder">
 		<div  id="inputValue">
 		<s:form action="AddStock" theme="simple" name="addForm">
-		<table class="center_table">
+		<table class="center_table" style="border: 0px;">
 			<tr class="table_tr_left">
 			<td>
 			<s:hidden id="materielCode" name="stock.materielCode"></s:hidden>
@@ -104,10 +105,10 @@
 		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
 	    	<tr class="table_head">
-			   <th>物料名称</th>
-		    	<th>库位名称</th>
-		    	<th>单价</th>
-		    	<th>数量</th>
+			   <th class="table_head">物料名称</th>
+		    	<th class="table_head">库位名称</th>
+		    	<th class="table_head">单价</th>
+		    	<th class="table_head">数量</th>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -137,6 +138,7 @@
 		</div>
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>

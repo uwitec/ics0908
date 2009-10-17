@@ -16,7 +16,6 @@
 			rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css"
 			rel="stylesheet">
-		<link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
 		<script language="JavaScript" type="text/javascript"
 			src="../javascript/calendar.js"></script>
 		<script language="JavaScript" type="text/javascript"
@@ -255,6 +254,7 @@ function nextPage(){
 
 				</div>
 				<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+				<div class="left_body">
 				<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 				<div class="center_body">
 					<div class="center_head_text">
@@ -380,7 +380,8 @@ function nextPage(){
 					</div>
 				</div>
 				<div class="center_boder_foot"></div>
-				<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 			</div>
 		</s:form>
 

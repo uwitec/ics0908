@@ -108,7 +108,7 @@ String base=request.getContextPath();
        		 <div style="margin-top: 8px;" align="right">  
 		       </div>
 				<div align="right">
-       			<a href="#" onclick="sendTo()"><img src="<%=base%>/images/sub1_btn_hand.jpg" border="0"></a>
+       			<a href="#" onclick="sendTo()"><img src="<%=base%>/images/add.jpg" border="0"></a>
 	      		</div>
 	     </div>
 		</div>

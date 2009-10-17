@@ -8,7 +8,7 @@
 	<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
-    <link href="<%=base%>/css/sub.css" type="text/css" rel="stylesheet">
+     <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
@@ -51,6 +51,7 @@
 				</s:form>
 		</div>
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
 			<div class="center_head_text">物料流出清单</div>
@@ -147,6 +148,7 @@
 		</div>
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 	</div>
 </body>
 </html>
