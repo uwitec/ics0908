@@ -97,7 +97,8 @@
 <STYLE type="text/css">
 .mymenu div {
 	text-shadow: gray;
-	margin-top: 5px;
+	margin-top: 0px !important;
+    margin-top: 5px;
 	margin-left: 15px;
 	border: 0px solid red;
 	cursor: pointer;
