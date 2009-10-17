@@ -172,10 +172,10 @@
                             .append("\", true)'   onmouseout=\"menuOut('div_m");
                     sbd.append(subItem.getCode());
                     sbd
-                            .append("')\"  style=\"width:150px;height:30px !important;height:35px;margin-left:0px;margin-top:1px !important;margin-top:2px;border:0px solid red;\")> ");
+                            .append("')\"  style=\"width:150px;height:30px !important;height:35px;margin-left:0px;margin-top:1px !important;margin-top:1px;border:0px solid red;\")> ");
                     sbd.append(subItem.getViewName());
                     if (childsize > 0) {
-                        sbd.append("<div class=\"menu_rock\">&nbsp;</div>");
+                        sbd.append("<div class=\"menu_rock\" style=\"margin-top: -10px !important;margin-top:5px;\">&nbsp;</div>");
                     }
                     sbd.append("</div></a>");
 
@@ -202,10 +202,10 @@
                                     .append("\" style=\"height:30px !important;height:35px;width:150px;border:0px solid green;z-index:10000;");
                             if (threeIndex == 0) {
                                 sbd
-                                        .append("margin-top:0px;margin-left:1px;\"");
+                                        .append("margin-top:0px !important;margin-top:0px;margin-left:1px;\"");
                             } else {
                                 sbd
-                                        .append("margin-top:0px;margin-left:1px;\"");
+                                        .append("margin-top:1px !important;margin-top:1px;margin-left:1px;\"");
                             }
                             sbd
                                     .append(" onmouseover=\"menuOver('div_m");
