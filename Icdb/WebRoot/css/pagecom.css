@@ -274,6 +274,7 @@ font-size:14px;
 font-weight:bold;
 text-align:center;
 padding-top:6px;
+width: 136px;
 }
 .menu_level2_body{
 display: none;
@@ -319,8 +320,7 @@ background-repeat:no-repeat;
 position: absolute;
 width:4px;
 height:7px;
-margin-top:-10px !important;
-margin-left:135px !important;
-margin-top:-5px;
-margin-left:135px;
+left:120px;
+margin-top: -10px !important;
+margin-top: -5px;
 }
