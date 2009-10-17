@@ -27,7 +27,7 @@
                 <item code="0001000200030001" parent="000100020003" level="3" permissionIndex="191" viewName="物料消耗" action="stockmanage/ShowOutLevel.action" />
                 <item code="0001000200030002" parent="000100020003" level="3" permissionIndex="192" viewName="库存周转" action="stockmanage/ShowStockTurn.action" />
             </item>
-            <item code="000100020004" parent="00010002" level="2" permissionIndex="10" viewName="库存警告" action="stockmanage/ShowMax.action" >
+            <item code="000100020004" parent="00010002" level="2" permissionIndex="10" viewName="库存警告" action="stockmanage/ShowMax.action">
                 <item code="0001000200040001" parent="000100020004" level="3" permissionIndex="211" viewName="呆滞物料" action="stockmanage/ShowMax.action" />
                 <item code="0001000200040002" parent="000100020004" level="3" permissionIndex="212" viewName="库存不足" action="stockmanage/ShowMin.action" />
             </item>
