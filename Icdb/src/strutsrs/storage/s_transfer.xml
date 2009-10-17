@@ -7,6 +7,9 @@
 <action name="ShowStockMove" class="com.action.storage.StockMoveAction" method="showStockMove">
 	<result name="success">/storage/stockmove/StockMoveShow.jsp</result>
 </action>
+<action name="ShowStockHistroyMove" class="com.action.storage.StockMoveAction" method="showStockHistroyMove">
+	<result name="success">/storage/stockmove/StockHistroy.jsp</result>
+</action>
 <action name="GoAddStockMove" class="com.action.storage.StockMoveAction" method="goAddStockMove">
 	<result name="success">/storage/stockmove/StockMoveAdd.jsp</result>
 </action>
@@ -15,6 +18,12 @@
 </action>
 <action name="GetOneStockMove" class="com.action.storage.StockMoveAction" method="getOneStockMove">
 	<result name="success">/storage/stockmove/StockMoveAdd.jsp</result>
+</action>
+<action name="GetOneLook" class="com.action.storage.StockMoveAction" method="getOneLook">
+	<result name="success">/storage/stockmove/StockMoveOne.jsp</result>
+</action>
+<action name="DelteStockMove" class="com.action.storage.StockMoveAction" method="delteStockMove">
+	<result name="success" type="redirect">ShowStockMove.action</result>
 </action>
 </package>
 </struts>
