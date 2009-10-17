@@ -102,6 +102,7 @@
 	margin-left: 15px;
 	border: 0px solid red;
 	cursor: pointer;
+    z-index: 99px;
 }
 
 .mymenu a {
@@ -113,8 +114,10 @@
 </head>
 <body onload="" topmargin="0" onclick="menuClick()">
 <div class="page_top">
-<div id="logger">IMC</div>
-<div id="softname">库存管理软件</div>
+<div id="logger">
+<img alt="IMS" src="<%=base %>/images/log_.jpg" />
+</div>
+
 <div id="exit_help"><img src="<%=base%>/images/help.gif"> <a
 	href="#" class="a_top">帮助</a> <img src="<%=base%>/images/quit.gif"><a
 	href="#" class="a_top">退出</a></div>
