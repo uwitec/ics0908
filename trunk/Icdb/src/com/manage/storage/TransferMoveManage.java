@@ -13,6 +13,25 @@ import com.mydomain.bean.storage.TransferOrderHasMaterielBean;
 public class TransferMoveManage {
 
 	
+	@SuppressWarnings("unchecked")
+	public List<TransferOrderBean> getTransferOrderPersonList(TransferOrderBean transfer){
+		try {
+			return (List<TransferOrderBean>) DBServer.quider.queryForList("selectTransferPersonDef", transfer);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return new ArrayList<TransferOrderBean>();
+		}
+	}
+	
+	public TransferOrderBean getTransferOrderPersonPage(TransferOrderBean transfer){
+		 PageManage pm=new PageManage();
+		 if(transfer==null)
+		 		transfer=new TransferOrderBean();
+		 		
+		 return (TransferOrderBean) pm.setPage(transfer, "selectTransferPersonCount");
+	 }
+	
 	 @SuppressWarnings("unchecked")
 	public List<TransferOrderBean> getTransferOrderList(TransferOrderBean transfer){
 		 try {
@@ -41,6 +60,17 @@ public class TransferMoveManage {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
 			return new TransferOrderBean();
+		}
+	 }
+	 
+	 public boolean deleteTransfer(TransferOrderBean transfer){
+		 try {
+			DBServer.quider.deleteObject("deleteTransferBean", transfer);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
 		}
 	 }
 	 

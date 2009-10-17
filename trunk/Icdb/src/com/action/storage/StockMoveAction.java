@@ -242,6 +242,15 @@ public class StockMoveAction extends ActionSupport{
 	public String showStockMove(){
 		TransferMoveManage tmm=new TransferMoveManage();
 		transferOrder=tmm.getTransferOrderPage(transferOrder);
+		lhp=tmm.getTransferOrderPersonList(transferOrder);
+		getAllState();
+		gethouselist();
+		return SUCCESS;
+	}
+	
+	public String showStockHistroyMove(){
+		TransferMoveManage tmm=new TransferMoveManage();
+		transferOrder=tmm.getTransferOrderPage(transferOrder);
 		lhp=tmm.getTransferOrderList(transferOrder);
 		getAllState();
 		gethouselist();
@@ -285,6 +294,17 @@ public class StockMoveAction extends ActionSupport{
 		getAllState();
 		cardoublelist=this.getDoubleCarSelect();
 		gethouseName(transferOrder.getStorehouseCode());
+		return SUCCESS;
+	}
+	
+	public String getOneLook() {
+		this.getOneStockMove();
+		return SUCCESS;
+	}
+	
+	public String delteStockMove(){
+		TransferMoveManage tmm=new TransferMoveManage();
+		tmm.deleteTransfer(transferOrder);
 		return SUCCESS;
 	}
 }

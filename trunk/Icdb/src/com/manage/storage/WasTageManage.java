@@ -73,6 +73,18 @@ public class WasTageManage {
 		}
 	}
 	
+	public boolean deleteWasTage(WasTageBean wasTage){
+		try {
+			DBServer.quider.deleteObject("deleteWasTageBean", wasTage);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
+		}
+		
+	}
+	
 	public boolean updateWasTageAll(List<WasMaterielBean> w_List,WasTageBean wasTage){
 		if(w_List!=null){
 			try {
