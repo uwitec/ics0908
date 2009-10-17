@@ -9,11 +9,13 @@ import propeties.IcdbOption;
 import com.manage.storage.StockManage;
 import com.manage.storage.WasMaterielManage;
 import com.manage.storage.WasTageManage;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.MaterielBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.storage.StockBean;
 import com.mydomain.bean.storage.WasMaterielBean;
 import com.mydomain.bean.storage.WasTageBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -36,9 +38,21 @@ public class WasAction extends ActionSupport{
 	private String wasCause;
 	private String cargoSpaceCode;
 	
-	
+	private EmployeeBean emp;
 	
 
+	/**
+	 * @return the emp
+	 */
+	public EmployeeBean getEmp() {
+		return emp;
+	}
+	/**
+	 * @param emp the emp to set
+	 */
+	public void setEmp(EmployeeBean emp) {
+		this.emp = emp;
+	}
 	/**
 	 * @return the cargoSpaceCode
 	 */
@@ -190,14 +204,15 @@ public class WasAction extends ActionSupport{
 	@SuppressWarnings("unchecked")
 	public String showWasTage(){
 		 WasTageManage wtm=new WasTageManage();
+		 this.getUserSession();
 		if(wasTage==null){
 			wasTage=new WasTageBean();
 			ICTools.setBean(wasTage, "");
 		}else{
 			ICTools.setBean(wasTage, wasTage.getS_value());
 		}
-		wasTage.setOperator("P2009091614585852");
-		wasTage.setWasState(2);
+		wasTage.setOptionor(emp.getPersonCode());
+		
 		wasTage=wtm.getPageWasTagePerson(wasTage);
 		lhp=wtm.getWasPersonList(wasTage);
 		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
@@ -217,6 +232,8 @@ public class WasAction extends ActionSupport{
 	
 	@SuppressWarnings("unchecked")
 	public String goAddWas(){
+		 this.getUserSession();
+
 		if(wasTage==null)
 			wasTage=new WasTageBean();
 		wasTage.setWasCode(ICTools.randId("W"));
@@ -229,7 +246,7 @@ public class WasAction extends ActionSupport{
 		WasTageManage wtm=new WasTageManage();
 		WasMaterielManage wmm=new WasMaterielManage();
 		WasMaterielBean wasMateriel=new WasMaterielBean();
-		
+		 this.getUserSession();
 		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
 		wasTage=wtm.getWasTageOne(wasTage.getWasCode());
 		wasMateriel.setWasCode(wasTage.getWasCode());
@@ -244,8 +261,10 @@ public class WasAction extends ActionSupport{
 	}
 	
 	public String updateWasTage(){
+		
 		WasTageManage wtm=new WasTageManage();
-		List<WasMaterielBean> lwmb=changeToWasMateriel();		
+		List<WasMaterielBean> lwmb=changeToWasMateriel();	
+		this.getUserSession();
 		if(!wasTage.getS_value().equals("")){
 			wasTage.setWasState(2);
 		}else{
@@ -254,7 +273,7 @@ public class WasAction extends ActionSupport{
 				wasTage.setWasState(2);
 			}
 		}
-		
+		wasTage.setOptionor(emp.getPersonCode());
 		if(wtm.updateWasTageAll(lwmb,wasTage)){
 			wasTage.setMessage(ICTools.MESSAGE_OK);
 		}else{
@@ -264,10 +283,12 @@ public class WasAction extends ActionSupport{
 	}
 	
 	public String addWasTage(){
+		
+		
 		WasMaterielManage wmm=new WasMaterielManage();
 		List<WasMaterielBean> lwmb=changeToWasMateriel();
 		wasTage.setWasTime(ICTools.getTime());
-	
+		
 		if(!wasTage.getS_value().equals("")){
 			wasTage.setWasState(2);
 		}else{
@@ -276,7 +297,8 @@ public class WasAction extends ActionSupport{
 				wasTage.setWasState(2);
 			}
 		}
-		
+		this.getUserSession();
+		wasTage.setOptionor(emp.getPersonCode());
 		if(wmm.addWasMaterielList(lwmb,wasTage)){
 			wasTage.setMessage(ICTools.MESSAGE_OK);
 		}else{
@@ -286,6 +308,19 @@ public class WasAction extends ActionSupport{
 		
 		return SUCCESS;
 	}
+	
+	
+	public String deleteWas(){
+		WasTageManage wtm=new WasTageManage();
+		wtm.deleteWasTage(wasTage);
+		return SUCCESS;
+	}
+	
+	private void getUserSession(){
+		this.emp=(EmployeeBean) ActionContext.getContext().getSession().get("user");
+		
+	}
+	
 	
 	private boolean updateStock(){
 		StockManage sm=new StockManage();

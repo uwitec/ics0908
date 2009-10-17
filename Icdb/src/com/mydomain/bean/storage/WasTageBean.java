@@ -7,7 +7,7 @@ public class WasTageBean extends BaseBean{
 	private String wasCode;
 	private int wasType;
 	private String wasTime;
-	private String operator;
+	private String optionor;
 	private String personName;
 	private String wasDoc;
 	private int wasState;
@@ -47,12 +47,7 @@ public class WasTageBean extends BaseBean{
 	public void setPersonName(String personName) {
 		this.personName = personName;
 	}
-	/**
-	 * @return the operator
-	 */
-	public String getOperator() {
-		return operator;
-	}
+	
 	/**
 	 * @return the wasCode
 	 */
@@ -71,11 +66,18 @@ public class WasTageBean extends BaseBean{
 	public int getWasType() {
 		return wasType;
 	}
+	
 	/**
-	 * @param operator the operator to set
+	 * @return the optionor
 	 */
-	public void setOperator(String operator) {
-		this.operator = operator;
+	public String getOptionor() {
+		return optionor;
+	}
+	/**
+	 * @param optionor the optionor to set
+	 */
+	public void setOptionor(String optionor) {
+		this.optionor = optionor;
 	}
 	/**
 	 * @param wasCode the wasCode to set

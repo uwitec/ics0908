@@ -5,6 +5,32 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="TransferOrder">
+	<select id="selectTransferPersonCount" resultClass="com.mydomain.bean.storage.TransferOrderBean">
+	select
+	count(*) as countValue
+	from TransferOrder as t,person as p
+	where 
+	transferState!=0 and 
+	p.personCode=t.transferOrderPerson and
+	locate(#transferOrderType#,transferOrderType)>0
+	</select>
+	<select id="selectTransferPersonDef" resultClass="com.mydomain.bean.storage.TransferOrderBean">
+	select
+	transferOrderCode,
+	transferOrderTime,
+	transferOrderType,
+	transferOrderCredence,
+	transferOrderChecker,
+	transferOrderPerson,
+	transferState,
+	storehouseCode
+	from TransferOrder as t,person as p
+	where 
+	transferState!=0 and 
+	p.personCode=t.transferOrderPerson and
+	locate(#transferOrderType#,transferOrderType)>0
+	limit #startValue#,#endValue# 
+	</select>
 	<select id="selectTransferCount" resultClass="com.mydomain.bean.storage.TransferOrderBean">
 	select
 	count(*) as countValue
@@ -27,6 +53,7 @@
 	where 
 	transferState!=0 and 
 	locate(#transferOrderType#,transferOrderType)>0
+	limit #startValue#,#endValue# 
 	</select>
 	<select id="getTransferBean"  resultClass="com.mydomain.bean.storage.TransferOrderBean">	
 	select

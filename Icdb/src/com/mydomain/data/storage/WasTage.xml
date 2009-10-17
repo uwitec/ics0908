@@ -9,34 +9,34 @@
 		select 
 		count(*) as countValue
 		from wastage as w,person as p
-		where p.personCode=w.operator and w.wasState=#wasState#
+		where p.personCode=w.optionor and w.wasState!=0
 		and (
 		locate(#wasCode#,w.wasCode)>0  or
 		locate(#personName#,p.personName)>0 or
 		locate(#wasTime#,w.wasTime)>0 or
 		locate(#wasDoc#,w.wasDoc)>0)
-		and w.operator=#operator#
+		and w.optionor=#optionor#
 	</select>
 	<select id="selectWasPerson" resultClass="com.mydomain.bean.storage.WasTageBean">
 		select 
-		w.wasCode,w.wasTime,w.wasType,w.operator,p.personName,w.wasState,
+		w.wasCode,w.wasTime,w.wasType,w.optionor,p.personName,w.wasState,
 		w.wasDoc
 		from wastage as w,person as p
-		where p.personCode=w.operator
-		and w.wasState=#wasState#
+		where p.personCode=w.optionor
+		and w.wasState!=0
 		and (
 		locate(#wasCode#,w.wasCode)>0  or
 		locate(#personName#,p.personName)>0 or
 		locate(#wasTime#,w.wasTime)>0 or
 		locate(#wasDoc#,w.wasDoc)>0) 
-		and w.operator=#operator#
+		and w.optionor=#optionor#
 		limit #startValue#,#endValue# 
 	</select>
 	<select id="selectWasCount" resultClass="com.mydomain.bean.storage.WasTageBean">
 		select 
 		count(*) as countValue
 		from wastage as w,person as p
-		where p.personCode=w.operator and w.wasState!=0
+		where p.personCode=w.optionor and w.wasState!=0
 		and (
 		locate(#wasCode#,w.wasCode)>0  or
 		locate(#personName#,p.personName)>0 or
@@ -48,12 +48,12 @@
 		w.wasCode,
 		w.wasTime,
 		w.wasType,
-		w.operator,
+		w.optionor,
 		p.personName,
 		w.wasState,
 		w.wasDoc
 		from wastage as w,person as p
-		where p.personCode=w.operator
+		where p.personCode=w.optionor
 		and w.wasState!=0
 		and (
 		locate(#wasCode#,w.wasCode)>0  or
@@ -67,25 +67,25 @@
 		w.wasCode,
 		w.wasTime,
 		w.wasType,
-		w.operator,
+		w.optionor,
 		p.personName,
 		w.wasDoc,
 		w.wasState
 		from wastage as w,person as p
-		where p.personCode=w.operator and w.wasState!=0 and
+		where p.personCode=w.optionor and w.wasState!=0 and
 		w.wasCode=#wasCode#
 	</select>
 	<insert id="insertWasTageBean" parameterClass="com.mydomain.bean.storage.WasTageBean">
 		insert into wastage
-		(wasCode,wasTime,wasType,operator,wasState,wasDoc) values
-		(#wasCode#,#wasTime#,#wasType#,#operator#,#wasState#,#wasDoc#)	
+		(wasCode,wasTime,wasType,optionor,wasState,wasDoc) values
+		(#wasCode#,#wasTime#,#wasType#,#optionor#,#wasState#,#wasDoc#)	
 	</insert>
 	<update id="updateWasTageBean" parameterClass="com.mydomain.bean.storage.WasTageBean">
 		update wastage
 		set 
 		wasTime=#wasTime#,
 		wasType=#wasType#,
-		operator=#operator#,
+		optionor=#optionor#,
 		wasDoc=#wasDoc#,
 		wasState=#wasState#
 		where wasCode=#wasCode#
