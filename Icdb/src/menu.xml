@@ -66,7 +66,10 @@
             <item code="000100050003" parent="00010005" level="2" permissionIndex="25" viewName="盘点审批" action="storage/ShowCheckApprove.action" />
         </item>
         <item code="00010006" parent="0001" level="1" permissionIndex="30" viewName="系统设置">
-            <item code="000100060001" parent="00010006" level="2" permissionIndex="31" viewName="权限设置" action="permission/index.jsp" />
+            <item code="000100060001" parent="00010006" level="2" permissionIndex="31" viewName="权限设置" action="permission/index.jsp">
+                <item code="0001000600010001" parent="000100060001" level="3" permissionIndex="32" viewName="用户" action="permission/ShowEmployeeList.action" />
+                <item code="0001000600010002" parent="000100060001" level="3" permissionIndex="33" viewName="岗位" action="permission/ShowJobList.action" />
+            </item>
         </item>
     </menu>
 
