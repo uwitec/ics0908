@@ -25,5 +25,8 @@
 <action name="GoAddWas" class="com.action.storage.WasAction" method="goAddWas">
 	<result name="success">/storage/was/WasAdd.jsp</result>
 </action>
+<action name="DeleteWas" class="com.action.storage.WasAction" method="deleteWas">
+	<result name="success" type="redirect">ShowWas.action</result>
+</action>
 </package>
 </struts>
