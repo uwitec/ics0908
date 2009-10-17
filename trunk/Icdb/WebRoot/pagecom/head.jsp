@@ -96,7 +96,6 @@
 
 <STYLE type="text/css">
 .mymenu div {
-	width: 136px;
 	text-shadow: gray;
 	margin-top: 5px;
 	margin-left: 15px;
@@ -175,7 +174,7 @@
                             .append("')\"  style=\"width:150px;height:30px !important;height:35px;margin-left:0px;margin-top:1px !important;margin-top:2px;border:0px solid red;\")> ");
                     sbd.append(subItem.getViewName());
                     if (childsize > 0) {
-                        sbd.append("<div class=\"menu_rock\"></div>");
+                        sbd.append("<div class=\"menu_rock\">&nbsp;</div>");
                     }
                     sbd.append("</div></a>");
 
