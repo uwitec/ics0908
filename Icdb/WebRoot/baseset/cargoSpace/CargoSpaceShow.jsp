@@ -96,7 +96,6 @@
 	<base target="_self"> 
 	<body class="sub1_body">
 		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">货位信息</div>
-		</div>
 		<div class="sub1_con">
 		<div><a href="#" onclick="addCa()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
 		<div id="formdiv"  style="display:<s:property value="storehouse.s_value"/>">
