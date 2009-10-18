@@ -45,6 +45,7 @@ a.edit:visited {
 	font-weight: bold;
 	position: relative;
 	height: 80px;
+	margin-top: 0px;
 }
 
 .report_body {
