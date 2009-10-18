@@ -115,7 +115,7 @@
 <body onload="" topmargin="0" onclick="menuClick()">
 <div class="page_top">
 <div id="logger">
-<img alt="IMS" src="<%=base %>/images/log_.jpg" />
+<img alt="IMS" src="<%=base %>/images/logo.gif" style="margin-top: 20px;"/>
 </div>
 
 <div id="exit_help"><img src="<%=base%>/images/help.gif"> <a
