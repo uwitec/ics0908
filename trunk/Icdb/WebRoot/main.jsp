@@ -29,7 +29,6 @@
 	<td></td>
 	<td colspan="5"></td>
   </TR>
-  </TR>
    <TR>
 	<td colspan="4"></td>
 	<td colspan="13"><img height="1px;" width="100%" src="<%=base%>/img/heng.gif"></td>
@@ -136,6 +135,7 @@
   </TABLE>
 			
 	</div>
+	<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
 	</div>
 </body>
 </html>
