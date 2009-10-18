@@ -7,8 +7,7 @@
                 <item code="0001000100010002" parent="000100010001" level="3" permissionIndex="102" viewName="部门信息" action="baseset/ShowDepartment.action" />
             </item>
             <item code="000100010002" parent="00010001" level="2" permissionIndex="2" viewName="仓储及货架" action="baseset/ShowStorehouse.action" />
-            <item code="000100010003" parent="00010001" level="2" permissionIndex="3" viewName="物品管理" action="baseset/ShowMateriel.action" />
-            <item code="000100010006" parent="00010001" level="2" permissionIndex="26" viewName="类型信息" action="baseset/ShowUnitType.action" />
+            <item code="000100010003" parent="00010001" level="2" permissionIndex="3" viewName="物料管理" action="baseset/ShowMateriel.action" />
             <item code="000100010004" parent="00010001" level="2" permissionIndex="4" viewName="银行帐号" action="baseset/ShowBank.action">
                 <item code="0001000100040001" parent="000100010004" level="3" permissionIndex="141" viewName="银行信息" action="baseset/ShowBank.action" />
                 <item code="0001000100040002" parent="000100010004" level="3" permissionIndex="142" viewName="帐号信息" action="baseset/ShowAccount.action" />
