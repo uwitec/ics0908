@@ -35,7 +35,7 @@
 			<div class="center_tools">
 			<s:form action="ShowHistroy" namespace="/storage" theme="simple" >
 				<input type="text" name="checkStock.s_value" value="<s:property value="checkStock.s_value"/>" class="search_border" size="20"/>
-				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" title="查询" alt="查询"/>
 			</s:form>
 			</div>	
 		</div>
@@ -43,13 +43,13 @@
 		
 		   <table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-				<td>盘点仓库</td>
-	    		<td>盘点时间</td>
-	    		<td>审核人</td>
-	    		<td>操作员</td>
-	    		<td>是否通过审核</td>
-	    		<td>详细信息</td>
+	    	<tr>
+				<td class="table_head">盘点仓库</td>
+	    		<td class="table_head">盘点时间</td>
+	    		<td class="table_head">审核人</td>
+	    		<td class="table_head">操作员</td>
+	    		<td class="table_head">是否通过审核</td>
+	    		<td class="table_head">详细信息</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -80,36 +80,36 @@
     		</s:iterator>
     		</td>
     		<td>
-	    		<s:url id="findUrl" action="FindCheck">
-	    			<s:param name="checkStock.csCode" value="csCode"></s:param>
-	    		</s:url>
-    			<s:a href="%{findUrl}">查看</s:a>
+	    	<a href="FindCheck.action?checkStock.message='histroy'&checkStock.csCode=<s:property value='csCode'/>"><img src="<%=base%>/images/chaxunyu_e.gif" border="0"></a>
     		</td>
     		</tr>
 	       </s:iterator>
 	     </table>
 		<div class="pages">
 		<s:form action="ShowHistroy" namespace="/storage" theme="simple" name="pageform">
-       <s:push value="checkStock">
-       <s:hidden name="checkStock.s_value" value="%{checkStock.s_value}"></s:hidden>
-       <s:hidden id="countsize" name="checkStock.countSize" value="%{checkStock.countSize}"></s:hidden>
-       <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
-       <s:if test="checkStock.startSize-1<1">
-       		<font color="gray">上一页</font>
+		<s:if test="lhp.size>0">
+	       <s:push value="checkStock">
+	       <s:hidden name="checkStock.s_value" value="%{checkStock.s_value}"></s:hidden>
+	       <s:hidden id="countsize" name="checkStock.countSize" value="%{checkStock.countSize}"></s:hidden>
+	       <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)" title="首页" alt="首页"/>
+	       <s:if test="checkStock.startSize-1<1">
+	       		<font color="gray">上一页</font>
+	       </s:if>
+	       <s:else>
+	      	  <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)" title="上一页" alt="上一页"/>
+	       </s:else>
+	       <s:property value="checkStock.startSize"/>/<s:property value="checkStock.countSize"/>
+	       <s:if test="checkStock.startSize+1>checkStock.countSize">
+	       		<font color="gray">下一页</font>
+	       </s:if>
+	       <s:else>
+	      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)" title="下一页" alt="下一页"/>
+	       </s:else>
+	       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"  title="末页" alt="末页"/>
+	      	<font color="gray">共<s:property value="checkStock.countValue"/>条记录,合计<s:property value="checkStock.countSize"/>页</font>
+	        <font color="gray">跳转到：<input type="text" onchange="pageChange(this,<s:property value="checkStock.countSize"/>)" id="size" size="2" name="checkStock.startSize" value="<s:property value="checkStock.startSize"/>" class="pages_border"/>页</font>
+	       </s:push> 
        </s:if>
-       <s:else>
-      	  <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
-       </s:else>
-       <s:property value="checkStock.startSize"/>/<s:property value="checkStock.countSize"/>
-       <s:if test="checkStock.startSize+1>checkStock.countSize">
-       		<font color="gray">下一页</font>
-       </s:if>
-       <s:else>
-      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
-       </s:else>
-       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
-        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="checkStock.startSize" cssClass="pages_border"/>页</font>
-       </s:push> 
        </s:form>
 		</div>
 		</div>

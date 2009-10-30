@@ -15,6 +15,21 @@ String base=request.getContextPath();
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
 
+	function sub_back(path_value){
+		if(confirm("是否终止当前工作，返回上一页？")){
+			
+			if(path_value=="approve")
+					window.location.href="ShowCheckApprove.action";
+				
+			if(path_value=="show")
+					window.location.href="ShowCheck.action";
+				
+			if(path_value=="histroy")
+					window.location.href="ShowHistroy.action";
+				
+			}
+	}
+
 	function get_init(){
 		var a=document.getElementById("checkListMater");
 		for(var i=3;i<a.rows.length;i++){
@@ -83,20 +98,20 @@ String base=request.getContextPath();
 		    	<td>盘点单号:
 		    	<s:property value="%{checkStock.csCode}"/>
 		    	</td>
-		    	<td>盘点库房
+		    	<td>盘点库房:
 		    	<s:property value="%{checkStock.storehouseName}"/>
 		    	</td>
 		    </tr>
 		    <tr class="stock_tr">
-		    	<td>盘点时间：
+		    	<td>盘点时间:
 		    	<s:property value="%{checkStock.csDate}"/>
 		    	</td>
-		    	<td>审批人：
+		    	<td>审批人:
 		    	<s:property value="%{checkStock.csCheckPerson}"/><s:hidden name="checkStock.csCheckPerson" value="%{checkStock.csCheckPerson}"></s:hidden>
 		    	</td>
 		    </tr>
 		    <tr class="stock_tr">
-		    	<td colspan="2">操作员：
+		    	<td colspan="2">操作员:
 		    	<s:property value="%{checkStock.personName}"/>
 		    	<s:hidden name="checkStock.csOptionor" value="%{checkStock.csOptionor}"></s:hidden>
 		    	</td>
@@ -104,7 +119,7 @@ String base=request.getContextPath();
 		</table>
 		</div>
 		<div style="width: 800px;margin-top: 8px;">
-		<table id="addMatail"  class="stock_table" width="850">
+		<table id="checkListMater"  class="stock_table" width="850">
 			<tr class="table_tr__even">
 	    				<td rowspan="3">产品名</td>
 	    				<td rowspan="3">库位</td>
@@ -154,7 +169,7 @@ String base=request.getContextPath();
 	    					<td><s:property value="%{csStartNumber*csStartPrice}"/></td>
 	    					<td><s:property value="%{csCheckNumber}"/></td>
 	    					<td><s:property value="%{csCheckPrice}"/></td>
-	    					<td>0</td>
+	    					<td><s:property value="%{csCheckNumber*csCheckPrice}"/></td>
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>
@@ -194,7 +209,10 @@ String base=request.getContextPath();
 			    		</td>
     				</tr> 	
 			</table>
-			</div>
+				<a href="#" onclick="sub_back(<s:property value="%{checkStock.message}"/>)">	
+				<img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0" style="margin-top: 8px;margin-left: 10px;"/>
+				</a>
+			</div>	
 		</div>
 		 <SCRIPT type="text/javascript">
 	    	get_init();
