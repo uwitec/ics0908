@@ -20,6 +20,7 @@ public class PageManage {
 			int countnum=Integer.valueOf(IcdbOption.getValue("pageCount"));
 			
 			obj.setCountSize(ICTools.mathCeil(tempObj.getCountValue(),countnum));
+			obj.setCountValue(tempObj.getCountValue());
 			return obj;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
