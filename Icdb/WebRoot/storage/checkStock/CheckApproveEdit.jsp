@@ -16,6 +16,12 @@ String base=request.getContextPath();
 <SCRIPT type="text/javascript">
 	
 
+	function sub_back(){
+		if(confirm("是否终止当前工作，返回上一页？")){
+			window.location.href="ShowCheckApprove.action";
+		}
+	}
+	
 	function sub_approve(){
 		if(confirm("是否完成，并完成库存盘点？")){
 			document.getElementById("app_state").value=1;
@@ -100,7 +106,7 @@ String base=request.getContextPath();
 		<div class="stock_title"><img src="<%=base%>/images/img01.gif">盘点审核</div>
 		<div class="stock_con">
 			
-		<s:form action="UpdateCheckApprove" theme="simple" namespace="/storage">
+		<s:form action="UpdateCheckApprove" theme="simple" namespace="/storage" name="ApproveCheck">
 		<div>
 		<table class="stock_table" cellpadding="0" cellspacing="0" width="100%" border="0">
 		    <tr class="stock_tr">
@@ -230,6 +236,7 @@ String base=request.getContextPath();
 				<input id="sub_state" type="hidden" value="1" name="checkStock.csState">
 	    		<a href="#" onclick="sub_approve()"><img src="<%=base%>/images/pass.jpg" border="0" alt="保存"></a>
 				<a href="#" onclick="sub_noapprove()"><img src="<%=base%>/images/no.jpg" border="0" alt="完成"></a>
+				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
 			</div>
 		</s:form>
 		</div>

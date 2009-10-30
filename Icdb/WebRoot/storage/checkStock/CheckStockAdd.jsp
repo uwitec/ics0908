@@ -10,11 +10,16 @@ String base=request.getContextPath();
 		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
-	   <title>新增盘点信息</title>
+	   <title>盘点信息</title>
 	</HEAD>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
-	
+
+	function sub_back(){
+		if(confirm("是否终止当前工作，返回上一页？")){
+			window.location.href="ShowCheck.action";
+		}
+	}
 	function submitComplete(){
 		if(confirm("是否完成，并提交审查？")){
         	checkUpdate.submit();
@@ -27,7 +32,7 @@ String base=request.getContextPath();
 	function submitSava(){
 		if(confirm("确定无误后，请确定！")){
 			document.getElementById("sub_state").value=2;
-			dcheckUpdate.submit();
+			checkUpdate.submit();
 		}else{
 			return false;
 		}
@@ -106,7 +111,7 @@ String base=request.getContextPath();
 	
 </SCRIPT>
 	<body class="stock_body">
-		<div class="stock_title"><img src="<%=base%>/images/img01.gif">新增盘点信息</div>
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">编辑盘点信息</div>
 		<div class="stock_con">
 			
 		<s:form action="UpdateCheckStock" theme="simple" namespace="/storage" name="checkUpdate">
@@ -117,24 +122,26 @@ String base=request.getContextPath();
 		    	<s:hidden name="checkStock.csCode" value="%{checkStock.csCode}"/>
 		    	<s:property value="%{checkStock.csCode}"/>
 		    	</td>
-		    	<td>盘点库房
+		    	<td>盘点库房:
 		    	<s:hidden name="checkStock.storehouseCode" value="%{checkStock.storehouseCode}"/>
 		    	<s:property value="%{checkStock.storehouseName}"/>
 		    	</td>
 		    </tr>
 		    <tr class="stock_tr">
-		    	<td>盘点时间：
+		    	<td>盘点时间:
 		    	<s:hidden name="checkStock.csDate" value="%{checkStock.csDate}"/>
 		    	<s:property value="%{checkStock.csDate}"/>
 		    	</td>
-		    	<td>审批人：
+		    	<td>操作员:
+		    	<s:hidden name="checkStock.csOptionor" value="%{checkStock.csOptionor}"/>
+		    	<s:property value="%{checkStock.personName}"/>
 		    	</td>
 		    </tr>
 		</table>
 		</div>
 
 		<div style="width: 800px;margin-top: 8px;">
-		<table id="addMatail"  class="stock_table" width="850">
+		<table id="addMatail"  class="stock_table" width="900">
 			<tr class="table_tr__even">
 	    				<td rowspan="3">产品名</td>
 	    				<td rowspan="3">库位</td>
@@ -193,8 +200,8 @@ String base=request.getContextPath();
 	    					<s:hidden name="checkStockList.t_StartPrice" value="%{csStartPrice}"/>
 	    					</td>
 	    					<td><s:property value="%{csStartNumber*csStartPrice}"/></td>
-	    					<td><s:textfield size="5" name="checkStockList.t_CheckNumber" value="%{csCheckNumber}" onchange="getPrice(this)"/></td>
-	    					<td><s:textfield size="5" name="checkStockList.t_CheckPrice" value="%{csCheckPrice}" onchange="getPrice(this)"/></td>
+	    					<td><s:textfield cssClass="stock_border" cssStyle="width:50px;" name="checkStockList.t_CheckNumber" value="%{csCheckNumber}" onchange="getPrice(this)"/></td>
+	    					<td><s:textfield cssClass="stock_border" cssStyle="width:50px;" name="checkStockList.t_CheckPrice" value="%{csCheckPrice}" onchange="getPrice(this)"/></td>
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>
@@ -204,9 +211,9 @@ String base=request.getContextPath();
 	    					<td>0</td>
 	    					<td>0</td>
 	    					<td>0</td>
-	    					<td><input Class="stock_small_border" type="text" name="checkStockList.csDiffMessage" value=" "></td>
-	    					<td><input Class="stock_small_border" type="text" name="checkStockList.csRemark" value=" "></td>
-	    					<td><input Class="stock_small_border" type="text" name="checkStockList.csGM" value=" "></td>
+	    					<td><input Class="stock_small_border" Style="width:50px;" type="text" name="checkStockList.csDiffMessage" value=" "></td>
+	    					<td><input Class="stock_small_border" Style="width:50px;" type="text" name="checkStockList.csRemark" value=" "></td>
+	    					<td><input Class="stock_small_border" Style="width:50px;" type="text" name="checkStockList.csGM" value=" "></td>
 	    				</tr>
 	    			</s:iterator>
 			</table>
@@ -215,6 +222,7 @@ String base=request.getContextPath();
 				<input id="sub_state" type="hidden" value="1" name="checkStock.csState">
 	    		<a href="#" onclick="submitSava()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
 				<a href="#" onclick="submitComplete()"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
+				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
 			</div>
 		</s:form>
 		</div>
