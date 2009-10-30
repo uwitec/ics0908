@@ -51,6 +51,19 @@ catch(e){}
 
 }
 	
+	function pageChange(obj,maxvalue){
+		if(isNumber(obj.value,10)){
+			if(obj.value>maxvalue){
+				obj.value="1";
+				alert("输入的数字不要超过"+maxvalue+"!");
+			}
+		}else{
+				obj.value="1";
+				alert("请输入正确的数字");
+		}
+		
+	}	
+	
 	function pageSet(value_key){
     		var sizevalue=document.getElementById("size").value;
     		var countvalue=document.getElementById("countsize").value;
