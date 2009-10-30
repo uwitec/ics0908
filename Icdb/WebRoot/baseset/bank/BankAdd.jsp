@@ -10,6 +10,13 @@
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<SCRIPT type="text/javascript">
 	
+		function sub_back(){
+			if(confirm("是否关闭该页面？")){
+				window.opener=null;
+	  			window.close();
+			}
+		}
+		
 		function isEmpty(){
 			var v_name=document.getElementById("bank_name");
 			if(trim(v_name.value)==''){
@@ -21,16 +28,20 @@
 		}
 		
 		function save_next(){
-			if(isEmpty()){
-				insertForm.submit();
+			if(confirm("是否添加该信息？")){
+				if(isEmpty()){
+					insertForm.submit();
+				}
 			}
 		}
 		
 		function save_close(){
-			if(isEmpty()){
-				insertForm.submit();
-				window.opener=null;
-	  			window.close();
+			if(confirm("是否添加该信息？")){
+				if(isEmpty()){
+					insertForm.submit();
+					window.opener=null;
+		  			window.close();
+	  			}
   			}   
 		}
 		
@@ -45,8 +56,11 @@
 			</div>
 			<div>银行名称：
 			<s:textfield name="bank.bankName" cssClass="sub1_border" id="bank_name" value=""/>
-			<div><input type="button" class="sub1_btn_save_closed" onclick="save_close()"/></div>
-			<div><input type="button" class="sub1_btn_save_add" onclick="save_next()"/></div>
+			</div>
+			<div style="margin-top: 8px;">
+				<a href="#" onclick="save_close()"><img src="<%=base%>/images/sub1_btn_save_closed.jpg" alt="保存并关闭" title="保存并关闭" border="0"></a>
+				<a href="#" onclick="save_next()"><img src="<%=base%>/images/sub1_btn_save_add.jpg" alt="保存并添加" title="保存并添加" border="0"></a>
+				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
 			</div>
 		</s:form>
 		</div>

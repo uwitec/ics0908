@@ -14,25 +14,33 @@
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <SCRIPT type="text/javascript">
  
+ 	function sub_back(){
+		if(confirm("是否终止当前工作，返回上一页？")){
+			window.location.href="ShowStorehouse.action";
+		}
+	}
  
 	function showEmployee(){
 		window.showModalDialog("FindEmployee.action","","dialogHeight:400px;dialogWidth:500px");
 	}
 	function save(){
-		if(checkMessage()){
-			addEm.submit();
-		}else{
-			return false;
+		if(confirm("是否修改该信息？")){
+			if(checkMessage()){
+				addEm.submit();
+			}else{
+				return false;
+			}
 		}
-		
 	}
 	function save_next(){
-		if(checkMessage()){
-			document.getElementById("evalue").value=1;
-			addEm.submit();
-		}else{
-			return false;
-		}
+		
+			if(checkMessage()){
+				document.getElementById("evalue").value=1;
+				addEm.submit();
+			}else{
+				return false;
+			}
+		
 	}
 	
 	function checkMessage(){
@@ -91,18 +99,18 @@
 	    	</tr>
 	    	<tr class="table_tr_left"><td>&nbsp;</td></tr>
 	    	<tr class="table_tr_right"><td>负责人:
-	    		<s:textfield id="personName" name="storehouse.personName" onclick="showEmployee()" cssClass="sub1_border"/>
-	    		<a href="#" onclick="showEmployee()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
+	    		<s:textfield id="personName" name="storehouse.personName" onclick="showEmployee()" cssClass="sub1_border" cssStyle="margin-top:0px;"/>
+	    		<a href="#" onclick="showEmployee()" class="a_top"><img src="<%=base%>/images/img10.gif" alt="查找数据" title="查找数据" border="0" align="top"></a>
 				<s:hidden id="employeeCode" name="storehouse.employeeCode"></s:hidden>
 	    	</tr>
 	    	<tr class="table_tr_odd"><td><font id="employeeCode_r" color="red"></font></td></tr>
 	    	<tr class="table_tr_right"><td>
 				<s:hidden id="evalue" name="storehouse.s_value" value=""></s:hidden>
 			</td></tr>
-	    	<tr class="table_tr_right">
+	    	<tr align="center">
 	    		<td>
-	    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0"></a>
-	    		<a href="#" onclick="save_next()"><img src="<%=base%>/images/sub1_btn_save_add.jpg" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+	    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" alt="保存" title="保存" border="0"></a>
+	    		<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
 	    		</td>
 	    	</tr>
 	     </table> 

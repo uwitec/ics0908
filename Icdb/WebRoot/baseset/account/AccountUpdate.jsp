@@ -14,7 +14,12 @@
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <SCRIPT type="text/javascript">
  
- 
+ 	function sub_back(){
+ 		if(confirm("是否终止当前工作，返回上一页？")){
+			window.location.href="ShowAccount.action";
+		}
+ 	}
+ 	
     function showSupplier(){
 	window.showModalDialog("FindSupplier.action","","dialogHeight:400px;dialogWidth:700px");
 	}
@@ -22,12 +27,13 @@
 		window.showModalDialog("FindBank.action","","dialogHeight:400px;dialogWidth:500px");
 	}
 	function save(){
-		if(checkMessage()){
-			addEm.submit();
-		}else{
-			return false;
+		if(confirm("确定修改该数据？")){
+			if(checkMessage()){
+				addEm.submit();
+			}else{
+				return false;
+			}
 		}
-		
 	}
 	function checkMessage(){
 		var ccode=document.getElementById("ccode");
@@ -89,24 +95,25 @@
 	    	</tr>
 	    	<tr class="table_tr_right"><td>&nbsp;</td></tr>
 	    	<tr class="table_tr_right"><td>户主:
-	    		<s:textfield id="supplierName" name="account.supplierName" onclick="showSupplier()" readonly="true" cssClass="sub1_border"/>
-	    		<a href="#" onclick="showSupplier()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
+	    		<s:textfield id="supplierName" name="account.supplierName" onclick="showSupplier()" readonly="true" cssClass="sub1_border" cssStyle="margin-top:0px;"/>
+	    		<a href="#" onclick="showSupplier()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top" alt="查找数据" title="查找数据"></a>
 	    		<s:hidden id="supplierCode" name="account.supplierCode"></s:hidden>
 	    	</td></tr>
 	    	<tr class=table_tr_right><td id="supplierCode_td">&nbsp;</td></tr>
 	    	<tr class="table_tr_right">
 	    		<td>所属银行:
-	    		<s:textfield id="bankName" name="account.bankName" value="%{account.bankName}" onclick="showBank()" readonly="true"  cssClass="sub1_border"/>
-	    		<a href="#" onclick="showBank()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
+	    		<s:textfield id="bankName" name="account.bankName" value="%{account.bankName}" onclick="showBank()" readonly="true"  cssClass="sub1_border" cssStyle="margin-top:0px;"/>
+	    		<a href="#" onclick="showBank()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top" alt="查找数据" title="查找数据"></a>
 	    		</td>
 	    		<s:hidden id="bankCode" value="%{account.bankCode}" name="account.bankCode"></s:hidden>
 	    	</tr>
 	    	<tr class="table_tr_right"><td id="bankCode_tr">
 				
 			</td></tr>
-	    	<tr class="table_tr_right" align="right">
+	    	<tr align="center">
 	    		<td><s:hidden id="evalue" name="account.s_value" value=""></s:hidden>
-	    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0"></a>
+	    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存" title="保存"></a>
+	    		<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" border="0" alt="返回" title="返回"></a>
 	    		</td>
 	    	</tr>
 	     </table> 
