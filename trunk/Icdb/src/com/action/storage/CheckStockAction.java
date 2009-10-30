@@ -9,10 +9,12 @@ import propeties.IcdbOption;
 import com.manage.baseset.StorehouseManage;
 import com.manage.storage.CheckStockManage;
 import com.manage.storage.StockManage;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.storage.CheckStockBean;
 import com.mydomain.bean.storage.CheckStockListBean;
 import com.mydomain.bean.storage.StockBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -29,6 +31,7 @@ public class CheckStockAction extends ActionSupport{
 	private CheckStockListBean checkStockList;
 	private List<CheckStockListBean> list_CheckstockList;
 	private LinkedHashMap<?,?> list_state;
+	
 	
 	
 
@@ -121,7 +124,7 @@ public class CheckStockAction extends ActionSupport{
 		CheckStockManage csm=new CheckStockManage();
 		String date=ICTools.getDate();
 		checkStock=new CheckStockBean();
-		if(date.equals(IcdbOption.getValue("Data_date"))){
+		if(ICTools.isDateIn(IcdbOption.getValue("check_start"),IcdbOption.getValue("check_end"),date)){
 			checkTime="";
 		}else{
 			checkTime="disabled";
@@ -151,6 +154,7 @@ public class CheckStockAction extends ActionSupport{
 		checkStock.setCsDate(ICTools.getTime());
 		checkStock.setStorehouseName(storehouse.getStorehouseName());
 		checkStock.setCsState(IcdbOption.state_Unfinished);
+		checkStock.setCsOptionor(this.getUserSession().getPersonCode());
 	    
 		stock.setStorehouseCode(checkStock.getStorehouseCode());
 		List<StockBean> list_stock=sm.getStockListOfStoreHouse(stock);
@@ -162,6 +166,7 @@ public class CheckStockAction extends ActionSupport{
 	public String editCheckStock(){
 		CheckStockManage csm=new CheckStockManage();
 		checkStock=csm.getCheckStock(checkStock.getCsCode());
+
 		list_CheckstockList=csm.getOneCheckList(checkStock);
 		return SUCCESS;
 	}
@@ -176,7 +181,9 @@ public class CheckStockAction extends ActionSupport{
 	
 	public String findCheck(){
 		CheckStockManage csm=new CheckStockManage();
+		String url_value=checkStock.getMessage();//临时记录ACTION路径做返回判断。
 		checkStock=csm.getCheckStock(checkStock.getCsCode());
+		checkStock.setMessage(url_value);
 		list_CheckstockList=csm.getOneCheckList(checkStock);
 		return SUCCESS;
 	}
@@ -210,6 +217,7 @@ public class CheckStockAction extends ActionSupport{
 	public String goCheckApprove(){
 		CheckStockManage csm=new CheckStockManage();
 		checkStock=csm.getCheckStock(checkStock.getCsCode());
+		checkStock.setCsCheckPerson(this.getUserSession().getPersonName());
 		list_CheckstockList=csm.getOneCheckList(checkStock);
 		return SUCCESS;
 	}
@@ -226,6 +234,9 @@ public class CheckStockAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
+	
+
+
 	
 	private boolean updateCheckAndStock(String houeID,List<StockBean> stock_list){
 		StockManage sm=new StockManage();
@@ -295,5 +306,10 @@ public class CheckStockAction extends ActionSupport{
 			get_List.add(cslb);
 		}
 		return get_List;
+	}
+	
+	private EmployeeBean getUserSession(){
+		return (EmployeeBean) ActionContext.getContext().getSession().get("user");
+		
 	}
 }
