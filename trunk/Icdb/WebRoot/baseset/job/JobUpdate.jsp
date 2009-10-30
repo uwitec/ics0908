@@ -10,6 +10,13 @@
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<SCRIPT type="text/javascript">
 	
+		function sub_back(){
+			if(confirm("是否关闭该页面？")){
+				window.opener=null;
+	  			window.close();
+			}
+		}
+		
 		function isEmpty(){
 			var v_code=document.getElementById("decode");
 			var v_name=documents.getElementById("dename");
@@ -31,15 +38,18 @@
 		}
 		
 		function save_close(){
-			if(isEmpty()){
-				insertForm.submit();
-				window.opener=null;
-	  			window.close();
-  			}   
+			if(confirm("是否修改该信息？")){
+				if(isEmpty()){
+					insertForm.submit();
+					window.opener=null;
+		  			window.close();
+	  			}else{
+	  				alert("123");
+	  			} 
+	  		}
 		}
 		
 	</SCRIPT>
-	<base target="_self"> 
 	<body class="sub1_body">
 		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">添加岗位信息</div>
 		<div class="sub1_con">
@@ -59,7 +69,10 @@
 				<div>所属部门：
 					<s:select  list="ldb" listKey="departmentCode" cssClass="sub2_border" listValue="departmentName" name="job.departmentCode"/>		
 				</div>
-				<div><input type="button" class="sub1_btn_save_closed" onclick="save_close()"/></div>
+				<div style="margin-top: 8px;">
+				<a href="#" onclick="save_close()"><img src="<%=base%>/images/sub1_btn_save_closed.jpg" alt="保存并关闭" title="保存并关闭" border="0"></a>
+				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
+				</div>
 			</s:form>
 		</s:else>
 		</div>

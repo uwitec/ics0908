@@ -14,15 +14,21 @@
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
     <SCRIPT type="text/javascript">
  
- 
+ 	function sub_back(){
+		if(confirm("是否终止当前工作，返回上一页？")){
+			window.location.href="ShowEmployee.action";
+		}
+	}
     function showJob(){
 		window.showModalDialog("FindJob.action","","dialogHeight:400px;dialogWidth:600px");
 	}
 	function save(){
-		if(checkMessage()){
-			addEm.submit();
-		}else{
-			return false;
+		if(confirm("是否修改该信息？")){
+			if(checkMessage()){
+				addEm.submit();
+			}else{
+				return false;
+			}
 		}
 		
 	}	
@@ -74,7 +80,7 @@
 	    	</td></tr>
 	    	<tr class="table_tr_left"><td>&nbsp;</td></tr>
 	    	<tr class="table_tr_left"><td>岗位:
-	    		<s:textfield id="jobName" name="employee.jobName" onclick="showJob()" cssClass="sub1_border" readonly="true"/>
+	    		<s:textfield id="jobName" name="employee.jobName" onclick="showJob()" cssClass="sub1_border" cssStyle="margin-top:0px;" readonly="true"/>
 	    		<a href="#" onclick="showJob()" class="a_top"><img src="<%=base%>/images/img10.gif"/ border="0" align="top"></a>
 	    		<s:hidden id="jobCode" name="employee.jobCode"/>
 	    	</td></tr>
@@ -99,7 +105,8 @@
 			</td></tr>
 	    	<tr class="table_tr_odd">
 	    		<td colspan="2">
-	    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0"></a>
+	    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" alt="保存" title="保存" border="0"></a>
+	    		<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
 	    		</td>
 	    	</tr>
 	     </table> 
