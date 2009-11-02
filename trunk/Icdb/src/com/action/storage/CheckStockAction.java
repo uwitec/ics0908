@@ -128,7 +128,7 @@ public class CheckStockAction extends ActionSupport{
 			checkTime="";
 		}else{
 			checkTime="disabled";
-			checkStock.setMessage("现在不能进行盘点，每月"+IcdbOption.getValue("Data_date")+"日,为盘点日期。");
+			checkStock.setMessage("现在不能进行盘点，每月"+IcdbOption.getValue("check_start")+"日,为盘点日期。");
 		}
 		lsb=csm.getCheckHouse(ICTools.getYearMonth());
 		checkStock=csm.getPageShowCheckState(checkStock);

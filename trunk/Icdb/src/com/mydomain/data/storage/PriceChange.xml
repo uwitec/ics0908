@@ -5,40 +5,72 @@
     "http://ibatis.apache.org/dtd/sql-map-2.dtd">
 
 <sqlMap namespace="PriceChange">
+<select id="selectPriceHisCount" resultClass="com.mydomain.bean.storage.PriceChangeBean">
+		select 
+		count(*) as countValue
+		from priceChange as pc ,person as p
+		where pc.pchangeState!=0 and
+		p.personcode=pc.optionar and
+		pc.pchangeDate between #startTime# and #endTime#+1 and
+		(locate(#pchangeCode#,pc.pchangeCode)>0 or
+		 locate(#pchangeMessage#,pc.pchangeMessage)>0) 
+	</select>
+	<select id="selectPriceHisDef" resultClass="com.mydomain.bean.storage.PriceChangeBean">
+		select 
+		pc.pchangeCode,
+		pc.pchangeDate,
+		pc.optionar,
+		pc.pchangeMessage,
+		pc.pchangeState,
+		pc.jsonField,
+		p.personName
+		from priceChange as pc,person as p
+		where pc.pchangeState!=0 and
+		p.personcode=pc.optionar and
+		pchangeDate between #startTime# and #endTime#+1 and
+		(locate(#pchangeCode#,pc.pchangeCode)>0 or
+		 locate(#pchangeMessage#,pc.pchangeMessage)>0) 
+		limit #startValue#,#endValue# 
+	</select>
+	
 	<select id="selectPriceChangeCount" resultClass="com.mydomain.bean.storage.PriceChangeBean">
 		select 
 		count(*) as countValue
-		from priceChange 
-		where pchangeState!=0 and
-		pchangeDate between #startTime# and #endTime#+1 and
-		(locate(#pchangeCode#,pchangeCode)>0 or
-		 locate(#pchangeMessage#,pchangeMessage)>0) 
+		from priceChange as pc ,person as p
+		where pc.pchangeState!=0 and
+		p.personcode=pc.optionar and
+		pc.pchangeDate between #startTime# and #endTime#+1 and p.personcode=#optionar# and
+		(locate(#pchangeCode#,pc.pchangeCode)>0 or
+		 locate(#pchangeMessage#,pc.pchangeMessage)>0) 
 	</select>
 	<select id="selectPriceChangeDef" resultClass="com.mydomain.bean.storage.PriceChangeBean">
 		select 
-		pchangeCode,
-		pchangeDate,
-		optionar,
-		pchangeMessage,
-		pchangeState,
-		jsonField
-		from priceChange 
-		where pchangeState!=0 and
-		pchangeDate between #startTime# and #endTime#+1 and
-		(locate(#pchangeCode#,pchangeCode)>0 or
-		 locate(#pchangeMessage#,pchangeMessage)>0) 
+		pc.pchangeCode,
+		pc.pchangeDate,
+		pc.optionar,
+		pc.pchangeMessage,
+		pc.pchangeState,
+		pc.jsonField,
+		p.personName
+		from priceChange as pc,person as p
+		where pc.pchangeState!=0 and
+		p.personcode=pc.optionar and
+		pchangeDate between #startTime# and #endTime#+1 and p.personcode=#optionar# and
+		(locate(#pchangeCode#,pc.pchangeCode)>0 or
+		 locate(#pchangeMessage#,pc.pchangeMessage)>0) 
 		limit #startValue#,#endValue# 
 	</select>
 	<select id="selectOnePriceChange" resultClass="com.mydomain.bean.storage.PriceChangeBean">
 		select 
-		pchangeCode,
-		pchangeDate,
-		optionar,
-		pchangeMessage,
-		pchangeState,
-		jsonField
-		from priceChange 
-		where pchangeState!=0 and pchangeCode=#pchangeCode#
+		pc.pchangeCode,
+		pc.pchangeDate,
+		pc.optionar,
+		pc.pchangeMessage,
+		pc.pchangeState,
+		pc.jsonField,
+		p.personName
+		from priceChange as pc,person as p 
+		where pc.pchangeState!=0 and pc.pchangeCode=#pchangeCode# and p.personcode=pc.optionar
 	</select>
 	<insert id="insertPriceChangeBean" parameterClass="com.mydomain.bean.storage.PriceChangeBean">
 		insert into priceChange

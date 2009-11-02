@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.manage.baseset.PageManage;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.MaterielBean;
 import com.mydomain.bean.storage.PriceChangeBean;
 import com.mydomain.bean.storage.PriceChangeMaterBean;
@@ -14,8 +15,7 @@ import com.tools.ICTools;
 
 public class PriceChangeManage {
 
-	
-	public PriceChangeBean getPriceChangePage(PriceChangeBean pricechange){
+	public PriceChangeBean getPriceHisPage(PriceChangeBean pricechange){
 		PageManage pm=new PageManage();
 		if(pricechange==null){
 			pricechange=new PriceChangeBean();
@@ -23,7 +23,41 @@ public class PriceChangeManage {
 			pricechange.setStartTime(ICTools.m_startTime);
 			pricechange.setEndTime(ICTools.getSearchTime());
 			
+		}else{
+			pricechange.setPchangeCode(pricechange.getS_value());
+			pricechange.setPchangeMessage(pricechange.getS_value());
 		}
+		
+		return (PriceChangeBean) pm.setPage(pricechange, "selectPriceHisCount");
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<PriceChangeBean> getPriceHisList(PriceChangeBean pricechange){
+		try {
+			return (List<PriceChangeBean>) DBServer.quider.queryForList("selectPriceHisDef", pricechange);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return new ArrayList<PriceChangeBean>();
+		}
+	}
+	
+	public PriceChangeBean getPriceChangePage(PriceChangeBean pricechange,EmployeeBean emp){
+		PageManage pm=new PageManage();
+		if(pricechange==null){
+			pricechange=new PriceChangeBean();
+			ICTools.setBean(pricechange, "");
+			pricechange.setStartTime(ICTools.m_startTime);
+			pricechange.setEndTime(ICTools.getSearchTime());
+			pricechange.setOptionar(emp.getPersonCode());
+			
+		}else{
+			pricechange.setPchangeCode(pricechange.getS_value());
+			pricechange.setPchangeMessage(pricechange.getS_value());
+			pricechange.setOptionar(emp.getPersonCode());
+		}
+		
 		return (PriceChangeBean) pm.setPage(pricechange, "selectPriceChangeCount");
 	}
 	

@@ -163,6 +163,26 @@ public class ICTools {
 
 	        return weekDays[w];
 	    }
+	
+	 public static boolean  isDateIn(String date1,String date2,String date3){
+		 try{
+			 double value1=Double.valueOf(date1);
+			 double value2=Double.valueOf(date2);
+			 double value3=Double.valueOf(date3);
+			 if(value1<value3 && value3<value2){
+				 return true;
+			 }else{
+				 return false;
+			 }
+		 }catch (Exception e) {
+			// TODO: handle exception
+			 return false;
+		}
+	 }
+	 
+	 
+	 
+	
 	 public static void main(String[] args) {
 		ICTools.getSearchTime();
 	}
