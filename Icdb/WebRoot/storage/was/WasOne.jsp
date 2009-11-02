@@ -12,6 +12,14 @@ String base=request.getContextPath();
 	</HEAD>
 	<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 	<script type="text/javascript">
+	
+		function sub_back(path_value){
+			if(confirm("是否关闭该页面？")){
+				window.opener=null;
+	  			window.close();
+			}
+		}
+	
 		 function getPrice(row_){
 	 		var a = document.getElementById("was_tab");
 	 		var stockInAmount = a.rows.item(row_).cells.item(2).innerHTML;
@@ -78,6 +86,9 @@ String base=request.getContextPath();
     		<td><s:property value="wasCause"/>&nbsp;</td></tr>
        		</s:iterator>
 		    </table>
+		    <div style="margin-top: 10px;margin-left: 10px;">
+		    	<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
+	     	</div>
 	     </div>
 		</div>
 		<SCRIPT type="text/javascript">

@@ -34,9 +34,9 @@
 			<div class="center_head_text">报损单</div>
 			<div class="center_tools">
 			<s:form action="ShowWas" namespace="/storage" theme="simple" >
-				<a href="GoAddWas.action" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
+				<a href="GoAddWas.action" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top" title="添加" alt="添加">添加</a>
 				<input type="text" name="wasTage.s_value" value="<s:property value="wasTage.s_value"/>" class="search_border" size="20"/>
-				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" title="查询" alt="查询"/>
 			</s:form>
 			</div>	
 		</div>
@@ -50,7 +50,7 @@
 		    	<td class="table_head">报损类型</td>
 		    	<td class="table_head">状态</td>
 		    	<td class="table_head">操作员</td>
-				<td class="table_head">编辑</td>
+				<td class="table_head">操作</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -86,38 +86,41 @@
 	       	<td><s:property value="personName"/></td>
 	       	<td>
 	       	<s:if test="wasState==2">
-	       		<a href="UpdateOneWas.action?wasTage.wasCode=<s:property value="wasCode"/>"><img src="<%=base%>/images/img03.gif" border="0"></a>
-	       		<a href="#" onclick="Deletevalue('<s:property value="wasCode"/>')"><img src="<%=base%>/images/img04.gif" border="0"></a>
+	       		<a href="UpdateOneWas.action?wasTage.wasCode=<s:property value="wasCode"/>"><img src="<%=base%>/images/img03.gif" border="0" title="编辑" alt="编辑"></a>
+	       		<a href="#" onclick="Deletevalue('<s:property value="wasCode"/>')"><img src="<%=base%>/images/img04.gif" border="0" title="删除" alt="删除"></a>
 	       	</s:if>
 	       	<s:if test="wasState==1">
-	       		<a href="#" onclick="getOneWas('<s:property value="wasCode"/>')"><img src="<%=base%>/images/chaxunyu_e.gif" border="0"></a>
+	       		<a href="#" onclick="getOneWas('<s:property value="wasCode"/>')"><img src="<%=base%>/images/chaxunyu_e.gif" border="0" title="查看" alt="查看"></a>
 	       	</s:if>
 	       	</td>
 	       	</tr>
 	       </s:iterator>
 	     </table>
-	     		<div class="pages">
-			<s:form action="ShowWas" namespace="/storage" theme="simple" name="pageform">
+	   <div class="pages">
+	   <s:form action="ShowWas" namespace="/storage" theme="simple" name="pageform">
+       <s:if test="lhp.size>0">
        <s:push value="wasTage">
        <s:hidden name="wasTage.s_value" value="%{wasTage.s_value}"></s:hidden>
        <s:hidden id="countsize" name="wasTage.countSize" value="%{wasTage.countSize}"></s:hidden>
-        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)" title="首页" alt="首页"/>
        <s:if test="wasTage.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)" title="上一页" alt="上一页"/>
        </s:else>
        <s:property value="wasTage.startSize"/>/<s:property value="wasTage.countSize"/>
        <s:if test="wasTage.startSize+1>wasTage.countSize">
        		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)" title="下一页" alt="下一页"/>
        </s:else>
-       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
-        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="wasTage.startSize" cssClass="pages_border"/>页</font>
-       </s:push> 
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)" title="末页" alt="末页"/>
+        <font color="gray">共<s:property value="countValue"/>条记录,合计<s:property value="countSize"/>页</font>
+	       <font color="gray">跳转到：<input type="text" onchange="pageChange(this,<s:property value="countSize"/>)" id="size" size="2" name="wasTage.startSize" value="<s:property value="startSize"/>" class="pages_border"/>页</font>
+	  </s:push> 
+	  </s:if>
        </s:form>
 		</div>
 		</div>

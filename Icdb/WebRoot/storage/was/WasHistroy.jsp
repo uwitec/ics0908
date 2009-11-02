@@ -20,14 +20,15 @@
 	}</SCRIPT>
 <body topmargin="0">
 	<div class="body_div">
-		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+			<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
-			<div class="center_head_text">报损单</div>
+			<div class="center_head_text">报损单(历史信息)</div>
 			<div class="center_tools">
 			<s:form action="ShowWasHistroy" namespace="/storage" theme="simple" >
 				<input type="text" name="wasTage.s_value" value="<s:property value="wasTage.s_value"/>" class="search_border" size="20"/>
-				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" title="查询" alt="查询"/>
 			</s:form>
 			</div>	
 		</div>
@@ -35,13 +36,13 @@
 		
 		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-			    <td>报损编号</td>
-		    	<td>报损时间</td>
-		    	<td>报损类型</td>
-		    	<td>状态</td>
-		    	<td>操作员</td>
-				<td>查看</td>
+	    	<tr>
+			    <td class="table_head">报损编号</td>
+		    	<td class="table_head">报损时间</td>
+		    	<td class="table_head">报损类型</td>
+		    	<td class="table_head">状态</td>
+		    	<td class="table_head">操作员</td>
+				<td class="table_head">查看</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -76,33 +77,36 @@
 	       	</td>
 	       	<td><s:property value="personName"/></td>
 	       	<td>
-	       		<a href="#" onclick="getOneWas('<s:property value="wasCode"/>')"><img src="<%=base%>/images/img10.gif" border="0"></a>
+	       		<a href="#" onclick="getOneWas('<s:property value="wasCode"/>')"><img src="<%=base%>/images/chaxunyu_e.gif" title="查看" alt="查看" border="0"></a>
 	       	</td>
 	       	</tr>
 	       </s:iterator>
 	     </table>
 	     		<div class="pages">
-			<s:form action="ShowWasHistroy" namespace="/storage" theme="simple" name="pageform">
+	   <s:form action="ShowWasHistroy" namespace="/storage" theme="simple" name="pageform">
+       <s:if test="lhp.size>0">
        <s:push value="wasTage">
        <s:hidden name="wasTage.s_value" value="%{wasTage.s_value}"></s:hidden>
        <s:hidden id="countsize" name="wasTage.countSize" value="%{wasTage.countSize}"></s:hidden>
-        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)" title="首页" alt="首页"/>
        <s:if test="wasTage.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"  title="上一页" alt="上一页"/>
        </s:else>
        <s:property value="wasTage.startSize"/>/<s:property value="wasTage.countSize"/>
        <s:if test="wasTage.startSize+1>wasTage.countSize">
        		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)" title="下一页" alt="下一页"/>
        </s:else>
-       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
-        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="wasTage.startSize" cssClass="pages_border"/>页</font>
-       </s:push> 
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)" title="末页" alt="末页"/>
+        <font color="gray">共<s:property value="countValue"/>条记录,合计<s:property value="countSize"/>页</font>
+	       <font color="gray">跳转到：<input type="text" onchange="pageChange(this,<s:property value="countSize"/>)" id="size" size="2" name="wasTage.startSize" value="<s:property value="startSize"/>" class="pages_border"/>页</font>
+	  </s:push> 
+	  </s:if>
        </s:form>
 		</div>
 		</div>

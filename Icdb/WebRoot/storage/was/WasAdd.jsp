@@ -15,20 +15,50 @@ String base=request.getContextPath();
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
      <SCRIPT type="text/javascript">    
     	
+    	function sub_back(){
+			if(confirm("终止当前工作，返回上一页吗？")){
+				window.location.href="ShowWas.action";
+			}
+		}
+		
+		function check_from(){
+			var checkleng=document.getElementById("addMaterTab").rows.length;
+			if(checkleng<3){
+				return false;
+			}else{
+				return true;
+			}
+			
+		}
+    	
     	function save(){
-    		document.getElementById("save_").value="1";
-    		addform.submit();
+	    	if(check_from()){
+	    		if(confirm("确定添加该信息？")){
+		    		document.getElementById("save_").value="1";
+		    		addform.submit();
+	    		}
+	    	}else{
+	    		alert("未添加有效数据！");
+	    	}
     	}
     	
     	function save_submit(){
-    		addform.submit();
+	    	if(check_from()){
+	    		if(confirm("确定添加该信息,并继续添加信息？")){
+	    			addform.submit();
+	    		}	
+    		}else{
+	    		alert("未添加有效数据！");
+	    	}
     	}
     	
     	function removeTable(){
-    		  tblObj = document.getElementById("addMaterTab");
+    	
+    		  var tblObj = document.getElementById("addMaterTab");
 			  var length= tblObj.rows.length ;
+			  	
 			  for( var i=2; i<length; i++ ){
-			      tblObj.deleteRow(5);    
+			      tblObj.deleteRow(2);    
 			  } 
     	}
     	  
@@ -73,7 +103,11 @@ String base=request.getContextPath();
 	  	sum.innerHTML="总金额:"+sumPrice;
 	  }
  		
- 		
+ 		function addmateralert(){
+ 			if(confirm("重新添加物料，将清空该单据原有物料！")){
+ 				showMateriels();
+ 			}
+ 		}
     	
     	function showMateriels(){
 		var a = document.getElementById("addMaterTab");
@@ -136,10 +170,10 @@ String base=request.getContextPath();
 		  </div>
 		  <div style="margin-top: 8px;">
 		    	相关单据：<s:textfield id="DocNum" name="wasTage.wasDoc" readonly="true" cssClass="sub1_border"/>
-		    	<a href="#" onclick="showMateriels()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">选择物料</a>
+		    	<a href="#" onclick="addmateralert()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">选择物料</a>
 		  </div>
 		  <div style="margin-top: 8px;">
-		  		操作员：<s:property value="emp.personName"/>
+		  		操作员：<s:property value="emp.personName"/> <font color="red">注：重新添加物料，将清空该单据原有物料！</font>
 		  </div>
 		  <div style="margin-top: 8px;">
 		    <table id="addMaterTab"  border="0" class="center_table">
@@ -149,9 +183,9 @@ String base=request.getContextPath();
 		  </div>
 		    <div align="right" style="margin-top: 8px;margin-right: 12px;">
 		    		<input id="save_" type="hidden" name="wasTage.s_value" value=""/>
-		    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0"/></a>
-   					<a href="#" onclick="save_submit()"><img src="<%=base%>/images/sub1_btn_save_add.jpg" border="0"/></a>
-		    		<a href="#" onclick="removeTable()"><img src="<%=base%>/images/sub1_btn_reset.jpg" border="0"/></a>
+		    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" title="保存" alt="保存" border="0"/></a>
+   					<a href="#" onclick="save_submit()"><img src="<%=base%>/images/sub1_btn_save_add.jpg" title="保存并添加" alt="保存并添加" border="0"/></a>
+		    		<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
    			</div>
    		</s:form>
 		</div>
