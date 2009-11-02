@@ -23,7 +23,6 @@ int idtitle=1;
 
 
 </SCRIPT>
-	<base target="_self"> 
 	<body class="sub1_body">
 		<div class="sub1_title"><img src="<%=base%>/images/img01.gif">出库单信息</div>
 		<div class="sub1_con">
