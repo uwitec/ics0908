@@ -247,24 +247,6 @@ function nextPage(){
 						list="#{'1':'完成','2':'未完成'}"
 						value="stock.stockInStateType" headerKey="" headerValue="全部"
 						label="单据状态">单据状态:</s:select>
-
-					<!--
-					<td id="stockInCheckStateTab">
-						<s:select id="stockInCheckStateSelect"
-							name="stock.stockInCheckState" list="#{'0':'未审核','-1':'审核未通过','1':'审核通过'}"
-							value="stock.stockInCheckState" label="审核状态" headerKey=""
-							headerValue="全部" onchange="checkStateChange();">审核状态</s:select>
-					</td>
-					<td id="checkResultTab">
-						<s:select id="checkResultSelect" name="stock.checkResult"
-							list="#{'0':'未检查','1':'检查通过','-1':'检查未通过'}" value="2"
-							value="stock.checkResult" headerKey="" headerValue="全部"
-							 label="检测状态">检查状态</s:select>
-					</td>
-					<script type="text/javascript">
-						stockInStateChange();
-					</script>
-					 -->
 					<a href="#" onclick="javascript:check();"><img
 							src="<%=base%>/images/img09.gif" border="0"
 							style="margin-bottom: -4px;"> </a>
@@ -360,20 +342,6 @@ function nextPage(){
 										test="checkResult==-1 || stockInCheckState==-1||(stockInStateType!=1 && stockInStateType!=3 && stockInCheckState != 1 && checkResult!= 1)">
 										<a href="#" onclick='window.location.href="goEditStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'><img src="<%=base%>/images/img03.gif" border="0"></a>|
 									</s:if>
-									<!--
-									<s:if
-										test="stockInStateType==1 && stockInCheckState==1 && checkResult==0 ">
-										<input type='button'
-											onclick='window.location.href="goCheckStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'
-											value="检查" />
-									</s:if>
-									<s:if
-										test="stockInStateType == 1 && stockInCheckState==0">
-										<input type='button'
-											onclick='window.location.href="goApprovalStockIn.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'
-											value="审核">
-									</s:if>
-									-->
 									<s:if
 										test="stockInStateType == 1 && stockInCheckState==1 && checkResult==1">
 										<a href="#"onclick='window.location.href="goStockInOver.action?stock.stockInCode=<%=request.getAttribute("stockInCode")%>"'><img src="<%=base%>/images/img01.gif" border="0"></a>

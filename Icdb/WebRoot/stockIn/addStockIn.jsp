@@ -93,7 +93,7 @@
 			newTd7.appendChild(supplier);
 			//newTd8.appendChild(cargoSpace);
 			newTd9.innerHTML= '';
-			newTd10.innerHTML= '<input type="button" value="删除" onclick = "deleteRow(this)">';
+			newTd10.innerHTML= '<a onclick = "deleteRow(this)"><img src="'+base+'/images/quit.gif" border="0"></a>';
 
  		}
 	  }
