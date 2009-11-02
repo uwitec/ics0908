@@ -15,21 +15,32 @@ String base=request.getContextPath();
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
 		function DeleteTable(obj){
-			
-    		  tblObj = document.getElementById("MoveTab");
-			  var rownum= obj.parentNode.parentNode.rowIndex;
-			  
-			      tblObj.deleteRow(rownum);    
+			if(confirm("是否删除该信息？")){
+	    		  tblObj = document.getElementById("MoveTab");
+				  var rownum= obj.parentNode.parentNode.rowIndex;
+				  
+				      tblObj.deleteRow(rownum);    
+			}
     	}
     	
+    	function sub_back(){
+	 		if(confirm("是否终止当前工作，返回上一页？")){
+				window.location.href="ShowStockMove.action";
+			}
+ 		}
+    	
     	function submitSava(){
-    		document.getElementById("sub_state").value="2";
-    		moveForm.submit();
+	    	if(confirm("是否保存当前内容，保存后可继续修改该内容。")){
+	    		document.getElementById("sub_state").value="2";
+	    		moveForm.submit();
+    		}
     	}
     	
     	function submitComplete(){
-    		document.getElementById("sub_state").value="1";
-    		moveForm.submit();
+	    	if(confirm("是否完成当前内容，完成后内容不可修改！")){
+	    		document.getElementById("sub_state").value="1";
+	    		moveForm.submit();
+    		}
     	}
     	
     	function numCheck(obj){
@@ -77,7 +88,8 @@ String base=request.getContextPath();
 		        	<s:hidden value="%{transferOrder.rePath}" name="transferOrder.rePath"/>
 		    	</td>
 		    	<td>调拨人:
-		    	 	
+		    	 	<s:hidden name="transferOrder.transferOrderPerson" value="%{transferOrder.transferOrderPerson}"/>
+		    	 	<s:property value="transferOrder.personName"/>
 		    	   	</td>
 		    </tr>
 		</table>
@@ -138,7 +150,7 @@ String base=request.getContextPath();
 	       	<s:property value="%{stockPrice}"/>
 	       	</td>
 	       	<td>
-	       	<a href="#" onclick="DeleteTable(this)"><img src="<%=base%>/images/quit.gif" alt="删除" border="0"></a>
+	       	<a href="#" onclick="DeleteTable(this)"><img src="<%=base%>/images/quit.gif" alt="删除" title="删除" border="0"></a>
 	       	</td>
 	    </tr>
 	    </s:iterator>
@@ -147,9 +159,9 @@ String base=request.getContextPath();
 			<div style="margin-top: 8px;margin-left:10px;">
 				<input id="sub_state" type="hidden" value="1" name="transferOrder.transferState">
 				
-	    		<a href="#" onclick="submitSava()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
-				<a href="#" onclick="submitComplete()"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
-				<a href="ShowStockMove.action"><img src="<%=base%>/images/back.gif" border="0" alt="返回"></a>
+	    		<a href="#" onclick="submitSava()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存" title="保存"></a>
+				<a href="#" onclick="submitComplete()"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成" title="完成"></a>
+				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" border="0" alt="返回" title="返回"></a>
 			</div>
 		</s:form>
 		</div>

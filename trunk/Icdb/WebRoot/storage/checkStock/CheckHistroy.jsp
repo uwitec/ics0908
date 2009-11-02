@@ -31,7 +31,7 @@
 		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
-			<div class="center_head_text">盘点历史信息</div>
+			<div class="center_head_text">盘点查询</div>
 			<div class="center_tools">
 			<s:form action="ShowHistroy" namespace="/storage" theme="simple" >
 				<input type="text" name="checkStock.s_value" value="<s:property value="checkStock.s_value"/>" class="search_border" size="20"/>
