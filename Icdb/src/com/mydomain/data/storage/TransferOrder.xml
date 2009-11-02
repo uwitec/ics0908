@@ -11,64 +11,73 @@
 	from TransferOrder as t,person as p
 	where 
 	transferState!=0 and 
-	p.personCode=t.transferOrderPerson and
-	locate(#transferOrderType#,transferOrderType)>0
+	p.personCode=t.transferOrderPerson and t.transferOrderPerson=#transferOrderPerson# and
+	locate(#transferOrderType#,transferOrderType)>0 and
+	locate(#transferOrderCode#,transferOrderCode)>0
 	</select>
 	<select id="selectTransferPersonDef" resultClass="com.mydomain.bean.storage.TransferOrderBean">
 	select
-	transferOrderCode,
-	transferOrderTime,
-	transferOrderType,
-	transferOrderCredence,
-	transferOrderChecker,
-	transferOrderPerson,
-	transferState,
-	storehouseCode
+	t.transferOrderCode,
+	t.transferOrderTime,
+	t.transferOrderType,
+	t.transferOrderCredence,
+	t.transferOrderChecker,
+	t.transferOrderPerson,
+	t.transferState,
+	t.storehouseCode,
+	p.personName
+	from TransferOrder as t,person as p
+	where 
+	t.transferState!=0 and 
+	p.personCode=t.transferOrderPerson and t.transferOrderPerson=#transferOrderPerson# and
+	locate(#transferOrderType#,transferOrderType)>0 and
+	locate(#transferOrderCode#,transferOrderCode)>0
+	limit #startValue#,#endValue# 
+	</select>
+	<select id="selectTransferHisCount" resultClass="com.mydomain.bean.storage.TransferOrderBean">
+	select
+	count(*) as countValue
 	from TransferOrder as t,person as p
 	where 
 	transferState!=0 and 
 	p.personCode=t.transferOrderPerson and
-	locate(#transferOrderType#,transferOrderType)>0
-	limit #startValue#,#endValue# 
+	locate(#transferOrderType#,transferOrderType)>0 and
+	locate(#transferOrderCode#,transferOrderCode)>0
 	</select>
-	<select id="selectTransferCount" resultClass="com.mydomain.bean.storage.TransferOrderBean">
+	<select id="selectTransferHisDef" resultClass="com.mydomain.bean.storage.TransferOrderBean">
 	select
-	count(*) as countValue
-	from TransferOrder
+	t.transferOrderCode,
+	t.transferOrderTime,
+	t.transferOrderType,
+	t.transferOrderCredence,
+	t.transferOrderChecker,
+	t.transferOrderPerson,
+	t.transferState,
+	t.storehouseCode,
+	p.personName
+	from TransferOrder as t,person as p
 	where 
 	transferState!=0 and 
-	locate(#transferOrderType#,transferOrderType)>0
-	</select>
-	<select id="selectTransferDef" resultClass="com.mydomain.bean.storage.TransferOrderBean">
-	select
-	transferOrderCode,
-	transferOrderTime,
-	transferOrderType,
-	transferOrderCredence,
-	transferOrderChecker,
-	transferOrderPerson,
-	transferState,
-	storehouseCode
-	from TransferOrder
-	where 
-	transferState!=0 and 
-	locate(#transferOrderType#,transferOrderType)>0
+	p.personCode=t.transferOrderPerson and
+	locate(#transferOrderType#,transferOrderType)>0 and
+	locate(#transferOrderCode#,transferOrderCode)>0
 	limit #startValue#,#endValue# 
 	</select>
 	<select id="getTransferBean"  resultClass="com.mydomain.bean.storage.TransferOrderBean">	
 	select
-	transferOrderCode,
-	transferOrderTime,
-	transferOrderType,
-	transferOrderCredence,
-	transferOrderChecker,
-	transferOrderPerson,
-	transferState,
-	storehouseCode
-	from TransferOrder
+	t.transferOrderCode,
+	t.transferOrderTime,
+	t.transferOrderType,
+	t.transferOrderCredence,
+	t.transferOrderChecker,
+	t.transferOrderPerson,
+	t.transferState,
+	t.storehouseCode,
+	p.personName
+	from TransferOrder as t,person as p
 	where 
-	transferState!=0 and
-	transferOrderCode=#transferOrderCode#
+	t.transferState!=0 and p.personcode=t.transferOrderPerson and
+	t.transferOrderCode=#transferOrderCode#
 	</select>
 	<insert id="insertTransferBean" parameterClass="com.mydomain.bean.storage.TransferOrderBean">
 	insert into TransferOrder(transferOrderCode,transferOrderTime,transferOrderType,

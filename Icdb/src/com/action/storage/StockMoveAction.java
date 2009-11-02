@@ -11,10 +11,12 @@ import com.manage.baseset.StorehouseManage;
 import com.manage.storage.StockManage;
 import com.manage.storage.TransferMoveManage;
 import com.mydomain.bean.baseset.CargoSpaceBean;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.storage.StockBean;
 import com.mydomain.bean.storage.TransferOrderBean;
 import com.mydomain.bean.storage.TransferOrderHasMaterielBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -241,7 +243,7 @@ public class StockMoveAction extends ActionSupport{
 	}
 	public String showStockMove(){
 		TransferMoveManage tmm=new TransferMoveManage();
-		transferOrder=tmm.getTransferOrderPage(transferOrder);
+		transferOrder=tmm.getTransferOrderPersonPage(transferOrder,this.getUserSession());
 		lhp=tmm.getTransferOrderPersonList(transferOrder);
 		getAllState();
 		gethouselist();
@@ -250,8 +252,8 @@ public class StockMoveAction extends ActionSupport{
 	
 	public String showStockHistroyMove(){
 		TransferMoveManage tmm=new TransferMoveManage();
-		transferOrder=tmm.getTransferOrderPage(transferOrder);
-		lhp=tmm.getTransferOrderList(transferOrder);
+		transferOrder=tmm.getTransferOrderHisPage(transferOrder);
+		lhp=tmm.getTransferOrderHis(transferOrder);
 		getAllState();
 		gethouselist();
 		return SUCCESS;
@@ -262,11 +264,13 @@ public class StockMoveAction extends ActionSupport{
 		transferOrder.setTransferOrderCode(ICTools.randId("TM"));
 		transferOrder.setTransferOrderTime(ICTools.getTime());
 		transferOrder.setRePath("add");
-		
+		transferOrder.setTransferOrderPerson(this.getUserSession().getPersonCode());
+		transferOrder.setPersonName(this.getUserSession().getPersonName());
 		getAllState();
 		gethouselist();
 		getStockMater();
 		transferlist=this.stockChangetoTransfer(stockmater);
+		
 		gethouseName(storhouse.getStorehouseCode());
 		cardoublelist=this.getDoubleCarSelect();
 		return SUCCESS;
@@ -306,5 +310,10 @@ public class StockMoveAction extends ActionSupport{
 		TransferMoveManage tmm=new TransferMoveManage();
 		tmm.deleteTransfer(transferOrder);
 		return SUCCESS;
+	}
+	
+	private EmployeeBean getUserSession(){
+		return (EmployeeBean) ActionContext.getContext().getSession().get("user");
+		
 	}
 }
