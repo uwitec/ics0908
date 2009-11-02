@@ -17,6 +17,7 @@
     <a href="<s:url action="baseset/ShowAccount"/>">帐号信息</a><br/>
     <a href="<s:url action="baseset/ShowSupplier"/>">供应商信息</a><br/>
    <a href="<s:url action="baseset/ShowEmployee"/>">员工信息</a><br/>
+   <a href="<s:url action="baseset/ShowCustomer"/>">客户信息</a><br/>
 
 
    <a href="<s:url action="baseset/ShowStorehouse"/>">仓库信息</a><br/>
@@ -36,6 +37,9 @@
    <a href="<s:url action="stockOut/searchCheckStockOut"/>">出库检查管理</a><br/>
    <a href="<s:url action="stockOut/searchStockOutOver"/>">出库</a><br/>
    <a href="<s:url action="storage/ShowStockMove"/>">调拨单</a><br/>
+   <a href="<s:url action="storage/ShowBackStock"/>">退货单</a><br/>
+   <a href="<s:url action="storage/ShowPriceChange"/>">调价单</a><br/>
+   
    -------------------库存管理---------------------------------<br/>
 
  	<a href="<s:url action="stockmanage/ShowMax"/>">呆滞物料</a><br/>

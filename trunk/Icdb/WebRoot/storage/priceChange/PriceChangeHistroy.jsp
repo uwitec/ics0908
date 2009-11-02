@@ -13,13 +13,13 @@
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
-
+				
 				function findOne(value_str){
 					var url="FindPriceOne.action?priceChange.pchangeCode="+value_str;
 					window.showModalDialog(url,"","dialogHeight:550px;dialogWidth:750px");
 					location.reload();
 				}	
-					
+				
 				function showSearch(){
 					document.getElementById("seachDIV").style.display="block";
 				}
@@ -125,13 +125,8 @@
 	       	</td>
 	       	<td><s:property value="personName"/></td>
 	       	<td>
-	       	<s:if test="pchangeState==1">
 	       		<a href="#" onclick="findOne('<s:property value="pchangeCode"/>')"><img src="<%=base%>/images/chaxunyu_e.gif" border="0" title="查看" alt="查看"></a>
-	       	</s:if>	       	
-	       	<s:if test="pchangeState==2">
-	       		<a href="GetOnePriceChange.action?priceChange.pchangeCode=<s:property value="pchangeCode"/>"><img src="<%=base%>/images/img03.gif" title="编辑" alt="编辑" border="0"></a>
-	      	 	<a href="#" onclick="DeleteValue('<s:property value='pchangeCode'/>')"><img src="<%=base%>/images/img04.gif" border="0" title="删除" alt="删除"></a>
-	       	</s:if>	       		
+	            		
 	       	</td>
 	       	</tr>
 	       </s:iterator>
