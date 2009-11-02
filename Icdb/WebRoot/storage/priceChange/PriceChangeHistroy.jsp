@@ -76,7 +76,7 @@
 		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
-			<div class="center_head_text">调价单</div>
+			<div class="center_head_text">调价单查询</div>
 			<div class="center_tools">
 			<s:form action="ShowPriceChange" namespace="/storage" theme="simple" >
 				<a href="#" onclick="showSearch()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" title="添加" alt="添加" class="a_top">添加</a>

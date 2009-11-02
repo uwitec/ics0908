@@ -13,11 +13,20 @@
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 <SCRIPT type="text/javascript">
+
+		function findOne(value_str){
+					var url="GetOneLook.action?transferOrder.transferOrderCode="+value_str;
+					window.showModalDialog(url,"","dialogHeight:550px;dialogWidth:750px");
+					location.reload();
+				}	
+	
 	function showSearch(){
 		document.getElementById("seachDIV").style.display="block";
 	}
 	function closeDIV(){
-		document.getElementById("seachDIV").style.display="none";
+		if(confirm("是否关闭该信息窗口？")){
+			document.getElementById("seachDIV").style.display="none";
+		}
 	}
 	function deleteValue(){
 		var url="delteStockMove.action?transferOrder.transferOrderCode="+value_str;
@@ -52,7 +61,7 @@
 		<s:select cssClass="sub1_border" list="tranf_type" listKey="key" listValue="value" name="transferOrder.transferOrderType"/>
 		</td>
 	</tr>
-	<tr><td colspan="2" align="center"><input type="image" src="<%=base%>/images/add.jpg" style="margin-top: 5px;"></td></tr>
+	<tr><td colspan="2" align="center"><input type="image" src="<%=base%>/images/add.jpg" style="margin-top: 5px;" alt="添加" title="添加"></td></tr>
 	</s:form>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -71,9 +80,9 @@
 			<div class="center_head_text">调拨单</div>
 			<div class="center_tools">
 			<s:form action="ShowStockMove" namespace="/storage" theme="simple" >
-				<a href="#" onclick="showSearch()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
+				<a href="#" onclick="showSearch()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" alt="添加" title="添加" class="a_top">添加</a>
 				<input type="text" name="transferOrder.s_value" value="<s:property value="transferOrder.s_value"/>" class="search_border" size="20"/>
-				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
+				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" alt="查询" title="查询"/>
 			</s:form>
 			</div>	
 		</div>
@@ -81,13 +90,13 @@
 		
 		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-			    <td>调拨编号</td>
-		    	<td>调拨时间</td>
-		    	<td>调拨状态</td>
-		    	<td>调拨类型</td>
-		    	<td>调拨员</td>
-		    	<td>操作</td>
+	    	<tr>
+			    <td class="table_head">调拨编号</td>
+		    	<td class="table_head">调拨时间</td>
+		    	<td class="table_head">调拨状态</td>
+		    	<td class="table_head">调拨类型</td>
+		    	<td class="table_head">调拨员</td>
+		    	<td class="table_head">操作</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -120,41 +129,44 @@
 	       			</s:if>
 	       		</s:iterator>
 	       	</td>
-	       	<td><s:property value="transferOrderPerson"/></td>
+	       	<td><s:property value="personName"/></td>
 	       	<td>
 	       	<s:if test="transferState==1">
-	       	<a href="GetOneLook.action?transferOrder.transferOrderCode=<s:property value="transferOrderCode"/>"><img src="<%=base%>/images/chaxunyu_e.gif" border="0"></a>
-	       	</s:if>
+	       	<a href="#" onclick="findOne('<s:property value="transferOrderCode"/>')"><img src="<%=base%>/images/chaxunyu_e.gif" border="0"></a>
+	        </s:if>
 	       	<s:if test="transferState==2">
-	      	 	<a href="GetOneStockMove.action?transferOrder.transferOrderCode=<s:property value="transferOrderCode"/>"><img src="<%=base%>/images/img03.gif" border="0"></a>
-	      		<a href="#" onclick="deleteValue('<s:property value="transferOrderCode"/>')"><img src="<%=base%>/images/img04.gif" border="0"></a>
+	      	 	<a href="GetOneStockMove.action?transferOrder.transferOrderCode=<s:property value="transferOrderCode"/>"><img src="<%=base%>/images/img03.gif" title="编辑" alt="编辑"  border="0"></a>
+	      		<a href="#" onclick="deleteValue('<s:property value="transferOrderCode"/>')"><img src="<%=base%>/images/img04.gif" title="删除" alt="删除"  border="0"></a>
 	       	</s:if>	       		
 	       	</td>
 	       	</tr>
 	       </s:iterator>
 	     </table>
 	     		<div class="pages">
-			<s:form action="ShowStockMove" namespace="/storage" theme="simple" name="pageform">
+	   <s:form action="ShowStockMove" namespace="/storage" theme="simple" name="pageform">
+       <s:if test="lhp.size>0">
        <s:push value="transferOrder">
        <s:hidden name="transferOrder.s_value" value="%{transferOrder.s_value}"></s:hidden>
        <s:hidden id="countsize" name="transferOrder.countSize" value="%{transferOrder.countSize}"></s:hidden>
-        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)" title="首页" alt="首页"/>
        <s:if test="transferOrder.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)" title="上一页" alt="上一页"/>
        </s:else>
        <s:property value="transferOrder.startSize"/>/<s:property value="transferOrder.countSize"/>
        <s:if test="transferOrder.startSize+1>transferOrder.countSize">
        		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)" title="下一页" alt="下一页"/>
        </s:else>
-       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
-        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="transferOrder.startSize" cssClass="pages_border"/>页</font>
-       </s:push> 
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)" title="末页" alt="末页"/>
+       <font color="gray">共<s:property value="countValue"/>条记录,合计<s:property value="countSize"/>页</font>
+	       <font color="gray">跳转到：<input type="text" onchange="pageChange(this,<s:property value="countSize"/>)" id="size" size="2" name="transferOrder.startSize" value="<s:property value="startSize"/>" class="pages_border"/>页</font>
+	    </s:push> 
+       </s:if>
        </s:form>
 		</div>
 		</div>

@@ -21,7 +21,12 @@ String base=request.getContextPath();
 			  
 			      tblObj.deleteRow(rownum);    
     	}
-    	
+    	function sub_back(){
+	 		if(confirm("是否关闭该页面？")){
+				window.opener=null;
+	  			window.close();
+			}
+ 		}
     	function submitSava(){
     		document.getElementById("sub_state").value="2";
     		moveForm.submit();
@@ -41,8 +46,8 @@ String base=request.getContextPath();
 	<body class="stock_body">
 		<div class="stock_title"><img src="<%=base%>/images/img01.gif">调拨信息</div>
 		<div class="stock_con">
-			
 		<s:form action="AddOrUpdateStockMove" theme="simple" namespace="/storage" name="moveForm">
+			
 		<div>
 		<table class="stock_table" cellpadding="0" cellspacing="0" width="100%" border="0">
 		    <tr class="stock_tr">
@@ -70,7 +75,7 @@ String base=request.getContextPath();
 		    	<td>
 		    	</td>
 		    	<td>调拨人:
-		    	 	
+		    	 	<s:property value="transferOrder.personName"/>
 		    	   	</td>
 		    </tr>
 		</table>
@@ -129,8 +134,12 @@ String base=request.getContextPath();
 	    </tr>
 	    </s:iterator>
 		</table>
+		<div style="margin-top: 8px;margin-left:10px;">
+				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" border="0" alt="返回" title="返回"></a>
 			</div>
 		</s:form>
+		
+			</div>
 		</div>
     </body>
 </html>
