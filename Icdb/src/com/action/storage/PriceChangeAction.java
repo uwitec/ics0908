@@ -9,10 +9,12 @@ import propeties.IcdbOption;
 import com.manage.baseset.StorehouseManage;
 import com.manage.storage.PriceChangeManage;
 import com.manage.storage.StockManage;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.storage.PriceChangeBean;
 import com.mydomain.bean.storage.PriceChangeMaterBean;
 import com.mydomain.bean.storage.StockBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 
@@ -115,11 +117,23 @@ public class PriceChangeAction extends ActionSupport{
 		this.storeHouse = storeHouse;
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public String showPriceHistroy(){
+		PriceChangeManage pcm=new PriceChangeManage();
+		StorehouseManage sm=new StorehouseManage();
+		priceChange=pcm.getPriceHisPage(priceChange);
+		lhp=pcm.getPriceHisList(priceChange);
+		price_type=(LinkedHashMap<String, String>) IcdbOption.getTableState();
+		lsb=sm.getStorhouseAllList();
+		return SUCCESS;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public String showPriceChange(){
 		PriceChangeManage pcm=new PriceChangeManage();
 		StorehouseManage sm=new StorehouseManage();
-		priceChange=pcm.getPriceChangePage(priceChange);
+		priceChange=pcm.getPriceChangePage(priceChange,this.getUserSession());
 		lhp=pcm.getPriceChangeList(priceChange);
 		price_type=(LinkedHashMap<String, String>) IcdbOption.getTableState();
 		lsb=sm.getStorhouseAllList();
@@ -136,6 +150,8 @@ public class PriceChangeAction extends ActionSupport{
 		priceChange.setPchangeCode(ICTools.randId("PC"));
 		priceChange.setPchangeDate(ICTools.getTime());
 		priceChange.setRePath("add");
+		priceChange.setOptionar(this.getUserSession().getPersonCode());
+		priceChange.setPersonName(this.getUserSession().getPersonName());
 		return SUCCESS;
 	}
 	
@@ -149,10 +165,21 @@ public class PriceChangeAction extends ActionSupport{
 		return SUCCESS;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public String findPriceChange(){
+		PriceChangeManage pcm=new PriceChangeManage();
+		priceChange=pcm.getOnePriceChange(priceChange);
+		priceChange.setRePath("update");
+		lpm=pcm.getPriceMaterList(priceChange);
+		price_type=(LinkedHashMap<String, String>) IcdbOption.getTableState();
+		return SUCCESS;
+	}
+	
 	public String addOrUpdate(){
 		PriceChangeManage pcm=new PriceChangeManage();
 		lpm=this.getPriceMaterList();
 		if(priceChange.getRePath().equals("add")){
+			priceChange.setOptionar(this.getUserSession().getPersonCode());
 			pcm.addPriceChange(priceChange, lpm);
 		}else if(priceChange.getRePath().equals("update")) {
 			pcm.updatePriceChange(priceChange, lpm);
@@ -194,6 +221,10 @@ public class PriceChangeAction extends ActionSupport{
 			temp_priceChange.add(temp_pcMater);
 		}
 		return temp_priceChange;
+	}
+	
+	private EmployeeBean getUserSession(){
+		return (EmployeeBean) ActionContext.getContext().getSession().get("user");
 	}
 	
 }

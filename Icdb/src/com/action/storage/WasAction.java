@@ -246,9 +246,11 @@ public class WasAction extends ActionSupport{
 		WasTageManage wtm=new WasTageManage();
 		WasMaterielManage wmm=new WasMaterielManage();
 		WasMaterielBean wasMateriel=new WasMaterielBean();
+		
 		 this.getUserSession();
 		wasTypeList=(LinkedHashMap<String, String>) IcdbOption.getLostState();
 		wasTage=wtm.getWasTageOne(wasTage.getWasCode());
+		
 		wasMateriel.setWasCode(wasTage.getWasCode());
 		lwb=wmm.getWasMaterileList(wasMateriel);
 		return SUCCESS;

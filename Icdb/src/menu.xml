@@ -20,10 +20,11 @@
             </item>
         </item>
         <item code="00010002" parent="0001" level="1" permissionIndex="6" viewName="库存管理">
-            <item code="000100020001" parent="00010002" level="2" permissionIndex="7" viewName="库存交易管理">
-            	<item code="0001000200010001" parent="000100020001" level="3" permissionIndex="171" viewName="调拨历史" action="storage/ShowStockHistroyMove.action"/>
-            	<item code="0001000200010002" parent="000100020001" level="3" permissionIndex="172" viewName="盘点历史" action="storage/ShowHistroy.action"/>
-                <item code="0001000200010003" parent="000100020001" level="3" permissionIndex="173" viewName="报损历史" action="storage/ShowWasHistroy.action" />
+            <item code="000100020001" parent="00010002" level="2" permissionIndex="7" viewName="库存管理">
+            	<item code="0001000200010001" parent="000100020001" level="3" permissionIndex="171" viewName="调拨查询" action="storage/ShowStockHistroyMove.action"/>
+            	<item code="0001000200010002" parent="000100020001" level="3" permissionIndex="172" viewName="盘点查询" action="storage/ShowHistroy.action"/>
+                <item code="0001000200010003" parent="000100020001" level="3" permissionIndex="173" viewName="报损查询" action="storage/ShowWasHistroy.action" />
+           		<item code="0001000200010004" parent="000100020001" level="3" permissionIndex="174" viewName="调价查询" action="storage/ShowPriceHistroy.action"/>
             </item>
             <item code="000100020002" parent="00010002" level="2" permissionIndex="8" viewName="库存控制" />
             	<item code="0001000200020001" parent="000100020002" level="3" permissionIndex="181" viewName="物料流出" action="stockmanage/ShowMaterOutFrom.action" />

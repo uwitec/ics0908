@@ -11,6 +11,19 @@ public class PriceChangeBean extends BaseBean{
 	private int pchangeState;
 	private String startTime;
 	private String endTime;
+	private String personName;
+	/**
+	 * @return the personName
+	 */
+	public String getPersonName() {
+		return personName;
+	}
+	/**
+	 * @param personName the personName to set
+	 */
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
 	/**
 	 * @return the endTime
 	 */
