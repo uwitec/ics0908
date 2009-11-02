@@ -7,6 +7,9 @@
 <action name="ShowPriceChange" class="com.action.storage.PriceChangeAction" method="showPriceChange">
 	<result name="success">/storage/priceChange/PriceChangeShow.jsp</result>
 </action>
+<action name="ShowPriceHistroy" class="com.action.storage.PriceChangeAction" method="showPriceHistroy">
+	<result name="success">/storage/priceChange/PriceChangeHistroy.jsp</result>
+</action>
 <action name="GoAddPriceChange" class="com.action.storage.PriceChangeAction" method="goAddPriceChange">
 	<result name="success">/storage/priceChange/PriceChangeAddOrUpdate.jsp</result>
 </action>
@@ -18,6 +21,9 @@
 </action>
 <action name="DeletePriceChange" class="com.action.storage.PriceChangeAction" method="deletePriceChange">
 	<result name="success" type="redirect">ShowPriceChange.action</result>
+</action>
+<action name="FindPriceOne" class="com.action.storage.PriceChangeAction" method="findPriceChange">
+	<result name="success">/storage/priceChange/PriceChangeOne.jsp</result>
 </action>
 </package>
 </struts>
