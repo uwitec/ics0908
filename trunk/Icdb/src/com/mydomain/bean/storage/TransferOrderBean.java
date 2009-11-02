@@ -12,8 +12,21 @@ public class TransferOrderBean extends BaseBean{
 	private String	transferOrderPerson;
 	private int transferState;
 	private String storehouseCode;
+	private String personName;
 	
 	
+	/**
+	 * @return the personName
+	 */
+	public String getPersonName() {
+		return personName;
+	}
+	/**
+	 * @param personName the personName to set
+	 */
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
 	/**
 	 * @return the storehouseCode
 	 */
@@ -28,6 +41,7 @@ public class TransferOrderBean extends BaseBean{
 	}
 	public TransferOrderBean(){
 		this.transferOrderType="";
+		this.transferOrderCode="";
 	}
 	/**
 	 * @return the transferState

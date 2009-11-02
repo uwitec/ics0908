@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.dbserver.DBServer;
 import com.manage.baseset.PageManage;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.storage.StockBean;
 import com.mydomain.bean.storage.TransferOrderBean;
 import com.mydomain.bean.storage.TransferOrderHasMaterielBean;
@@ -24,18 +25,22 @@ public class TransferMoveManage {
 		}
 	}
 	
-	public TransferOrderBean getTransferOrderPersonPage(TransferOrderBean transfer){
+	public TransferOrderBean getTransferOrderPersonPage(TransferOrderBean transfer,EmployeeBean emp){
 		 PageManage pm=new PageManage();
-		 if(transfer==null)
+		 if(transfer==null){
 		 		transfer=new TransferOrderBean();
 		 		
+		 }else{
+			 transfer.setTransferOrderCode(transfer.getS_value());
+		 }
+		 transfer.setTransferOrderPerson(emp.getPersonCode());	
 		 return (TransferOrderBean) pm.setPage(transfer, "selectTransferPersonCount");
 	 }
 	
 	 @SuppressWarnings("unchecked")
-	public List<TransferOrderBean> getTransferOrderList(TransferOrderBean transfer){
+	public List<TransferOrderBean> getTransferOrderHis(TransferOrderBean transfer){
 		 try {
-			return (List<TransferOrderBean>) DBServer.quider.queryForList("selectTransferDef", transfer);
+			return (List<TransferOrderBean>) DBServer.quider.queryForList("selectTransferHisDef", transfer);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			com.dbserver.DBServer.logger.exception(e);
@@ -43,12 +48,15 @@ public class TransferMoveManage {
 		}
 	 }
 	 
-	 public TransferOrderBean getTransferOrderPage(TransferOrderBean transfer){
+	 public TransferOrderBean getTransferOrderHisPage(TransferOrderBean transfer){
 		 PageManage pm=new PageManage();
-		 if(transfer==null)
+		 if(transfer==null){
 		 		transfer=new TransferOrderBean();
-		 		
-		 return (TransferOrderBean) pm.setPage(transfer, "selectTransferCount");
+		 }
+		 else{
+			 transfer.setTransferOrderCode(transfer.getS_value());
+		 }
+		 return (TransferOrderBean) pm.setPage(transfer, "selectTransferHisCount");
 	 }
 	 
 	 public TransferOrderBean getTransferOrderOne(String Id){
