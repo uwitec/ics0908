@@ -24,7 +24,7 @@
 		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 		<div class="center_body">
-			<div class="center_head_text">报损单(历史信息)</div>
+			<div class="center_head_text">报损单查询</div>
 			<div class="center_tools">
 			<s:form action="ShowWasHistroy" namespace="/storage" theme="simple" >
 				<input type="text" name="wasTage.s_value" value="<s:property value="wasTage.s_value"/>" class="search_border" size="20"/>
