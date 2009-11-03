@@ -8,6 +8,7 @@
 	<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
@@ -32,7 +33,7 @@
 				开始时间:<s:textfield cssClass="sub3_border" name="stockLevel.startTime" value="%{stockLevel.startTime}"/>
 				截至时间:<s:textfield cssClass="sub3_border" name="stockLevel.endTime" value="%{stockLevel.endTime}"/>
 				物料名称:<s:textfield cssClass="sub3_border" name="stockLevel.materielName" value="%{stockLevel.materielName}"/>
-				<a href="#" onclick="searchf()"><img src="<%=base%>/images/img09.gif" border="0" style="margin-bottom:-4px;"></a>
+				<a href="#" onclick="searchf()"><img src="<%=base%>/images/img09.gif" title="查询" alt="查询" border="0" style="margin-bottom:-4px;"></a>
 			</s:push>
 			</s:form>
 			</div>
@@ -42,13 +43,13 @@
 		
 		<table class="center_table" cellspacing="1" cellpadding="0">
 	    <s:if test="lhp.size>0">
-	    	<tr class="table_head">
-			    <td>编号</td>
-		    	<td>名称</td>
-		    	<td>消耗数目</td>
-		    	<td>最大库存</td>
-		    	<td>最小库存</td>
-		    	<td>ABC类型</td>
+	    	<tr>
+			    <td class="table_head">编号</td>
+		    	<td class="table_head">名称</td>
+		    	<td class="table_head">消耗数目</td>
+		    	<td class="table_head">最大库存</td>
+		    	<td class="table_head">最小库存</td>
+		    	<td class="table_head">ABC类型</td>
 	    	</tr>
 	    </s:if>
 	    <s:else>
@@ -83,28 +84,31 @@
 	     </table>
 	     		<div class="pages">
 		<s:form action="ShowOutLevel" namespace="/stockmanage" theme="simple" name="pageform">
+      <s:if test="lhp.size>0">
        <s:push value="stockLevel">
        <s:hidden name="stockLevel.startTime" value="%{stockLevel.startTime}"/>
        <s:hidden name="stockLevel.endTime" value="%{stockLevel.endTime}"/>
        <s:hidden name="stockLevel.materielName" value="%{stockLevel.materielName}"/>
        <s:hidden id="countsize" name="stockLevel.countSize" value="%{stockLevel.countSize}"/>
-        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)" title="首页" alt="首页"/>
        <s:if test="stockLevel.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)" title="上一页" alt="上一页"/>
        </s:else>
        <s:property value="stockLevel.startSize"/>/<s:property value="stockLevel.countSize"/>
        <s:if test="stockLevel.startSize+1>stockLevel.countSize">
        		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)" title="下一页" alt="下一页"/>
        </s:else>
-       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
-        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="stockLevel.startSize" cssClass="pages_border"/>页</font>
-       </s:push> 
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"  title="末页" alt="末页"/>
+       <font color="gray">共<s:property value="countValue"/>条记录,合计<s:property value="countSize"/>页</font>
+	    <font color="gray">跳转到：<input type="text" onchange="pageChange(this,<s:property value="countSize"/>)" id="size" size="2" name="stockLevel.startSize" value="<s:property value="startSize"/>" class="pages_border"/>页</font>
+	     </s:push> 
+	     </s:if>
        </s:form>
 		</div>
 		</div>
