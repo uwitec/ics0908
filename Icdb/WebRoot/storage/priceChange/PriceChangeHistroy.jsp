@@ -59,8 +59,6 @@
 			<s:select list="lsb" listKey="storehouseCode" listValue="storehouseName" name="storeHouse.storehouseCode" cssStyle="margin-top:5px;"/>
 		</td>
 	</tr>
-	<tr><td colspan="2" align="center">
-	<a href="#" onclick="submitchange()"><img src="<%=base%>/images/add.jpg" alt="添加" title="添加" border="0" style="margin-top: 5px;"></a></td></tr>
 	</s:form>
 </table>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -78,8 +76,7 @@
 		<div class="center_body">
 			<div class="center_head_text">调价单查询</div>
 			<div class="center_tools">
-			<s:form action="ShowPriceChange" namespace="/storage" theme="simple" >
-				<a href="#" onclick="showSearch()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" title="添加" alt="添加" class="a_top">添加</a>
+			<s:form action="ShowPriceHistroy" namespace="/storage" theme="simple" >
 				<input type="text" name="priceChange.s_value" value="<s:property value="priceChange.s_value"/>"  class="search_border" size="20"/>
 				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" title="查询" alt="查询"/>
 				<s:hidden name="priceChange.startTime" value="%{priceChange.startTime}"/>
@@ -132,7 +129,7 @@
 	       </s:iterator>
 	     </table>
 	     		<div class="pages">
-	   <s:form action="ShowPriceChange" namespace="/storage" theme="simple" name="pageform">
+	   <s:form action="ShowPriceHistroy" namespace="/storage" theme="simple" name="pageform">
        <s:if test="lhp.size>0">
        <s:push value="priceChange">
        <s:hidden name="priceChange.s_value" value="%{priceChange.s_value}"></s:hidden>
