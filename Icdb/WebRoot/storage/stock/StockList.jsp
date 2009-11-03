@@ -47,8 +47,8 @@
 	       			class="table_tr__even"
 	       		</s:else>
 	       	>
-	       	<td><s:hidden value="storehouseCode"></s:hidden>
-	        <td><s:url id="updateUrl" action="GetStockMaterielList">
+	       
+	        <td><s:hidden value="storehouseCode"/><s:url id="updateUrl" action="GetStockMaterielList">
 				<s:param name="storehouse.storehouseCode" value="storehouseCode"></s:param>       
 	        	</s:url> 
 	        	<s:a href="%{updateUrl}"><s:property value="storehouseName"></s:property></s:a>
