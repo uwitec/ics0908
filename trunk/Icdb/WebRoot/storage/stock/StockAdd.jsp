@@ -36,7 +36,7 @@
 			<div class="center_head_text">物料信息</div>
 			<div class="center_tools">
 			<s:form action="ShowMateriel" namespace="/baseset" theme="simple" >
-				<a href="#" onclick="AddMat()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">添加</a>
+				<a href="#" onclick="AddMat()" class="a_top"><img src="<%=base%>/images/img06.gif" title="添加" alt="添加" border="0" class="a_top">添加</a>
 				<input type="text" name="materiel.s_value" value="<s:property value="materiel.s_value"/>" class="search_border" size="20"/>
 				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif"/>
 			</s:form>

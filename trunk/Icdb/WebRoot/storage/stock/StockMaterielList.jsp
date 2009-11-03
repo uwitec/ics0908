@@ -81,7 +81,7 @@
 			<td>
 			<s:hidden id="materielCode" name="stock.materielCode"></s:hidden>
 			物料:<s:textfield id="materielName" cssClass="sub1_border" name="stock.materielName" onclick="showMateriel()"/>
-		    <a href="#" onclick="showMateriel()" class="a_top"><img src="<%=base%>/images/img06.gif" border="0" class="a_top">选择物料</a>
+		    <a href="#" onclick="showMateriel()" class="a_top"><img src="<%=base%>/images/img06.gif" title="选择物料" alt="选择物料" border="0" class="a_top">选择物料</a>
 		    <font id="erro1" color="red"></font>
 		    </td></tr>
 		    <tr class="table_tr_left"><td colspan="2">
@@ -96,10 +96,10 @@
 			数量:<s:textfield cssClass="sub1_border" id="amount" name="stock.stockAmount"/>
 			    <font id="erro3" color="red"></font>
 			</td></tr>
-			<tr class="table_tr_left"><td colspan="2">
-			<a href="#" onclick="formsubmit()"><img src="<%=base%>/images/add.jpg" border="0"/></a>
-			</td></tr>
 		</table>
+		<div style="margin-left: 10px;margin-top: 8px;">
+		<a href="#" onclick="formsubmit()"><img src="<%=base%>/images/add.jpg" border="0" title="添加" alt="添加"/></a>
+		</div>
 		</s:form>
 		</div>
 		<table class="center_table" cellspacing="1" cellpadding="0">
