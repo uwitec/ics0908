@@ -8,9 +8,16 @@
 	<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+     <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<script type="text/javascript">
+	
+	function form_submit(){
+		showMaxForm.submit();
+	}
+</script>
 <body topmargin="0">
 	<div class="body_div">
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
@@ -19,9 +26,9 @@
 		<div class="center_body">
 			<div class="center_head_text">物料呆滞清单</div>
 			<div class="center_tools">
-			<s:form action="ShowMax" namespace="/stockmanage" theme="simple" >
-				<s:select list="lsb" listKey="key" listValue="value" name="stockmm.materielABC" />
-				<input type="image" onclick="submit()" src="<%=base%>/images/img09.gif" align="top"/>
+			<s:form action="ShowMax" namespace="/stockmanage" theme="simple" name="showMaxForm" >
+				<s:select cssClass="sub3_border"  list="lsb" listKey="key" listValue="value" name="stockmm.materielABC" />
+				<a href="#" onclick="form_submit()"><img src="<%=base%>/images/img09.gif" title="查询" alt="查询" border="0" style="margin-bottom:-4px;"></a>
 			</s:form>
 			</div>	
 		</div>
@@ -70,26 +77,29 @@
 	     </table>
 	     		<div class="pages">
 		<s:form action="ShowMax" namespace="/stockmanage" theme="simple" name="pageform">
+       <s:if test="lhp.size>0">
        <s:push value="stockmm">
        <s:hidden name="stockmm.materielABC" value="%{stockmm.materielABC}"></s:hidden>
        <s:hidden id="countsize" name="stockmm.countSize" value="%{stockmm.countSize}"></s:hidden>
-        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)"/>
+        <input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="pageSet(0)" title="首页" alt="首页"/>
        <s:if test="stockmm.startSize-1<1">
        		<font color="gray">上一页</font>
        </s:if>
        <s:else>
-      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)"/>
+      	   <input class="img_size" type="image" src="<%=base%>/images/btn1_pre.gif" onclick="pageSet(-1)" title="上一页" alt="上一页"/>
        </s:else>
        <s:property value="stockmm.startSize"/>/<s:property value="stockmm.countSize"/>
        <s:if test="stockmm.startSize+1>stockmm.countSize">
        		<font color="gray" >下一页</font>
        </s:if>
        <s:else>
-      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)"/>
+      	 	<input type="image" class="img_size" src="<%=base%>/images/btn_next.gif" onclick="pageSet(1)" title="下一页" alt="下一页"/>
        </s:else>
-       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)"/>
-        <font color="gray">跳转到：<s:textfield  id="size" size="2" name="stockmm.startSize" cssClass="pages_border"/>页</font>
-       </s:push> 
+       		<input type="image" class="img_size" align="bottom" src="<%=base%>/images/btn1_end.gif" onclick="pageSet(2)" title="末页" alt="末页"/>
+       <font color="gray">共<s:property value="countValue"/>条记录,合计<s:property value="countSize"/>页</font>
+	    <font color="gray">跳转到：<input type="text" onchange="pageChange(this,<s:property value="countSize"/>)" id="size" size="2" name="stockmm.startSize" value="<s:property value="startSize"/>" class="pages_border"/>页</font>
+	     </s:push> 
+	     </s:if>
        </s:form>
 		</div>
 		</div>
