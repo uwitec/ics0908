@@ -56,6 +56,10 @@ public class StockInAction extends ActionSupport {
 
 	private String storehouseCode;
 
+	/**
+	 * 查询入库申请单
+	 * @return
+	 */
 	public String searchStockIn() {
 
 		if (page == null) {
@@ -78,6 +82,10 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 查询入库检查
+	 * @return
+	 */
 	public String searchCheckStockIn() {
 
 		if (page == null) {
@@ -102,6 +110,10 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 查询入库审核
+	 * @return
+	 */
 	public String searchApprovalStockIn() {
 
 		if (page == null) {
@@ -126,6 +138,10 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 查询入库
+	 * @return
+	 */
 	public String searchStockInOver() {
 
 		if (page == null) {
@@ -149,6 +165,12 @@ public class StockInAction extends ActionSupport {
 
 		return SUCCESS;
 	}
+	
+	/**
+	 * 跳转到添加入库单
+	 * @return
+	 * @throws SQLException
+	 */
 	public String goAddStockIn() throws SQLException {
 		stock = new StockInBean();
 		stockInCheckMaterielBean = new StockInCheckMaterielBean();
@@ -161,6 +183,11 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+    /**
+     * 跳转到修改入库申请单
+     * @return
+     * @throws SQLException
+     */	
 	public String goEditStockIn() throws SQLException {
 
 		StockInManage stockInManage = new StockInManage();
@@ -176,6 +203,11 @@ public class StockInAction extends ActionSupport {
 
 	}
 
+	/**
+	 * 跳转到检查入库申请
+	 * @return
+	 * @throws SQLException
+	 */
 	public String goCheckStockIn() throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		stock = stockInManage.getStockInInfo(stock.getStockInCode());
@@ -189,6 +221,11 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 跳转至入库审核
+	 * @return
+	 * @throws SQLException
+	 */
 	public String goApprovalStockIn() throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		stock = stockInManage.getStockInInfo(stock.getStockInCode());
@@ -203,6 +240,11 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 跳转到入库
+	 * @return
+	 * @throws SQLException
+	 */
 	public String goStockInOver() throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		stock = stockInManage.getStockInInfo(stock.getStockInCode());
@@ -217,6 +259,11 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 新增物料
+	 * @return
+	 * @throws SQLException
+	 */
 	public String addMaterielList() throws SQLException {
 
 		MaterielManage materielManage = new MaterielManage();
@@ -234,6 +281,15 @@ public class StockInAction extends ActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 查的货位
+	 * @param storehouseCode
+	 * @return
+	 * @throws SQLException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 */
 	public List<?> findCargoSpaceList(String storehouseCode)
 			throws SQLException, IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException {
@@ -258,6 +314,11 @@ public class StockInAction extends ActionSupport {
 		return list;
 	}
 
+    /**
+     * 添加货位
+     * @return
+     * @throws SQLException
+     */
 	public String addCargoSpaceList() throws SQLException {
 
 		StorehouseManage storehouseManage = new StorehouseManage();
@@ -305,6 +366,13 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 提交入库单申请
+	 * @param json
+	 * @param json2
+	 * @return
+	 * @throws SQLException
+	 */
 	public String submitStockIn(String json, String[] json2)
 			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
@@ -326,6 +394,13 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 保存入库检查
+	 * @param json
+	 * @param json2
+	 * @return
+	 * @throws SQLException
+	 */
 	public String saveCheckStockIn(String json, String[] json2)
 			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
@@ -347,6 +422,13 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 提交入库检查
+	 * @param json
+	 * @param json2
+	 * @return
+	 * @throws SQLException
+	 */
 	public String submitCheckStockIn(String json, String[] json2)
 			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
@@ -368,6 +450,13 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 完成入库
+	 * @param json
+	 * @param json2
+	 * @return
+	 * @throws SQLException
+	 */
 	public String complStockIn(String json, String[] json2) throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
@@ -388,6 +477,12 @@ public class StockInAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 审核入库
+	 * @param json
+	 * @return
+	 * @throws SQLException
+	 */
 	public String approvalStockIn(String json) throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
@@ -402,10 +497,13 @@ public class StockInAction extends ActionSupport {
 
 	}
 
-	public String deleteStockIn() {
-		return SUCCESS;
-	}
-
+	/**
+	 * 删除物料
+	 * @param materielCode
+	 * @param stockInCode
+	 * @return
+	 * @throws SQLException
+	 */
 	public String deleteStockInMateriel(String materielCode, String stockInCode)
 			throws SQLException {
 		StockInManage stockInManage = new StockInManage();
@@ -415,6 +513,12 @@ public class StockInAction extends ActionSupport {
 		return ERROR;
 	}
 
+	/**
+	 * 删除入库申请
+	 * @param stockInCode
+	 * @return
+	 * @throws SQLException
+	 */
 	public String deleteStockIn(String stockInCode) throws SQLException {
 		StockInManage stockInManage = new StockInManage();
 		if (stockInManage.deleteStockIn(stockInCode)) {
