@@ -16,6 +16,7 @@ import com.manage.storage.StockInManage;
 import com.manage.storage.StorehouseManage;
 import com.manage.storage.SupplierManange;
 import com.mydomain.bean.baseset.CargoSpaceBean;
+import com.mydomain.bean.baseset.EmployeeBean;
 import com.mydomain.bean.baseset.StorehouseBean;
 import com.mydomain.bean.baseset.SupplierBean;
 import com.mydomain.bean.storage.MaterielBean;
@@ -23,6 +24,7 @@ import com.mydomain.bean.storage.Page;
 import com.mydomain.bean.storage.PageUtil;
 import com.mydomain.bean.storage.StockInBean;
 import com.mydomain.bean.storage.StockInCheckMaterielBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tools.ICTools;
 import com.tools.StringUtil;
@@ -55,6 +57,7 @@ public class StockInAction extends ActionSupport {
 	private String materielIds;
 
 	private String storehouseCode;
+	
 
 	/**
 	 * 查询入库申请单
@@ -177,7 +180,7 @@ public class StockInAction extends ActionSupport {
 		stock.setStockInCode(ICTools.randId("SI"));
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
 		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
-
+		stock.setEmployeeCode(this.getUserSession().getEmployeeCode()+this.getUserSession().getPersonName());
 		SupplierManange supplierManage = new SupplierManange();
 		this.supplierList = supplierManage.getSupliers();
 		return SUCCESS;
@@ -290,6 +293,7 @@ public class StockInAction extends ActionSupport {
 	 * @throws InvocationTargetException
 	 * @throws NoSuchMethodException
 	 */
+	@SuppressWarnings("unchecked")
 	public List<?> findCargoSpaceList(String storehouseCode)
 			throws SQLException, IllegalAccessException,
 			InvocationTargetException, NoSuchMethodException {
@@ -351,7 +355,6 @@ public class StockInAction extends ActionSupport {
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
 				StockInBean.class);
-
 		List<StockInCheckMaterielBean> stockInCheckMaterielList = new ArrayList<StockInCheckMaterielBean>();
 		for (int i = 0; i < json2.length; i++) {
 			stockInCheckMaterielList.add((StockInCheckMaterielBean) JSONObject
@@ -379,7 +382,7 @@ public class StockInAction extends ActionSupport {
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
 				StockInBean.class);
-
+		stockInBean.setEmployeeCode(this.getUserSession().getEmployeeCode());
 		List<StockInCheckMaterielBean> stockInCheckMaterielList = new ArrayList<StockInCheckMaterielBean>();
 		for (int i = 0; i < json2.length; i++) {
 			stockInCheckMaterielList.add((StockInCheckMaterielBean) JSONObject
@@ -407,7 +410,7 @@ public class StockInAction extends ActionSupport {
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
 				StockInBean.class);
-
+		
 		List<StockInCheckMaterielBean> stockInCheckMaterielList = new ArrayList<StockInCheckMaterielBean>();
 		for (int i = 0; i < json2.length; i++) {
 			stockInCheckMaterielList.add((StockInCheckMaterielBean) JSONObject
@@ -527,6 +530,11 @@ public class StockInAction extends ActionSupport {
 		return ERROR;
 	}
 
+	private EmployeeBean getUserSession(){
+		return (EmployeeBean) ActionContext.getContext().getSession().get("user");
+		
+	}
+	
 	public String getMaterielCode() {
 		return ICTools.randId("M");
 	}

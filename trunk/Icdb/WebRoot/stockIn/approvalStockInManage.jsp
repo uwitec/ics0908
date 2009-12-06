@@ -15,7 +15,7 @@
 			rel="stylesheet">
 		<link href="<%=base%>/css/stock_css.css" type="text/css"
 			rel="stylesheet">
-		<title>审核入库单</title>
+		<title>入库审核单</title>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/interface/StockInAction.js'></script>
 		<script type='text/javascript'
@@ -33,6 +33,11 @@
 	   	return str;
 	}
 
+	 function goback(){	
+			if(window.confirm("终止当前工作返回上一页？")){
+				window.location.href="searchApprovalStockIn.action";
+			}
+	}
 
 	  function callBack(data){
 		 if(data!=null && data=="success"){
@@ -88,10 +93,12 @@
 	  }
 
 	   function approvalStockIn(stockInCheckState){
-			var stockInCode = trim(document.getElementById('stockInCode').value);
-			var stockInExMessage = trim(document.getElementById("stockInExMessage").value);
-	  		var stockIn = new StockIn(stockInCode,'','','','', '','','', '',  '', '',stockInExMessage,'',stockInCheckState);
-	  		StockInAction.approvalStockIn(JSON.stringify(stockIn),callBack);
+		   if(window.confirm("是否进行该工作，该工作进行后将不能撤销！")){
+				var stockInCode = trim(document.getElementById('stockInCode').value);
+				var stockInExMessage = trim(document.getElementById("stockInExMessage").value);
+		  		var stockIn = new StockIn(stockInCode,'','','','', '','','', '',  '', '',stockInExMessage,'',stockInCheckState);
+		  		StockInAction.approvalStockIn(JSON.stringify(stockIn),callBack);
+		  	}
 	   }
 	</script>
 
@@ -317,11 +324,12 @@
 						<s:if
 							test="stock.stockInStateType == 1 && stock.stockInCheckState == 0">
 							<a href="#" onclick="approvalStockIn(1);"><img
-									src="<%=base%>/images/pass.jpg" border="0" alt="通过">
+									src="<%=base%>/images/pass.jpg" border="0" title="通过" alt="通过">
 							</a>
 							<a href="#" onclick="approvalStockIn(-1);"><img
-									src="<%=base%>/images/no.jpg" border="0" alt="未通过">
+									src="<%=base%>/images/no.jpg" border="0" title="通过" alt="未通过">
 							</a>
+							<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" alt="返回"></a>
 						</s:if>
 					</div>
 			</s:form>

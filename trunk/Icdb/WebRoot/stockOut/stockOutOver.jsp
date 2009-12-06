@@ -7,10 +7,11 @@ String base = request.getContextPath();
  %>
 <html>
     <head>
-        <title>出库管理</title>
+        <title>出库</title>
 	<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
     <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+    <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 		<script language="JavaScript" type="text/javascript"
@@ -19,6 +20,8 @@ String base = request.getContextPath();
 			src="../javascript/calendar-chs.js"></script>
 		<script language="JavaScript" type="text/javascript"
 			src="../javascript/calendar-setup.js"></script>
+		<script language="JavaScript" type="text/javascript"
+			src="../javascript/setday.js"></script>
 		<link rel="stylesheet" type="text/css"
 			href="../styles/calendar-blue.css" media="screen" />
 		<script type='text/javascript'
@@ -165,36 +168,54 @@ function nextPage(){
 	  		}
 		</script>
 <body topmargin="0">
-<s:form id="searchForm" theme="simple" action="searchApprovalStockOut.action" namespace="/stockOut">
+<s:form id="searchForm" theme="simple" action="searchStockOutOver.action" namespace="/stockOut">
 	<div class="body_div">
-	<div id="seachDIV" class="searche_DIV" style="display: none;height:150px;">
-	<div align="right">
-	<a href="#" onclick="closeDIV()"><img src="<%=base%>/images/quit.gif" alt="关闭" border="0"></a>
-	</div>
-
-						入库单号:<s:textfield cssClass="sub3_border" name="stock.stockOutCode" cssStyle="margin-top:5px;"/><br/>
-						开始时间:<s:textfield cssClass="sub3_border" id="stock.stockOutStartDate" name="stock.stockOutStartDate" cssStyle="margin-top:5px;"/><br/>
-						结束时间:<s:textfield cssClass="sub3_border" id="stock.stockOutEndDate" name="stock.stockOutEndDate" cssStyle="margin-top:5px;"/><br/>
-					<script type="text/javascript">
-                            Calendar.setup({
-                                inputField : "stock.stockOutStartDate",
-                                ifFormat   : "%Y-%m-%d",
-                                align      : "Tl",
-
-                            });
-                            Calendar.setup({
-                                inputField : "stock.stockOutEndDate",
-                                ifFormat   : "%Y-%m-%d",
-                                align      : "Tl",
-
-                            });
-                        </script>
-						单据状态:<s:select cssClass="sub3_border" id="stockOutStateSelect" name="stock.stockOutStateType"
+	<div id="seachDIV" class="searche_DIV" style="display: none">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="background:url(<%=base%>/images/menu_top_left.gif);" width="88" height="35">&nbsp;</td>
+		<td style="background:url(<%=base%>/images/menu_top_con.jpg); background-repeat:repeat-x;color:#E0F2F9;font-size:13px;font-weight:bold;">信息查询</td>
+		<td style="background:url(<%=base%>/images/menu_top_con.jpg); background-repeat:repeat-x;color:#E0F2F9;font-size:13px;font-weight:bold;" align="right">
+		<a href="#" onclick="closeDIV()" ><img src="<%=base%>/images/quit.gif" alt="关闭" border="0"></a>
+		</td>
+		<td style="background:url(<%=base%>/images/menu_top_right.gif);" width="8" height="35" align="left">
+		</td>
+	</tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" style='background-color:#E2F3FB;border-left:#0C6A9D 1 solid;border-right:#0C6A9D 1px solid;'>
+	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
+		<td style="font-size:12px;color:#636B6D;">
+			&nbsp;&nbsp;&nbsp;&nbsp;出库单号:<s:textfield cssClass="sub3_border" name="stock.stockOutCode" cssStyle="margin-top:5px;"/><br/>	
+		</td>
+	</tr>
+	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
+		<td style="font-size:12px;color:#636B6D;">
+		&nbsp;&nbsp;&nbsp;&nbsp;开始时间:<s:textfield readonly="true" cssClass="sub3_border" onclick="setday(this)" id="stock.stockOutStartDate" name="stock.stockOutStartDate"  cssStyle="margin-top:5px;"/>
+		</td>
+	</tr>
+	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
+		<td style="font-size:12px;color:#636B6D;">
+		&nbsp;&nbsp;&nbsp;&nbsp;结束时间:<s:textfield readonly="true" cssClass="sub3_border" onclick="setday(this)" id="stock.stockOutEndDate" name="stock.stockOutEndDate" cssStyle="margin-top:5px;"/>
+		</td>
+	</tr>
+	<tr style="margin-top: 8px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
+		<td style="font-size:12px;color:#636B6D;">
+		&nbsp;&nbsp;&nbsp;&nbsp;单据状态:<s:select cssClass="sub3_border" id="stockOutStateSelect" name="stock.stockOutStateType"
 							list="#{'1':'完成','2':'未完成'}" value="2"
 							value="stock.stockInStateType" headerKey="" headerValue="全部"/>
-						<a href="#" onclick="javascript:check();"><img src="<%=base%>/images/img09.gif" border="0" style="margin-bottom:-4px;"></a><br/>
-
-		</div>
+						<a href="#" onclick="javascript:check();"><img src="<%=base%>/images/img09.gif" border="0" alt="查询" title="查询" style="margin-bottom:-4px;"></a>
+		</td>
+	</tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="background:url(<%=base%>/images/menu_bottom_left.jpg);background-repeat:no-repeat;" width="13" height="13">&nbsp;</td>
+		<td style="background:url(<%=base%>/images/menu_bottom_con.jpg); background-repeat:repeat-x; text-align:center;">&nbsp;</td>
+		<td style="background:url(<%=base%>/images/menu_bottom_con.jpg); background-repeat:repeat-x; text-align:center;">&nbsp;</td>
+		<td style="background:url(<%=base%>/images/menu_bottom_right.jpg);background-repeat:no-repeat;" width="13" height="13">&nbsp;</td>
+	</tr>
+</table>
+</div>
 		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
 		<div class="left_body">
 		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
@@ -267,10 +288,10 @@ function nextPage(){
 		</s:iterator>
 	     </table>
 	     <div class="pages">
-			<input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif"  onclick="goFirstPage();"/>
+			<input type="image"  class="img_size" src="<%=base%>/images/btn_first.gif" title="首页" alt="首页"   onclick="goFirstPage();"/>
 						<s:if test="page.hasPrevious">
 							<input class="img_size" type="image"
-								src="<%=base%>/images/btn1_pre.gif" onclick="previousPage();" />
+								src="<%=base%>/images/btn1_pre.gif" title="上一页" alt="上一页" onclick="previousPage();" />
 						</s:if>
 						<s:else>
 							<font color="gray">上一页</font>
@@ -282,13 +303,13 @@ function nextPage(){
 
 						<s:if test="page.hasNext">
 							<input type="image" class="img_size"
-								src="<%=base%>/images/btn_next.gif" onclick="nextPage();" />
+								src="<%=base%>/images/btn_next.gif" title="下一页" alt="下一页" onclick="nextPage();" />
 						</s:if>
 						<s:else>
 							<font color="gray">下一页</font>
 						</s:else>
 						<input type="image" class="img_size" align="bottom"
-							src="<%=base%>/images/btn1_end.gif" onclick="goFinalPage();" />
+							src="<%=base%>/images/btn1_end.gif" title="末页" alt="末页" onclick="goFinalPage();" />
 						<font color="gray">跳转到：<input type="text" size="2"
 								id="toPage" name="toPage" value="<%=((Page)request.getAttribute("page")).getCurrentPage()%>" cssClass="pages_border" onblur="goPage();" />页</font>
 
@@ -299,11 +320,11 @@ function nextPage(){
 							onchange="pageSizeChange();" />
 						条 &nbsp;总共
 						<s:property value="page.totalRowsAmount" />
-						条记录
+						条记录-->
 						<input type="hidden" id="currentPage" name="page.currentPage"
 							value="<%=((Page) request.getAttribute("page"))
 								.getCurrentPage()%>" />
-						 -->
+						 
 		</div>
 		</div>
 

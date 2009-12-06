@@ -29,7 +29,13 @@ int index = 1;
 	   	str = str.replace(/(^\s*)|(\s*$)/g,'');
 	   	return str;
 	}
-
+	
+	function goback(){
+			
+			if(window.confirm("终止当前工作返回上一页？")){
+				window.location.href="searchApprovalStockOut.action";
+			}
+		}
 	  function showMateriels(){
 		var a = document.getElementById("addMatail");
 
@@ -736,7 +742,7 @@ int index = 1;
 				test="stock.stockOutStateType == 1 && stock.stockOutCheckState != 1 && stock.stockOutCheckState !=-1">
 				<a href="#" onclick="approvalStockOut(1)"><img src="<%=base%>/images/pass.jpg" border="0" alt="通过"></a>
 				<a href="#" onclick="approvalStockOut(-1)"><img src="<%=base%>/images/no.jpg" border="0" alt="未通过"></a>
-
+				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" alt="返回"></a>
 			</s:if>
 			</div>
 		</s:form>

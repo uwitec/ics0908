@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@page import="com.mydomain.bean.baseset.EmployeeBean"%>
 <%
     String base = request.getContextPath();
-    EmployeeBean employee = new EmployeeBean();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -19,10 +17,10 @@
 <div class="login_top"></div>
 <div class="login_left"><s:form name="logForm" action="Login"
 	namespace="/login" method="post" theme="simple">
-	<div><s:textfield name="userName" value="" cssClass="border_user"></s:textfield></div>
-	<div><s:password name="passWord" value="" cssClass="border_pwd"></s:password></div>
+	<div><s:textfield id="userNameid" name="userName"  cssClass="border_user"></s:textfield></div>
+	<div><s:password  name="passWord"  cssClass="border_pwd"></s:password></div>
 	<div><s:submit value="" cssClass="btn_login"></s:submit></div>
-	<div><s:reset value="" cssClass="btn_reset"></s:reset></div>
+	<div><s:reset value="" onclick="resetMe()" cssClass="btn_reset"></s:reset></div>
 </s:form></div>
 <div class="login_line"></div>
 <div class="login_right">
@@ -32,6 +30,22 @@
 <p>评估库存货物状况与市场价值，为企业减少消耗损失。</p>
 </div>
 <div class="login_foot">CopyRight © 2009-2012 IMS</div>
+<script type="text/javascript">
+			
+			function loginmess(){
+			var message=document.getElementById("userNameid").value;
+				
+				if(message!=null && message!=''){
+					alert("用户名或密码错误！请重新输入");
+				}
+			}	
+			
+			loginmess();
+			
+			function resetMe(){
+				document.getElementById("userNameid").text="";
+			}
+</script>
 
 </BODY>
 </HTML>

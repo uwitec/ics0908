@@ -11,7 +11,7 @@ int index = 1;
 		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
-	   <title>新增出库单</title>
+	   <title>新增出库申请单</title>
 	</HEAD>
 	<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/interface/StockOutAction.js'></script>
@@ -29,6 +29,13 @@ int index = 1;
 	   	str = str.replace(/(^\s*)|(\s*$)/g,'');
 	   	return str;
 	}
+	
+		function goback(){
+			
+			if(window.confirm("终止当前工作返回上一页？")){
+				window.location.href="searchStockOut.action";
+			}
+		}
 
 	  function showMateriels(){
 		var a = document.getElementById("addMatail");
@@ -723,6 +730,7 @@ int index = 1;
 			<s:if test="stock.stockOutStateType!=1||stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
 				<a href="#" onclick="saveStockOut();"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
 				<a href="#" onclick="submitStockOut();"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
+				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" alt="返回"></a>
 			</s:if>
 			</div>
 		</s:form>

@@ -69,6 +69,17 @@ public class EmployeeManage {
 		
 	}
 	
+	public boolean changePassword(EmployeeBean emp){
+		try {
+			DBServer.quider.updateObject("updateUserPassword",emp);
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			com.dbserver.DBServer.logger.exception(e);
+			return false;
+		}
+	}
+	
 	public EmployeeBean getPageEmployee(EmployeeBean employee){
 		PageManage pm=new PageManage();
 		if(employee==null){
