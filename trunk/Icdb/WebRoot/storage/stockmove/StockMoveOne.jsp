@@ -138,8 +138,6 @@ String base=request.getContextPath();
 				<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" border="0" alt="返回" title="返回"></a>
 			</div>
 		</s:form>
-		
 			</div>
-		</div>
     </body>
 </html>
