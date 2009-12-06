@@ -58,7 +58,7 @@
 				<tr style="margin-top: 5px;"><td style="font-size:12px;color:#636B6D;" align="center">
 						物料类别:<s:select cssClass="sub3_border" list="lsb" listKey="key" listValue="value" name="stockturn.materielABC"/></td></tr>
 				<tr><td style="font-size:12px;color:#636B6D;" align="center" height="30px;">
-						<a href="#" onclick="search2()" style="margin-top: 5px;"><img src="<%=base%>/images/find.jpg" align="bottom" border="0" title="查询" alt="查询" style="margin-bottom:-4px;"></a></td></tr>
+						<a href="#" onclick="search2()" style="margin-top: 5px;"><img src="<%=base%>/images/find.jpg" align="bottom" border="0" title="查询" alt="查询" style="margin-bottom:-4px;"></a></td>
 				</tr>
 				</s:push>
 			</table>	

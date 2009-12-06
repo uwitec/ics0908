@@ -328,7 +328,6 @@ String base = request.getContextPath();
 		<div class="center_boder_foot"></div>
 		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
 		</div>
-	</div>
 		</s:form>
 </body>
 </html>
