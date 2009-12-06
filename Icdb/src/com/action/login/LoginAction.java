@@ -42,18 +42,28 @@ public class LoginAction extends ActionSupport {
         }
     }
 
-    public String login() {
+    @SuppressWarnings("unchecked")
+	public String login() {
         EmployeeManage em = new EmployeeManage();
         if (null != userName && null != passWord) {
             EmployeeBean employee = em.login(userName, toSHA(passWord));
             if (null != employee && null != employee.getPermissionCode()) {
             	ActionContext.getContext().getSession().put("user", employee);
+            	ActionContext.getContext().getSession().put("OLDPassword", passWord);
                 return "SUCCESS";
             }
         }
+        userName=userName;
         return "NULLRESULT";
     }
 
+    public String unlogin(){
+    	ActionContext.getContext().getSession().clear();
+    	return "Unload";
+    }
+    
+
+    
     public String getUserName() {
         return userName;
     }

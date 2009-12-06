@@ -92,6 +92,12 @@
             m.style.backgroundColor='#CBE6F1';
         }
     }
+    
+    function _quit(){
+    	if(window.confirm("是否关闭该窗口？")){
+    		window.close();
+    	}
+    }
 </SCRIPT>
 
 <STYLE type="text/css">
@@ -104,7 +110,7 @@
 	cursor: pointer;
     z-index: 99px;
 }
-
+"C:/Documents and Settings/admin/Application Data/Microsoft/Internet Explorer/Quick Launch/Mozilla Firefox.lnk"
 .mymenu a {
 	text-shadow: gray;
 	color: black;
@@ -120,7 +126,7 @@
 
 <div id="exit_help"><img src="<%=base%>/images/help.gif"> <a
 	href="#" class="a_top">帮助</a> <img src="<%=base%>/images/quit.gif"><a
-	href="#" class="a_top">退出</a></div>
+	href="#" onclick="_quit()" class="a_top">退出</a></div>
 </div>
 <div class="menu">
 <div id="mymenu" class="mymenu"
@@ -163,10 +169,14 @@
                     int childsize = subItem.getSubItemList().size();
                     // 二级菜单
                     // <div id="div_m1_1" onmouseover='viewSub("div_m1_1", true)' >名称2</div>
-                    sbd.append("<a href=\"");
-                    sbd.append(base).append("/");
-                    sbd.append(subItem.getAction());
-                    sbd.append("\">");
+                   if(subItem.getAction().equals("#")){
+                   		sbd.append("<a href=\"#\">");
+                   }else{
+	                    sbd.append("<a href=\"");
+	                    sbd.append(base).append("/");
+	                    sbd.append(subItem.getAction());
+	                    sbd.append("\">");
+                    }
                     sbd.append("<div class='menu_level2' id=\"div_m");
                     sbd.append(subItem.getCode());
                     sbd.append("\" onmouseover='viewSub(\"div_m");

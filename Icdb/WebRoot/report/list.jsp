@@ -14,38 +14,28 @@
 <title>报表列表</title>
 </head>
 <body topmargin="0" style="margin-top: 0px; padding-top: 0px">
-<div class="body_div" style="border:1px solid green;top: 0px;height: 800px;"><jsp:include flush="true"
-	page="/pagecom/head.jsp"></jsp:include>
-	<div class="left_body">
-<div class="left_menu">
-<div class="left_menu_head">报表</div>
-<table class="left_menu_table" border="0">
-    <tr height="40">
-        <td class="left_menu_table_td"><s:url action="CheckStockList"
-            id="ShowReportList"></s:url><s:a href="%{ShowReportList}">查看报表</s:a></td>
-    </tr>
-    
-</table>
-</div>
-</div>
+<div class="body_div">
+		<jsp:include flush="true" page="/pagecom/head.jsp"></jsp:include>
+		<div class="left_body">
+		<jsp:include flush="true" page="/main/left_.jsp"></jsp:include>
 <div class="center_body">
-<div class="center_head_text">功能信息</div>
-<div class="center_tools"> <input type="text" class="search_border" /><input type="image"
-	src="<%=base%>/images/img09.gif" alt="查询" /></div>
+<div class="center_head_text">报表</div>
+<div class="center_tools"> 
+	<input type="text" class="search_border" style="margin-top: -3px;"/>
+	<input type="image" src="<%=base%>/images/img09.gif" title="查询" alt="查询" /></div>
 </div>
 <div class="center_boder"><s:if test="csList.size>0">
 	<table class="center_table">
-		<tr class="table_head">
-			<td>盘点号</td>
-			<td>仓库名</td>
-			<td>盘点日期</td>
-			<td>审批人</td>
-			<td>审批意见</td>
-			<td>审批状态</td>
-			<td>经手人</td>
-			<td>操作员</td>
-			<td>单据状态</td>
-			<td>是否初期库存</td>
+		<tr>
+			<td class="table_head">盘点号</td>
+			<td class="table_head">仓库名</td>
+			<td class="table_head">盘点日期</td>
+			<td class="table_head">审批人</td>
+			<td class="table_head">审批状态</td>
+			<td class="table_head">经手人</td>
+			<td class="table_head">操作员</td>
+			<td class="table_head">单据状态</td>
+			<td class="table_head">是否初期库存</td>
 		</tr>
 		<s:iterator value="csList" status="stat">
 			<tr
@@ -67,7 +57,6 @@
 				<td><s:property value="storehouseCode"></s:property></td>
 				<td><s:property value="csDate"></s:property></td>
 				<td><s:property value="csApprove"></s:property></td>
-				<td><s:property value="csApproveMessage"></s:property></td>
 				<td><s:property value="csApproveState"></s:property></td>
 				<td><s:property value="csCheckPerson"></s:property></td>
 				<td><s:property value="csOptionor"></s:property></td>
@@ -82,7 +71,7 @@
 <div class="pages">分页信息</div>
 </div>
 <div class="center_boder_foot"></div>
-<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include></div>
-
+		<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include>
+		</div>
 </body>
 </html>

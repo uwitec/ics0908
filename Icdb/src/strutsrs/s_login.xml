@@ -8,6 +8,11 @@
             <result name="SUCCESS">/main.jsp</result>
             <result name="NULLRESULT">/login.jsp</result>
         </action>
+        <action name="Unlogin" class="com.action.login.LoginAction" method="unlogin">
+        	<result name="Unload">/login.jsp</result>
+        </action>
+        <action name="ChangPass" class="com.action.login.UpdatePassWord" method="changePassWord">
+        	<result name="success" type="redirect">Unlogin.action</result>
+        </action>
     </package>
-
 </struts>

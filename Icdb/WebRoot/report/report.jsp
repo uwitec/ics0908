@@ -8,38 +8,39 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GBK">
-<link href="<%=base%>/css/left_css.css" type="text/css" rel="stylesheet">
-<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
-<link href="<%=base%>/css/center_css.css" type="text/css"
-	rel="stylesheet">
-<link href="<%=base%>/css/pagecom.css" type="text/css" rel="stylesheet">
-<title>Insert title here</title>
+ 		 <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
+<title>报表</title>
 <SCRIPT type="text/javascript">
-	
+	function sub_back(){
+	 		if(confirm("是否终止当前工作，返回上一页？")){
+				window.location.href="CheckStockList.action";
+			}
+ 		}
 </SCRIPT>
 </head>
-<body topmargin="0">
-<div class="body_div"><jsp:include flush="true"
-	page="/pagecom/head.jsp"></jsp:include>
-	<div class="report_body">
-<div ><s:form name="abcFrom"
-	action="ABCReportAction" method="post">
-	<s:select label="请选择报表类型" name="reportType" list="reportTypeList"
-		listKey="key" listValue="name" onchange="javascript:abcFrom.submit()"></s:select>
-	<s:hidden name="abcReportBean.csCode" value="%{abcReportBean.csCode}"></s:hidden>
-	<s:hidden name="abcReportBean.oldCsCode"
-		value="%{abcReportBean.oldCsCode}"></s:hidden>
-	<s:hidden name="abcReportBean.beginDate"
-		value="%{abcReportBean.beginDate}"></s:hidden>
-	<s:hidden name="abcReportBean.endDate" value="%{abcReportBean.endDate}"></s:hidden>
-	<s:select name="abcReportBean.materielType" label="物品类型"
-		list="abcTypeList" listKey="value" listValue="name"
-		onchange="javascript:abcFrom.submit()"></s:select>
-	<s:if test="'CCREPORT'.equals(reportType)">
-		<s:select name="stateType" label="报表类型"
-			list="#{2:'全部',0:'正常',-1:'短缺',1:'超存'}" listKey="key"
-			listValue="value" onchange="javascript:abcFrom.submit()"></s:select>
-	</s:if>
+	<body class="stock_body">
+		<div class="stock_title"><img src="<%=base%>/images/img01.gif">新增调价信息</div>
+		<div class="stock_con">
+		<s:form name="abcFrom" action="ABCReportAction" method="post">
+		<s:select label="请选择报表类型" name="reportType" list="reportTypeList" cssClass="sub3_border"
+			listKey="key" listValue="name" onchange="javascript:abcFrom.submit()"></s:select>
+		<s:hidden name="abcReportBean.csCode" value="%{abcReportBean.csCode}"></s:hidden>
+		<s:hidden name="abcReportBean.oldCsCode"
+			value="%{abcReportBean.oldCsCode}"></s:hidden>
+		<s:hidden name="abcReportBean.beginDate"
+			value="%{abcReportBean.beginDate}"></s:hidden>
+		<s:hidden name="abcReportBean.endDate" value="%{abcReportBean.endDate}"></s:hidden>
+		<s:select name="abcReportBean.materielType" label="物品类型" cssClass="sub3_border"
+			list="abcTypeList" listKey="value" listValue="name"
+			onchange="javascript:abcFrom.submit()"></s:select>
+		<s:if test="'CCREPORT'.equals(reportType)">
+			<s:select name="stateType" label="报表类型" cssClass="sub_small_border"
+				list="#{2:'全部',0:'正常',-1:'短缺',1:'超存'}" listKey="key"
+				listValue="value" onchange="javascript:abcFrom.submit()"></s:select>
+		</s:if>
 	<table border="0" width="800px">
 		<tr>
 			<td>单位名称:XXXXXX</td>
@@ -47,11 +48,10 @@
 			<td align="right">单位:元</td>
 		</tr>
 	</table>
-</s:form></div>
-<div ><s:if
-	test="abcReportList!=null">
+</s:form>
+	<s:if test="abcReportList!=null">
 	<table class="center_table" style="width: 1002px; margin: 0;">
-		<tr style="text-align: center; font-weight: bold;">
+		<tr style="text-align: center; font-weight: bold;"  class="table_tr__even">
 			<td colspan="2" rowspan="2">项目</td>
 			<td rowspan="2">规格型号</td>
 			<td rowspan="2">单位</td>
@@ -74,7 +74,7 @@
 			</s:else>
 			<td rowspan="2">备注</td>
 		</tr>
-		<tr style="text-align: center; font-weight: bold;">
+		<tr style="text-align: center; font-weight: bold;"  class="table_tr__even">
 			<s:if test="'CCREPORT'.equals(reportType)">
 				<td>最大数量</td>
 				<td>最小数量</td>
@@ -151,13 +151,9 @@
 			</s:if>
 		</s:iterator>
 	</table>
-</s:if></div>
+</s:if>
+<div>
+	<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" border="0" alt="返回" title="返回" style="margin-top: 8px;"></a>
 </div>
-<div><s:url id="back" action="CheckStockList"></s:url><s:a
-	href="%{back}">返回盘点列表</s:a></div>
-
-
-<jsp:include flush="true" page="/main/bottom_.jsp"></jsp:include></div>
-
 </body>
 </html>

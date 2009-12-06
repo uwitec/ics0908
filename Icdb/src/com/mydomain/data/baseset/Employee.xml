@@ -166,7 +166,6 @@
 	<update id="updateUserPassword" parameterClass="com.mydomain.bean.baseset.EmployeeBean">
 			update employee
 			set
-			userName=#userName#,
 			passWord=#passWord#,
 			isEnabled=1
 			where employeeCode=#employeeCode#

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<jsp:directive.page import="com.mydomain.bean.baseset.EmployeeBean"/>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
@@ -11,6 +12,7 @@
 		<link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 		<link href="<%=base%>/css/stock_css.css" type="text/css" rel="stylesheet">
+		<link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
 		<title>新增入库单</title>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/interface/StockInAction.js'></script>
@@ -30,6 +32,12 @@
 	   	return str;
 	}
 
+	   function goback(){	
+			if(window.confirm("终止当前工作返回上一页？")){
+				window.location.href="searchStockIn.action";
+			}
+		}
+	
 	  function showMateriels(){
 		var a = document.getElementById("addMatail");
 
@@ -104,7 +112,7 @@
 			newTd7.appendChild(supplier);
 			//newTd8.appendChild(cargoSpace);
 			newTd9.innerHTML= '';
-			newTd10.innerHTML= '<input type="button" value="删除" onclick = "deleteRow(this)">';
+			newTd10.innerHTML= '<a href="#" onclick="deleteRow(this)"><img src=<%=base%>/images/quit.gif" title="删除" alt="删除" border="0"></a>';
 
  		}
 	  }
@@ -158,26 +166,31 @@
 	  }
 
 	  function deleteRow(tab){
-	  	var a = document.getElementById("addMatail");
-	  	var rowIndex = tab.parentNode.parentNode.rowIndex;
-	  	for(var row =  rowIndex ;row < a.rows.length;row++){
-	  		a.rows.item(row).cells.item(0).innerHTML = row-1;
+	  	if(window.confirm("是否删除该信息？")){
+		  	var a = document.getElementById("addMatail");
+		  	var rowIndex = tab.parentNode.parentNode.rowIndex;
+		  	for(var row =  rowIndex ;row < a.rows.length;row++){
+		  		a.rows.item(row).cells.item(0).innerHTML = row-1;
+		  	}
+	
+		  	a.deleteRow(rowIndex);
 	  	}
-
-	  	a.deleteRow(rowIndex);
 	  }
 
 
 	  function saveStockIn(){
+	    if(!window.confirm("是否进行该工作？该工作进行后可继续进行编辑！"))
+	      	return;
 		var stockInType = trim(document.getElementById('stockInType').value);
 		if(stockInType == null || stockInType==''){
 			alert("入库类型不能为空");
 			return;
 		}
 		var stockInCode = trim(document.getElementById('stockInCode').value);
-
+		var employeeCode = trim(document.getElementById('employeeCode').value);
+		alert(employeeCode);
 		var checkRemark = document.getElementById('checkRemark').value;
-	  	var stockIn = new StockIn(stockInCode,'','','','',checkRemark,stockInType,'','','','','','','');
+	  	var stockIn = new StockIn(stockInCode,'','',employeeCode,'',checkRemark,stockInType,'','','','','','','');
 	  	var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
@@ -217,13 +230,13 @@
 				alert("供应商不能为空");
 				return;
 			}
-			/**
-	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
+			
+	  	/*	var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
 			if(cargoSpaceCode == null || cargoSpaceCode==''){
 				alert("货位不能为空");
 				return;
 			}
-			**/
+			*/
 	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
 	  									stockInCode,'','','','',
 	  									'','','',
@@ -231,7 +244,7 @@
 	  		array.push(JSON.stringify(stockInCheckMaterielBean));
 	  	}
 
-//		var parameter = new Array(stockIn,array);
+		var parameter = new Array(stockIn,array);
 		var stockInJson = JSON.stringify(stockIn)
 		var arrayJson = JSON.stringify(array);
 		StockInAction.saveStockIn(stockInJson,array,callBack);
@@ -291,12 +304,14 @@
 	  }
 
 	  function deleteMateriel(tab){
-	  	var a = document.getElementById("addMatail");
-	  	var rownum = tab.parentNode.parentNode.rowIndex;
-	  	var materielCode = trim(a.rows.item(rownum).cells.item(1).innerText);
-	  	var stockInCode = trim(document.getElementById('stockInCode').value);
-	  	var tab = tab;
-	  	StockInAction.deleteStockInMateriel(materielCode,stockInCode, function(data){deleteMaterielBack(data,tab);});
+	  	if(window.confirm("是否删除该信息？")){
+		  	var a = document.getElementById("addMatail");
+		  	var rownum = tab.parentNode.parentNode.rowIndex;
+		  	var materielCode = trim(a.rows.item(rownum).cells.item(1).innerText);
+		  	var stockInCode = trim(document.getElementById('stockInCode').value);
+		  	var tab = tab;
+		  	StockInAction.deleteStockInMateriel(materielCode,stockInCode, function(data){deleteMaterielBack(data,tab);});
+		}
 	  }
 
 	  function deleteMaterielBack(data,tab){
@@ -309,6 +324,8 @@
 	  }
 
 	  function submitStockIn(){
+	  	if(!window.confirm("是否进行该工作？该工作进行后将自动进入下一工作流程！"))
+	  		return;
 	  	var stockInType = trim(document.getElementById('stockInType').value);
 		if(stockInType == null || stockInType==''){
 			alert("入库类型不能为空");
@@ -376,278 +393,6 @@
 		var stockInJson = JSON.stringify(stockIn)
 		var arrayJson = JSON.stringify(array);
 		StockInAction.submitStockIn(stockInJson,array,callBack);
-	  }
-
-	  function saveCheckStockIn(){
-	  	var stockInType = trim(document.getElementById('stockInType').value);
-		if(stockInType == null || stockInType==''){
-			alert("入库类型不能为空");
-			return;
-		}
-		var stockInCode = trim(document.getElementById('stockInCode').value);
-
-		var checkRemark = document.getElementById('checkRemark').value;
-		var checkMessage = document.getElementById('checkMessage').value;
-		var employeeCode = document.getElementById('employeeCode').value;
-	  	var stockIn = new StockIn(stockInCode,checkMessage,'',employeeCode,'',checkRemark,stockInType,'','','','','','','');
-	  	var array = new Array();
-	  	var a = document.getElementById("addMatail");
-	  	for(var row = 1; row < a.rows.length; row++){
-	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmountId = "stockInAmount_"+row;
-	  		var stockInAmount = document.getElementById(stockInAmountId).value;
-	  		if(isNaN(stockInAmount)){
-	  			alert("数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var onePriceId = "onePrice_"+row;
-	  		var onePrice =document.getElementById(onePriceId).value;
-	  		if(isNaN(onePrice)){
-	  			alert("单价填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var supplierCodeId = "supplierCode_"+row;
-	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
-	  		if(supplierCode == null || supplierCode==''){
-				alert("供应商不能为空");
-				return;
-			}
-			/**
-	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
-			if(cargoSpaceCode == null || cargoSpaceCode==''){
-				alert("货位不能为空");
-				return;
-			}
-			**/
-			var checkAmountId = "checkAmount_"+row;
-			var checkAmount = document.getElementById(checkAmountId).value;
-	  		if(isNaN(checkAmount)){
-	  			alert("抽查数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-
-			var amountPercentId = "amountPercent_"+row;
-	  		var amountPercent = document.getElementById(amountPercentId).value;
-	  		if(isNaN(amountPercent)){
-	  			alert("数量合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var qualityPercentId = "qualityPercent_"+row;
-	  		var qualityPercent = document.getElementById(qualityPercentId).value;
-	  		if(isNaN(qualityPercent)){
-	  			alert("质量合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var packagePercentId = "packagePercent_"+row;
-	  		var packagePercent = document.getElementById(packagePercentId).value;
-	  		if(isNaN(packagePercent)){
-	  			alert("包装合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-
-			var errorStockPercentId = "errorStockPercent_"+row;
-			var errorStockPercent = document.getElementById(errorStockPercentId).value;
-	  		if(isNaN(errorStockPercent)){
-	  			alert("商品串库率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
-	  									stockInCode,amountPercent,qualityPercent,packagePercent,errorStockPercent,
-	  									'',checkAmount,'',
-	  									'',stockInAmount,onePrice,stockInType);
-	  		array.push(JSON.stringify(stockInCheckMaterielBean));
-	  	}
-
-//		var parameter = new Array(stockIn,array);
-		var stockInJson = JSON.stringify(stockIn)
-		var arrayJson = JSON.stringify(array);
-		StockInAction.saveCheckStockIn(stockInJson,array,callBack);
-	  }
-
-	  function submitCheckStockIn(checkResult){
-	  	  	var stockInType = trim(document.getElementById('stockInType').value);
-		if(stockInType == null || stockInType==''){
-			alert("入库类型不能为空");
-			return;
-		}
-		var stockInCode = trim(document.getElementById('stockInCode').value);
-
-		var checkRemark = document.getElementById('checkRemark').value;
-		var checkMessage = document.getElementById('checkMessage').value;
-		var employeeCode = document.getElementById('employeeCode').value;
-
-		if(employeeCode == null || employeeCode==''){
-			alert("经手人不能为空");
-			return;
-		}
-	  	var stockIn = new StockIn(stockInCode,checkMessage,checkResult,employeeCode,'',checkRemark,stockInType,'','','','','','','');
-	  	var array = new Array();
-	  	var a = document.getElementById("addMatail");
-	  	for(var row = 1; row < a.rows.length; row++){
-	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmountId = "stockInAmount_"+row;
-	  		var stockInAmount = document.getElementById(stockInAmountId).value;
-	  		if(isNaN(stockInAmount)){
-	  			alert("数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var onePriceId ="onePrice_"+row;
-	  		var onePrice =document.getElementById(onePriceId).value;
-	  		if(isNaN(onePrice)){
-	  			alert("单价填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var supplierCodeId = "supplierCode_"+row
-	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
-	  		if(supplierCode == null || supplierCode==''){
-				alert("供应商不能为空");
-				return;
-			}
-
-			/**
-	  		var cargoSpaceCode = trim(a.rows.item(row).cells.item(8).firstChild.options[a.rows.item(row).cells.item(8).firstChild.options.selectedIndex].value);
-			if(cargoSpaceCode == null || cargoSpaceCode==''){
-				alert("货位不能为空");
-				return;
-			}
-			**/
-			var checkAmountId = "checkAmount_"+row;
-			var checkAmount = document.getElementById(checkAmountId).value;
-	  		if(isNaN(checkAmount)){
-	  			alert("抽查数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-
-			var amountPercentId = "amountPercent_"+row;
-	  		var amountPercent = document.getElementById(amountPercentId).value;
-	  		if(isNaN(amountPercent)){
-	  			alert("数量合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var qualityPercentId = "qualityPercent_"+row;
-	  		var qualityPercent = document.getElementById(qualityPercentId).value;
-	  		if(isNaN(qualityPercent)){
-	  			alert("质量合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var packagePercentId = "packagePercent_"+row;
-	  		var packagePercent = document.getElementById(packagePercentId).value;
-	  		if(isNaN(packagePercent)){
-	  			alert("包装合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-
-			var errorStockPercentId = "errorStockPercent_"+row;
-			var errorStockPercent = document.getElementById(errorStockPercentId).value;
-	  		if(isNaN(errorStockPercent)){
-	  			alert("商品串库率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,'',
-	  									stockInCode,amountPercent,qualityPercent,packagePercent,errorStockPercent,
-	  									'',checkAmount,'',
-	  									'',stockInAmount,onePrice,stockInType);
-	  		array.push(JSON.stringify(stockInCheckMaterielBean));
-	  	}
-
-//		var parameter = new Array(stockIn,array);
-		var stockInJson = JSON.stringify(stockIn)
-		var arrayJson = JSON.stringify(array);
-		StockInAction.submitCheckStockIn(stockInJson,array,callBack);
-	  }
-
-	   function approvalStockIn(stockInCheckState){
-			var stockInCode = trim(document.getElementById('stockInCode').value);
-			var stockInExMessage = trim(document.getElementById("stockInExMessage").value);
-	  		var stockIn = new StockIn(stockInCode,'','','','', '','','', '',  '', '',stockInExMessage,'',stockInCheckState);
-	  		StockInAction.approvalStockIn(JSON.stringify(stockIn),callBack);
-	   }
-
-	    function complStockIn(stockInStateType){
-	  	  	var stockInType = trim(document.getElementById('stockInType').value);
-		if(stockInType == null || stockInType==''){
-			alert("入库类型不能为空");
-			return;
-		}
-		var stockInCode = trim(document.getElementById('stockInCode').value);
-
-		var checkRemark = document.getElementById('checkRemark').value;
-		var checkMessage = document.getElementById('checkMessage').value;
-		var employeeCode = document.getElementById('employeeCode').value;
-		var stockInGM = document.getElementById("stock.stockInGM").value;
-	  	var stockIn = new StockIn(stockInCode,checkMessage,'',employeeCode,'',checkRemark,stockInType,'',stockInStateType,stockInGM,'','','','');
-	  	var array = new Array();
-	  	var a = document.getElementById("addMatail");
-	  	for(var row = 1; row < a.rows.length; row++){
-	  		var materielCode = trim(a.rows.item(row).cells.item(1).innerText);
-	  		var stockInAmountId = "stockInAmount_"+row;
-	  		var stockInAmount = document.getElementById(stockInAmountId).value;
-	  		if(isNaN(stockInAmount)){
-	  			alert("数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var onePriceId ="onePrice_"+row;
-	  		var onePrice =document.getElementById(onePriceId).value;
-	  		if(isNaN(onePrice)){
-	  			alert("单价填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var supplierCodeId = "supplierCode_"+row
-	  		var supplierCode = trim(document.getElementById(supplierCodeId).value);
-	  		if(supplierCode == null || supplierCode==''){
-				alert("供应商不能为空");
-				return;
-			}
-			var cargoSpaceCodeId = "cargoSpaceCode_"+row;
-	  		var cargoSpaceCode = trim(document.getElementById(cargoSpaceCodeId).value);
-			if(cargoSpaceCode == null || cargoSpaceCode==''){
-				alert("货位不能为空");
-				return;
-			}
-
-			var checkAmountId = "checkAmount_"+row;
-			var checkAmount = document.getElementById(checkAmountId).value;
-	  		if(isNaN(checkAmount)){
-	  			alert("抽查数量填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-
-			var amountPercentId = "amountPercent_"+row;
-	  		var amountPercent = document.getElementById(amountPercentId).value;
-	  		if(isNaN(amountPercent)){
-	  			alert("数量合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var qualityPercentId = "qualityPercent_"+row;
-	  		var qualityPercent = document.getElementById(qualityPercentId).value;
-	  		if(isNaN(qualityPercent)){
-	  			alert("质量合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var packagePercentId = "packagePercent_"+row;
-	  		var packagePercent = document.getElementById(packagePercentId).value;
-	  		if(isNaN(packagePercent)){
-	  			alert("包装合格率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-
-			var errorStockPercentId = "errorStockPercent_"+row;
-			var errorStockPercent = document.getElementById(errorStockPercentId).value;
-	  		if(isNaN(errorStockPercent)){
-	  			alert("商品串库率填写错误，请输入正确的数字！！！");
-	  			return;
-	  		}
-	  		var stockInCheckMaterielBean = new StockInCheckMaterielBean(materielCode,supplierCode,cargoSpaceCode,
-	  									stockInCode,amountPercent,qualityPercent,packagePercent,errorStockPercent,
-	  									'',checkAmount,'',
-	  									'',stockInAmount,onePrice,stockInType);
-	  		array.push(JSON.stringify(stockInCheckMaterielBean));
-	  	}
-
-//		var parameter = new Array(stockIn,array);
-		var stockInJson = JSON.stringify(stockIn)
-		var arrayJson = JSON.stringify(array);
-		StockInAction.complStockIn(stockInJson,array,callBack);
 	  }
 
 	   function showCargoSpace(tab){
@@ -807,36 +552,36 @@
 										<td>
 											<s:if
 												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
-												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
+												<s:textfield cssClass="stock_small_border" id='stockInAmount_%{#stockInMateriel.index+1}'
 													name="stockInAmount" disabled="true" size="5" />
 											</s:if>
 											<s:else>
-												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
+												<s:textfield cssClass="stock_small_border" id='stockInAmount_%{#stockInMateriel.index+1}'
 													name="stockInAmount" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
 										<td>
 											<s:if
 												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
-												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
+												<s:textfield cssClass="stock_small_border" id="onePrice_%{#stockInMateriel.index+1}"
 													name="onePrice" disabled="true" size="5" />
 											</s:if>
 											<s:else>
-												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
+												<s:textfield cssClass="stock_small_border" id="onePrice_%{#stockInMateriel.index+1}"
 													name="onePrice" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
 										<td>
 											<s:if
 												test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
-												<s:select name='supplierCode'
+												<s:select name='supplierCode' cssClass="sub3_border"
 													id="supplierCode_%{#stockInMateriel.index+1}"
 													list='#request.supplierList' listKey='supplierCode'
 													listValue='supplierName' theme='simple'
 													value="supplierCode" headerKey='' headerValue='请选择' />
 											</s:if>
 											<s:else>
-												<s:select name='supplierCode'
+												<s:select name='supplierCode' cssClass="sub3_border"
 													id="supplierCode_%{#stockInMateriel.index+1}"
 													list='#request.supplierList' listKey='supplierCode'
 													listValue='supplierName' theme='simple'
@@ -846,7 +591,7 @@
 										<td>
 											<s:if
 												test="stock.stockInStateType==1 && stock.checkResult==1">
-												<s:textfield name="cargoSpaceCode"
+												<s:textfield name="cargoSpaceCode" cssClass="stock_small_border"
 													id="cargoSpaceCode_%{#stockInMateriel.index+1}"
 													onclick="showCargoSpace(this);" />
 											</s:if>
@@ -858,33 +603,33 @@
 											test="stock.checkResult!=-1 && stock.stockInStateType==1 && stock.stockInCheckState==1">
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="checkAmount"
+													<s:textfield name="checkAmount" cssClass="stock_small_border"
 														id="checkAmount_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="checkAmount"
+													<s:textfield name="checkAmount" cssClass="stock_small_border"
 														id="checkAmount_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="amountPercent"
+													<s:textfield name="amountPercent" cssClass="stock_small_border"
 														id="amountPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="amountPercent"
+													<s:textfield name="amountPercent" cssClass="stock_small_border"
 														id="amountPercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td  >
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="qualityPercent"
+													<s:textfield name="qualityPercent" cssClass="stock_small_border"
 														id="qualityPercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="qualityPercent"
+													<s:textfield name="qualityPercent" cssClass="stock_small_border"
 														id="qualityPercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
@@ -895,19 +640,19 @@
 														id="packagePercent_%{#stockInMateriel.index+1}" size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="packagePercent"
+													<s:textfield name="packagePercent" cssClass="stock_small_border"
 														id="packagePercent_%{#stockInMateriel.index+1}" size="10"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="errorStockPercent"
+													<s:textfield name="errorStockPercent" cssClass="stock_small_border"
 														id="errorStockPercent_%{#stockInMateriel.index+1}"
 														size="10"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="errorStockPercent"
+													<s:textfield name="errorStockPercent" cssClass="stock_small_border"
 														id="errorStockPercent_%{#stockInMateriel.index+1}"
 														size="10" disabled="true"></s:textfield>
 												</s:else>
@@ -917,11 +662,8 @@
 										<s:if
 											test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
 											<td>
-
-												<input type="button" value="删除"
-													onclick="deleteMateriel(this);">
-
-											</td>
+										<a href="#" onclick='deleteMateriel(this);'><img src="<%=base%>/images/quit.gif" title="删除" alt="删除" border="0"></a>
+												</td>
 										</s:if>
 									</tr>
 								</s:iterator>
@@ -930,11 +672,17 @@
 
 						<table class="stock_table" cellspacing="1" border="0" width="850">
 							<tr class="stock_tr">
-
-								<td class="stock_right">
+							<td colspan="4">
+								<table border="0">
+								<tr>
+								<td align="left">
 									金额合计:
 									</td>
-								<td colspan="3" align="right" id="sumPrice"></td>
+								<td align="left" id="sumPrice"></td>
+								</tr>
+								</table>
+							</td>
+								
 							</tr>
 							<tr class="stock_tr">
 
@@ -989,23 +737,13 @@
 
 
 							<tr class="stock_tr">
-								<td>
-									经手人
+								<td colspan="2" width="50%">
+									经手人:
+									<s:hidden id="employeeCode" name="stock.employeeCode" disabled="true" cssClass="stock_border" />
+									<s:property value="stock.employeeCode"/>
 								</td>
-								<td>
-									<s:if
-										test="stock.stockInStateType == 1 && stock.stockInCheckState==1 && stock.checkResult ==0">
-										<s:textfield id="employeeCode" cssClass="stock_border" name="stock.employeeCode" />
-									</s:if>
-									<s:else>
-										<s:textfield id="employeeCode" name="stock.employeeCode"
-											disabled="true" cssClass="stock_border" />
-									</s:else>
-								</td>
-								<td>
-									库管员
-								</td>
-								<td>
+								<td colspan="2">	
+								库管员:
 									<s:if test="stock.checkResult == 1">
 										<s:textfield id="stock.stockInGM" cssClass="stock_border" name="stock.stockInGM" />
 									</s:if>
@@ -1018,27 +756,9 @@
 							</tr>
 						</table>
 			<div style="margin-top: 8px;margin-left:10px;">
-			<s:if
-				test="stock.stockInStateType!=1||stock.checkResult==-1||stock.stockInCheckState==-1">
-				<a href="#" onclick="saveStockIn();"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
-				<a href="#" onclick="submitStockIn();"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
-			</s:if>
-			<s:if
-				test="stock.stockInStateType == 1 && stock.stockInCheckState == 0">
-				<input type="button" value="通过" onclick="approvalStockIn(1)" />
-				<input type="button" value="不通过" onclick="approvalStockIn(-1)" />
-			</s:if>
-			<s:if
-				test="stock.stockInStateType == 1 && stock.stockInCheckState == 1 && stock.checkResult == 0">
-				<input type="button" value="保存" onclick="saveCheckStockIn();" />
-				<input type="button" value="通过" onclick="submitCheckStockIn(1);" />
-				<input type="button" value="不通过" onclick="submitCheckStockIn(-1);" />
-			</s:if>
-
-			<s:if test="stock.checkResult == 1">
-				<input type="button" value="保存" onclick="complStockIn(1)" />
-				<input type="button" value="完成" onclick="complStockIn(3)" />
-			</s:if>
+				<a href="#" onclick="saveStockIn()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" title="保存" alt="保存"></a>
+				<a href="#" onclick="submitStockIn();"><img src="<%=base%>/images/finish.jpg" border="0" title="完成" alt="完成"></a>
+				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" title="返回" alt="返回"></a>
 			</div>
 		</s:form>
 		</div>

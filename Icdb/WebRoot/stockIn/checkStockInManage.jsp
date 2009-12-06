@@ -14,6 +14,7 @@
 			rel="stylesheet">
 		<link href="<%=base%>/css/stock_css.css" type="text/css"
 			rel="stylesheet">
+		<link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
 		<title>检查入库单</title>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/interface/StockInAction.js'></script>
@@ -32,6 +33,12 @@
 	   	return str;
 	}
 
+  	 function goback(){	
+			if(window.confirm("终止当前工作返回上一页？")){
+				window.location.href="searchCheckStockIn.action";
+			}
+		}
+	
 
 	  function getPrice(tab){
 	  	var a = document.getElementById("addMatail");
@@ -148,6 +155,8 @@
 	  }
 
 	  function saveCheckStockIn(){
+	  	if(!window.confirm("是否进行该操作，该操作执行后，可继续进行编辑"))
+	  		return;
 	  	var stockInType = trim(document.getElementById('stockInType').value);
 		if(stockInType == null || stockInType==''){
 			alert("入库类型不能为空");
@@ -234,6 +243,8 @@
 	  }
 
 	  function submitCheckStockIn(checkResult){
+	  	if(!window.confirm("是否进行该操作？该操作完成后，将进行下一步业务操作！"))
+	  		return;
 	  	var stockInType = trim(document.getElementById('stockInType').value);
 		if(stockInType == null || stockInType==''){
 			alert("入库类型不能为空");
@@ -344,25 +355,26 @@
 					<td>
 						入库类型：
 
-						<s:select id='stockInType' name='stockInType'
+						<s:select id='stockInType' name='stockInType' cssClass="sub3_border"
 							list="#{'1':'生产入库','2':'采购入库','3':'其他入库'}"
 							value="stock.stockInType" headerKey="" headerValue="请选择"
 							disabled="true" />
 
 
-						<s:select id='cargoSpace' cssStyle="display:none"
+						<s:select id='cargoSpace' cssStyle="display:none" cssClass="sub3_border"
 							name='cargoSpaceCode' list='#request.cargoSpaceList'
 							listKey='cargoSpaceCode' listValue='cargoSpaceName'
 							theme='simple' headerKey='' headerValue='请选择' />
-						<s:select id='supplier' cssStyle="display:none"
+						<s:select id='supplier' cssStyle="display:none" cssClass="sub3_border"
 							name='supplierCode' list='#request.supplierList'
 							listKey='supplierCode' listValue='supplierName' theme='simple'
 							headerKey='' headerValue='请选择' />
 					</td>
 					<td>
 						入库编号：
-						<s:textfield id="stockInCode" name="stock.stockInCode"
+						<s:hidden id="stockInCode"  name="stock.stockInCode"
 							disabled="true" />
+						<s:property value="stock.stockInCode"/>
 					</td>
 					<s:if test="stock.stockInStateType==1">
 						<td>
@@ -455,35 +467,35 @@
 											<s:if
 												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
 												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
-													name="stockInAmount" disabled="true" size="5" />
+													name="stockInAmount" cssClass="stock_small_border" disabled="true" size="5" />
 											</s:if>
 											<s:else>
 												<s:textfield id='stockInAmount_%{#stockInMateriel.index+1}'
-													name="stockInAmount" onchange="getPrice(this);" size="5" />
+													name="stockInAmount" cssClass="stock_small_border" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
 										<td>
 											<s:if
 												test="stock.stockInStateType == 1&&stock.checkResult!=-1&&stock.stockInCheckState != -1">
 												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
-													name="onePrice" disabled="true" size="5" />
+													name="onePrice" cssClass="stock_small_border" disabled="true" size="5" />
 											</s:if>
 											<s:else>
 												<s:textfield id="onePrice_%{#stockInMateriel.index+1}"
-													name="onePrice" onchange="getPrice(this);" size="5" />
+													name="onePrice" cssClass="stock_small_border" onchange="getPrice(this);" size="5" />
 											</s:else>
 										</td>
 										<td>
 											<s:if
 												test="stock.stockInStateType!=1||stock.stockInCheckState == -1||stock.checkResult==-1">
-												<s:select name='supplierCode'
+												<s:select name='supplierCode' cssClass="sub3_border"
 													id="supplierCode_%{#stockInMateriel.index+1}"
 													list='#request.supplierList' listKey='supplierCode'
 													listValue='supplierName' theme='simple'
 													value="supplierCode" headerKey='' headerValue='请选择' />
 											</s:if>
 											<s:else>
-												<s:select name='supplierCode'
+												<s:select name='supplierCode' cssClass="sub3_border"
 													id="supplierCode_%{#stockInMateriel.index+1}"
 													list='#request.supplierList' listKey='supplierCode'
 													listValue='supplierName' theme='simple'
@@ -493,7 +505,7 @@
 										<td>
 											<s:if
 												test="stock.stockInStateType==1 && stock.checkResult==1">
-												<s:textfield name="cargoSpaceCode"
+												<s:textfield name="cargoSpaceCode" cssClass="stock_small_border"
 													id="cargoSpaceCode_%{#stockInMateriel.index+1}"
 													onclick="showCargoSpace(this);" />
 											</s:if>
@@ -504,56 +516,56 @@
 
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="checkAmount"
+													<s:textfield name="checkAmount" cssClass="stock_small_border"
 														id="checkAmount_%{#stockInMateriel.index+1}" size="5"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="checkAmount"
+													<s:textfield name="checkAmount" cssClass="stock_small_border"
 														id="checkAmount_%{#stockInMateriel.index+1}" size="5"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="amountPercent"
+													<s:textfield name="amountPercent" cssClass="stock_small_border"
 														id="amountPercent_%{#stockInMateriel.index+1}" size="5"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="amountPercent"
+													<s:textfield name="amountPercent" cssClass="stock_small_border"
 														id="amountPercent_%{#stockInMateriel.index+1}" size="5"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="qualityPercent"
+													<s:textfield name="qualityPercent" cssClass="stock_small_border"
 														id="qualityPercent_%{#stockInMateriel.index+1}" size="5"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="qualityPercent"
+													<s:textfield name="qualityPercent" cssClass="stock_small_border"
 														id="qualityPercent_%{#stockInMateriel.index+1}" size="5"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="packagePercent"
+													<s:textfield name="packagePercent" cssClass="stock_small_border"
 														id="packagePercent_%{#stockInMateriel.index+1}" size="5"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="packagePercent"
+													<s:textfield name="packagePercent" cssClass="stock_small_border"
 														id="packagePercent_%{#stockInMateriel.index+1}" size="5"
 														disabled="true"></s:textfield>
 												</s:else>
 											</td>
 											<td>
 												<s:if test="stock.checkResult!=1">
-													<s:textfield name="errorStockPercent"
+													<s:textfield name="errorStockPercent" cssClass="stock_small_border"
 														id="errorStockPercent_%{#stockInMateriel.index+1}"
 														size="5"></s:textfield>
 												</s:if>
 												<s:else>
-													<s:textfield name="errorStockPercent"
+													<s:textfield name="errorStockPercent" cssClass="stock_small_border"
 														id="errorStockPercent_%{#stockInMateriel.index+1}"
 														size="5" disabled="true"></s:textfield>
 												</s:else>
@@ -606,13 +618,13 @@
 									经手人:
 								</td>
 								<td>
-										<s:textfield id="employeeCode" name="stock.employeeCode" />
+										<s:textfield id="employeeCode" cssClass="sub1_border" name="stock.employeeCode" />
 								</td>
 								<td>
 									库管员
 								</td>
 								<td>
-										<s:textfield id="stock.stockInGM" name="stock.stockInGM"  disabled="true"/>
+										<s:textfield id="stock.stockInGM" cssClass="sub1_border" name="stock.stockInGM"  disabled="true"/>
 								</td>
 
 							</tr>
@@ -621,9 +633,10 @@
 			<div style="margin-top: 8px; margin-left: 10px;">
 			<s:if
 				test="stock.stockInStateType == 1 && stock.stockInCheckState == 1 && stock.checkResult == 0">
-				<a href="#" onclick="saveCheckStockIn();"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
-				<a href="#" onclick="submitCheckStockIn(1);"><img src="<%=base%>/images/pass.jpg" border="0" alt="通过"></a>
-				<a href="#" onclick="submitCheckStockIn(-1);"><img src="<%=base%>/images/no.jpg" border="0" alt="未通过"></a>
+				<a href="#" onclick="saveCheckStockIn();"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" title="保存" alt="保存"></a>
+				<a href="#" onclick="submitCheckStockIn(1);"><img src="<%=base%>/images/pass.jpg" border="0" title="通过" alt="通过"></a>
+				<a href="#" onclick="submitCheckStockIn(-1);"><img src="<%=base%>/images/no.jpg" border="0" title="未通过" alt="未通过"></a>
+				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" title="返回" alt="返回"></a>
 			</s:if>
 			</div>
 
