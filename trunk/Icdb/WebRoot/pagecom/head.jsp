@@ -110,7 +110,6 @@
 	cursor: pointer;
     z-index: 99px;
 }
-"C:/Documents and Settings/admin/Application Data/Microsoft/Internet Explorer/Quick Launch/Mozilla Firefox.lnk"
 .mymenu a {
 	text-shadow: gray;
 	color: black;
@@ -137,7 +136,11 @@
         StringBuilder sbd = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
             Item item = list.get(i);
-
+            
+            if (-1 == item.getUserPermissionCode()){
+                continue;
+            }
+            
             // 一级菜单
             // <div id="div_m1" onmouseover='viewSub("div_m1", false)'>名称1</div>
             sbd
@@ -166,6 +169,9 @@
             if (null != subList) {
                 for (int subIndex = 0; subIndex < subList.size(); subIndex++) {
                     Item subItem = subList.get(subIndex);
+                    if (-1 == subItem.getUserPermissionCode()){
+                        continue;
+                    }
                     int childsize = subItem.getSubItemList().size();
                     // 二级菜单
                     // <div id="div_m1_1" onmouseover='viewSub("div_m1_1", true)' >名称2</div>
@@ -205,6 +211,9 @@
                         for (int threeIndex = 0; threeIndex < threeList
                                 .size(); threeIndex++) {
                             Item threeItem = threeList.get(threeIndex);
+                            if (-1 == threeItem.getUserPermissionCode()){
+                                continue;
+                            }
                             sbd.append("<a href=\"");
                             sbd.append(base).append("/");
                             sbd.append(threeItem.getAction());
