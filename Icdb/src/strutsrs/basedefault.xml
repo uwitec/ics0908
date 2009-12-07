@@ -7,8 +7,8 @@
         <interceptors>
             <interceptor name="LoginActionFilter" class="com.icdb.filter.LoginActionFilter"></interceptor>
             <interceptor-stack name="mydefalut">
-                <interceptor-ref name="defaultStack"></interceptor-ref>
                 <interceptor-ref name="LoginActionFilter"></interceptor-ref>
+                <interceptor-ref name="defaultStack"></interceptor-ref>
             </interceptor-stack>
         </interceptors>
         <default-interceptor-ref name="mydefalut"></default-interceptor-ref>
