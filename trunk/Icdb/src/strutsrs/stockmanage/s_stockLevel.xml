@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="stockLevel" extends="struts-default" namespace="/stockmanage">
+<package name="stockLevel" extends="basedefalut" namespace="/stockmanage">
 	<action name="ShowOutLevel" class="com.action.stockmanage.StockLevelAction" method="showOutLevel">
 		<result name="success">/stockmanage/stockLevel/StockOutLevel.jsp</result>
 	</action>
