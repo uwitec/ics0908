@@ -53,7 +53,8 @@ public class LoginAction extends ActionSupport {
                 return "SUCCESS";
             }
         }
-        userName=userName;
+        //userName=userName;
+        
         return "NULLRESULT";
     }
 
