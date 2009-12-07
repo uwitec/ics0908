@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="department" extends="struts-default" namespace="/baseset">
+<package name="department" extends="basedefalut" namespace="/baseset">
 <action name="ShowDepartment" class="com.action.baseset.DepartmentAction" method="showDepartment">
 	<result name="success">/baseset/department/DepartmentShow.jsp</result>
 </action>

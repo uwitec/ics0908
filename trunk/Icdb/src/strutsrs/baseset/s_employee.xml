@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="employee" extends="struts-default" namespace="/baseset">
+<package name="employee" extends="basedefalut" namespace="/baseset">
 <action name="ShowEmployee" class="com.action.baseset.EmployeeAction" method="showEmployee">
 	<result name="success">/baseset/employee/EmployeeShow.jsp</result>
 </action>
