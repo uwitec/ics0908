@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="materiel" extends="struts-default" namespace="/baseset">
+<package name="materiel" extends="basedefalut" namespace="/baseset">
 <action name="ShowMateriel" class="com.action.baseset.MaterielAction" method="showMateriel">
 	<result name="success">/baseset/materiel/MaterielShow.jsp</result>
 </action>
