@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="materOutInFrom" extends="struts-default" namespace="/stockmanage">
+<package name="materOutInFrom" extends="basedefalut" namespace="/stockmanage">
 <action name="ShowMaterInFrom" class="com.action.stockmanage.MaterielOutInFromAction" method="showMaterInFrom">
 	<result name="success">/stockmanage/materOutInFrom/MaterInFrom.jsp</result>
 </action>
