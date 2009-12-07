@@ -14,12 +14,10 @@ public class LoginActionFilter extends AbstractInterceptor {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Override
 	public String intercept(ActionInvocation arg0) throws Exception {
 		ActionContext ctx = arg0.getInvocationContext();
 		Map<?, ?> map = ctx.getSession();
 		Object obj = map.get("user");
-		System.out.println("login: " + obj);
 		if (null != obj) {
 			return arg0.invoke();
 		}
