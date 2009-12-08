@@ -13,20 +13,17 @@
 			src='<%=request.getContextPath()%>/dwr/util.js'></script>
 		<script  type='text/javascript'>
 		
-		function cargoSpace(cargoSpaceCode,cargoSpaceName){
-			this.cargoSpaceCode = cargoSpaceCode;
-			this.cargoSpaceName = cargoSpaceName;
-		}
 		 function sendTo()
 		 {
 		    var cargoSpaceTab = document.getElementsByName("c_checked");
 		    var returnValue;
 		    for(var i=0;i < cargoSpaceTab.length; i++){
 		    	if(cargoSpaceTab[i].checked){
-		    		var cargoSpaceCode = document.getElementById("cargoSpaceTable").rows.item(i+1).cells.item(1).innerText;
-		    		var cargoSpaceName = document.getElementById("cargoSpaceTable").rows.item(i+1).cells.item(2).innerText;
-		    		var _cargoSpace = new cargoSpace(cargoSpaceCode,cargoSpaceName);
-		    		returnValue = _cargoSpace;		    	}
+		    		var cargoSpaceCode = document.getElementById("cargoSpaceTable").rows.item(i+1).cells.item(1).innerHTML;
+		    		var cargoSpaceName = document.getElementById("cargoSpaceTable").rows.item(i+1).cells.item(2).innerHTML;
+		    		var _cargoSpace = new CargoSpace(cargoSpaceCode,cargoSpaceName);
+		    		returnValue = _cargoSpace;	
+		    	}
 		    }
 		    if(returnValue==null||returnValue==''){
 		    	alert("请选择货位！");
@@ -35,6 +32,10 @@
 		 	window.returnValue = returnValue
 		 	window.close()
 		 }
+		function CargoSpace(cargoSpaceCode,cargoSpaceName){
+			this.cargoSpaceCode = cargoSpaceCode;
+			this.cargoSpaceName = cargoSpaceName;
+		}
 		function getCargoSpaceList(){
 			var storehouseCode = document.getElementById("storehouseCode").options[document.getElementById("storehouseCode").selectedIndex].value;
 			StockInAction.findCargoSpaceList(storehouseCode,callback);

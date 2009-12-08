@@ -263,8 +263,8 @@
 		  }
 		  var cargoSpaceCodeId = "cargoSpaceCode_"+id;
 		  var cargoSpaceNameId = "cargoSpaceName_"+id;
-	  	  document.getElementById(cargoSpaceNameId).value=returnValue.cargoSpaceName;
-	  	  document.getElementById(cargoSpaceCodeId).value=returnValue.cargoSpaceCode;
+	  	  document.getElementById(cargoSpaceNameId).value=trim(returnValue.cargoSpaceName);
+	  	  document.getElementById(cargoSpaceCodeId).value=trim(returnValue.cargoSpaceCode);
 	  	}
 
 	</script>
