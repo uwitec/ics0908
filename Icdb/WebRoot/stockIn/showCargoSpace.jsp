@@ -12,6 +12,7 @@
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/dwr/util.js'></script>
 		<script  type='text/javascript'>
+		
 		function cargoSpace(cargoSpaceCode,cargoSpaceName){
 			this.cargoSpaceCode = cargoSpaceCode;
 			this.cargoSpaceName = cargoSpaceName;

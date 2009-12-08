@@ -258,7 +258,6 @@
 	   function showCargoSpace(id){
 
 	  	  var returnValue = window.showModalDialog("showCargoSpace.action?tempid="+Math.random(),"","dialogHeight:400px;dialogWidth:500px");
-
 		  if(returnValue==null){
 		  	return;
 		  }
@@ -347,7 +346,7 @@
 									供应商
 								</th>
 								<th>
-									货位编号
+									货位
 								</th>
 								<th>
 									金额
