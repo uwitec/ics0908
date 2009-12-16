@@ -18,14 +18,6 @@
 			rel="stylesheet">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/calendar.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/calendar-chs.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/calendar-setup.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/setday.js"></script>
 		<link rel="stylesheet" type="text/css"
 			href="../styles/calendar-blue.css" media="screen" />
 		<script type='text/javascript'
@@ -36,6 +28,7 @@
 			src='<%=request.getContextPath()%>/dwr/util.js'></script>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/script/json.js'></script>
+		<script type="text/javascript" src="<%=base%>/javascript/WebCalendar.js"></script>
 		
 	</head>
 	<body>
@@ -189,12 +182,12 @@
 	</tr>
 	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
 		<td style="font-size:12px;color:#636B6D;">
-		&nbsp;&nbsp;&nbsp;&nbsp;开始时间:<s:textfield cssClass="sub3_border" readonly="true" onclick="setday(this)" id="stock.stockOutStartDate" name="stock.stockOutStartDate"  cssStyle="margin-top:5px;"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;开始时间:<s:textfield cssClass="sub3_border" readonly="true" onclick="SelectDate(this,'yyyy-MM-dd')" id="stock.stockOutStartDate" name="stock.stockOutStartDate"  cssStyle="margin-top:5px;"/>
 		</td>
 	</tr>
 	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
 		<td style="font-size:12px;color:#636B6D;">
-		&nbsp;&nbsp;&nbsp;&nbsp;结束时间:<s:textfield cssClass="sub3_border" readonly="true" onclick="setday(this)" id="stock.stockOutEndDate" name="stock.stockOutEndDate" cssStyle="margin-top:5px;"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;结束时间:<s:textfield cssClass="sub3_border" readonly="true" onclick="SelectDate(this,'yyyy-MM-dd')" id="stock.stockOutEndDate" name="stock.stockOutEndDate" cssStyle="margin-top:5px;"/>
 		</td>
 	</tr>
 	<tr style="margin-top: 8px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
