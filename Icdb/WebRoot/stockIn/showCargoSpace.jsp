@@ -24,6 +24,7 @@
 		    		var _cargoSpace = new CargoSpace(cargoSpaceCode,cargoSpaceName);
 		    		returnValue = _cargoSpace;	
 		    	}
+		    		
 		    }
 		    if(returnValue==null||returnValue==''){
 		    	alert("请选择货位！");
