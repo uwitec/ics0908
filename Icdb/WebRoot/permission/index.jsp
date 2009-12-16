@@ -13,7 +13,7 @@
 <link href="<%=base%>/css/body_css.css" type="text/css" rel="stylesheet">
 <link href="<%=base%>/css/center_css.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="<%=base%>/jstree/tree.js"></script>
-<title>Insert title here</title>
+<title>权限设置</title>
 <script type="text/javascript">
 function initFunTree(){
 	Tree.createTree('funTree', 'lmenutree', false);
