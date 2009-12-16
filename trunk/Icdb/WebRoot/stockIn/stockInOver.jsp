@@ -17,14 +17,7 @@
 		<link href="<%=base%>/css/center_css.css" type="text/css"
 			rel="stylesheet">
 		 <link href="<%=base%>/css/form_css.css" type="text/css" rel="stylesheet">
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/calendar.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/calendar-chs.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/calendar-setup.js"></script>
-		<script language="JavaScript" type="text/javascript"
-			src="../javascript/setday.js"></script>
+		
 		<link rel="stylesheet" type="text/css"
 			href="../styles/calendar-blue.css" media="screen" />
 		<script type='text/javascript'
@@ -35,7 +28,7 @@
 			src='<%=request.getContextPath()%>/dwr/util.js'></script>
 		<script type='text/javascript'
 			src='<%=request.getContextPath()%>/script/json.js'></script>
-
+		<script type="text/javascript" src="<%=base%>/javascript/WebCalendar.js"></script>
 		<script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
 		<script type="text/javascript">
 				function showSearch(){
@@ -233,12 +226,12 @@ function nextPage(){
 	</tr>
 	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
 		<td style="font-size:12px;color:#636B6D;">
-		&nbsp;&nbsp;&nbsp;&nbsp;开始时间:<s:textfield cssClass="sub3_border" onclick="setday(this)" id="stock.stockInStartDate" name="stock.stockInStartDate" readonly="true" cssStyle="margin-top:5px;"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;开始时间:<s:textfield cssClass="sub3_border" onclick="SelectDate(this,'yyyy-MM-dd')" id="stock.stockInStartDate" name="stock.stockInStartDate" readonly="true" cssStyle="margin-top:5px;"/>
 		</td>
 	</tr>
 	<tr style="margin-top: 5px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
 		<td style="font-size:12px;color:#636B6D;">
-		&nbsp;&nbsp;&nbsp;&nbsp;结束时间:<s:textfield cssClass="sub3_border" onclick="setday(this)" id="stock.stockInEndDate" name="stock.stockInEndDate" readonly="true" cssStyle="margin-top:5px;"/>
+		&nbsp;&nbsp;&nbsp;&nbsp;结束时间:<s:textfield cssClass="sub3_border" onclick="SelectDate(this,'yyyy-MM-dd')" id="stock.stockInEndDate" name="stock.stockInEndDate" readonly="true" cssStyle="margin-top:5px;"/>
 		</td>
 	</tr>
 	<tr style="margin-top: 8px;"><td align="right" style="font-size:12px;color:#636B6D;"></td>
