@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="backOrder" extends="struts-default" namespace="/storage">
+<package name="backOrder" extends="basedefalut" namespace="/storage">
 <action name="ShowBackStock" class="com.action.storage.BackStockAction" method="showBackStock">
 	<result name="success">/storage/backStock/BackStockShow.jsp</result>
 </action>

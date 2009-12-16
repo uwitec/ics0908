@@ -3,7 +3,7 @@
 "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-<package name="stock" extends="struts-default" namespace="/storage">
+<package name="stock" extends="basedefalut" namespace="/storage">
 <action name="ShowStockList" class="com.action.storage.StockAction" method="getStoreHouseList">
 	<result name="success">/storage/stock/StockList.jsp</result>
 </action>
