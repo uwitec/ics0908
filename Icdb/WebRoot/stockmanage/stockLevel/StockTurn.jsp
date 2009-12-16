@@ -12,6 +12,7 @@
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<script type="text/javascript" src="<%=base%>/javascript/WebCalendar.js"></script>
 <SCRIPT type="text/javascript">
 	
 	function search1(){
@@ -50,9 +51,9 @@
 			<table width="100%" border="0" cellpadding="0" cellspacing="0" style='background-color:#E2F3FB;border-left:#0C6A9D 1 solid;border-right:#0C6A9D 1px solid;'>
 				<s:push value="stockturn">
 				<tr style="margin-top: 5px;"><td style="font-size:12px;color:#636B6D;" align="center">
-					开始时间:<s:textfield cssClass="sub3_border" name="stockturn.startTime" value="%{stockturn.startTime}" cssStyle="margin-top:5px;" /></td></tr>
+					开始时间:<s:textfield cssClass="sub3_border" onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true" name="stockturn.startTime" value="%{stockturn.startTime}" cssStyle="margin-top:5px;" /></td></tr>
 				<tr style="margin-top: 5px;"><td style="font-size:12px;color:#636B6D;" align="center">
-						截至时间:<s:textfield cssClass="sub3_border" name="stockturn.endTime" value="%{stockturn.endTime}"/></td></tr>
+						截至时间:<s:textfield cssClass="sub3_border" name="stockturn.endTime" onclick="SelectDate(this,'yyyy-MM-dd')" readonly="true"  value="%{stockturn.endTime}"/></td></tr>
 				<tr style="margin-top: 5px;"><td style="font-size:12px;color:#636B6D;" align="center">
 						物料名称:<s:textfield cssClass="sub3_border" name="stockturn.materielName" value="%{stockturn.materielName}" cssStyle="margin-top:5px;"/></td></tr>
 				<tr style="margin-top: 5px;"><td style="font-size:12px;color:#636B6D;" align="center">
