@@ -12,6 +12,7 @@
 	</head>
 <body>
 <script type="text/javascript" src="<%=base%>/javascript/innerText.js"></script>
+<script type="text/javascript" src="<%=base%>/javascript/WebCalendar.js"></script>
 <SCRIPT type="text/javascript">
 	
 	function searchf(){
@@ -30,8 +31,8 @@
 			<div style="margin-top: -3px;">
 			<s:form action="ShowOutLevel" namespace="/stockmanage" theme="simple" id="searchForm">
 			<s:push value="stockLevel">
-				开始时间:<s:textfield cssClass="sub3_border" name="stockLevel.startTime" value="%{stockLevel.startTime}"/>
-				截至时间:<s:textfield cssClass="sub3_border" name="stockLevel.endTime" value="%{stockLevel.endTime}"/>
+				开始时间:<s:textfield cssClass="sub3_border" onclick="SelectDate(this,'yyyy-MM-dd')" name="stockLevel.startTime" readonly="true"  value="%{stockLevel.startTime}"/>
+				截至时间:<s:textfield cssClass="sub3_border" onclick="SelectDate(this,'yyyy-MM-dd')" name="stockLevel.endTime" readonly="true"  value="%{stockLevel.endTime}"/>
 				物料名称:<s:textfield cssClass="sub3_border" name="stockLevel.materielName" value="%{stockLevel.materielName}"/>
 				<a href="#" onclick="searchf()"><img src="<%=base%>/images/img09.gif" title="查询" alt="查询" border="0" style="margin-bottom:-4px;"></a>
 			</s:push>
