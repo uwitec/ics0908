@@ -61,7 +61,7 @@ int idtitle=1;
        		</s:iterator>
 		    </table>
        		 <div style="margin-top: 8px;" align="right">  
-       		 <s:form action="ShowMateriel" namespace="/baseset" theme="simple" name="pageform">
+       		 <s:form action="FindMateriel" namespace="/baseset" theme="simple" name="pageform">
        <s:push value="materiel">
        <s:hidden name="materiel.s_value" value="%{materiel.s_value}"></s:hidden>
        <s:hidden id="countsize" name="materiel.countSize" value="%{materiel.countSize}"></s:hidden>

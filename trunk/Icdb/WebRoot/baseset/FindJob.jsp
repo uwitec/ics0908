@@ -56,7 +56,7 @@ int idtitle=1;
        		</s:iterator>
 		    </table>
        		 <div style="margin-top: 8px;" align="right">  
-       		 <s:form action="ShowJob" namespace="/baseset" theme="simple" name="pageform">
+       		 <s:form action="FindJob" namespace="/baseset" theme="simple" name="pageform">
 		       <s:push value="job">
 		       <s:hidden name="job.s_value" value="%{job.s_value}"></s:hidden>
 		       <s:hidden id="countsize" name="job.countSize" value="%{job.countSize}"></s:hidden>
