@@ -19,7 +19,7 @@
 		
 		function isEmpty(){
 			var v_code=document.getElementById("decode");
-			var v_name=documents.getElementById("dename");
+			var v_name=document.getElementById("dename");
 			if(trim(v_code.value)==''){
 				document.getElementById("decode_f").innerHTML="该信息不能为空";
 				return false;
