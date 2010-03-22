@@ -88,7 +88,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -129,7 +129,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -147,7 +147,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -173,7 +173,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -198,7 +198,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -248,7 +248,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();
@@ -269,7 +269,7 @@ public class StockInManage extends GenericManage<StockInBean, Long> {
 			DBServer.quider.commitTransaction();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			log.error("", e);
+			com.dbserver.DBServer.logger.exception(e);
 			return false;
 		} finally {
 			DBServer.quider.endTransaction();

@@ -32,7 +32,12 @@
 	   	str = str.replace(/(^\s*)|(\s*$)/g,'');
 	   	return str;
 	}
-
+ 	
+ 	function goback(){	
+			if(window.confirm("终止当前工作返回上一页？")){
+				window.location.href="searchStockInOver.action";
+			}
+		}
 
 
 	  function getPrice(tab){
@@ -584,6 +589,7 @@
 			<s:if test="stock.checkResult == 1">
 				<a href="#" onclick="complStockIn(1);"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="保存"></a>
 				<a href="#" onclick="complStockIn(3);"><img src="<%=base%>/images/finish.jpg" border="0" alt="完成"></a>
+				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" title="返回" alt="返回"></a>
 			</s:if>
 			</div>
 		</s:form>
