@@ -19,8 +19,8 @@
 	namespace="/login" method="post" theme="simple">
 	<div><s:textfield id="userNameid" name="userName"  cssClass="border_user"></s:textfield></div>
 	<div><s:password  name="passWord"  cssClass="border_pwd"></s:password></div>
-	<div><s:submit value="" cssClass="btn_login"></s:submit></div>
-	<div><s:reset value="" onclick="resetMe()" cssClass="btn_reset"></s:reset></div>
+	<div><s:submit value="" cssClass="btn_login" cssStyle="CURSOR:pointer"></s:submit></div>
+	<div><s:reset value="" onclick="resetMe()" cssStyle="CURSOR:pointer" cssClass="btn_reset"></s:reset></div>
 </s:form></div>
 <div class="login_line"></div>
 <div class="login_right">
@@ -31,6 +31,10 @@
 </div>
 <div class="login_foot">CopyRight © 2009-2012 IMS</div>
 <script type="text/javascript">
+			
+			function cursorstyle(){
+				CURSOR: hand;
+			}
 			
 			function loginmess(){
 			var message=document.getElementById("userNameid").value;

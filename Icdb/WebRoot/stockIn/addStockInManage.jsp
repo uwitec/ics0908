@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<jsp:directive.page import="com.mydomain.bean.baseset.EmployeeBean"/>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 "http://www.w3.org/TR/html4/strict.dtd">
@@ -112,7 +111,7 @@
 			newTd7.appendChild(supplier);
 			//newTd8.appendChild(cargoSpace);
 			newTd9.innerHTML= '';
-			newTd10.innerHTML= '<a href="#" onclick="deleteRow(this)"><img src=<%=base%>/images/quit.gif" title="删除" alt="删除" border="0"></a>';
+			newTd10.innerHTML= '<a href="#" onclick="deleteRow(this)"><img src="<%=base%>/images/quit.gif" title="删除" alt="删除" border="0"></a>';
 
  		}
 	  }
@@ -188,7 +187,7 @@
 		}
 		var stockInCode = trim(document.getElementById('stockInCode').value);
 		var employeeCode = trim(document.getElementById('employeeCode').value);
-		alert(employeeCode);
+		
 		var checkRemark = document.getElementById('checkRemark').value;
 	  	var stockIn = new StockIn(stockInCode,'','',employeeCode,'',checkRemark,stockInType,'','','','','','','');
 	  	var array = new Array();
@@ -254,6 +253,7 @@
 		 if(data!=null && data=="success"){
 		 	 window.location.href="searchStockIn.action?backurl="+window.location.href;
 		 }
+		
 	  }
 
 	  function StockIn(stockInCode, checkMessage, checkResult,employeeCode, orderNumber,
@@ -324,6 +324,7 @@
 	  }
 
 	  function submitStockIn(){
+	 
 	  	if(!window.confirm("是否进行该工作？该工作进行后将自动进入下一工作流程！"))
 	  		return;
 	  	var stockInType = trim(document.getElementById('stockInType').value);
@@ -331,10 +332,11 @@
 			alert("入库类型不能为空");
 			return;
 		}
+		 
 		var stockInCode = trim(document.getElementById('stockInCode').value);
-
+	    var employeeCode = trim(document.getElementById('employeeCode').value);
 		var checkRemark = document.getElementById('checkRemark').value;
-	  	var stockIn = new StockIn(stockInCode,'','','','',checkRemark,stockInType,'','','','','','','');
+	  	var stockIn = new StockIn(stockInCode,'','',employeeCode,'',checkRemark,stockInType,'','','','','','','');
 	  	var array = new Array();
 	  	var a = document.getElementById("addMatail");
 	  	for(var row = 1; row < a.rows.length; row++){
@@ -370,7 +372,7 @@
 		  	}else{
 	 			supplierCode = document.getElementById(supplierCodeId).value;
 	 		}
-
+		
 	  		if(supplierCode == null || supplierCode==''){
 				alert("供应商不能为空");
 				return;
@@ -389,9 +391,10 @@
 	  		array.push(JSON.stringify(stockInCheckMaterielBean));
 	  	}
 
-//		var parameter = new Array(stockIn,array);
+		var parameter = new Array(stockIn,array);
 		var stockInJson = JSON.stringify(stockIn)
 		var arrayJson = JSON.stringify(array);
+//		StockInAction.saveStockIn(stockInJson,array,callBack);
 		StockInAction.submitStockIn(stockInJson,array,callBack);
 	  }
 
@@ -757,7 +760,7 @@
 						</table>
 			<div style="margin-top: 8px;margin-left:10px;">
 				<a href="#" onclick="saveStockIn()"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" title="保存" alt="保存"></a>
-				<a href="#" onclick="submitStockIn();"><img src="<%=base%>/images/finish.jpg" border="0" title="完成" alt="完成"></a>
+				<a href="#" onclick="submitStockIn()"><img src="<%=base%>/images/finish.jpg" border="0" title="完成" alt="完成"></a>
 				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" title="返回" alt="返回"></a>
 			</div>
 		</s:form>

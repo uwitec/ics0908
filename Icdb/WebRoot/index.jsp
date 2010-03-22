@@ -6,6 +6,11 @@
         <title>欢迎</title>
     </head>
     <body>
+    <table border="" style="top: 0px;">
+    	<tr>
+    	<td colspan="1"></td>
+    	</tr>
+    </table>
   --------------------基本信息-------------------------------<br/>
      <a href="<s:url action="baseset/ShowBank"/>">银行</a><br/>
      <a href="<s:url action="baseset/ShowStruct"/>">机构</a><br/>

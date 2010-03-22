@@ -180,7 +180,7 @@ public class StockInAction extends ActionSupport {
 		stock.setStockInCode(ICTools.randId("SI"));
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
 		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
-		stock.setEmployeeCode(this.getUserSession().getEmployeeCode()+this.getUserSession().getPersonName());
+		stock.setEmployeeCode(this.getUserSession().getEmployeeCode());
 		SupplierManange supplierManage = new SupplierManange();
 		this.supplierList = supplierManage.getSupliers();
 		return SUCCESS;
@@ -199,7 +199,7 @@ public class StockInAction extends ActionSupport {
 				.getStockInCheckMateriel(stock.getStockInCode());
 		CargoSpaceManage cargoSpaceManage = new CargoSpaceManage();
 		this.cargoSpaceList = cargoSpaceManage.getCargoSpaceList();
-
+     
 		SupplierManange supplierManage = new SupplierManange();
 		this.supplierList = supplierManage.getSupliers();
 		return SUCCESS;
@@ -361,7 +361,6 @@ public class StockInAction extends ActionSupport {
 					.toBean(JSONObject.fromObject(json2[i]),
 							StockInCheckMaterielBean.class));
 		}
-
 		if (stockInManage.save(stockInBean, stockInCheckMaterielList)) {
 			return SUCCESS;
 		} else {
@@ -378,23 +377,26 @@ public class StockInAction extends ActionSupport {
 	 */
 	public String submitStockIn(String json, String[] json2)
 			throws SQLException {
+		System.out.println(json);
+		System.out.println(json2);
 		StockInManage stockInManage = new StockInManage();
 		JSONObject jsonObject = JSONObject.fromObject(json);
 		StockInBean stockInBean = (StockInBean) JSONObject.toBean(jsonObject,
 				StockInBean.class);
-		stockInBean.setEmployeeCode(this.getUserSession().getEmployeeCode());
 		List<StockInCheckMaterielBean> stockInCheckMaterielList = new ArrayList<StockInCheckMaterielBean>();
 		for (int i = 0; i < json2.length; i++) {
 			stockInCheckMaterielList.add((StockInCheckMaterielBean) JSONObject
 					.toBean(JSONObject.fromObject(json2[i]),
 							StockInCheckMaterielBean.class));
 		}
-
 		if (stockInManage.submit(stockInBean, stockInCheckMaterielList)) {
+			System.out.println("OK");
 			return SUCCESS;
 		} else {
+			System.out.println("false");
 			return ERROR;
 		}
+		
 	}
 
 	/**

@@ -787,7 +787,7 @@ int index = 1;
 				<a href="#" onclick="saveCheckStockOut();"><img src="<%=base%>/images/sub1_btn_save.jpg" border="0" alt="通过"></a>
 				<a href="#" onclick="submitCheckStockOut(1);"><img src="<%=base%>/images/pass.jpg" border="0" alt="通过"></a>
 				<a href="#" onclick="submitCheckStockOut(-1);"><img src="<%=base%>/images/no.jpg" border="0" alt="未通过"></a>
-				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" alt="返回"></a>
+				<a href="#" onclick="goback();"><img src="<%=base%>/images/back.gif" border="0" alt="返回" title="返回"></a>
 			</s:if>
 			</div>
 		</s:form>

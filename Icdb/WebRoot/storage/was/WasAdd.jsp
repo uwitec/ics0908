@@ -184,7 +184,7 @@ String base=request.getContextPath();
 		    <div align="right" style="margin-top: 8px;margin-right: 12px;">
 		    		<input id="save_" type="hidden" name="wasTage.s_value" value=""/>
 		    		<a href="#" onclick="save()"><img src="<%=base%>/images/sub1_btn_save.jpg" title="保存" alt="保存" border="0"/></a>
-   					<a href="#" onclick="save_submit()"><img src="<%=base%>/images/sub1_btn_save_add.jpg" title="保存并添加" alt="保存并添加" border="0"/></a>
+   					<a href="#" onclick="save_submit()"><img src="<%=base%>/images/finish.jpg" border="0" title="完成" alt="完成"></a>
 		    		<a href="#" onclick="sub_back()"><img src="<%=base%>/images/back.gif" alt="返回" title="返回" border="0"></a>
    			</div>
    		</s:form>

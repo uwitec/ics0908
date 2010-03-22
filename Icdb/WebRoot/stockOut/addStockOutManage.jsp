@@ -96,7 +96,7 @@ int index = 1;
 			newTd8.innerHTML= '<input type="text" class="stock_small_border" id="stockOutAmount_"'+rownum+' name="stockOutAmount" onchange="getPrice(this);">';
 			newTd9.innerHTML= '<input type="text" class="stock_small_border" id="stockOutPrice_"'+rownum+' name="stockOutPrice" onchange="getPrice(this);">';
 			newTd10.innerHTML= '';
-			newTd11.innerHTML= '<input type="button" value="删除" onclick = "deleteRow(this)">';
+			newTd11.innerHTML= '<a href="#" onclick="deleteRow(this)"><img src="<%=base%>/images/quit.gif" title="删除" alt="删除" border="0"></a>';
 
  		}
 	  }
@@ -660,7 +660,9 @@ int index = 1;
 							<s:property value="(stockOutAmount*stockOutPrice)" />
 						</td>
 						<s:if test="stock.stockOutStateType!=1||stock.stockOutDealState==-1||stock.stockOutCheckState==-1">
-							<td><input type="button" value="删除" onclick="deleteMateriel(this);"></td>
+							<td>
+							<a href="#" onclick='deleteMateriel(this);'><img src="<%=base%>/images/quit.gif" title="删除" alt="删除" border="0"></a>
+							</td>
 						</s:if>
 					</tr>
 				</s:iterator>
